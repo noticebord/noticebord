@@ -39,6 +39,11 @@ class User extends Authenticatable
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',
+        'email_verified_at',
+        'current_team_id',
+        'profile_photo_path',
+        'created_at',
+        'updated_at'
     ];
 
     /**
@@ -58,4 +63,9 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function notices()
+    {
+        return $this->hasMany(Notice::class);
+    }
 }
