@@ -25,10 +25,10 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function() {
-    Route::get('/dashboard', fn () => Inertia::render('Dashboard'))->name('dashboard');
+    Route::inertia('/dashboard', 'Dashboard')->name('dashboard');
 
     Route::prefix('notices')->name('notices.')->group(function () {
-        Route::get('', fn () => Inertia::render('Notices/Index'))->name('index');
+        Route::inertia('', 'Notices/Index')->name('index');
         Route::get('/{noticeId}', fn ($id) => Inertia::render('Notices/Show', ['id' => $id]))->name('show');
     });
 });

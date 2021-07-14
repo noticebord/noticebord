@@ -15,7 +15,7 @@
             <div class="p-4">
               <div class="mb-2">
                 <inertia-link
-                  :href="route('notices.show', { noticeId: notice.id })"
+                  :href="route('notices.show', notice.id)"
                   class="text-xl font-semibold hover:text-indigo-500"
                 >
                   {{ notice.title }}
