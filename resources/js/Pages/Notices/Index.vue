@@ -46,8 +46,8 @@
 </template>
 
 <script>
-import AppLayout from "@/Layouts/AppLayout";
-import axios from "axios";
+import AppLayout from "../../Layouts/AppLayout.vue";
+import { getNoticesAsync } from "../../client/notices";
 
 export default {
   components: {
@@ -59,8 +59,7 @@ export default {
     };
   },
   created: async function () {
-    const response = await axios.get("/api/notices");
-    this.notices = response.data;
+    this.notices = await getNoticesAsync();
   },
 };
 </script>

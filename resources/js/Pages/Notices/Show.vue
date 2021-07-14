@@ -33,7 +33,8 @@
 </template>
 
 <script>
-import AppLayout from "@/Layouts/AppLayout";
+import AppLayout from "../../Layouts/AppLayout.vue";
+import { getNoticeAsync } from "../../client/notices";
 
 export default {
   props: ["id"],
@@ -46,8 +47,7 @@ export default {
     };
   },
   created: async function () {
-    const response = await axios.get(`/api/notices/${this.id}`);
-    this.notice = response.data;
+    this.notice = await getNoticeAsync(this.id);
   },
 };
 </script>
