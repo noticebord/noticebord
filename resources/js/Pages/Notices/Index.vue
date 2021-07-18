@@ -1,7 +1,17 @@
 <template>
   <app-layout>
     <template #header>
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">Notices</h2>
+      <div class="flex justify-between">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+          Notices
+        </h2>
+        <inertia-link
+          :href="route('notices.create')"
+          class="text-base text-gray-500 leading-none mb-2 hover:text-indigo-500 hover:underline"
+        >
+          Create a Notice
+        </inertia-link>
+      </div>
     </template>
 
     <div class="py-8 bg-white">
@@ -47,7 +57,7 @@
 
 <script>
 import AppLayout from "../../Layouts/AppLayout.vue";
-import { getNoticesAsync } from "../../client/notices";
+import { fetchNoticesAsync } from "../../client/notices";
 
 export default {
   components: {
@@ -59,7 +69,7 @@ export default {
     };
   },
   created: async function () {
-    this.notices = await getNoticesAsync();
+    this.notices = await fetchNoticesAsync();
   },
 };
 </script>

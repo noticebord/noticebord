@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -18,6 +17,15 @@ use Inertia\Inertia;
 Route::inertia('/', 'Home')->name('home');
 
 Route::prefix('notices')->name('notices.')->group(function () {
-    Route::inertia('', 'Notices/Index')->name('index');
-    Route::get('/{noticeId}', fn ($id) => Inertia::render('Notices/Show', ['id' => $id]))->name('show');
+    Route::inertia('', 'Notices/Index')
+        ->name('index');
+    Route::get('/{id}', fn ($id) => Inertia::render('Notices/Show', ['id' => $id]))
+        ->name('show');
+
+    Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+        Route::inertia('/create', 'Notices/Details')
+            ->name('create');
+        Route::get('edit/{id}', fn ($id) => Inertia::render('Notices/Details', ['id' => $id]))
+            ->name('edit');
+    });
 });

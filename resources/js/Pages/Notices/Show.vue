@@ -34,7 +34,7 @@
 
 <script>
 import AppLayout from "../../Layouts/AppLayout.vue";
-import { getNoticeAsync } from "../../client/notices";
+import { fetchNoticeAsync } from "../../client/notices";
 
 export default {
   props: ["id"],
@@ -47,7 +47,7 @@ export default {
     };
   },
   created: async function () {
-    this.notice = await getNoticeAsync(this.id);
+    this.notice = await fetchNoticeAsync(this.id);
   },
 };
 </script>

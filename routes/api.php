@@ -15,10 +15,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/notices', [NoticeController::class, 'index']);
+Route::prefix('notices')->group(function () {
+    Route::get('', [NoticeController::class, 'index']);
+    Route::get('/{id}', [NoticeController::class, 'show']);
 
-Route::get('/notices/{noticeId}', [NoticeController::class, 'show']);
+    // Must be logged in to create, update or delete a notice.
+    Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+        Route::post('', [NoticeController::class, 'store']);
+        Route::prefix('{id}')->group(function () {
+            Route::put('', [NoticeController::class, 'update']);
+            Route::delete('', [NoticeController::class, 'destroy']);
+        });
+    });
+});

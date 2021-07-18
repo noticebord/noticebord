@@ -66,6 +66,6 @@ class User extends Authenticatable
 
     public function notices()
     {
-        return $this->hasMany(Notice::class);
+        return $this->hasMany(Notice::class, 'author_id');
     }
 }
