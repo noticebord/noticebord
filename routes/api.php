@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\NoticeController;
+use App\Http\Controllers\Api\{NoticeController, TokenController};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,4 +31,8 @@ Route::prefix('notices')->group(function () {
             Route::delete('', [NoticeController::class, 'destroy']);
         });
     });
+});
+
+Route::prefix('tokens')->group(function () {
+    Route::post('', [TokenController::class, 'create']);
 });
