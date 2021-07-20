@@ -1,7 +1,7 @@
 <template>
   <app-layout>
     <template #header>
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+      <h2 class="font-semibold body-xl body-gray-800 leading-tight">
         {{ notice && notice.title }}
       </h2>
     </template>
@@ -9,7 +9,7 @@
     <div class="py-8 bg-white">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="prose mx-auto px-4 md:px-0">
-          {{ notice && notice.text }}
+          {{ notice && notice.body }}
         </div>
 
         <div class="flex w-full items-center px-4 py-4">

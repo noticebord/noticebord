@@ -19,7 +19,7 @@ class NoticeController extends Controller
      */
     public function index()
     {
-        return Notice::with(['author'])->get()->makeHidden(['text']);
+        return Notice::with(['author'])->get()->makeHidden(['body']);
     }
 
     /**
@@ -32,18 +32,18 @@ class NoticeController extends Controller
     {
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
-            'text'  => ['required', 'string']
+            'body'  => ['required', 'string']
         ]);
 
         /** @var \App\Models\User $user */
         $user = Auth::user();   
         $notice = new Notice([
             'title'   => $validated['title'],
-            'text'    => $validated['text']
+            'body'    => $validated['body']
         ]);
 
         $notice = $user->notices()->save($notice);
-        return $notice->load(['author'])->makeHidden(['text']);
+        return $notice->load(['author'])->makeHidden(['body']);
     }
 
     /**

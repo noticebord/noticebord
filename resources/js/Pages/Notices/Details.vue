@@ -23,22 +23,22 @@
           </div>
 
           <div class="mb-2">
-            <label for="text" class="font-semibold text-gray-500">Text</label>
+            <label for="body" class="font-semibold text-gray-500">Body</label>
             <textarea
-              id="text"
+              id="body"
               class="w-full rounded-lg"
               placeholder="This is a notice on Noticebord"
               rows="5"
-              v-model="text"
+              v-model="body"
             ></textarea>
           </div>
 
           <div class="w-100 flex justify-center">
             <button
-              :disabled="!title || !text"
+              :disabled="!title || !body"
               class="font-semibold rounded-lg px-3 py-2"
               :class="
-                title && text
+                title && body
                   ? 'border-blue-700 text-blue-700 shadow hover:shadow-inner'
                   : 'border-gray-500 text-gray:400'
               "
@@ -65,12 +65,12 @@ export default {
   data: function () {
     return {
       title: "",
-      text: "",
+      body: "",
     };
   },
   methods: {
     createNotice: async function () {
-      const notice = await createNoticeAsync(this.title, this.text);
+      const notice = await createNoticeAsync(this.title, this.body);
       Inertia.get(route('notices.show', notice.id));
     },
   },

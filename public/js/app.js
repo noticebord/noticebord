@@ -18210,7 +18210,7 @@ exports.fetchNoticeAsync = fetchNoticeAsync;
  * @param {Notice} notice The notice to create.
  */
 
-function createNoticeAsync(title, text) {
+function createNoticeAsync(title, body) {
   return __awaiter(this, void 0, void 0, function () {
     var response;
     return __generator(this, function (_a) {
@@ -18220,7 +18220,7 @@ function createNoticeAsync(title, text) {
           /*yield*/
           , api_1["default"].post("/notices", {
             title: title,
-            text: text
+            body: body
           })];
 
         case 1:
@@ -19582,7 +19582,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       title: "",
-      text: ""
+      body: ""
     };
   },
   methods: {
@@ -19594,7 +19594,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return (0,_client_notices__WEBPACK_IMPORTED_MODULE_2__.createNoticeAsync)(this.title, this.text);
+                return (0,_client_notices__WEBPACK_IMPORTED_MODULE_2__.createNoticeAsync)(this.title, this.body);
 
               case 2:
                 notice = _context.sent;
@@ -24184,9 +24184,9 @@ var _hoisted_7 = {
 };
 
 var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
-  "for": "text",
+  "for": "body",
   "class": "font-semibold text-gray-500"
-}, "Text", -1
+}, "Body", -1
 /* HOISTED */
 );
 
@@ -24212,18 +24212,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 512
       /* NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.title]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("textarea", {
-        id: "text",
+        id: "body",
         "class": "w-full rounded-lg",
         placeholder: "This is a notice on Noticebord",
         rows: "5",
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-          return _ctx.text = $event;
+          return _ctx.body = $event;
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.text]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
-        disabled: !_ctx.title || !_ctx.text,
-        "class": ["font-semibold rounded-lg px-3 py-2", _ctx.title && _ctx.text ? 'border-blue-700 text-blue-700 shadow hover:shadow-inner' : 'border-gray-500 text-gray:400'],
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.body]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+        disabled: !_ctx.title || !_ctx.body,
+        "class": ["font-semibold rounded-lg px-3 py-2", _ctx.title && _ctx.body ? 'border-blue-700 text-blue-700 shadow hover:shadow-inner' : 'border-gray-500 text-gray:400'],
         onClick: _cache[3] || (_cache[3] = function () {
           return $options.createNotice && $options.createNotice.apply($options, arguments);
         })
@@ -24369,7 +24369,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "font-semibold text-xl text-gray-800 leading-tight"
+  "class": "font-semibold body-xl body-gray-800 leading-tight"
 };
 var _hoisted_2 = {
   "class": "py-8 bg-white"
@@ -24398,7 +24398,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       )];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.notice && _ctx.notice.text), 1
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.notice && _ctx.notice.body), 1
       /* TEXT */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
         "class": "w-10 h-10 rounded-full mr-4",

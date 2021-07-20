@@ -24,7 +24,7 @@ export async function fetchNoticeAsync(id: number): Promise<Notice> {
  * 
  * @param {Notice} notice The notice to create.
  */
-export async function createNoticeAsync(title: string, text: string): Promise<Notice> {
-    const response = await api.post<Notice>("/notices", { title, text });
+export async function createNoticeAsync(title: string, body: string): Promise<Notice> {
+    const response = await api.post<Notice>("/notices", { title, body });
     return response.data;
 }

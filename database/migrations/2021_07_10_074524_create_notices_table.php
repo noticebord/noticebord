@@ -16,7 +16,7 @@ class CreateNoticesTable extends Migration
         Schema::create('notices', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->longText('text');
+            $table->longText('body');
             $table->foreignId('author_id')
                 ->constrained('users')
                 ->onUpdate('cascade')
