@@ -27,7 +27,7 @@ class NoticeSeeder extends Seeder
             [
                 'title'      => "Notice $i",
                 'body'       => $body,
-                'author_id'  => 1,
+                'author_id'  => random_int(0, 10) < 7 ? 1 : null,
                 'created_at' => $created,
                 'updated_at' => $created->addMinutes(5),
                 'deleted_at' => null

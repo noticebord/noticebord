@@ -18207,10 +18207,10 @@ exports.fetchNoticeAsync = fetchNoticeAsync;
 /**
  * Create a new notice
  *
- * @param {Notice} notice The notice to create.
+ * @param {CreateNoticeRequest} request The notice to create.
  */
 
-function createNoticeAsync(title, body) {
+function createNoticeAsync(request) {
   return __awaiter(this, void 0, void 0, function () {
     var response;
     return __generator(this, function (_a) {
@@ -18218,10 +18218,7 @@ function createNoticeAsync(title, body) {
         case 0:
           return [4
           /*yield*/
-          , api_1["default"].post("/notices", {
-            title: title,
-            body: body
-          })];
+          , api_1["default"].post("/notices", request)];
 
         case 1:
           response = _a.sent();
@@ -18234,6 +18231,37 @@ function createNoticeAsync(title, body) {
 }
 
 exports.createNoticeAsync = createNoticeAsync;
+
+/***/ }),
+
+/***/ "./resources/js/utils/notices.ts":
+/*!***************************************!*\
+  !*** ./resources/js/utils/notices.ts ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.assignDefaultAuthor = void 0;
+var defaultUser = {
+  id: 0,
+  name: "Anonymous",
+  email: "",
+  profile_photo_url: "https://ui-avatars.com/api/?name=Anonymous&color=7F9CF5&background=EBF4FF"
+};
+
+function assignDefaultAuthor(notice) {
+  var _a;
+
+  (_a = notice.author) !== null && _a !== void 0 ? _a : notice.author = defaultUser;
+  return notice;
+}
+
+exports.assignDefaultAuthor = assignDefaultAuthor;
 
 /***/ }),
 
@@ -19582,7 +19610,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       title: "",
-      body: ""
+      body: "",
+      anonymous: !this.$page.props.user
     };
   },
   methods: {
@@ -19594,11 +19623,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return (0,_client_notices__WEBPACK_IMPORTED_MODULE_2__.createNoticeAsync)(this.title, this.body);
+                return (0,_client_notices__WEBPACK_IMPORTED_MODULE_2__.createNoticeAsync)({
+                  title: this.title,
+                  body: this.body,
+                  anonymous: this.anonymous
+                });
 
               case 2:
                 notice = _context.sent;
-                _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_3__.Inertia.get(route('notices.show', notice.id));
+                _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_3__.Inertia.get(route("notices.show", notice.id));
 
               case 4:
               case "end":
@@ -19635,11 +19668,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Layouts/AppLayout.vue */ "./resources/js/Layouts/AppLayout.vue");
 /* harmony import */ var _client_notices__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../client/notices */ "./resources/js/client/notices.ts");
 /* harmony import */ var _client_notices__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_client_notices__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _utils_notices__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/notices */ "./resources/js/utils/notices.ts");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 
@@ -19654,6 +19689,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   created: function () {
     var _created = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var notices;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -19662,9 +19698,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return (0,_client_notices__WEBPACK_IMPORTED_MODULE_2__.fetchNoticesAsync)();
 
             case 2:
-              this.notices = _context.sent;
+              notices = _context.sent;
+              this.notices = notices.map(function (notice) {
+                return (0,_utils_notices__WEBPACK_IMPORTED_MODULE_3__.assignDefaultAuthor)(notice);
+              });
 
-            case 3:
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -19698,11 +19737,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Layouts/AppLayout.vue */ "./resources/js/Layouts/AppLayout.vue");
 /* harmony import */ var _client_notices__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../client/notices */ "./resources/js/client/notices.ts");
 /* harmony import */ var _client_notices__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_client_notices__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _utils_notices__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/notices */ "./resources/js/utils/notices.ts");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 
@@ -19718,6 +19759,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   created: function () {
     var _created = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var notice;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -19726,9 +19768,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return (0,_client_notices__WEBPACK_IMPORTED_MODULE_2__.fetchNoticeAsync)(this.id);
 
             case 2:
-              this.notice = _context.sent;
+              notice = _context.sent;
+              this.notice = (0,_utils_notices__WEBPACK_IMPORTED_MODULE_3__.assignDefaultAuthor)(notice);
 
-            case 3:
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -24191,6 +24234,9 @@ var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 );
 
 var _hoisted_9 = {
+  "class": "mb-2"
+};
+var _hoisted_10 = {
   "class": "w-100 flex justify-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -24221,10 +24267,29 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.body]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.body]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+        type: "checkbox",
+        id: "anonymous",
+        "class": ["rounded-lg mr-1", {
+          'text-gray-500': !_ctx.$page.props.user
+        }],
+        disabled: !_ctx.$page.props.user,
+        "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+          return _ctx.anonymous = $event;
+        })
+      }, null, 10
+      /* CLASS, PROPS */
+      , ["disabled"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, _ctx.anonymous]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+        "for": "anonymous",
+        "class": ["font-semibold", {
+          'text-gray-500': !_ctx.$page.props.user
+        }]
+      }, " Anonymous? ", 2
+      /* CLASS */
+      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
         disabled: !_ctx.title || !_ctx.body,
         "class": ["font-semibold rounded-lg px-3 py-2", _ctx.title && _ctx.body ? 'border-blue-700 text-blue-700 shadow hover:shadow-inner' : 'border-gray-500 text-gray:400'],
-        onClick: _cache[3] || (_cache[3] = function () {
+        onClick: _cache[4] || (_cache[4] = function () {
           return $options.createNotice && $options.createNotice.apply($options, arguments);
         })
       }, " Create! ", 10

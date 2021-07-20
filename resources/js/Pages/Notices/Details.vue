@@ -33,6 +33,24 @@
             ></textarea>
           </div>
 
+          <div class="mb-2">
+            <input
+              type="checkbox"
+              id="anonymous"
+              class="rounded-lg mr-1"
+              :class="{ 'text-gray-500': !$page.props.user }"
+              :disabled="!$page.props.user"
+              v-model="anonymous"
+            />
+            <label
+              for="anonymous"
+              class="font-semibold"
+              :class="{ 'text-gray-500': !$page.props.user }"
+            >
+              Anonymous?
+            </label>
+          </div>
+
           <div class="w-100 flex justify-center">
             <button
               :disabled="!title || !body"
@@ -66,12 +84,17 @@ export default {
     return {
       title: "",
       body: "",
+      anonymous: !this.$page.props.user,
     };
   },
   methods: {
     createNotice: async function () {
-      const notice = await createNoticeAsync(this.title, this.body);
-      Inertia.get(route('notices.show', notice.id));
+      const notice = await createNoticeAsync({
+        title: this.title,
+        body: this.body,
+        anonymous: this.anonymous,
+      });
+      Inertia.get(route("notices.show", notice.id));
     },
   },
 };

@@ -35,6 +35,7 @@
 <script>
 import AppLayout from "../../Layouts/AppLayout.vue";
 import { fetchNoticeAsync } from "../../client/notices";
+import { assignDefaultAuthor } from '../../utils/notices';
 
 export default {
   props: ["id"],
@@ -47,7 +48,8 @@ export default {
     };
   },
   created: async function () {
-    this.notice = await fetchNoticeAsync(this.id);
+    const notice = await fetchNoticeAsync(this.id);
+    this.notice = assignDefaultAuthor(notice);
   },
 };
 </script>

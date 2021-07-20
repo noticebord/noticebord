@@ -58,6 +58,7 @@
 <script>
 import AppLayout from "../../Layouts/AppLayout.vue";
 import { fetchNoticesAsync } from "../../client/notices";
+import { assignDefaultAuthor } from "../../utils/notices";
 
 export default {
   components: {
@@ -69,7 +70,8 @@ export default {
     };
   },
   created: async function () {
-    this.notices = await fetchNoticesAsync();
+    const notices = await fetchNoticesAsync();
+    this.notices = notices.map(notice => assignDefaultAuthor(notice));
   },
 };
 </script>

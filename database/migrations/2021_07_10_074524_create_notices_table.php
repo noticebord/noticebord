@@ -18,6 +18,7 @@ class CreateNoticesTable extends Migration
             $table->string('title');
             $table->longText('body');
             $table->foreignId('author_id')
+                ->nullable()
                 ->constrained('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');

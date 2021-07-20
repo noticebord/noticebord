@@ -21,10 +21,11 @@ Route::prefix('notices')->name('notices.')->group(function () {
         ->name('index');
     Route::get('/{id}', fn ($id) => Inertia::render('Notices/Show', ['id' => $id]))
         ->name('show');
+    Route::inertia('/create', 'Notices/Details')
+        ->name('create');    
 
-    Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-        Route::inertia('/create', 'Notices/Details')
-            ->name('create');
+    // Must be logged in to update a notice
+    Route::middleware(['auth:sanctum', 'verified'])->group(function () {   
         Route::get('edit/{id}', fn ($id) => Inertia::render('Notices/Details', ['id' => $id]))
             ->name('edit');
     });

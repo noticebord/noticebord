@@ -30,19 +30,16 @@ class NoticeController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'body'  => ['required', 'string']
+        $data = $request->validate([
+            'title'     => ['required', 'string', 'max:255'],
+            'body'      => ['required', 'string'],
+            'anonymous' => ['boolean']
         ]);
 
-        /** @var \App\Models\User $user */
-        $user = Auth::user();   
-        $notice = new Notice([
-            'title'   => $validated['title'],
-            'body'    => $validated['body']
-        ]);
+        $notice = new Notice($data);
+        $notice->author_id = $data['anonymous'] ? null : Auth::id();
+        $notice->save();
 
-        $notice = $user->notices()->save($notice);
         return $notice->load(['author'])->makeHidden(['body']);
     }
 

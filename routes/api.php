@@ -21,16 +21,17 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 Route::prefix('notices')->group(function () {
     Route::get('', [NoticeController::class, 'index']);
+    Route::post('', [NoticeController::class, 'store']);
+
     Route::get('/{id}', [NoticeController::class, 'show']);
 
-    // Must be logged in to create, update or delete a notice.
-    Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-        Route::post('', [NoticeController::class, 'store']);
-        Route::prefix('{id}')->group(function () {
+    // Must be logged in to update or delete a notice.
+    Route::middleware(['auth:sanctum', 'verified'])
+        ->prefix('{id}')
+        ->group(function () {
             Route::put('', [NoticeController::class, 'update']);
             Route::delete('', [NoticeController::class, 'destroy']);
         });
-    });
 });
 
 Route::prefix('tokens')->group(function () {
