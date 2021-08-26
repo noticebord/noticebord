@@ -34,6 +34,4 @@ Route::prefix('notices')->group(function () {
         });
 });
 
-Route::prefix('tokens')->group(function () {
-    Route::post('', [TokenController::class, 'create']);
-});
+Route::post('/tokens', [TokenController::class, 'create']);

@@ -5,10 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Notice;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class NoticeController extends Controller
 {
@@ -32,12 +29,13 @@ class NoticeController extends Controller
     {
         $data = $request->validate([
             'title'     => ['required', 'string', 'max:255'],
-            'body'      => ['required', 'string'],
-            'anonymous' => ['boolean']
+            'body'      => ['required', 'string']
         ]);
 
+        $anonymous = $request->boolean('anonymous', false);
+
         $notice = new Notice($data);
-        $notice->author_id = $data['anonymous'] ? null : Auth::id();
+        $notice->author_id = $anonymous ? null : Auth::guard('sanctum')->id();
         $notice->save();
 
         return $notice->load(['author'])->makeHidden(['body']);
