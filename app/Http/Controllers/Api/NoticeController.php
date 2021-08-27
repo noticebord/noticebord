@@ -54,9 +54,10 @@ class NoticeController extends Controller
      */
     public function show($id)
     {
-        $notice = Notice::with(['author'])->find($id);
+        $notice = Notice::with(['author'])->findOrFail($id);
+        $guard = Auth::guard('sanctum');
 
-        $belongsToCurrent = $notice->author->id === Auth::guard('sanctum')->id();
+        $belongsToCurrent = $guard->check() && $notice->author_id === $guard->id();
         abort_unless($notice->public || $belongsToCurrent, Response::HTTP_NOT_FOUND); 
     
         return $notice;
