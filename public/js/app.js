@@ -19608,13 +19608,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     AppLayout: _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__.default
   },
   data: function data() {
+    var anonymous = !this.$page.props.user;
     return {
-      title: "",
-      body: "",
-      anonymous: !this.$page.props.user
+      notice: {
+        title: "",
+        body: "",
+        anonymous: anonymous,
+        "public": anonymous
+      }
     };
   },
   methods: {
+    anonymousChange: function anonymousChange(checked) {
+      if (checked) {
+        this.notice.anonymous = true;
+        this.notice["public"] = true;
+        return;
+      }
+
+      this.notice.anonymous = false;
+    },
     createNotice: function () {
       var _createNotice = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         var notice;
@@ -19623,11 +19636,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return (0,_client_notices__WEBPACK_IMPORTED_MODULE_2__.createNoticeAsync)({
-                  title: this.title,
-                  body: this.body,
-                  anonymous: this.anonymous
-                });
+                return (0,_client_notices__WEBPACK_IMPORTED_MODULE_2__.createNoticeAsync)(this.notice);
 
               case 2:
                 notice = _context.sent;
@@ -23964,33 +23973,33 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   "class": "bg-white overflow-hidden shadow-xl sm:rounded-lg"
 };
-var _hoisted_4 = {
+
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "p-6 sm:px-20 bg-white border-b border-gray-200"
-};
-
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "mt-8 text-2xl"
-}, "Welcome to Noticebord!", -1
-/* HOISTED */
-);
-
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <jet-application-logo class=\"block h-12 w-auto\" /> ")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "mt-6 text-4xl"
+}, "Welcome to Noticebord!"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "mt-6 text-gray-500"
-}, " Noticebord is a simple yet powerful platform that enables you post notices - which can be anything - to anyone, at any time. You don't even need an account to get started. We also let you make your notices anonymous, even if you do have an account. We respect free speech over here at Noticebord, as long as it remains within reasonable limits.* ", -1
+}, " Noticebord is a simple yet powerful platform that enables you to post notices - which can be anything - to anyone, at any time. You don't even need an account to get started. We also let you make your notices anonymous, even if you are logged in. We respect free speech* over here at Noticebord. "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("small", {
+  "class": "text-xs text-gray-500 italic"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" *As long as content adheres to "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+  href: "#",
+  "class": "text-indigo-500 underline hover:text-indigo-600"
+}, " community guidelines "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" . Noticebord reserves the right to remove any content deemed offensive or otherwise unfit for consumption. ")])], -1
 /* HOISTED */
 );
 
-var _hoisted_7 = {
+var _hoisted_5 = {
   "class": "bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2"
 };
-var _hoisted_8 = {
+var _hoisted_6 = {
   "class": "p-6"
 };
-var _hoisted_9 = {
+var _hoisted_7 = {
   "class": "flex items-center"
 };
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("svg", {
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("svg", {
   fill: "none",
   stroke: "currentColor",
   "stroke-linecap": "round",
@@ -24004,20 +24013,20 @@ var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_11 = {
+var _hoisted_9 = {
   "class": "ml-4 text-lg text-gray-600 leading-7 font-semibold"
 };
-var _hoisted_12 = {
+var _hoisted_10 = {
   "class": "ml-12"
 };
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "mt-2 text-sm text-gray-500"
-}, " Noticebord is a free service that lets you post notices both publicly and privately to \"teams\" or even to one user in particular. Posted notices can either be permanent or self-destruct after a set amount of time or after it is read a set amount of times. ", -1
+}, " Noticebord is a free service that lets you post notices both publicly and privately to \"teams\" or even to one user in particular. Posted notices can either be permanent or set to self-destruct based on certain factors. ", -1
 /* HOISTED */
 );
 
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "\r\n                        mt-3\r\n                        flex\r\n                        items-center\r\n                        text-sm\r\n                        font-semibold\r\n                        text-indigo-700\r\n                      "
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, "Explore public notices"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "ml-1 text-indigo-500"
@@ -24033,7 +24042,7 @@ var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "p-6 border-t border-gray-200 md:border-t-0 md:border-l"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "flex items-center"
@@ -24057,7 +24066,7 @@ var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
   "class": "ml-12"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "mt-2 text-sm text-gray-500"
-}, " Noticebord offers downloadable applications for various mobile and desktop platforms. You may even use Noticebord via the cross-platform command-line interface or our chatbot that is available on a number of messaging platforms. "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+}, " Noticebord offers a number of offcial downloadable applications for various mobile and desktop platforms. You may even use Noticebord via the cross-platform command-line interface or even our chatbot, accessible on a number of chat applications. "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
   href: "#"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "\r\n                        mt-3\r\n                        flex\r\n                        items-center\r\n                        text-sm\r\n                        font-semibold\r\n                        text-indigo-700\r\n                      "
@@ -24075,7 +24084,7 @@ var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "p-6 border-t border-gray-200"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "flex items-center"
@@ -24097,7 +24106,7 @@ var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
   "class": "ml-12"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "mt-2 text-sm text-gray-500"
-}, " Noticebord offers a free, public API - with support baked in for every action our own platform offers - that lets you build our own experience. In fact, each of our own applcations uses the very same API behind the scenes. Go ahead, build something awesome! "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+}, " Noticebord offers a free, public API - with support baked in for every action our own platform offers - that lets you build our own experience. In fact, each of our own applications uses the very same API behind the scenes. Go ahead, build something awesome! "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
   href: "#"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "\r\n                        mt-3\r\n                        flex\r\n                        items-center\r\n                        text-sm\r\n                        font-semibold\r\n                        text-indigo-700\r\n                      "
@@ -24115,7 +24124,7 @@ var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "p-6 border-t border-gray-200 md:border-l"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "flex items-center"
@@ -24154,23 +24163,19 @@ var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_jet_application_logo = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-application-logo");
-
   var _component_app_layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("app-layout");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_app_layout, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_application_logo, {
-        "class": "block h-12 w-auto"
-      })]), _hoisted_5, _hoisted_6]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
         href: _ctx.route('notices.index')
       }, "Free and public", 8
       /* PROPS */
-      , ["href"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+      , ["href"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
         href: _ctx.route('notices.index')
-      }, [_hoisted_14], 8
+      }, [_hoisted_12], 8
       /* PROPS */
-      , ["href"])])]), _hoisted_15, _hoisted_16, _hoisted_17])])])])])];
+      , ["href"])])]), _hoisted_13, _hoisted_14, _hoisted_15])])])])])];
     }),
     _: 1
     /* STABLE */
@@ -24237,6 +24242,9 @@ var _hoisted_9 = {
   "class": "mb-2"
 };
 var _hoisted_10 = {
+  "class": "mb-2"
+};
+var _hoisted_11 = {
   "class": "w-100 flex justify-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -24253,43 +24261,67 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "w-full rounded-lg",
         placeholder: "Hi Everybody!",
         "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-          return _ctx.title = $event;
+          return _ctx.notice.title = $event;
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.title]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("textarea", {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.notice.title, void 0, {
+        trim: true
+      }]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("textarea", {
         id: "body",
         "class": "w-full rounded-lg",
-        placeholder: "This is a notice on Noticebord",
+        placeholder: "This is a notice on Noticebord.",
         rows: "5",
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-          return _ctx.body = $event;
+          return _ctx.notice.body = $event;
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.body]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.notice.body, void 0, {
+        trim: true
+      }]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
         type: "checkbox",
         id: "anonymous",
         "class": ["rounded-lg mr-1", {
           'text-gray-500': !_ctx.$page.props.user
         }],
         disabled: !_ctx.$page.props.user,
-        "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-          return _ctx.anonymous = $event;
+        checked: _ctx.notice.anonymous,
+        onChange: _cache[3] || (_cache[3] = function ($event) {
+          return $options.anonymousChange($event.target.checked);
         })
-      }, null, 10
-      /* CLASS, PROPS */
-      , ["disabled"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, _ctx.anonymous]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+      }, null, 42
+      /* CLASS, PROPS, HYDRATE_EVENTS */
+      , ["disabled", "checked"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
         "for": "anonymous",
         "class": ["font-semibold", {
           'text-gray-500': !_ctx.$page.props.user
         }]
       }, " Anonymous? ", 2
       /* CLASS */
-      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
-        disabled: !_ctx.title || !_ctx.body,
-        "class": ["font-semibold rounded-lg px-3 py-2", _ctx.title && _ctx.body ? 'border-blue-700 text-blue-700 shadow hover:shadow-inner' : 'border-gray-500 text-gray:400'],
-        onClick: _cache[4] || (_cache[4] = function () {
+      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+        type: "checkbox",
+        id: "public",
+        "class": ["rounded-lg mr-1", {
+          'text-gray-500': _ctx.notice.anonymous
+        }],
+        disabled: _ctx.notice.anonymous,
+        "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+          return _ctx.notice["public"] = $event;
+        })
+      }, null, 10
+      /* CLASS, PROPS */
+      , ["disabled"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, _ctx.notice["public"]]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+        "for": "public",
+        "class": ["font-semibold", {
+          'text-gray-500': _ctx.notice.anonymous
+        }]
+      }, " Public? ", 2
+      /* CLASS */
+      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+        disabled: !_ctx.notice.title || !_ctx.notice.body,
+        "class": ["font-semibold rounded-lg px-3 py-2 border", _ctx.notice.title && _ctx.notice.body ? 'border-blue-700 text-blue-700 shadow hover:shadow-inner' : 'border-gray-500 text-gray:400'],
+        onClick: _cache[5] || (_cache[5] = function () {
           return $options.createNotice && $options.createNotice.apply($options, arguments);
         })
       }, " Create! ", 10

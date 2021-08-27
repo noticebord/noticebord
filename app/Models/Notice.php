@@ -17,7 +17,9 @@ class Notice extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'body'
+        'title', 
+        'body', 
+        'public',
     ];
 
     /**
@@ -26,6 +28,7 @@ class Notice extends Model
      * @var array
      */
     protected $hidden = [
+        'public',
         'author_id',
         'deleted_at'
     ];

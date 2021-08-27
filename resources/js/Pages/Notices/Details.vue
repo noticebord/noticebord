@@ -18,7 +18,7 @@
               id="title"
               class="w-full rounded-lg"
               placeholder="Hi Everybody!"
-              v-model="title"
+              v-model.trim="notice.title"
             />
           </div>
 
@@ -27,9 +27,9 @@
             <textarea
               id="body"
               class="w-full rounded-lg"
-              placeholder="This is a notice on Noticebord"
+              placeholder="This is a notice on Noticebord."
               rows="5"
-              v-model="body"
+              v-model.trim="notice.body"
             ></textarea>
           </div>
 
@@ -40,7 +40,8 @@
               class="rounded-lg mr-1"
               :class="{ 'text-gray-500': !$page.props.user }"
               :disabled="!$page.props.user"
-              v-model="anonymous"
+              :checked="notice.anonymous"
+              @change="anonymousChange($event.target.checked)"
             />
             <label
               for="anonymous"
@@ -51,12 +52,30 @@
             </label>
           </div>
 
+          <div class="mb-2">
+            <input
+              type="checkbox"
+              id="public"
+              class="rounded-lg mr-1"
+              :class="{ 'text-gray-500': notice.anonymous }"
+              :disabled="notice.anonymous"
+              v-model="notice.public"
+            />
+            <label
+              for="public"
+              class="font-semibold"
+              :class="{ 'text-gray-500': notice.anonymous }"
+            >
+              Public?
+            </label>
+          </div>
+
           <div class="w-100 flex justify-center">
             <button
-              :disabled="!title || !body"
-              class="font-semibold rounded-lg px-3 py-2"
+              :disabled="!notice.title || !notice.body"
+              class="font-semibold rounded-lg px-3 py-2 border"
               :class="
-                title && body
+                notice.title && notice.body
                   ? 'border-blue-700 text-blue-700 shadow hover:shadow-inner'
                   : 'border-gray-500 text-gray:400'
               "
@@ -81,19 +100,29 @@ export default {
     AppLayout,
   },
   data: function () {
+
+    const anonymous = !this.$page.props.user;
     return {
-      title: "",
-      body: "",
-      anonymous: !this.$page.props.user,
+      notice: {
+        title: "",
+        body: "",
+        anonymous: anonymous,
+        public: anonymous,
+      },
     };
   },
   methods: {
+    anonymousChange: function(checked) {
+      if (checked) {
+        this.notice.anonymous = true;
+        this.notice.public = true;
+        return;
+      }
+
+      this.notice.anonymous = false;
+    },
     createNotice: async function () {
-      const notice = await createNoticeAsync({
-        title: this.title,
-        body: this.body,
-        anonymous: this.anonymous,
-      });
+      const notice = await createNoticeAsync(this.notice);
       Inertia.get(route("notices.show", notice.id));
     },
   },

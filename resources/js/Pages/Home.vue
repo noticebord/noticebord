@@ -6,19 +6,29 @@
           <div>
             <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
               <div>
-                <jet-application-logo class="block h-12 w-auto" />
+                <!-- <jet-application-logo class="block h-12 w-auto" /> -->
               </div>
 
-              <div class="mt-8 text-2xl">Welcome to Noticebord!</div>
+              <div class="mt-6 text-4xl">Welcome to Noticebord!</div>
 
               <div class="mt-6 text-gray-500">
-                Noticebord is a simple yet powerful platform that enables you
+                Noticebord is a simple yet powerful platform that enables you to
                 post notices - which can be anything - to anyone, at any time.
                 You don't even need an account to get started. We also let you
-                make your notices anonymous, even if you do have an account. We
-                respect free speech over here at Noticebord, as long as it
-                remains within reasonable limits.*
+                make your notices anonymous, even if you are logged in. We
+                respect free speech* over here at Noticebord.
               </div>
+              <small class="text-xs text-gray-500 italic">
+                *As long as content adheres to
+                <a
+                  href="#"
+                  class="text-indigo-500 underline hover:text-indigo-600"
+                >
+                  community guidelines
+                </a>
+                . Noticebord reserves the right to remove any content deemed
+                offensive or otherwise unfit for consumption.
+              </small>
             </div>
 
             <div
@@ -50,9 +60,8 @@
                   <div class="mt-2 text-sm text-gray-500">
                     Noticebord is a free service that lets you post notices both
                     publicly and privately to "teams" or even to one user in
-                    particular. Posted notices can either be permanent or
-                    self-destruct after a set amount of time or after it is read
-                    a set amount of times.
+                    particular. Posted notices can either be permanent or set to
+                    self-destruct based on certain factors.
                   </div>
 
                   <a :href="route('notices.index')">
@@ -113,10 +122,11 @@
 
                 <div class="ml-12">
                   <div class="mt-2 text-sm text-gray-500">
-                    Noticebord offers downloadable applications for various
-                    mobile and desktop platforms. You may even use Noticebord
-                    via the cross-platform command-line interface or our chatbot
-                    that is available on a number of messaging platforms.
+                    Noticebord offers a number of offcial downloadable
+                    applications for various mobile and desktop platforms. You
+                    may even use Noticebord via the cross-platform command-line
+                    interface or even our chatbot, accessible on a number of
+                    chat applications.
                   </div>
 
                   <a href="#">
@@ -177,7 +187,7 @@
                     Noticebord offers a free, public API - with support baked in
                     for every action our own platform offers - that lets you
                     build our own experience. In fact, each of our own
-                    applcations uses the very same API behind the scenes. Go
+                    applications uses the very same API behind the scenes. Go
                     ahead, build something awesome!
                   </div>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Notice;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class NoticeController extends Controller
@@ -16,7 +17,10 @@ class NoticeController extends Controller
      */
     public function index()
     {
-        return Notice::with(['author'])->get()->makeHidden(['body']);
+        return Notice::with(['author'])
+            ->where('public', true)
+            ->get()
+            ->makeHidden(['body']);
     }
 
     /**
@@ -33,6 +37,7 @@ class NoticeController extends Controller
         ]);
 
         $anonymous = $request->boolean('anonymous', false);
+        $data['public'] = $anonymous || $request->boolean('is_public', false);
 
         $notice = new Notice($data);
         $notice->author_id = $anonymous ? null : Auth::guard('sanctum')->id();
@@ -49,7 +54,12 @@ class NoticeController extends Controller
      */
     public function show($id)
     {
-        return Notice::with(['author'])->find($id);
+        $notice = Notice::with(['author'])->find($id);
+
+        $belongsToCurrent = $notice->author->id === Auth::guard('sanctum')->id();
+        abort_unless($notice->public || $belongsToCurrent, Response::HTTP_NOT_FOUND); 
+    
+        return $notice;
     }
 
     /**

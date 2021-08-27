@@ -1667,6 +1667,10 @@ select {
 	font-size: 1.25rem;
 	line-height: 1.75rem;
 }
+.text-4xl {
+	font-size: 2.25rem;
+	line-height: 2.5rem;
+}
 .font-medium {
 	font-weight: 500;
 }
@@ -1678,6 +1682,9 @@ select {
 }
 .uppercase {
 	text-transform: uppercase;
+}
+.italic {
+	font-style: italic;
 }
 .leading-5 {
 	line-height: 1.25rem;
@@ -1920,6 +1927,10 @@ select {
 .hover\:text-indigo-500:hover {
 	--tw-text-opacity: 1;
 	color: rgba(99, 102, 241, var(--tw-text-opacity));
+}
+.hover\:text-indigo-600:hover {
+	--tw-text-opacity: 1;
+	color: rgba(79, 70, 229, var(--tw-text-opacity));
 }
 .hover\:underline:hover {
 	text-decoration: underline;

@@ -23,11 +23,14 @@ class NoticeSeeder extends Seeder
         for($i = 1; $i <= 20; $i++)
         {
             $created = now()->subMinutes($i + 5);
+            $anonymous = random_int(0, 10) > 3;
+
             $notices[] = 
             [
                 'title'      => "Notice $i",
                 'body'       => $body,
-                'author_id'  => random_int(0, 10) < 7 ? 1 : null,
+                'public'  => $anonymous || random_int(0, 10) < 7,
+                'author_id'  => $anonymous ? null : 1,
                 'created_at' => $created,
                 'updated_at' => $created->addMinutes(5),
                 'deleted_at' => null

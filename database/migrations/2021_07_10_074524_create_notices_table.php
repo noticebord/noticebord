@@ -17,6 +17,7 @@ class CreateNoticesTable extends Migration
             $table->id();
             $table->string('title');
             $table->longText('body');
+            $table->boolean('public');
             $table->foreignId('author_id')
                 ->nullable()
                 ->constrained('users')
