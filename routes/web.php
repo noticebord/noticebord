@@ -19,14 +19,16 @@ Route::inertia('/', 'Home')->name('home');
 Route::prefix('notices')->name('notices.')->group(function () {
     Route::inertia('', 'Notices/Index')
         ->name('index');
-    Route::get('/{id}', fn ($id) => Inertia::render('Notices/Show', ['id' => $id]))
+    Route::get('/{id}', fn ($id) => Inertia::render('Notices/Show', ['id' => (int)$id]))
         ->name('show');
-    Route::inertia('/create', 'Notices/Details')
+    Route::inertia('/create', 'Notices/Entry')
         ->name('create');    
 
-    // Must be logged in to update a notice
-    Route::middleware(['auth:sanctum', 'verified'])->group(function () {   
-        Route::get('edit/{id}', fn ($id) => Inertia::render('Notices/Details', ['id' => $id]))
+    // Must be logged in to update or delete a notice
+    Route::prefix('{id}')->middleware(['auth:sanctum', 'verified'])->group(function () {   
+        Route::get('/edit', fn ($id) => Inertia::render('Notices/Entry', ['id' => (int)$id]))
             ->name('edit');
+        Route::get('/delete', fn ($id) => Inertia::render('Notices/Delete', ['id' => (int)$id]))
+            ->name('delete');
     });
 });

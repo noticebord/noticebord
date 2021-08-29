@@ -22,7 +22,7 @@
             <inertia-link
               href="#"
               class="text-base font-bold md:text-xl leading-none mb-2"
-            >   
+            >
               {{ notice && notice.author.name }}
             </inertia-link>
           </div>
@@ -35,10 +35,15 @@
 <script>
 import AppLayout from "../../Layouts/AppLayout.vue";
 import { fetchNoticeAsync } from "../../client/notices";
-import { assignDefaultAuthor } from '../../utils/notices';
+import { assignDefaultAuthor } from "../../utils/notices";
 
 export default {
-  props: ["id"],
+  props: {
+    id: {
+      type: Number,
+      required: true,
+    },
+  },
   components: {
     AppLayout,
   },

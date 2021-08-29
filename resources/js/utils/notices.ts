@@ -1,5 +1,4 @@
-import { Notice } from "../client/models/Notice";
-import { User } from "../client/models/User";
+import { Notice, User } from "../client/models";
 
 const defaultUser: User = {
     id: 0,

@@ -1,4 +1,4 @@
-export interface CreateNoticeRequest {
+export interface SaveNoticeRequest {
     title: string;
     body: string;
     anonymous: boolean;

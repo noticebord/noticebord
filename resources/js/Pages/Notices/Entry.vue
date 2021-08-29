@@ -3,7 +3,7 @@
     <template #header>
       <div class="flex justify-between">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-          Create a Notice
+          {{ id > 0 ? "Edit" : "Create" }} a Notice
         </h2>
       </div>
     </template>
@@ -79,9 +79,9 @@
                   ? 'border-blue-700 text-blue-700 shadow hover:shadow-inner'
                   : 'border-gray-500 text-gray:400'
               "
-              @click="createNotice"
+              @click="saveNotice"
             >
-              Create!
+              Save!
             </button>
           </div>
         </div>
@@ -92,15 +92,25 @@
 
 <script>
 import AppLayout from "../../Layouts/AppLayout.vue";
-import { createNoticeAsync } from "../../client/notices";
+import {
+  createNoticeAsync,
+  fetchNoticeAsync,
+  updateNoticeAsync,
+} from "../../client/notices";
 import { Inertia } from "@inertiajs/inertia";
 
 export default {
+  props: {
+    id: {
+      type: Number,
+      required: false,
+      default: -1,
+    },
+  },
   components: {
     AppLayout,
   },
   data: function () {
-
     const anonymous = !this.$page.props.user;
     return {
       notice: {
@@ -111,8 +121,11 @@ export default {
       },
     };
   },
+  created: async function () {
+    if (this.id > 0) this.notice = await fetchNoticeAsync(this.id);
+  },
   methods: {
-    anonymousChange: function(checked) {
+    anonymousChange: function (checked) {
       if (checked) {
         this.notice.anonymous = true;
         this.notice.public = true;
@@ -121,8 +134,11 @@ export default {
 
       this.notice.anonymous = false;
     },
-    createNotice: async function () {
-      const notice = await createNoticeAsync(this.notice);
+    saveNotice: async function () {
+      const saveTask = this.id > 0
+        ? updateNoticeAsync(this.id, this.notice)
+        : createNoticeAsync(this.notice);
+      const notice = await saveTask;
       Inertia.get(route("notices.show", notice.id));
     },
   },

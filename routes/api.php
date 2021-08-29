@@ -29,7 +29,7 @@ Route::prefix('notices')->group(function () {
     Route::middleware(['auth:sanctum', 'verified'])
         ->prefix('{id}')
         ->group(function () {
-            Route::put('', [NoticeController::class, 'update']);
+            Route::patch('', [NoticeController::class, 'update']);
             Route::delete('', [NoticeController::class, 'destroy']);
         });
 });

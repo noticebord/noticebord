@@ -37,7 +37,7 @@ class NoticeController extends Controller
         ]);
 
         $anonymous = $request->boolean('anonymous', false);
-        $data['public'] = $anonymous || $request->boolean('is_public', false);
+        $data['public'] = $anonymous || $request->boolean('public', false);
 
         $notice = new Notice($data);
         $notice->author_id = $anonymous ? null : Auth::guard('sanctum')->id();
@@ -72,7 +72,27 @@ class NoticeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // TODO: Validate
+        $data = $request->validate([
+            'title'     => ['nullable', 'string', 'max:255'],
+            'body'      => ['nullable', 'string']
+        ]);
+
+        $anonymous = $request->boolean('anonymous', false);
+
+        /** @var \App\Models\Notice $notice */
+        $notice = Notice::with(['author'])
+            ->where('author_id', Auth::guard('sanctum')->id())
+            ->findOrFail($id);
+
+        $notice->update([
+            'title'     => $data['title'] ?? $notice->title,
+            'body'      => $data['body'] ?? $notice->body,
+            'public'    => $anonymous || $request->boolean('public', false),
+            'author_id' => $anonymous ? null : $notice->author_id,
+        ]);
+
+        return $notice;
     }
 
     /**
@@ -83,6 +103,12 @@ class NoticeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        /** @var \Illuminate\Database\Eloquent\Model $notice */
+        $notice = Notice::with(['author'])
+            ->where('author_id', Auth::guard('sanctum')->id())
+            ->findOrFail($id);
+            
+        $notice->delete();
+        return $notice;
     }
 }
