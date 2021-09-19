@@ -23,6 +23,12 @@
                 >
                   Notices
                 </jet-nav-link>
+                <jet-nav-link
+                  :href="route('apps')"
+                  :active="route().current('apps*')"
+                >
+                  Apps
+                </jet-nav-link>
               </div>
             </div>
 
@@ -312,6 +318,12 @@
               :active="route().current('notices*')"
             >
               Notices
+            </jet-responsive-nav-link>
+            <jet-responsive-nav-link
+              :href="route('apps')"
+              :active="route().current('apps*')"
+            >
+              Apps
             </jet-responsive-nav-link>
           </div>
 

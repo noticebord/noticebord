@@ -53,9 +53,9 @@
                     focus:shadow-inner
                     hover:shadow-inner
                   "
-                  :class="{ tippy: notice.author?.id === $page.props.user.id }"
+                  :class="{ tippy: notice.author?.id === $page.props.user?.id }"
                   :data-template="`notice-${notice.id}`"
-                  v-if="notice.author?.id === $page.props.user.id"
+                  v-if="notice.author?.id === $page.props.user?.id"
                 >
                   <FontAwesomeIcon
                     :icon="icons.faEllipsisV"
@@ -83,7 +83,7 @@
             <div
               class="hidden"
               :id="`notice-${notice.id}`"
-              v-if="notice.author?.id === $page.props.user.id"
+              v-if="notice.author?.id === $page.props.user?.id"
             >
               <div class="-mx-2 -my-1">
                 <!-- <button

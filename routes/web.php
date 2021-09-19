@@ -32,3 +32,5 @@ Route::prefix('notices')->name('notices.')->group(function () {
             ->name('delete');
     });
 });
+
+Route::inertia('/apps', 'Apps')->name('apps');
