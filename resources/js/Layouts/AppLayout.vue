@@ -18,16 +18,12 @@
               <!-- Navigation Links -->
               <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                 <jet-nav-link
-                  :href="route('notices.index')"
-                  :active="route().current('notices*')"
+                  v-for="(route, i) in routes"
+                  :key="i"
+                  :href="route.href"
+                  :active="route.match"
                 >
-                  Notices
-                </jet-nav-link>
-                <jet-nav-link
-                  :href="route('apps')"
-                  :active="route().current('apps*')"
-                >
-                  Apps
+                  {{ route.text }}
                 </jet-nav-link>
               </div>
             </div>
@@ -314,16 +310,12 @@
         >
           <div class="pt-2 pb-3 space-y-1">
             <jet-responsive-nav-link
-              :href="route('notices.index')"
-              :active="route().current('notices*')"
+              v-for="(route, i) in routes"
+              :key="i"
+              :href="route.href"
+              :active="route.match"
             >
-              Notices
-            </jet-responsive-nav-link>
-            <jet-responsive-nav-link
-              :href="route('apps')"
-              :active="route().current('apps*')"
-            >
-              Apps
+              {{ route.text }}
             </jet-responsive-nav-link>
           </div>
 
@@ -487,6 +479,18 @@ export default {
   data() {
     return {
       showingNavigationDropdown: false,
+      routes: [
+        {
+          text: "Notices",
+          href: route("notices.index"),
+          match: route().current("notices*"),
+        },
+        {
+          text: "Apps",
+          href: route("apps"),
+          match: route().current("apps*"),
+        }
+      ],
     };
   },
 
