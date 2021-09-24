@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\TeamNotice;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,7 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             TeamSeeder::class,
-            NoticeSeeder::class
+            NoticeSeeder::class,
+            TeamNoticeSeeder::class
         ]);
     }
 }

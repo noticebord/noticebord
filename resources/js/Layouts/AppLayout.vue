@@ -19,6 +19,7 @@
               <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                 <jet-nav-link
                   v-for="(route, i) in routes"
+                  v-show="!route.protected || $page.props.user"
                   :key="i"
                   :href="route.href"
                   :active="route.match"
@@ -311,6 +312,7 @@
           <div class="pt-2 pb-3 space-y-1">
             <jet-responsive-nav-link
               v-for="(route, i) in routes"
+              v-show="!route.protected || $page.props.user"	
               :key="i"
               :href="route.href"
               :active="route.match"
@@ -484,11 +486,19 @@ export default {
           text: "Notices",
           href: route("notices.index"),
           match: route().current("notices*"),
+          protected: false
+        },
+        {
+          text: "Team Notices",
+          href: route("team-notices.index"),
+          match: route().current("team-notices*"),
+          protected: true
         },
         {
           text: "Apps",
           href: route("apps"),
           match: route().current("apps*"),
+          protected: false
         }
       ],
     };
@@ -498,12 +508,8 @@ export default {
     switchToTeam(team) {
       this.$inertia.put(
         route("current-team.update"),
-        {
-          team_id: team.id,
-        },
-        {
-          preserveState: false,
-        }
+        { team_id: team.id },
+        { preserveState: false }
       );
     },
 

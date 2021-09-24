@@ -15,7 +15,7 @@
             hover:underline
           "
         >
-          Create a Notice
+          Create a Team Notice
         </inertia-link>
       </div>
     </template>

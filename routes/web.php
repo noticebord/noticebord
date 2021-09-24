@@ -39,4 +39,27 @@ Route::prefix('notices')->name('notices.')->group(function () {
     });
 });
 
+Route::prefix('team')->name('team-notices.')->group(function () {
+    Route::inertia('', 'TeamNotices/Index')
+        ->name('index');
+    Route::get('/{id}', fn ($id) => Inertia::render('TeamNotices/Show', [
+        'id' => (int)$id
+    ]))
+        ->name('show');
+    Route::inertia('/create', 'TeamNotices/Entry')
+        ->name('create');
+
+    // Must be logged in to update or delete a notice
+    Route::prefix('{id}')->middleware(['auth:sanctum', 'verified'])->group(function () {
+        Route::get('/edit', fn ($id) => Inertia::render('TeamNotices/Entry', [
+            'id' => (int)$id
+        ]))
+            ->name('edit');
+        Route::get('/delete', fn ($id) => Inertia::render('TeamNotices/Delete', [
+            'id' => (int)$id
+        ]))
+            ->name('delete');
+    });
+});
+
 Route::inertia('/apps', 'Apps')->name('apps');

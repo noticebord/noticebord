@@ -36,7 +36,7 @@ export async function createNoticeAsync(request: SaveNoticeRequest): Promise<Not
  * @param {SaveNoticeRequest} request The notice to create.
  */
  export async function updateNoticeAsync(id: number, request: SaveNoticeRequest): Promise<Notice> {
-    const response = await api.patch<Notice>(`/notices/${id}`, request);
+    const response = await api.put<Notice>(`/notices/${id}`, request);
     return response.data;
 }
 
@@ -45,7 +45,6 @@ export async function createNoticeAsync(request: SaveNoticeRequest): Promise<Not
  * 
  * @param {number} id The id of the notice to delete.
  */
- export async function deleteNoticeAsync(id: number): Promise<Notice> {
-    const response = await api.delete<Notice>(`/notices/${id}`);
-    return response.data;
+ export async function deleteNoticeAsync(id: number): Promise<void> {
+    await api.delete<Notice>(`/notices/${id}`);
 }

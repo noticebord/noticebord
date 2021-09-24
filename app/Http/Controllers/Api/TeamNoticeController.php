@@ -4,20 +4,22 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Notice;
-use Illuminate\Http\{ Request, Response };
+use App\Models\Team;
+use App\Models\TeamNotice;
+use Illuminate\Http\{Request, Response};
 use Illuminate\Support\Facades\Auth;
 
-class NoticeController extends Controller
+class TeamNoticeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($teamId)
     {
-        return Notice::with(['author'])
-            ->where('public', true)
+        return TeamNotice::with(['author'])
+            ->where('team_id', $teamId)
             ->get()
             ->makeHidden(['body']);
     }
@@ -28,18 +30,16 @@ class NoticeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $team)
     {
         $data = $request->validate([
             'title'     => ['required', 'string', 'max:255'],
             'body'      => ['required', 'string']
         ]);
 
-        $anonymous = $request->boolean('anonymous', false);
-        $data['public'] = $anonymous || $request->boolean('public', false);
-
-        $notice = new Notice($data);
-        $notice->author_id = $anonymous ? null : Auth::guard('sanctum')->id();
+        $notice = new TeamNotice($data);
+        $notice->author_id = Auth::guard('sanctum')->id();
+        $notice->team_id = $team;;
         $notice->save();
 
         return response()->json($notice->load(['author'])->makeHidden(['body']), Response::HTTP_CREATED);
@@ -48,47 +48,42 @@ class NoticeController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param  int  $team
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($team, $id)
     {
-        $notice = Notice::with(['author'])->findOrFail($id);
-        $guard = Auth::guard('sanctum');
-
-        $belongsToCurrent = $guard->check() && $notice->author_id === $guard->id();
-        abort_unless($notice->public || $belongsToCurrent, Response::HTTP_NOT_FOUND); 
-    
-        return $notice;
+        return TeamNotice::with(['author'])
+            ->where('author_id', Auth::guard('sanctum')->id())
+            ->where('team_id', $team)
+            ->findOrFail($id);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  int  $team
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $team, $id)
     {
-        // TODO: Validate
         $data = $request->validate([
             'title'     => ['nullable', 'string', 'max:255'],
             'body'      => ['nullable', 'string']
         ]);
 
-        $anonymous = $request->boolean('anonymous', false);
-
         /** @var \App\Models\Notice $notice */
         $notice = Notice::with(['author'])
             ->where('author_id', Auth::guard('sanctum')->id())
+            ->where('team_id', $team)
             ->findOrFail($id);
 
         $notice->update([
             'title'     => $data['title'] ?? $notice->title,
-            'body'      => $data['body'] ?? $notice->body,
-            'public'    => $anonymous || $request->boolean('public', false),
-            'author_id' => $anonymous ? null : $notice->author_id,
+            'body'      => $data['body'] ?? $notice->body
         ]);
 
         return $notice;
@@ -97,16 +92,18 @@ class NoticeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param  int  $team
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($team, $id)
     {
         /** @var \Illuminate\Database\Eloquent\Model $notice */
         $notice = Notice::with(['author'])
             ->where('author_id', Auth::guard('sanctum')->id())
+            ->where('team_id', $team)            
             ->findOrFail($id);
-            
+
         $notice->delete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }

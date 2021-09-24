@@ -37,6 +37,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         // All ids should be integers
         Route::pattern('id', '[0-9]+');
+        Route::pattern('teamId', '[0-9]+');
 
         $this->configureRateLimiting();
 
