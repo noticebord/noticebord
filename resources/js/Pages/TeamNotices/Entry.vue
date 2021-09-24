@@ -3,7 +3,7 @@
     <template #header>
       <div class="flex justify-between">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-          {{ id > 0 ? "Edit" : "Create" }} a Notice
+          {{ id > 0 ? "Edit" : "Create" }} a Team Notice
         </h2>
       </div>
     </template>
@@ -33,43 +33,6 @@
             ></textarea>
           </div>
 
-          <div class="mb-2">
-            <input
-              type="checkbox"
-              id="anonymous"
-              class="rounded-lg mr-1"
-              :class="{ 'text-gray-500': !$page.props.user }"
-              :disabled="!$page.props.user"
-              :checked="notice.anonymous"
-              @change="anonymousChange($event.target.checked)"
-            />
-            <label
-              for="anonymous"
-              class="font-semibold"
-              :class="{ 'text-gray-500': !$page.props.user }"
-            >
-              Anonymous?
-            </label>
-          </div>
-
-          <div class="mb-2">
-            <input
-              type="checkbox"
-              id="public"
-              class="rounded-lg mr-1"
-              :class="{ 'text-gray-500': notice.anonymous }"
-              :disabled="notice.anonymous"
-              v-model="notice.public"
-            />
-            <label
-              for="public"
-              class="font-semibold"
-              :class="{ 'text-gray-500': notice.anonymous }"
-            >
-              Public?
-            </label>
-          </div>
-
           <div class="w-100 flex justify-center">
             <button
               :disabled="!notice.title || !notice.body"
@@ -79,7 +42,7 @@
                   ? 'border-blue-700 text-blue-700 shadow hover:shadow-inner'
                   : 'border-gray-500 text-gray:400'
               "
-              @click="saveNotice"
+              @click="saveTeamNotice"
             >
               Save!
             </button>
@@ -93,9 +56,9 @@
 <script>
 import AppLayout from "../../Layouts/AppLayout.vue";
 import {
-  createNoticeAsync,
-  fetchNoticeAsync,
-  updateNoticeAsync,
+  createTeamNoticeAsync,
+  fetchTeamNoticeAsync,
+  updateTeamNoticeAsync,
 } from "../../client";
 import { Inertia } from "@inertiajs/inertia";
 
@@ -111,35 +74,25 @@ export default {
     AppLayout,
   },
   data: function () {
-    const anonymous = !this.$page.props.user;
     return {
       notice: {
         title: "",
-        body: "",
-        anonymous: anonymous,
-        public: anonymous,
+        body: ""
       },
     };
   },
   created: async function () {
-    if (this.id > 0) this.notice = await fetchNoticeAsync(this.id);
+    const teamId = this.$page.props.user.current_team.id;
+    if (this.id > 0) this.notice = await fetchTeamNoticeAsync(teamId, this.id);
   },
   methods: {
-    anonymousChange: function (checked) {
-      if (checked) {
-        this.notice.anonymous = true;
-        this.notice.public = true;
-        return;
-      }
-
-      this.notice.anonymous = false;
-    },
-    saveNotice: async function () {
+    saveTeamNotice: async function () {
+      const teamId = this.$page.props.user.current_team.id;
       const saveTask = this.id > 0
-        ? updateNoticeAsync(this.id, this.notice)
-        : createNoticeAsync(this.notice);
+        ? updateTeamNoticeAsync(teamId, this.id, this.notice)
+        : createTeamNoticeAsync(teamId, this.notice);
       const notice = await saveTask;
-      Inertia.get(route("notices.show", notice.id));
+      Inertia.get(route("team-notices.show", notice.id));
     },
   },
 };

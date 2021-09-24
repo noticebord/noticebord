@@ -42,12 +42,12 @@ Route::prefix('notices')->group(function () {
 Route::middleware(['auth:sanctum', 'verified'])
     ->prefix('teams/{team}/notices')->group(function () {
         Route::get('', [TeamNoticeController::class, 'index']);
-        Route::post('', [NoticeController::class, 'store']);
+        Route::post('', [TeamNoticeController::class, 'store']);
 
         Route::prefix('{id}')->group(function () {
-            Route::get('', [NoticeController::class, 'show']);
-            Route::put('', [NoticeController::class, 'update']);
-            Route::delete('', [NoticeController::class, 'destroy']);
+            Route::get('', [TeamNoticeController::class, 'show']);
+            Route::put('', [TeamNoticeController::class, 'update']);
+            Route::delete('', [TeamNoticeController::class, 'destroy']);
         });
     });
 

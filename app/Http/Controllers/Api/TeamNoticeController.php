@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Notice;
-use App\Models\Team;
 use App\Models\TeamNotice;
 use Illuminate\Http\{Request, Response};
 use Illuminate\Support\Facades\Auth;
@@ -76,7 +74,7 @@ class TeamNoticeController extends Controller
         ]);
 
         /** @var \App\Models\Notice $notice */
-        $notice = Notice::with(['author'])
+        $notice = TeamNotice::with(['author'])
             ->where('author_id', Auth::guard('sanctum')->id())
             ->where('team_id', $team)
             ->findOrFail($id);
@@ -99,7 +97,7 @@ class TeamNoticeController extends Controller
     public function destroy($team, $id)
     {
         /** @var \Illuminate\Database\Eloquent\Model $notice */
-        $notice = Notice::with(['author'])
+        $notice = TeamNotice::with(['author'])
             ->where('author_id', Auth::guard('sanctum')->id())
             ->where('team_id', $team)            
             ->findOrFail($id);

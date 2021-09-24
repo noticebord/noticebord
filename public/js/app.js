@@ -37427,19 +37427,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
-    deleteNotice: function () {
-      var _deleteNotice = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+    deleteTeamNotice: function () {
+      var _deleteTeamNotice = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var teamId;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return (0,_client__WEBPACK_IMPORTED_MODULE_2__.deleteNoticeAsync)(this.id);
-
-              case 2:
-                _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_4__.Inertia.get(route("notices.index"));
+                teamId = this.$page.props.user.current_team.id;
+                _context.next = 3;
+                return (0,_client__WEBPACK_IMPORTED_MODULE_2__.deleteTeamNoticeAsync)(teamId, this.id);
 
               case 3:
+                _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_4__.Inertia.get(route("team-notices.index"));
+
+              case 4:
               case "end":
                 return _context.stop();
             }
@@ -37447,11 +37449,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee, this);
       }));
 
-      function deleteNotice() {
-        return _deleteNotice.apply(this, arguments);
+      function deleteTeamNotice() {
+        return _deleteTeamNotice.apply(this, arguments);
       }
 
-      return deleteNotice;
+      return deleteTeamNotice;
     }()
   }
 });
@@ -37496,34 +37498,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     AppLayout: _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__.default
   },
   data: function data() {
-    var anonymous = !this.$page.props.user;
     return {
       notice: {
         title: "",
-        body: "",
-        anonymous: anonymous,
-        "public": anonymous
+        body: ""
       }
     };
   },
   created: function () {
     var _created = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var teamId;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+              teamId = this.$page.props.user.current_team.id;
+
               if (!(this.id > 0)) {
-                _context.next = 4;
+                _context.next = 5;
                 break;
               }
 
-              _context.next = 3;
-              return (0,_client__WEBPACK_IMPORTED_MODULE_2__.fetchNoticeAsync)(this.id);
-
-            case 3:
-              this.notice = _context.sent;
+              _context.next = 4;
+              return (0,_client__WEBPACK_IMPORTED_MODULE_2__.fetchTeamNoticeAsync)(teamId, this.id);
 
             case 4:
+              this.notice = _context.sent;
+
+            case 5:
             case "end":
               return _context.stop();
           }
@@ -37538,31 +37540,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return created;
   }(),
   methods: {
-    anonymousChange: function anonymousChange(checked) {
-      if (checked) {
-        this.notice.anonymous = true;
-        this.notice["public"] = true;
-        return;
-      }
-
-      this.notice.anonymous = false;
-    },
-    saveNotice: function () {
-      var _saveNotice = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var saveTask, notice;
+    saveTeamNotice: function () {
+      var _saveTeamNotice = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var teamId, saveTask, notice;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                saveTask = this.id > 0 ? (0,_client__WEBPACK_IMPORTED_MODULE_2__.updateNoticeAsync)(this.id, this.notice) : (0,_client__WEBPACK_IMPORTED_MODULE_2__.createNoticeAsync)(this.notice);
-                _context2.next = 3;
+                teamId = this.$page.props.user.current_team.id;
+                saveTask = this.id > 0 ? (0,_client__WEBPACK_IMPORTED_MODULE_2__.updateTeamNoticeAsync)(teamId, this.id, this.notice) : (0,_client__WEBPACK_IMPORTED_MODULE_2__.createTeamNoticeAsync)(teamId, this.notice);
+                _context2.next = 4;
                 return saveTask;
 
-              case 3:
+              case 4:
                 notice = _context2.sent;
-                _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_3__.Inertia.get(route("notices.show", notice.id));
+                _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_3__.Inertia.get(route("team-notices.show", notice.id));
 
-              case 5:
+              case 6:
               case "end":
                 return _context2.stop();
             }
@@ -37570,11 +37564,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2, this);
       }));
 
-      function saveNotice() {
-        return _saveNotice.apply(this, arguments);
+      function saveTeamNotice() {
+        return _saveTeamNotice.apply(this, arguments);
       }
 
-      return saveNotice;
+      return saveTeamNotice;
     }()
   }
 });
@@ -37597,13 +37591,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Layouts/AppLayout.vue */ "./resources/js/Layouts/AppLayout.vue");
 /* harmony import */ var _client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../client */ "./resources/js/client/index.ts");
 /* harmony import */ var _client__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_client__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _utils_notices__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/notices */ "./resources/js/utils/notices.ts");
-/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-/* harmony import */ var tippy_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! tippy.js */ "./node_modules/tippy.js/dist/tippy.esm.js");
-/* harmony import */ var tippy_js_dist_tippy_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tippy.js/dist/tippy.css */ "./node_modules/tippy.js/dist/tippy.css");
-/* harmony import */ var tippy_js_animations_scale_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tippy.js/animations/scale.css */ "./node_modules/tippy.js/animations/scale.css");
-/* harmony import */ var tippy_js_themes_light_border_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tippy.js/themes/light-border.css */ "./node_modules/tippy.js/themes/light-border.css");
+/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var tippy_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tippy.js */ "./node_modules/tippy.js/dist/tippy.esm.js");
+/* harmony import */ var tippy_js_dist_tippy_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tippy.js/dist/tippy.css */ "./node_modules/tippy.js/dist/tippy.css");
+/* harmony import */ var tippy_js_animations_scale_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tippy.js/animations/scale.css */ "./node_modules/tippy.js/animations/scale.css");
+/* harmony import */ var tippy_js_themes_light_border_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tippy.js/themes/light-border.css */ "./node_modules/tippy.js/themes/light-border.css");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -37618,39 +37611,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     AppLayout: _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__.default,
-    FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_4__.FontAwesomeIcon
+    FontAwesomeIcon: _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_3__.FontAwesomeIcon
   },
   data: function data() {
     return {
       icons: {
-        faEdit: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__.faEdit,
-        faEllipsisV: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__.faEllipsisV,
-        faQrcode: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__.faQrcode,
-        faTrashAlt: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__.faTrashAlt
+        faEdit: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faEdit,
+        faEllipsisV: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faEllipsisV,
+        faQrcode: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faQrcode,
+        faTrashAlt: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faTrashAlt
       },
       notices: []
     };
   },
   created: function () {
     var _created = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var notices;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return (0,_client__WEBPACK_IMPORTED_MODULE_2__.fetchNoticesAsync)();
+              return (0,_client__WEBPACK_IMPORTED_MODULE_2__.fetchTeamNoticesAsync)(this.$page.props.user.current_team.id);
 
             case 2:
-              notices = _context.sent;
-              this.notices = notices.map(function (notice) {
-                return (0,_utils_notices__WEBPACK_IMPORTED_MODULE_3__.assignDefaultAuthor)(notice);
-              });
-              (0,tippy_js__WEBPACK_IMPORTED_MODULE_9__.delegate)(".grid", {
+              this.notices = _context.sent;
+              (0,tippy_js__WEBPACK_IMPORTED_MODULE_8__.delegate)(".grid", {
                 allowHTML: true,
                 animation: "scale",
                 arrow: false,
@@ -37667,7 +37655,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }
               });
 
-            case 5:
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -37701,13 +37689,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Layouts/AppLayout.vue */ "./resources/js/Layouts/AppLayout.vue");
 /* harmony import */ var _client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../client */ "./resources/js/client/index.ts");
 /* harmony import */ var _client__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_client__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _utils_notices__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/notices */ "./resources/js/utils/notices.ts");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 
 
 
@@ -37728,17 +37714,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   created: function () {
     var _created = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var notice;
+      var teamId;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return (0,_client__WEBPACK_IMPORTED_MODULE_2__.fetchNoticeAsync)(this.id);
+              teamId = this.$page.props.user.current_team.id;
+              _context.next = 3;
+              return (0,_client__WEBPACK_IMPORTED_MODULE_2__.fetchTeamNoticeAsync)(teamId, this.id);
 
-            case 2:
-              notice = _context.sent;
-              this.notice = (0,_utils_notices__WEBPACK_IMPORTED_MODULE_3__.assignDefaultAuthor)(notice);
+            case 3:
+              this.notice = _context.sent;
 
             case 4:
             case "end":
@@ -43417,7 +43403,7 @@ var _hoisted_3 = {
   "class": "text-xl font-semibold mb-2"
 };
 
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Are you sure you want to delete this notice? ");
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Are you sure you want to delete this team notice? ");
 
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h5", {
   "class": "text-lg text-gray-500 italic mb-4"
@@ -43442,7 +43428,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , ["icon"]), _hoisted_4]), _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
         "class": "\r\n            p-2\r\n            w-full\r\n            rounded-lg\r\n            text-red-500\r\n            hover:bg-red-100\r\n            hover:shadow-inner\r\n          ",
         onClick: _cache[1] || (_cache[1] = function () {
-          return $options.deleteNotice && $options.deleteNotice.apply($options, arguments);
+          return $options.deleteTeamNotice && $options.deleteTeamNotice.apply($options, arguments);
         })
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FontAwesomeIcon, {
         icon: _ctx.icons.faTrashAlt,
@@ -43510,12 +43496,6 @@ var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 );
 
 var _hoisted_10 = {
-  "class": "mb-2"
-};
-var _hoisted_11 = {
-  "class": "mb-2"
-};
-var _hoisted_12 = {
   "class": "w-100 flex justify-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -43523,7 +43503,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_app_layout, null, {
     header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.id > 0 ? "Edit" : "Create") + " a Notice ", 1
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.id > 0 ? "Edit" : "Create") + " a Team Notice ", 1
       /* TEXT */
       )])];
     }),
@@ -43552,50 +43532,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.notice.body, void 0, {
         trim: true
-      }]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
-        type: "checkbox",
-        id: "anonymous",
-        "class": ["rounded-lg mr-1", {
-          'text-gray-500': !_ctx.$page.props.user
-        }],
-        disabled: !_ctx.$page.props.user,
-        checked: _ctx.notice.anonymous,
-        onChange: _cache[3] || (_cache[3] = function ($event) {
-          return $options.anonymousChange($event.target.checked);
-        })
-      }, null, 42
-      /* CLASS, PROPS, HYDRATE_EVENTS */
-      , ["disabled", "checked"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
-        "for": "anonymous",
-        "class": ["font-semibold", {
-          'text-gray-500': !_ctx.$page.props.user
-        }]
-      }, " Anonymous? ", 2
-      /* CLASS */
-      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
-        type: "checkbox",
-        id: "public",
-        "class": ["rounded-lg mr-1", {
-          'text-gray-500': _ctx.notice.anonymous
-        }],
-        disabled: _ctx.notice.anonymous,
-        "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-          return _ctx.notice["public"] = $event;
-        })
-      }, null, 10
-      /* CLASS, PROPS */
-      , ["disabled"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, _ctx.notice["public"]]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
-        "for": "public",
-        "class": ["font-semibold", {
-          'text-gray-500': _ctx.notice.anonymous
-        }]
-      }, " Public? ", 2
-      /* CLASS */
-      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+      }]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
         disabled: !_ctx.notice.title || !_ctx.notice.body,
         "class": ["font-semibold rounded-lg px-3 py-2 border", _ctx.notice.title && _ctx.notice.body ? 'border-blue-700 text-blue-700 shadow hover:shadow-inner' : 'border-gray-500 text-gray:400'],
-        onClick: _cache[5] || (_cache[5] = function () {
-          return $options.saveNotice && $options.saveNotice.apply($options, arguments);
+        onClick: _cache[3] || (_cache[3] = function () {
+          return $options.saveTeamNotice && $options.saveTeamNotice.apply($options, arguments);
         })
       }, " Save! ", 10
       /* CLASS, PROPS */
@@ -43628,7 +43569,7 @@ var _hoisted_1 = {
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
   "class": "font-semibold text-xl text-gray-800 leading-tight"
-}, " Notices ", -1
+}, " Team Notices ", -1
 /* HOISTED */
 );
 
@@ -43677,7 +43618,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_app_layout, null, {
     header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
-        href: _ctx.route('notices.create'),
+        href: _ctx.route('team-notices.create'),
         "class": "\r\n            text-base text-gray-500\r\n            leading-none\r\n            mb-2\r\n            hover:text-indigo-500\r\n            hover:underline\r\n          "
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -43698,7 +43639,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "class": "rounded-lg focus-within:shadow hover:shadow",
           key: notice.id
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
-          href: _ctx.route('notices.show', notice.id),
+          href: _ctx.route('team-notices.show', notice.id),
           "class": "\r\n                    text-xl\r\n                    font-semibold\r\n                    hover:text-indigo-500\r\n                    flex flex-col\r\n                    justify-center\r\n                  "
         }, {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -43749,7 +43690,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "class": "hidden",
           id: "notice-".concat(notice.id)
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button\r\n                    class=\"hover:bg-gray-100 p-2 w-full text-left\"\r\n                    @click=\"console.log(`QR Code for notice #${notice.id}`)\"\r\n                  >\r\n                    <FontAwesomeIcon :icon=\"icons.faQrcode\" class=\"mr-2\" />\r\n                    Get QR Code\r\n                  </button> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
-          href: _ctx.route('notices.edit', notice.id)
+          href: _ctx.route('team-notices.edit', notice.id)
         }, {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
             return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FontAwesomeIcon, {
@@ -43765,7 +43706,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }, 1032
         /* PROPS, DYNAMIC_SLOTS */
         , ["href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
-          href: _ctx.route('notices.delete', notice.id)
+          href: _ctx.route('team-notices.delete', notice.id)
         }, {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
             return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FontAwesomeIcon, {

@@ -7,7 +7,7 @@
             :icon="icons.faExclamationTriangle"
             class="text-yellow-500 mr-2"
           />
-          Are you sure you want to delete this notice?
+          Are you sure you want to delete this team notice?
         </h4>
         <h5 class="text-lg text-gray-500 italic mb-4">
           CAUTION: This action is irreversible!
@@ -21,7 +21,7 @@
             hover:bg-red-100
             hover:shadow-inner
           "
-          @click="deleteNotice"
+          @click="deleteTeamNotice"
         >
           <FontAwesomeIcon :icon="icons.faTrashAlt" class="mr-2" />
           Delete
@@ -33,7 +33,7 @@
 
 <script>
 import AppLayout from "../../Layouts/AppLayout.vue";
-import { deleteNoticeAsync } from "../../client";
+import { deleteTeamNoticeAsync } from "../../client";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import {
   faExclamationTriangle,
@@ -61,9 +61,10 @@ export default {
     };
   },
   methods: {
-    deleteNotice: async function () {
-      await deleteNoticeAsync(this.id);
-      Inertia.get(route("notices.index"));
+    deleteTeamNotice: async function () {
+      const teamId = this.$page.props.user.current_team.id;
+      await deleteTeamNoticeAsync(teamId, this.id);
+      Inertia.get(route("team-notices.index"));
     },
   },
 };

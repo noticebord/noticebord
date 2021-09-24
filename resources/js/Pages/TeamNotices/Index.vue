@@ -3,10 +3,10 @@
     <template #header>
       <div class="flex justify-between">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-          Notices
+          Team Notices
         </h2>
         <inertia-link
-          :href="route('notices.create')"
+          :href="route('team-notices.create')"
           class="
             text-base text-gray-500
             leading-none
@@ -31,7 +31,7 @@
             <div class="p-4">
               <div class="flex justify-between align-middle mb-2">
                 <inertia-link
-                  :href="route('notices.show', notice.id)"
+                  :href="route('team-notices.show', notice.id)"
                   class="
                     text-xl
                     font-semibold
@@ -96,13 +96,13 @@
                 <div
                   class="text-blue-500 hover:bg-blue-100 p-2 w-full text-left"
                 >
-                  <inertia-link :href="route('notices.edit', notice.id)">
+                  <inertia-link :href="route('team-notices.edit', notice.id)">
                     <FontAwesomeIcon :icon="icons.faEdit" class="mr-2" />
                     Edit
                   </inertia-link>
                 </div>
                 <div class="text-red-500 hover:bg-red-100 p-2 w-full text-left">
-                  <inertia-link :href="route('notices.delete', notice.id)">
+                  <inertia-link :href="route('team-notices.delete', notice.id)">
                     <FontAwesomeIcon :icon="icons.faTrashAlt" class="mr-2" />
                     Delete
                   </inertia-link>
@@ -118,8 +118,7 @@
 
 <script>
 import AppLayout from "../../Layouts/AppLayout.vue";
-import { fetchNoticesAsync } from "../../client";
-import { assignDefaultAuthor } from "../../utils/notices";
+import { fetchTeamNoticesAsync } from "../../client";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import {
   faEdit,
@@ -150,8 +149,7 @@ export default {
     };
   },
   created: async function () {
-    const notices = await fetchNoticesAsync();
-    this.notices = notices.map((notice) => assignDefaultAuthor(notice));
+    this.notices = await fetchTeamNoticesAsync(this.$page.props.user.current_team.id);
     delegate(".grid", {
       allowHTML: true,
       animation: "scale",
