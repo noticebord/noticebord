@@ -1,4 +1,4 @@
-import { User } from "./User";
+import { Topic, User } from ".";
 
 export interface Notice {
     id: number;
@@ -7,4 +7,5 @@ export interface Notice {
     created_at: string;
     updated_at: string;
     author?: User;
+    topics: Topic[];
 }
