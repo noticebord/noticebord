@@ -2,13 +2,16 @@
 
 namespace Database\Seeders;
 
+use App\Models\Notice;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Spatie\Tags\Tag;
 
 class NoticeSeeder extends Seeder
 {
     private const BODY = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
-    
+    private const TOPICS = ["tech", "lifestyle", "opinion", "jobs", "fun", "news", "sports", "entertainment", "general"];
+
     /**
      * Run the database seeds.
      *
@@ -20,23 +23,27 @@ class NoticeSeeder extends Seeder
 
         $body = str_repeat(self::BODY, 20);
 
-        for($i = 1; $i <= 20; $i++)
-        {
-            $created = now()->subMinutes($i + 5);
+        for ($i = 1; $i <= 20; $i++) {
+            $created = now()->toImmutable()->subMinutes($i + 5);
             $anonymous = random_int(0, 10) > 3;
 
-            $notices[] = 
-            [
+            $indices = array_rand(self::TOPICS, random_int(1, 5));
+            $indices = is_array($indices) ? $indices : [$indices];
+            $topics = array_map(fn ($i) => self::TOPICS[$i], $indices);
+
+            Notice::create([
                 'title'      => "Notice $i",
                 'body'       => $body,
                 'public'     => $anonymous || random_int(0, 10) < 7,
                 'author_id'  => $anonymous ? null : 1,
                 'created_at' => $created,
                 'updated_at' => $created->addMinutes(5),
-                'deleted_at' => null
-            ];
+                'deleted_at' => null,
+                'tags'       => $topics,
+            ]);
         }
 
-        DB::table('notices')->insert($notices);
+        // Notice::create($notices);
+        // DB::table('notices')->insert($notices);
     }
 }

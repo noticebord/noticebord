@@ -3,7 +3,8 @@
 use App\Http\Controllers\Api\{
     NoticeController,
     TeamNoticeController,
-    TokenController
+    TokenController,
+    TopicController
 };
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -40,7 +41,8 @@ Route::prefix('notices')->group(function () {
 
 // Team actions always require login
 Route::middleware(['auth:sanctum', 'verified'])
-    ->prefix('teams/{team}/notices')->group(function () {
+    ->prefix('teams/{team}/notices')
+    ->group(function () {
         Route::get('', [TeamNoticeController::class, 'index']);
         Route::post('', [TeamNoticeController::class, 'store']);
 
@@ -50,5 +52,7 @@ Route::middleware(['auth:sanctum', 'verified'])
             Route::delete('', [TeamNoticeController::class, 'destroy']);
         });
     });
+
+Route::get('/topics', [TopicController::class, 'index']);
 
 Route::post('/tokens', [TokenController::class, 'create']);
