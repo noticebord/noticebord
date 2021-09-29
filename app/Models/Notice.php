@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\{
     Model,
     SoftDeletes
 };
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Spatie\Tags\HasTags;
 
 class Notice extends Model
@@ -32,6 +34,7 @@ class Notice extends Model
      * @var array
      */
     protected $hidden = [
+        'body',
         'public',
         'author_id',
         'deleted_at',
@@ -45,9 +48,21 @@ class Notice extends Model
      */
     protected $appends = ['topics'];
 
-    public function author()
+    public static function getTagClassName(): string
+    {
+        return Topic::class;
+    }
+
+    public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
+    }
+
+    public function tags(): MorphToMany
+    {
+        return $this
+            ->morphToMany(self::getTagClassName(), 'taggable', 'taggables', null, 'tag_id')
+            ->orderBy('order_column');
     }
 
     public function getTopicsAttribute()

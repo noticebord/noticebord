@@ -38,6 +38,7 @@ class RouteServiceProvider extends ServiceProvider
         // All ids should be integers
         Route::pattern('id', '[0-9]+');
         Route::pattern('notice', '[0-9]+');
+        Route::pattern('topic', '[0-9]+');
         Route::pattern('team', '[0-9]+');
 
         $this->configureRateLimiting();

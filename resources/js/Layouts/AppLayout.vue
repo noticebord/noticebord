@@ -489,6 +489,12 @@ export default {
           protected: false
         },
         {
+          text: "Topics",
+          href: route("topics.index"),
+          match: route().current("topics*"),
+          protected: false
+        },
+        {
           text: "Team Notices",
           href: route("team-notices.index"),
           match: route().current("team-notices*"),

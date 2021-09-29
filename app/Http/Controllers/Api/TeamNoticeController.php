@@ -18,8 +18,7 @@ class TeamNoticeController extends Controller
     {
         return TeamNotice::with(['author'])
             ->where('team_id', $teamId)
-            ->get()
-            ->makeHidden(['body']);
+            ->get();
     }
 
     /**

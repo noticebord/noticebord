@@ -39,6 +39,15 @@ Route::prefix('notices')->name('notices.')->group(function () {
     });
 });
 
+Route::prefix('topics')->name('topics.')->group(function () {
+    Route::inertia('', 'Topics/Index')
+        ->name('index');
+    Route::get('/{topic}', fn ($id) => Inertia::render('Topics/Show', [
+        'id' => (int)$id
+    ]))
+        ->name('show');
+});
+
 Route::prefix('team')->name('team-notices.')->group(function () {
     Route::inertia('', 'TeamNotices/Index')
         ->name('index');

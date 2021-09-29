@@ -3,7 +3,7 @@
     <template #header>
       <div class="flex justify-between">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-          Notices
+          #{{ topic?.name ?? 'topic' }}
         </h2>
         <inertia-link
           :href="route('notices.create')"
@@ -136,7 +136,7 @@
 
 <script>
 import AppLayout from "../../Layouts/AppLayout.vue";
-import { fetchNoticesAsync } from "../../client";
+import { fetchTopicAsync, fetchTopicNoticesAsync } from "../../client";
 import { assignDefaultAuthor } from "../../utils/notices";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import {
@@ -152,6 +152,12 @@ import "tippy.js/animations/scale.css";
 import "tippy.js/themes/light-border.css";
 
 export default {
+  props: {
+    id: {
+      type: Number,
+      required: true,
+    },
+  },
   components: {
     AppLayout,
     FontAwesomeIcon,
@@ -165,11 +171,14 @@ export default {
         faTrashAlt,
       },
       notices: [],
+      topic: null
     };
   },
   created: async function () {
-    const notices = await fetchNoticesAsync();
+    this.topic = await fetchTopicAsync(this.id);
+    const notices = await fetchTopicNoticesAsync(this.id);
     this.notices = notices.map((notice) => assignDefaultAuthor(notice));
+
     delegate(".grid", {
       allowHTML: true,
       animation: "scale",

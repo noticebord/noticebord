@@ -18,8 +18,7 @@ class NoticeController extends Controller
     {
         return Notice::with(['author'])
             ->where('public', true)
-            ->get()
-            ->makeHidden(['body']);
+            ->get();
     }
 
     /**
@@ -59,7 +58,7 @@ class NoticeController extends Controller
         $belongsToCurrent = $guard->check() && $notice->author_id === $guard->id();
         abort_unless($notice->public || $belongsToCurrent, Response::HTTP_NOT_FOUND); 
     
-        return $notice;
+        return $notice->makeVisible(['body']);;
     }
 
     /**

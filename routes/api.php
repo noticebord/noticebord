@@ -39,6 +39,12 @@ Route::prefix('notices')->group(function () {
         });
 });
 
+Route::prefix('topics')->group(function () {
+    Route::get('', [TopicController::class, 'index']);
+    Route::get('/{topic}', [TopicController::class, 'show']);
+    Route::get('/{topic}/notices', [TopicController::class, 'notices']);
+});
+
 // Team actions always require login
 Route::middleware(['auth:sanctum', 'verified'])
     ->prefix('teams/{team}/notices')
@@ -52,7 +58,5 @@ Route::middleware(['auth:sanctum', 'verified'])
             Route::delete('', [TeamNoticeController::class, 'destroy']);
         });
     });
-
-Route::get('/topics', [TopicController::class, 'index']);
 
 Route::post('/tokens', [TokenController::class, 'create']);
