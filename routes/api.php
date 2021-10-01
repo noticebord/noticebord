@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\{
     NoticeController,
+    TeamController,
     TeamNoticeController,
     TokenController,
     TopicController
@@ -47,15 +48,23 @@ Route::prefix('topics')->group(function () {
 
 // Team actions always require login
 Route::middleware(['auth:sanctum', 'verified'])
-    ->prefix('teams/{team}/notices')
+    ->prefix('teams')
     ->group(function () {
-        Route::get('', [TeamNoticeController::class, 'index']);
-        Route::post('', [TeamNoticeController::class, 'store']);
+        Route::get('', [TeamController::class, 'index']);
 
-        Route::prefix('{id}')->group(function () {
-            Route::get('', [TeamNoticeController::class, 'show']);
-            Route::put('', [TeamNoticeController::class, 'update']);
-            Route::delete('', [TeamNoticeController::class, 'destroy']);
+        Route::prefix("{team}")->group(function () {
+            Route::get('', [TeamController::class, 'show']);
+
+            Route::prefix("notices", function () {
+                Route::get('', [TeamNoticeController::class, 'index']);
+                Route::post('', [TeamNoticeController::class, 'store']);
+
+                Route::prefix('{id}')->group(function () {
+                    Route::get('', [TeamNoticeController::class, 'show']);
+                    Route::put('', [TeamNoticeController::class, 'update']);
+                    Route::delete('', [TeamNoticeController::class, 'destroy']);
+                });
+            });
         });
     });
 
