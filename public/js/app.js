@@ -35254,70 +35254,70 @@ var apps = [{
   name: "Noticebord Web",
   description: "Use Noticebord on the web!",
   platforms: ["Web"],
-  source: "https://github.com/sixpeteunder/noticebord"
+  source: "https://github.com/noticebord/noticebord"
 }, {
   id: "app",
   name: "Noticebord App",
   description: "Get the native app for your phone/PC.",
   platforms: ["Android", "iOS", "Windows", "macOS", "Linux"],
-  source: "https://github.com/sixpeteunder/noticebord-clients"
+  source: "https://github.com/noticebord/noticebord-clients"
 }, {
   id: "lite",
   name: "Noticebord Lite",
   description: "Get the lightweight app for your phone/PC.",
   platforms: ["Android", "iOS", "Windows", "macOS", "Linux"],
-  source: "https://github.com/sixpeteunder/noticebord-clients"
+  source: "https://github.com/noticebord/noticebord-clients"
 }, {
   id: "cli",
   name: "Noticebord CLI",
   description: "Use Noticebord from the terminal.",
-  platforms: ["Android", "iOS", "Windows", "macOS", "Linux"],
-  source: "https://github.com/sixpeteunder/noticebord-clients"
+  platforms: ["Windows", "macOS", "Linux"],
+  source: "https://github.com/noticebord/noticebord-clients"
 }, {
   id: "bot",
   name: "Noticebort",
   description: "Have a chat with Noticebort in your favourite messaging app.",
   platforms: ["Telegram", "Facebook Messenger", "Discord"],
-  source: "https://github.com/sixpeteunder/noticebord-clients"
+  source: "https://github.com/noticebord/noticebord-clients"
 }, {
   id: "browser",
   name: "Noticebord Chrome Extension",
   description: "Create notices inside your favourite browser.",
   platforms: ["Chrome"],
-  source: "https://github.com/sixpeteunder/noticebord-clients"
+  source: "https://github.com/noticebord/noticebord-clients"
 }, {
   id: "vscode",
   name: "Noticebord VS Code Extension",
   description: "Integrate Noticebord with your favourite editor.",
   platforms: ["VS Code"],
-  source: "https://github.com/sixpeteunder/noticebord-clients"
+  source: "https://github.com/noticebord/noticebord-clients"
 }];
 var libraries = [{
   id: "noticebord-ts",
   platform: "TypeScript",
   icon: "devicon-typescript-plain",
   color: "#007acc",
-  source: "https://github.com/sixpeteunder/noticebord",
+  source: "https://github.com/noticebord/noticebord-client-ts",
   registry: "NPM",
-  "package": "https://github.com/sixpeteunder/noticebord",
+  "package": "https://github.com/noticebord/noticebord",
   command: "npm install noticebord-client"
 }, {
   id: "noticebord-dotnet",
   platform: ".NET",
   icon: "devicon-dotnetcore-plain",
   color: "#623697",
-  source: "https://github.com/sixpeteunder/noticebord",
+  source: "https://github.com/noticebord/noticebord-client-dotnet",
   registry: "NuGet",
-  "package": "https://github.com/sixpeteunder/noticebord",
+  "package": "https://github.com/noticebord/noticebord",
   command: "dotnet add package Noticebord.Client"
 }, {
   id: "noticebord-php",
   platform: "PHP",
   icon: "devicon-php-plain",
   color: "#6181b6",
-  source: "https://github.com/sixpeteunder/noticebord",
+  source: "https://github.com/noticebord/noticebord-client-php",
   registry: "Packagist",
-  "package": "https://github.com/sixpeteunder/noticebord",
+  "package": "https://packagist.org/packages/noticebord/client",
   command: "composer require noticebord/client"
 }, {
   id: "noticebord-go",
@@ -35325,9 +35325,9 @@ var libraries = [{
   icon: "devicon-go-plain",
   color: "#00acd7",
   registry: "pkg.go.dev",
-  source: "https://github.com/sixpeteunder/noticebord",
-  "package": "https://github.com/sixpeteunder/noticebord",
-  command: "go get github.com/sixpeteunder/noticebord-go"
+  source: "https://github.com/noticebord/noticebord-client-go",
+  "package": "https://github.com/noticebord/noticebord",
+  command: "go get github.com/noticebord/noticebord-client-go"
 }];
 
 function getApps() {
@@ -41022,7 +41022,7 @@ var _hoisted_3 = {
   "class": "p-4 md:w-1/2 flex"
 };
 var _hoisted_4 = {
-  "class": "my-auto"
+  "class": "m-auto"
 };
 var _hoisted_5 = {
   "class": "font-semibold text-3xl mb-2"
@@ -41036,7 +41036,7 @@ var _hoisted_7 = {
 
 var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
   "class": "text-3xl text-white text-center mb-2"
-}, " API Client Libraries ", -1
+}, " Client Libraries ", -1
 /* HOISTED */
 );
 
@@ -41047,7 +41047,7 @@ var _hoisted_10 = {
   "class": "\r\n                bg-gray-900\r\n                text-white\r\n                p-2\r\n                rounded-lg\r\n                mb-2\r\n                overflow-x-scroll\r\n              "
 };
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" View Source on GitHub ");
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" View source on GitHub ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_FontAwesomeIcon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("FontAwesomeIcon");
@@ -41059,7 +41059,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.apps, function (app, i) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
           "class": ["flex flex-col md:flex-row p-4", {
-            'flex-row-reverse bg-blue-400 text-white': i % 2 != 0
+            'md:flex-row-reverse bg-blue-400 text-white': i % 2 != 0
           }],
           style: [{
             "scroll-snap-align": "start"

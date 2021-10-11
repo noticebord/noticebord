@@ -6,14 +6,14 @@
         v-for="(app, i) in apps"
         style="scroll-snap-align: start"
         :key="i"
-        :class="{ 'flex-row-reverse bg-blue-400 text-white': i % 2 != 0 }"
+        :class="{ 'md:flex-row-reverse bg-blue-400 text-white': i % 2 != 0 }"
         :style="{ height: i == 0 ? 'calc(100vh - 4rem)' : '100vh' }"
       >
         <div class="p-4 md:w-1/2 flex">
           <img src="logo.svg" alt="Logo" class="w-40 h-40 md:w-80 md:h-80 m-auto" />
         </div>
         <div class="p-4 md:w-1/2 flex">
-          <div class="my-auto">
+          <div class="m-auto">
             <h2 class="font-semibold text-3xl mb-2">{{ app.name }}</h2>
             <p
               class="text-xl mb-2"
@@ -46,7 +46,7 @@
       </div>
       <div class="p-4 bg-blue-400">
         <h2 class="text-3xl text-white text-center mb-2">
-          API Client Libraries
+          Client Libraries
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <div
@@ -92,7 +92,7 @@
                 class="text-lg hover:underline"
               >
                 <FontAwesomeIcon :icon="icons.faGithub" class="mr-1" />
-                View Source on GitHub
+                View source on GitHub
               </a>
             </div>
           </div>

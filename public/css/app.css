@@ -1117,10 +1117,6 @@ select {
 	margin-left: 0.5rem;
 	margin-right: 0.5rem;
 }
-.my-auto {
-	margin-top: auto;
-	margin-bottom: auto;
-}
 .-mx-2 {
 	margin-left: -0.5rem;
 	margin-right: -0.5rem;
@@ -1380,9 +1376,6 @@ select {
 }
 .grid-cols-1 {
 	grid-template-columns: repeat(1, minmax(0, 1fr));
-}
-.flex-row-reverse {
-	flex-direction: row-reverse;
 }
 .flex-col {
 	flex-direction: column;
@@ -2423,6 +2416,10 @@ select {
 
 	.md\:flex-row {
 		flex-direction: row;
+	}
+
+	.md\:flex-row-reverse {
+		flex-direction: row-reverse;
 	}
 
 	.md\:gap-6 {
