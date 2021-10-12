@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\{Notice, Topic};
-use Illuminate\Http\{Request, Response};
 
 class TopicController extends Controller
 {
@@ -26,30 +25,28 @@ class TopicController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $topic
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($topic)
     {
-        $topic = Topic::with('notices')->findOrFail($id);
+        $t = Topic::with('notices')->findOrFail($topic);
         return [
-            'id'    => $topic->id,
-            'name'  => $topic->name,
-            'type'  => $topic->type,
-            'count' => $topic->notices->count(),
+            'id'    => $t->id,
+            'name'  => $t->name,
+            'type'  => $t->type,
+            'count' => $t->notices->count(),
         ];
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $topic
      * @return \Illuminate\Http\Response
      */
-    public function notices($id)
+    public function notices($topic)
     {
-        $topic = Topic::findOrFail($id);
-        $name = $topic->name;
-        return Notice::withAllTagsOfAnyType([$name])->get();
+        return Notice::withAllTagsOfAnyType([Topic::findOrFail($topic)->name])->get();
     }
 }

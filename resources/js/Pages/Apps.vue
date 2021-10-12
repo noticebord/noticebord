@@ -39,7 +39,7 @@
                   : 'bg-blue-400 text-white border-blue-400 hover:bg-white hover:text-blue-400'
               "
             >
-              Do Something!
+              {{ app.cta }}
             </button>
           </div>
         </div>

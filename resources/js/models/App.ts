@@ -4,4 +4,5 @@ export interface App {
     description: string;
     platforms: string[];
     source: string;
+    cta: string;
 }

@@ -47,12 +47,12 @@ class NoticeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $notice
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($notice)
     {
-        $notice = Notice::with(['author'])->findOrFail($id);
+        $notice = Notice::with(['author'])->findOrFail($notice);
         $guard = Auth::guard('sanctum');
 
         $belongsToCurrent = $guard->check() && $notice->author_id === $guard->id();
@@ -65,10 +65,10 @@ class NoticeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $notice
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $notice)
     {
         // TODO: Validate
         $data = $request->validate([
@@ -81,7 +81,7 @@ class NoticeController extends Controller
         /** @var \App\Models\Notice $notice */
         $notice = Notice::with(['author'])
             ->where('author_id', Auth::guard('sanctum')->id())
-            ->findOrFail($id);
+            ->findOrFail($notice);
 
         $notice->update([
             'title'     => $data['title'] ?? $notice->title,
@@ -96,15 +96,15 @@ class NoticeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $notice
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($notice)
     {
         /** @var \Illuminate\Database\Eloquent\Model $notice */
         $notice = Notice::with(['author'])
             ->where('author_id', Auth::guard('sanctum')->id())
-            ->findOrFail($id);
+            ->findOrFail($notice);
             
         $notice->delete();
         return response()->json(null, Response::HTTP_NO_CONTENT);

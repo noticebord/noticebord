@@ -6,49 +6,56 @@ const apps: App[] = [
         name: "Noticebord Web",
         description: "Use Noticebord on the web!",
         platforms: ["Web"],
-        source: "https://github.com/noticebord/noticebord"
+        source: "https://github.com/noticebord/noticebord",
+        cta: "Go to web app"
     },
     {
         id: "app",
         name: "Noticebord App",
         description: "Get the native app for your phone/PC.",
         platforms: ["Android", "iOS", "Windows", "macOS", "Linux"],
-        source: "https://github.com/noticebord/noticebord-clients"
+        source: "https://github.com/noticebord/noticebord-clients",
+        cta: "Get Noticebord"
     },
     {
         id: "lite",
         name: "Noticebord Lite",
         description: "Get the lightweight app for your phone/PC.",
         platforms: ["Android", "iOS", "Windows", "macOS", "Linux"],
-        source: "https://github.com/noticebord/noticebord-clients"
+        source: "https://github.com/noticebord/noticebord-clients",
+        cta: "Get Noticebord Lite"
     },
     {
         id: "cli",
         name: "Noticebord CLI",
         description: "Use Noticebord from the terminal.",
         platforms: ["Windows", "macOS", "Linux"],
-        source: "https://github.com/noticebord/noticebord-clients"
+        source: "https://github.com/noticebord/noticebord-clients",
+        cta: "Get Noticebord CLI"
     },
     {
         id: "bot",
         name: "Noticebort",
         description: "Have a chat with Noticebort in your favourite messaging app.",
         platforms: ["Telegram", "Facebook Messenger", "Discord"],
-        source: "https://github.com/noticebord/noticebord-clients"
+        source: "https://github.com/noticebord/noticebord-clients",
+        cta: "Chat with Noticebort"
     },
     {
         id: "browser",
         name: "Noticebord Chrome Extension",
         description: "Create notices inside your favourite browser.",
         platforms: ["Chrome"],
-        source: "https://github.com/noticebord/noticebord-clients"
+        source: "https://github.com/noticebord/noticebord-clients",
+        cta: "Get the browser extension"
     },
     {
         id: "vscode",
         name: "Noticebord VS Code Extension",
         description: "Integrate Noticebord with your favourite editor.",
         platforms: ["VS Code"],
-        source: "https://github.com/noticebord/noticebord-clients"
+        source: "https://github.com/noticebord/noticebord-clients",
+        cta: "Get the VS Code extension"
     }
 ]
 
@@ -61,7 +68,7 @@ const libraries: Library[] = [
         source: "https://github.com/noticebord/noticebord-client-ts",
         registry: "NPM",
         package: "https://github.com/noticebord/noticebord",
-        command: "npm install noticebord-client"
+        command: "npm install @noticebord/client"
     },
     {
         id: "noticebord-dotnet",
