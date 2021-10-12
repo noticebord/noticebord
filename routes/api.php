@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\{
     NoticeController,
+    TeamController,
     TeamNoticeController,
     TokenController,
     TopicController
@@ -28,11 +29,11 @@ Route::prefix('notices')->group(function () {
     Route::get('', [NoticeController::class, 'index']);
     Route::post('', [NoticeController::class, 'store']);
 
-    Route::get('/{id}', [NoticeController::class, 'show']);
+    Route::get('/{notice}', [NoticeController::class, 'show']);
 
     // Must be logged in to update or delete a notice.
     Route::middleware(['auth:sanctum', 'verified'])
-        ->prefix('{id}')
+        ->prefix('{notice}')
         ->group(function () {
             Route::put('', [NoticeController::class, 'update']);
             Route::delete('', [NoticeController::class, 'destroy']);
@@ -47,15 +48,23 @@ Route::prefix('topics')->group(function () {
 
 // Team actions always require login
 Route::middleware(['auth:sanctum', 'verified'])
-    ->prefix('teams/{team}/notices')
+    ->prefix('teams')
     ->group(function () {
-        Route::get('', [TeamNoticeController::class, 'index']);
-        Route::post('', [TeamNoticeController::class, 'store']);
+        Route::get('', [TeamController::class, 'index']);
 
-        Route::prefix('{id}')->group(function () {
-            Route::get('', [TeamNoticeController::class, 'show']);
-            Route::put('', [TeamNoticeController::class, 'update']);
-            Route::delete('', [TeamNoticeController::class, 'destroy']);
+        Route::prefix('{team}')->group(function () {
+            Route::get('', [TeamController::class, 'show']);
+
+            Route::prefix('notices')->group(function () {
+                Route::get('', [TeamNoticeController::class, 'index']);
+                Route::post('', [TeamNoticeController::class, 'store']);
+
+                Route::prefix('{notice}')->group(function () {
+                    Route::get('', [TeamNoticeController::class, 'show']);
+                    Route::put('', [TeamNoticeController::class, 'update']);
+                    Route::delete('', [TeamNoticeController::class, 'destroy']);
+                });
+            });
         });
     });
 

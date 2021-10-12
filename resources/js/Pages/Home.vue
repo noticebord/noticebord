@@ -40,7 +40,7 @@
                   <div
                     class="ml-4 text-lg text-gray-600 leading-7 font-semibold"
                   >
-                    <a :href="route('notices.index')">Free and public</a>
+                    Free and public
                   </div>
                 </div>
 
@@ -52,7 +52,7 @@
                     self-destruct based on certain factors.
                   </div>
 
-                  <a :href="route('notices.index')">
+                  <inertia-link :href="route('notices.index')">
                     <div
                       class="
                         mt-3
@@ -66,7 +66,7 @@
                       <div>Explore public notices</div>
                       <FontAwesomeIcon :icon="icons.faArrowRight" class="text-indigo-500 ml-2" />
                     </div>
-                  </a>
+                  </inertia-link>
                 </div>
               </div>
 
@@ -78,7 +78,7 @@
                   <div
                     class="ml-4 text-lg text-gray-600 leading-7 font-semibold"
                   >
-                    <a href="#">Ubiquitous</a>
+                    Ubiquitous
                   </div>
                 </div>
 
@@ -91,7 +91,7 @@
                     chat applications.
                   </div>
 
-                  <a href="#">
+                  <inertia-link :href="route('apps')">
                     <div
                       class="
                         mt-3
@@ -105,7 +105,7 @@
                       <div>Check out the apps!</div>
                       <FontAwesomeIcon :icon="icons.faArrowRight" class="text-indigo-500 ml-2" />
                     </div>
-                  </a>
+                  </inertia-link>
                 </div>
               </div>
 
@@ -115,7 +115,7 @@
                   <div
                     class="ml-4 text-lg text-gray-600 leading-7 font-semibold"
                   >
-                    <a href="#">Bring your own experience</a>
+                    Bring your own experience
                   </div>
                 </div>
 
@@ -128,7 +128,7 @@
                     ahead, build something awesome!
                   </div>
 
-                  <a href="#">
+                  <a href="https://github.com/noticebord/noticebord" target="_blank">
                     <div
                       class="
                         mt-3
@@ -165,7 +165,7 @@
                     on GitHub! We're waiting.
                   </div>
 
-                  <a href="#">
+                  <a href="https://github.com/noticebord/noticebord" target="_blank">
                     <div
                       class="
                         mt-3

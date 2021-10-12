@@ -35254,70 +35254,77 @@ var apps = [{
   name: "Noticebord Web",
   description: "Use Noticebord on the web!",
   platforms: ["Web"],
-  source: "https://github.com/sixpeteunder/noticebord"
+  source: "https://github.com/noticebord/noticebord",
+  cta: "Go to web app"
 }, {
   id: "app",
   name: "Noticebord App",
   description: "Get the native app for your phone/PC.",
   platforms: ["Android", "iOS", "Windows", "macOS", "Linux"],
-  source: "https://github.com/sixpeteunder/noticebord-clients"
+  source: "https://github.com/noticebord/noticebord-clients",
+  cta: "Get Noticebord"
 }, {
   id: "lite",
   name: "Noticebord Lite",
   description: "Get the lightweight app for your phone/PC.",
   platforms: ["Android", "iOS", "Windows", "macOS", "Linux"],
-  source: "https://github.com/sixpeteunder/noticebord-clients"
+  source: "https://github.com/noticebord/noticebord-clients",
+  cta: "Get Noticebord Lite"
 }, {
   id: "cli",
   name: "Noticebord CLI",
   description: "Use Noticebord from the terminal.",
-  platforms: ["Android", "iOS", "Windows", "macOS", "Linux"],
-  source: "https://github.com/sixpeteunder/noticebord-clients"
+  platforms: ["Windows", "macOS", "Linux"],
+  source: "https://github.com/noticebord/noticebord-clients",
+  cta: "Get Noticebord CLI"
 }, {
   id: "bot",
   name: "Noticebort",
   description: "Have a chat with Noticebort in your favourite messaging app.",
   platforms: ["Telegram", "Facebook Messenger", "Discord"],
-  source: "https://github.com/sixpeteunder/noticebord-clients"
+  source: "https://github.com/noticebord/noticebord-clients",
+  cta: "Chat with Noticebort"
 }, {
   id: "browser",
   name: "Noticebord Chrome Extension",
   description: "Create notices inside your favourite browser.",
   platforms: ["Chrome"],
-  source: "https://github.com/sixpeteunder/noticebord-clients"
+  source: "https://github.com/noticebord/noticebord-clients",
+  cta: "Get the browser extension"
 }, {
   id: "vscode",
   name: "Noticebord VS Code Extension",
   description: "Integrate Noticebord with your favourite editor.",
   platforms: ["VS Code"],
-  source: "https://github.com/sixpeteunder/noticebord-clients"
+  source: "https://github.com/noticebord/noticebord-clients",
+  cta: "Get the VS Code extension"
 }];
 var libraries = [{
   id: "noticebord-ts",
   platform: "TypeScript",
   icon: "devicon-typescript-plain",
   color: "#007acc",
-  source: "https://github.com/sixpeteunder/noticebord",
+  source: "https://github.com/noticebord/noticebord-client-ts",
   registry: "NPM",
-  "package": "https://github.com/sixpeteunder/noticebord",
-  command: "npm install noticebord-client"
+  "package": "https://github.com/noticebord/noticebord",
+  command: "npm install @noticebord/client"
 }, {
   id: "noticebord-dotnet",
   platform: ".NET",
   icon: "devicon-dotnetcore-plain",
   color: "#623697",
-  source: "https://github.com/sixpeteunder/noticebord",
+  source: "https://github.com/noticebord/noticebord-client-dotnet",
   registry: "NuGet",
-  "package": "https://github.com/sixpeteunder/noticebord",
+  "package": "https://github.com/noticebord/noticebord",
   command: "dotnet add package Noticebord.Client"
 }, {
   id: "noticebord-php",
   platform: "PHP",
   icon: "devicon-php-plain",
   color: "#6181b6",
-  source: "https://github.com/sixpeteunder/noticebord",
+  source: "https://github.com/noticebord/noticebord-client-php",
   registry: "Packagist",
-  "package": "https://github.com/sixpeteunder/noticebord",
+  "package": "https://packagist.org/packages/noticebord/client",
   command: "composer require noticebord/client"
 }, {
   id: "noticebord-go",
@@ -35325,9 +35332,9 @@ var libraries = [{
   icon: "devicon-go-plain",
   color: "#00acd7",
   registry: "pkg.go.dev",
-  source: "https://github.com/sixpeteunder/noticebord",
-  "package": "https://github.com/sixpeteunder/noticebord",
-  command: "go get github.com/sixpeteunder/noticebord-go"
+  source: "https://github.com/noticebord/noticebord-client-go",
+  "package": "https://github.com/noticebord/noticebord",
+  command: "go get github.com/noticebord/noticebord-client-go"
 }];
 
 function getApps() {
@@ -41022,7 +41029,7 @@ var _hoisted_3 = {
   "class": "p-4 md:w-1/2 flex"
 };
 var _hoisted_4 = {
-  "class": "my-auto"
+  "class": "m-auto"
 };
 var _hoisted_5 = {
   "class": "font-semibold text-3xl mb-2"
@@ -41036,7 +41043,7 @@ var _hoisted_7 = {
 
 var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
   "class": "text-3xl text-white text-center mb-2"
-}, " API Client Libraries ", -1
+}, " Client Libraries ", -1
 /* HOISTED */
 );
 
@@ -41047,7 +41054,7 @@ var _hoisted_10 = {
   "class": "\r\n                bg-gray-900\r\n                text-white\r\n                p-2\r\n                rounded-lg\r\n                mb-2\r\n                overflow-x-scroll\r\n              "
 };
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" View Source on GitHub ");
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" View source on GitHub ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_FontAwesomeIcon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("FontAwesomeIcon");
@@ -41059,7 +41066,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.apps, function (app, i) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
           "class": ["flex flex-col md:flex-row p-4", {
-            'flex-row-reverse bg-blue-400 text-white': i % 2 != 0
+            'md:flex-row-reverse bg-blue-400 text-white': i % 2 != 0
           }],
           style: [{
             "scroll-snap-align": "start"
@@ -41077,8 +41084,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         /* TEXT */
         ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
           "class": ["\r\n                font-semibold\r\n                text-lg\r\n                p-4\r\n                rounded-full\r\n                border-2\r\n                duration-300\r\n              ", i % 2 != 0 ? 'bg-white text-blue-500 border-white hover:bg-blue-400 hover:text-white' : 'bg-blue-400 text-white border-blue-400 hover:bg-white hover:text-blue-400']
-        }, " Do Something! ", 2
-        /* CLASS */
+        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(app.cta), 3
+        /* TEXT, CLASS */
         )])])], 6
         /* CLASS, STYLE */
         );
@@ -42076,9 +42083,13 @@ var _hoisted_6 = {
 var _hoisted_7 = {
   "class": "flex items-center"
 };
-var _hoisted_8 = {
+
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "ml-4 text-lg text-gray-600 leading-7 font-semibold"
-};
+}, " Free and public ", -1
+/* HOISTED */
+);
+
 var _hoisted_9 = {
   "class": "ml-12"
 };
@@ -42106,9 +42117,7 @@ var _hoisted_14 = {
 
 var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "ml-4 text-lg text-gray-600 leading-7 font-semibold"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
-  href: "#"
-}, "Ubiquitous")], -1
+}, " Ubiquitous ", -1
 /* HOISTED */
 );
 
@@ -42123,88 +42132,87 @@ var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 );
 
 var _hoisted_18 = {
-  href: "#"
-};
-var _hoisted_19 = {
   "class": "\r\n                        mt-3\r\n                        flex\r\n                        items-center\r\n                        text-sm\r\n                        font-semibold\r\n                        text-indigo-700\r\n                      "
 };
 
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, "Check out the apps!", -1
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, "Check out the apps!", -1
 /* HOISTED */
 );
 
-var _hoisted_21 = {
+var _hoisted_20 = {
   "class": "p-6 border-t border-gray-200"
 };
-var _hoisted_22 = {
+var _hoisted_21 = {
   "class": "flex items-center"
 };
 
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "ml-4 text-lg text-gray-600 leading-7 font-semibold"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
-  href: "#"
-}, "Bring your own experience")], -1
+}, " Bring your own experience ", -1
 /* HOISTED */
 );
 
-var _hoisted_24 = {
+var _hoisted_23 = {
   "class": "ml-12"
 };
 
-var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "mt-2 text-sm text-gray-500"
 }, " Noticebord offers a free, public API - with support baked in for every action our own platform offers - that lets you build our own experience. In fact, each of our own applications uses the very same API behind the scenes. Go ahead, build something awesome! ", -1
 /* HOISTED */
 );
 
-var _hoisted_26 = {
-  href: "#"
+var _hoisted_25 = {
+  href: "https://github.com/noticebord/noticebord",
+  target: "_blank"
 };
-var _hoisted_27 = {
+var _hoisted_26 = {
   "class": "\r\n                        mt-3\r\n                        flex\r\n                        items-center\r\n                        text-sm\r\n                        font-semibold\r\n                        text-indigo-700\r\n                      "
 };
 
-var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, "Go to API documentation!", -1
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, "Go to API documentation!", -1
 /* HOISTED */
 );
 
-var _hoisted_29 = {
+var _hoisted_28 = {
   "class": "p-6 border-t border-gray-200 md:border-l"
 };
-var _hoisted_30 = {
+var _hoisted_29 = {
   "class": "flex items-center"
 };
 
-var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "ml-4 text-lg text-gray-600 leading-7 font-semibold"
 }, " Open Source ", -1
 /* HOISTED */
 );
 
-var _hoisted_32 = {
+var _hoisted_31 = {
   "class": "ml-12"
 };
 
-var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "mt-2 text-sm text-gray-500"
 }, " Noticebord, in its entirety - the web platform and all official client applications - is completely open-source under the MIT license. Found a bug you can fix? Thought of an awesome feature you can contribute? Open a pull request on GitHub! We're waiting. ", -1
 /* HOISTED */
 );
 
-var _hoisted_34 = {
-  href: "#"
+var _hoisted_33 = {
+  href: "https://github.com/noticebord/noticebord",
+  target: "_blank"
 };
-var _hoisted_35 = {
+var _hoisted_34 = {
   "class": "\r\n                        mt-3\r\n                        flex\r\n                        items-center\r\n                        text-sm\r\n                        font-semibold\r\n                        text-indigo-700\r\n                      "
 };
 
-var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, "View source code on GitHub", -1
+var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, "View source code on GitHub", -1
 /* HOISTED */
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_FontAwesomeIcon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("FontAwesomeIcon");
+
+  var _component_inertia_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("inertia-link");
 
   var _component_app_layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("app-layout");
 
@@ -42216,18 +42224,21 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "text-gray-400 mr-2"
       }, null, 8
       /* PROPS */
-      , ["icon"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+      , ["icon"]), _hoisted_8]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
         href: _ctx.route('notices.index')
-      }, "Free and public", 8
-      /* PROPS */
-      , ["href"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
-        href: _ctx.route('notices.index')
-      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FontAwesomeIcon, {
-        icon: _ctx.icons.faArrowRight,
-        "class": "text-indigo-500 ml-2"
-      }, null, 8
-      /* PROPS */
-      , ["icon"])])], 8
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FontAwesomeIcon, {
+            icon: _ctx.icons.faArrowRight,
+            "class": "text-indigo-500 ml-2"
+          }, null, 8
+          /* PROPS */
+          , ["icon"])])];
+        }),
+        _: 1
+        /* STABLE */
+
+      }, 8
       /* PROPS */
       , ["href"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FontAwesomeIcon, {
         icon: _ctx.icons.faGlobeAfrica,
@@ -42235,29 +42246,40 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "text-gray-400 mr-2"
       }, null, 8
       /* PROPS */
-      , ["icon"]), _hoisted_15]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FontAwesomeIcon, {
-        icon: _ctx.icons.faArrowRight,
-        "class": "text-indigo-500 ml-2"
-      }, null, 8
+      , ["icon"]), _hoisted_15]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
+        href: _ctx.route('apps')
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FontAwesomeIcon, {
+            icon: _ctx.icons.faArrowRight,
+            "class": "text-indigo-500 ml-2"
+          }, null, 8
+          /* PROPS */
+          , ["icon"])])];
+        }),
+        _: 1
+        /* STABLE */
+
+      }, 8
       /* PROPS */
-      , ["icon"])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FontAwesomeIcon, {
+      , ["href"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FontAwesomeIcon, {
         icon: _ctx.icons.faCode,
         size: "lg",
         "class": "text-gray-400 mr-2"
       }, null, 8
       /* PROPS */
-      , ["icon"]), _hoisted_23]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_24, [_hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_27, [_hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FontAwesomeIcon, {
+      , ["icon"]), _hoisted_22]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_23, [_hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_26, [_hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FontAwesomeIcon, {
         icon: _ctx.icons.faArrowRight,
         "class": "text-indigo-500 ml-2"
       }, null, 8
       /* PROPS */
-      , ["icon"])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FontAwesomeIcon, {
+      , ["icon"])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FontAwesomeIcon, {
         icon: _ctx.icons.faCodeBranch,
         size: "lg",
         "class": "text-gray-400 mr-2"
       }, null, 8
       /* PROPS */
-      , ["icon"]), _hoisted_31]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_32, [_hoisted_33, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_35, [_hoisted_36, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FontAwesomeIcon, {
+      , ["icon"]), _hoisted_30]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_31, [_hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_34, [_hoisted_35, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FontAwesomeIcon, {
         icon: _ctx.icons.faArrowRight,
         "class": "text-indigo-500 ml-2"
       }, null, 8
