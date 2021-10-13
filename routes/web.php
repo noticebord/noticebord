@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -70,5 +72,9 @@ Route::prefix('team')->middleware(['auth:sanctum', 'verified'])->name('team-noti
             ->name('delete');
     });
 });
+
+Route::get('/profiles/{profile}', fn ($profile) => Inertia::render('Profile', [
+    'id' => (int)$profile
+]))->name('profles.show');
 
 Route::inertia('/apps', 'Apps')->name('apps');
