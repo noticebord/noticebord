@@ -75,6 +75,6 @@ Route::prefix('team')->middleware(['auth:sanctum', 'verified'])->name('team-noti
 
 Route::get('/profiles/{profile}', fn ($profile) => Inertia::render('Profile', [
     'id' => (int)$profile
-]))->name('profles.show');
+]))->name('profiles.show');
 
 Route::inertia('/apps', 'Apps')->name('apps');

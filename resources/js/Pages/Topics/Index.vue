@@ -61,8 +61,7 @@ import { fetchTopicsAsync } from "../../client";
 
 export default {
   components: {
-    AppLayout,
-    FontAwesomeIcon,
+    AppLayout
   },
   data: function () {
     return {

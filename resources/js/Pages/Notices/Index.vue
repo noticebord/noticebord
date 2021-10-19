@@ -62,19 +62,31 @@
                 </span>
               </div>
 
-              <div class="flex w-full items-center">
+              <div
+                class="
+                  flex
+                  w-full
+                  items-center
+                  text-base text-gray-500
+                  leading-none
+                "
+              >
                 <img
                   class="w-8 h-8 rounded-full mr-2"
-                  :src="notice && notice.author.profile_photo_url"
-                  :alt="notice && notice.author.name"
+                  :src="notice?.author.profile_photo_url"
+                  :alt="notice?.author.name"
                 />
                 <div>
                   <inertia-link
-                    href="#"
-                    class="text-base text-gray-500 leading-none mb-2"
+                    :href="route('profiles.show', notice?.author.id)"
+                    class="hover:text-indigo-500"
+                    v-if="notice?.author.id > 0"
                   >
-                    {{ notice && notice.author.name }}
+                    {{ notice?.author.name }}
                   </inertia-link>
+                  <span v-else>
+                    {{ notice?.author.name }}
+                  </span>
                 </div>
               </div>
             </div>

@@ -2,7 +2,7 @@ import { Notice, Topic, User } from "../client/models";
 
 const defaultUser: User = {
     id: 0,
-    name: "Anonymous",
+    name: "[Anonymous]",
     email: "",
     profile_photo_url: "https://ui-avatars.com/api/?name=Anonymous&color=7F9CF5&background=EBF4FF",
     created_at: ""

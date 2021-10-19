@@ -27,6 +27,7 @@ class TopicController extends Controller
      *
      * @param  int  $topic
      * @return \Illuminate\Http\Response
+     * @todo Fix count
      */
     public function show($topic)
     {
@@ -44,9 +45,12 @@ class TopicController extends Controller
      *
      * @param  int  $topic
      * @return \Illuminate\Http\Response
+     * @todo Fix count
      */
     public function notices($topic)
     {
-        return Notice::withAllTagsOfAnyType([Topic::findOrFail($topic)->name])->get();
+        return Notice::withAllTagsOfAnyType([Topic::findOrFail($topic)->name])
+            ->with(['author'])
+            ->get();
     }
 }

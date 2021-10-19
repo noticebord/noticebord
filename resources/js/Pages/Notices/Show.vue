@@ -8,42 +8,68 @@
 
     <div class="py-8 bg-white">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="prose mx-auto px-4 md:px-0">
-          <div class="grid gap-4 mb-4 grid-cols-1 md:grid-cols-2"
-          :class="{ 'lg:grid-cols-4': notice?.author.id === $page.props.user?.id }">
-            <button class="rounded-full p-2 text-blue-500 hover:bg-blue-100" @click="qrcode">
+        <div class="prose prose-indigo mx-auto px-4 md:px-0">
+          <div
+            class="grid gap-4 mb-4 grid-cols-1 md:grid-cols-2"
+            :class="{
+              'lg:grid-cols-4': notice?.author.id === $page.props.user?.id,
+            }"
+          >
+            <button
+              class="rounded-full p-2 text-blue-500 hover:bg-blue-100"
+              @click="qrcode"
+            >
               <FontAwesomeIcon :icon="icons.faQrcode" class="mr-2" />
               QR Code
             </button>
-            <button class="rounded-full p-2 text-green-500 hover:bg-green-100" @click="share">
+            <button
+              class="rounded-full p-2 text-green-500 hover:bg-green-100"
+              @click="share"
+            >
               <FontAwesomeIcon :icon="icons.faShareAlt" class="mr-2" />
               Share
             </button>
-            <button class="rounded-full p-2 text-yellow-500 hover:bg-yellow-100" @click="editNotice" v-if="notice?.author.id === $page.props.user?.id">
+            <button
+              class="rounded-full p-2 text-yellow-500 hover:bg-yellow-100"
+              @click="editNotice"
+              v-if="notice?.author.id === $page.props.user?.id"
+            >
               <FontAwesomeIcon :icon="icons.faEdit" class="mr-2" />
               Edit
             </button>
-            <button class="rounded-full p-2 text-red-500 hover:bg-red-100" @click="deleteNotice" v-if="notice?.author.id === $page.props.user?.id">
+            <button
+              class="rounded-full p-2 text-red-500 hover:bg-red-100"
+              @click="deleteNotice"
+              v-if="notice?.author.id === $page.props.user?.id"
+            >
               <FontAwesomeIcon :icon="icons.faTrashAlt" class="mr-2" />
               Delete
             </button>
           </div>
-          {{ notice?.body }}
-        </div>
 
-        <div class="flex w-full items-center px-4 py-4">
-          <img
-            class="w-10 h-10 rounded-full mr-4"
-            :src="notice?.author.profile_photo_url"
-            :alt="notice?.author.name"
-          />
-          <div class="flex-1 px-2">
-            <inertia-link
-              href="#"
-              class="text-base font-bold md:text-xl leading-none mb-2"
+          <div id="body">
+            {{ notice?.body }}
+          </div>
+
+          <div class="flex w-full items-center px-4 py-4">
+            <img
+              class="w-10 h-10 rounded-full mr-4"
+              :src="notice?.author.profile_photo_url"
+              :alt="notice?.author.name"
+            />
+            <div
+              class="flex-1 px-2 text-base md:text-xl"
             >
-              {{ notice?.author.name }}
-            </inertia-link>
+              <inertia-link
+                :href="route('profiles.show', notice?.author.id)"
+                v-if="notice?.author.id > 0"
+              >
+                {{ notice?.author.name }}
+              </inertia-link>
+              <span v-else>
+                {{ notice?.author.name }}
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -73,7 +99,7 @@ export default {
   },
   components: {
     AppLayout,
-    FontAwesomeIcon
+    FontAwesomeIcon,
   },
   data: function () {
     return {
@@ -91,22 +117,22 @@ export default {
     this.notice = assignDefaultAuthor(notice);
   },
   methods: {
-    qrcode: function() {
+    qrcode: function () {
       alert("Work in progress!");
     },
-    share: function() {
+    share: function () {
       alert("Work in progress!");
     },
-    editNotice: function() {
+    editNotice: function () {
       Inertia.get(route("notices.edit", this.notice.id));
     },
-    deleteNotice: async function() {
-      if(confirm("Are you sure you want to delete this notice?")) {
+    deleteNotice: async function () {
+      if (confirm("Are you sure you want to delete this notice?")) {
         await deleteNoticeAsync(this.notice.id);
         alert("The notice was deleted successfully!");
         Inertia.get(route("notices.index"));
       }
     },
-  }
+  },
 };
 </script>
