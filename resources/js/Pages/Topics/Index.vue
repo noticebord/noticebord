@@ -43,9 +43,9 @@
                 #{{ topic.name }}
               </inertia-link>
 
-              <div class="text-gray-500"> 
-                <span class="font-bold">{{ topic.count }}</span> 
-                {{ topic.count === 1 ? 'notice' : 'notices' }}
+              <div class="text-gray-500">
+                <span class="font-bold">{{ topic.count }}</span>
+                {{ topic.count === 1 ? "notice" : "notices" }}
               </div>
             </div>
           </div>
@@ -58,18 +58,6 @@
 <script>
 import AppLayout from "../../Layouts/AppLayout.vue";
 import { fetchTopicsAsync } from "../../client";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import {
-  faEdit,
-  faEllipsisV,
-  faQrcode,
-  faTrashAlt,
-} from "@fortawesome/free-solid-svg-icons";
-import { delegate } from "tippy.js";
-
-import "tippy.js/dist/tippy.css";
-import "tippy.js/animations/scale.css";
-import "tippy.js/themes/light-border.css";
 
 export default {
   components: {
@@ -78,12 +66,6 @@ export default {
   },
   data: function () {
     return {
-      icons: {
-        faEdit,
-        faEllipsisV,
-        faQrcode,
-        faTrashAlt,
-      },
       topics: [],
     };
   },

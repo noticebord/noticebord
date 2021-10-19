@@ -29,7 +29,7 @@
             :key="notice.id"
           >
             <div class="p-4">
-              <div class="flex justify-between align-middle mb-2">
+              <div class="flex align-middle mb-2">
                 <inertia-link
                   :href="route('notices.show', notice.id)"
                   class="
@@ -42,26 +42,6 @@
                 >
                   {{ notice.title }}
                 </inertia-link>
-                <button
-                  class="
-                    py-2
-                    px-3
-                    rounded-lg
-                    flex flex-col
-                    justify-center
-                    active:shadow-inner
-                    focus:shadow-inner
-                    hover:shadow-inner
-                  "
-                  :class="{ tippy: notice.author?.id === $page.props.user?.id }"
-                  :data-template="`notice-${notice.id}`"
-                  v-if="notice.author?.id === $page.props.user?.id"
-                >
-                  <FontAwesomeIcon
-                    :icon="icons.faEllipsisV"
-                    class="text-gray-400"
-                  />
-                </button>
               </div>
 
               <div class="flex flex-wrap text-sm text-gray-500 mb-2 gap-2">
@@ -98,35 +78,6 @@
                 </div>
               </div>
             </div>
-            <div
-              class="hidden"
-              :id="`notice-${notice.id}`"
-              v-if="notice.author?.id === $page.props.user?.id"
-            >
-              <div class="-mx-2 -my-1">
-                <!-- <button
-                    class="hover:bg-gray-100 p-2 w-full text-left"
-                    @click="console.log(`QR Code for notice #${notice.id}`)"
-                  >
-                    <FontAwesomeIcon :icon="icons.faQrcode" class="mr-2" />
-                    Get QR Code
-                  </button> -->
-                <div
-                  class="text-blue-500 hover:bg-blue-100 p-2 w-full text-left"
-                >
-                  <inertia-link :href="route('notices.edit', notice.id)">
-                    <FontAwesomeIcon :icon="icons.faEdit" class="mr-2" />
-                    Edit
-                  </inertia-link>
-                </div>
-                <div class="text-red-500 hover:bg-red-100 p-2 w-full text-left">
-                  <inertia-link :href="route('notices.delete', notice.id)">
-                    <FontAwesomeIcon :icon="icons.faTrashAlt" class="mr-2" />
-                    Delete
-                  </inertia-link>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -138,55 +89,19 @@
 import AppLayout from "../../Layouts/AppLayout.vue";
 import { fetchNoticesAsync } from "../../client";
 import { assignDefaultAuthor } from "../../utils/notices";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import {
-  faEdit,
-  faEllipsisV,
-  faQrcode,
-  faTrashAlt,
-} from "@fortawesome/free-solid-svg-icons";
-import { delegate } from "tippy.js";
-
-import "tippy.js/dist/tippy.css";
-import "tippy.js/animations/scale.css";
-import "tippy.js/themes/light-border.css";
 
 export default {
   components: {
     AppLayout,
-    FontAwesomeIcon,
   },
   data: function () {
     return {
-      icons: {
-        faEdit,
-        faEllipsisV,
-        faQrcode,
-        faTrashAlt,
-      },
       notices: [],
     };
   },
   created: async function () {
     const notices = await fetchNoticesAsync();
     this.notices = notices.map((notice) => assignDefaultAuthor(notice));
-    delegate(".grid", {
-      allowHTML: true,
-      animation: "scale",
-      arrow: false,
-      interactive: true,
-      placement: "left-start",
-      target: ".tippy",
-      theme: "light-border",
-      trigger: "click",
-      content(reference) {
-        const id = reference.getAttribute("data-template");
-        if (id === null) return;
-
-        const template = document.getElementById(id);
-        return template.innerHTML;
-      },
-    });
   },
 };
 </script>
