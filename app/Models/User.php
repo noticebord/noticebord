@@ -44,7 +44,6 @@ class User extends Authenticatable
         'email_verified_at',
         'current_team_id',
         'profile_photo_path',
-        'created_at',
         'updated_at'
     ];
 

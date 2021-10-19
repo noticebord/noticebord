@@ -84,7 +84,7 @@
 
                   <template #content>
                     <div class="w-60">
-                      <!-- Team Management -->"
+                      <!-- Team Management -->
                       <template v-if="$page.props.jetstream.hasTeamFeatures">
                         <div class="block px-4 py-2 text-xs text-gray-400">
                           Manage Team
@@ -217,8 +217,14 @@
                         Manage Account
                       </div>
 
+                      <jet-dropdown-link
+                        :href="route('profiles.show', $page.props.user.id)"
+                      >
+                        My Profile
+                      </jet-dropdown-link>
+
                       <jet-dropdown-link :href="route('profile.show')">
-                        Profile
+                        Profile Settings
                       </jet-dropdown-link>
 
                       <jet-dropdown-link
@@ -312,7 +318,7 @@
           <div class="pt-2 pb-3 space-y-1">
             <jet-responsive-nav-link
               v-for="(route, i) in routes"
-              v-show="!route.protected || $page.props.user"	
+              v-show="!route.protected || $page.props.user"
               :key="i"
               :href="route.href"
               :active="route.match"
@@ -350,10 +356,17 @@
 
             <div class="mt-3 space-y-1">
               <jet-responsive-nav-link
+                :href="route('profiles.show', $page.props.user.id)"
+                :active="route().current('profiles.show', $page.props.user.id)"
+              >
+                My Profile
+              </jet-responsive-nav-link>
+
+              <jet-responsive-nav-link
                 :href="route('profile.show')"
                 :active="route().current('profile.show')"
               >
-                Profile
+                Profile Settings
               </jet-responsive-nav-link>
 
               <jet-responsive-nav-link
@@ -486,26 +499,26 @@ export default {
           text: "Notices",
           href: route("notices.index"),
           match: route().current("notices*"),
-          protected: false
+          protected: false,
         },
         {
           text: "Topics",
           href: route("topics.index"),
           match: route().current("topics*"),
-          protected: false
+          protected: false,
         },
         {
           text: "Team Notices",
           href: route("team-notices.index"),
           match: route().current("team-notices*"),
-          protected: true
+          protected: true,
         },
         {
           text: "Apps",
           href: route("apps"),
           match: route().current("apps*"),
-          protected: false
-        }
+          protected: false,
+        },
       ],
     };
   },
