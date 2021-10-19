@@ -34345,13 +34345,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_notices__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/notices */ "./resources/js/utils/notices.ts");
 /* harmony import */ var _utils_notices__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_utils_notices__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
 /* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var qrcode__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! qrcode */ "./node_modules/qrcode/lib/browser.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
 
 
 
@@ -34373,10 +34378,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       icons: {
-        faEdit: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__.faEdit,
-        faQrcode: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__.faQrcode,
-        faShareAlt: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__.faShareAlt,
-        faTrashAlt: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__.faTrashAlt
+        faEdit: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__.faEdit,
+        faQrcode: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__.faQrcode,
+        faShareAlt: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__.faShareAlt,
+        faTrashAlt: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__.faTrashAlt
       },
       notice: null
     };
@@ -34410,39 +34415,138 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return created;
   }(),
   methods: {
-    qrcode: function qrcode() {
-      alert("Work in progress!");
-    },
-    share: function share() {
-      alert("Work in progress!");
-    },
-    editNotice: function editNotice() {
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5__.Inertia.get(route("notices.edit", this.notice.id));
-    },
-    deleteNotice: function () {
-      var _deleteNotice = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+    qrcode: function () {
+      var _qrcode = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var url;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                if (!confirm("Are you sure you want to delete this notice?")) {
-                  _context2.next = 5;
-                  break;
-                }
+                url = "https://noticebord.herokuapp.com/notices/".concat(this.notice.id);
+                _context2.t0 = (sweetalert2__WEBPACK_IMPORTED_MODULE_6___default());
+                _context2.next = 4;
+                return qrcode__WEBPACK_IMPORTED_MODULE_7__.toDataURL(url);
 
-                _context2.next = 3;
-                return (0,_client__WEBPACK_IMPORTED_MODULE_2__.deleteNoticeAsync)(this.notice.id);
+              case 4:
+                _context2.t1 = _context2.sent;
+                _context2.t2 = {
+                  title: "QR Code",
+                  text: "Scan this code to find this notice again.",
+                  imageUrl: _context2.t1
+                };
+                _context2.next = 8;
+                return _context2.t0.fire.call(_context2.t0, _context2.t2);
 
-              case 3:
-                alert("The notice was deleted successfully!");
-                _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5__.Inertia.get(route("notices.index"));
-
-              case 5:
+              case 8:
               case "end":
                 return _context2.stop();
             }
           }
         }, _callee2, this);
+      }));
+
+      function qrcode() {
+        return _qrcode.apply(this, arguments);
+      }
+
+      return qrcode;
+    }(),
+    share: function () {
+      var _share = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                if (!navigator.canShare) {
+                  _context3.next = 4;
+                  break;
+                }
+
+                navigator.share({
+                  url: "https://noticebord.herokuapp.com/notices/".concat(this.notice.id),
+                  text: "Check out this notice (".concat(this.notice.title, ") on Noticebord!"),
+                  title: "\"".concat(this.notice.title, "\" on Noticebord")
+                })["catch"](console.error);
+                _context3.next = 6;
+                break;
+
+              case 4:
+                _context3.next = 6;
+                return sweetalert2__WEBPACK_IMPORTED_MODULE_6___default().fire({
+                  icon: "error",
+                  title: "Error while sharing",
+                  text: "Your device does not seem to support this!"
+                });
+
+              case 6:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function share() {
+        return _share.apply(this, arguments);
+      }
+
+      return share;
+    }(),
+    editNotice: function editNotice() {
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5__.Inertia.get(route("notices.edit", this.notice.id));
+    },
+    deleteNotice: function () {
+      var _deleteNotice = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var result, teamId;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return sweetalert2__WEBPACK_IMPORTED_MODULE_6___default().fire({
+                  title: "Are you sure?",
+                  text: "You won't be able to revert this!",
+                  icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#ef4444",
+                  cancelButtonColor: "#3b82f6"
+                });
+
+              case 2:
+                result = _context4.sent;
+
+                if (!result.isConfirmed) {
+                  _context4.next = 11;
+                  break;
+                }
+
+                teamId = this.$page.props.user.current_team.id;
+                _context4.next = 7;
+                return (0,_client__WEBPACK_IMPORTED_MODULE_2__.deleteNoticeAsync)(this.notice.id);
+
+              case 7:
+                sweetalert2__WEBPACK_IMPORTED_MODULE_6___default().fire({
+                  icon: "success",
+                  title: "Deleted!",
+                  text: "The notice was deleted successfully"
+                });
+                _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5__.Inertia.get(route("notices.index"));
+                _context4.next = 12;
+                break;
+
+              case 11:
+                sweetalert2__WEBPACK_IMPORTED_MODULE_6___default().fire({
+                  icon: "error",
+                  title: "Cancelled!",
+                  text: "The notice was not deleted."
+                });
+
+              case 12:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
       }));
 
       function deleteNotice() {
@@ -34497,12 +34601,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_notices__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/notices */ "./resources/js/utils/notices.ts");
 /* harmony import */ var _utils_notices__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_utils_notices__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var qrcode__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! qrcode */ "./node_modules/qrcode/lib/browser.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
 
 
 
@@ -34523,7 +34632,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       icons: {
-        faQrcode: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faQrcode
+        faQrcode: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faQrcode,
+        faShareAlt: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faShareAlt
       },
       user: null,
       notices: [],
@@ -34584,9 +34694,83 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return created;
   }(),
   methods: {
-    qrcode: function qrcode() {
-      alert("Work in progress!");
-    }
+    qrcode: function () {
+      var _qrcode = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var url;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                url = "https://noticebord.herokuapp.com/profiles/".concat(this.user.id);
+                _context2.t0 = (sweetalert2__WEBPACK_IMPORTED_MODULE_5___default());
+                _context2.next = 4;
+                return qrcode__WEBPACK_IMPORTED_MODULE_6__.toDataURL(url);
+
+              case 4:
+                _context2.t1 = _context2.sent;
+                _context2.t2 = {
+                  title: "QR Code",
+                  text: "Scan this code to find this user profile again.",
+                  imageUrl: _context2.t1
+                };
+                _context2.next = 8;
+                return _context2.t0.fire.call(_context2.t0, _context2.t2);
+
+              case 8:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function qrcode() {
+        return _qrcode.apply(this, arguments);
+      }
+
+      return qrcode;
+    }(),
+    share: function () {
+      var _share = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                if (!navigator.canShare) {
+                  _context3.next = 4;
+                  break;
+                }
+
+                navigator.share({
+                  url: "https://noticebord.herokuapp.com/profiles/".concat(this.user.id),
+                  text: "Check out this user (".concat(this.user.name, ") on Noticebord!"),
+                  title: "\"".concat(this.user.name, "\" on Noticebord")
+                })["catch"](console.error);
+                _context3.next = 6;
+                break;
+
+              case 4:
+                _context3.next = 6;
+                return sweetalert2__WEBPACK_IMPORTED_MODULE_5___default().fire({
+                  icon: "error",
+                  title: "Error while sharing",
+                  text: "Your device does not seem to support this!"
+                });
+
+              case 6:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function share() {
+        return _share.apply(this, arguments);
+      }
+
+      return share;
+    }()
   }
 });
 
@@ -35247,13 +35431,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../client */ "./resources/js/client/index.ts");
 /* harmony import */ var _client__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_client__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
 /* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var qrcode__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! qrcode */ "./node_modules/qrcode/lib/browser.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
 
 
 
@@ -35274,10 +35463,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       icons: {
-        faEdit: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faEdit,
-        faQrcode: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faQrcode,
-        faShareAlt: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faShareAlt,
-        faTrashAlt: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faTrashAlt
+        faEdit: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faEdit,
+        faQrcode: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faQrcode,
+        faShareAlt: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faShareAlt,
+        faTrashAlt: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faTrashAlt
       },
       notice: null
     };
@@ -35311,41 +35500,142 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return created;
   }(),
   methods: {
-    qrcode: function qrcode() {
-      alert("Work in progress!");
-    },
-    share: function share() {
-      alert("Work in progress!");
-    },
-    editNotice: function editNotice() {
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_4__.Inertia.get(route("team-notices.edit", this.notice.id));
-    },
-    deleteNotice: function () {
-      var _deleteNotice = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var teamId;
+    qrcode: function () {
+      var _qrcode = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var url;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                if (!confirm("Are you sure you want to delete this notice?")) {
-                  _context2.next = 6;
-                  break;
-                }
-
-                teamId = this.$page.props.user.current_team.id;
+                url = "https://noticebord.herokuapp.com/team/".concat(this.notice.id);
+                _context2.t0 = (sweetalert2__WEBPACK_IMPORTED_MODULE_5___default());
                 _context2.next = 4;
-                return (0,_client__WEBPACK_IMPORTED_MODULE_2__.deleteTeamNoticeAsync)(teamId, this.notice.id);
+                return qrcode__WEBPACK_IMPORTED_MODULE_6__.toDataURL(url);
 
               case 4:
-                alert("The notice was deleted successfully!");
-                _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_4__.Inertia.get(route("team-notices.index"));
+                _context2.t1 = _context2.sent;
+                _context2.t2 = {
+                  title: "QR Code",
+                  text: "Scan this code to find this notice again.",
+                  imageUrl: _context2.t1
+                };
+                _context2.next = 8;
+                return _context2.t0.fire.call(_context2.t0, _context2.t2);
 
-              case 6:
+              case 8:
               case "end":
                 return _context2.stop();
             }
           }
         }, _callee2, this);
+      }));
+
+      function qrcode() {
+        return _qrcode.apply(this, arguments);
+      }
+
+      return qrcode;
+    }(),
+    share: function () {
+      var _share = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                if (!navigator.canShare) {
+                  _context3.next = 4;
+                  break;
+                }
+
+                navigator.share({
+                  url: "https://noticebord.herokuapp.com/team/".concat(this.notice.id),
+                  text: "Check out this team notice (".concat(this.notice.title, ") on Noticebord!"),
+                  title: "\"".concat(this.notice.title, "\" on Noticebord")
+                })["catch"](console.error);
+                _context3.next = 6;
+                break;
+
+              case 4:
+                _context3.next = 6;
+                return sweetalert2__WEBPACK_IMPORTED_MODULE_5___default().fire({
+                  icon: "error",
+                  title: "Error while sharing",
+                  text: "Your device does not seem to support this!"
+                });
+
+              case 6:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function share() {
+        return _share.apply(this, arguments);
+      }
+
+      return share;
+    }(),
+    editNotice: function editNotice() {
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_4__.Inertia.get(route("team-notices.edit", this.notice.id));
+    },
+    deleteNotice: function () {
+      var _deleteNotice = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var result, teamId;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return sweetalert2__WEBPACK_IMPORTED_MODULE_5___default().fire({
+                  title: "Are you sure?",
+                  text: "You won't be able to revert this!",
+                  icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#ef4444",
+                  cancelButtonColor: "#3b82f6"
+                });
+
+              case 2:
+                result = _context4.sent;
+
+                if (!result.isConfirmed) {
+                  _context4.next = 12;
+                  break;
+                }
+
+                teamId = this.$page.props.user.current_team.id;
+                _context4.next = 7;
+                return (0,_client__WEBPACK_IMPORTED_MODULE_2__.deleteTeamNoticeAsync)(teamId, this.notice.id);
+
+              case 7:
+                _context4.next = 9;
+                return sweetalert2__WEBPACK_IMPORTED_MODULE_5___default().fire({
+                  icon: "success",
+                  title: "Deleted!",
+                  text: "The notice was deleted successfully"
+                });
+
+              case 9:
+                _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_4__.Inertia.get(route("team-notices.index"));
+                _context4.next = 14;
+                break;
+
+              case 12:
+                _context4.next = 14;
+                return sweetalert2__WEBPACK_IMPORTED_MODULE_5___default().fire({
+                  icon: "error",
+                  title: "Cancelled!",
+                  text: "The notice was not deleted."
+                });
+
+              case 14:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
       }));
 
       function deleteNotice() {
@@ -40252,6 +40542,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         icon: _ctx.icons.faQrcode
       }, null, 8
       /* PROPS */
+      , ["icon"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+        "class": "flex text-xl rounded-full p-2 text-blue-500 hover:shadow-inner ml-2",
+        onClick: _cache[2] || (_cache[2] = function () {
+          return $options.share && $options.share.apply($options, arguments);
+        })
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FontAwesomeIcon, {
+        icon: _ctx.icons.faShareAlt
+      }, null, 8
+      /* PROPS */
       , ["icon"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.user && new Date(_ctx.user.created_at).toLocaleDateString()), 1
       /* TEXT */
       )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.notices.length), 1
@@ -40282,7 +40581,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": ["\r\n            ml-auto\r\n            px-3\r\n            py-2\r\n            rounded-l-lg\r\n            hover:bg-blue-100\r\n            hover:text-blue-500\r\n          ", {
           'shadow-inner bg-blue-100 text-blue-500': _ctx.tab === 'public'
         }],
-        onClick: _cache[2] || (_cache[2] = function ($event) {
+        onClick: _cache[3] || (_cache[3] = function ($event) {
           return _ctx.tab = 'public';
         })
       }, " Public ", 2
@@ -40291,7 +40590,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": ["\r\n            mr-auto\r\n            px-3\r\n            py-2\r\n            rounded-r-lg\r\n            hover:bg-blue-100\r\n            hover:text-blue-500\r\n          ", {
           'shadow-inner bg-blue-100 text-blue-500': _ctx.tab === 'private'
         }],
-        onClick: _cache[3] || (_cache[3] = function ($event) {
+        onClick: _cache[4] || (_cache[4] = function ($event) {
           return _ctx.tab = 'private';
         })
       }, " Private ", 2
@@ -41701,10 +42000,11 @@ var _hoisted_9 = {
   id: "body"
 };
 var _hoisted_10 = {
+  key: 0,
   "class": "flex w-full items-center px-4 py-4"
 };
 var _hoisted_11 = {
-  "class": "flex-1 px-2 text-base md:text-xl"
+  "class": "flex-1 px-2 text-base md:text-xl blue"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_FontAwesomeIcon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("FontAwesomeIcon");
@@ -41722,7 +42022,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       )];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      var _ctx$notice2, _ctx$$page$props$user, _ctx$notice3, _ctx$$page$props$user2, _ctx$notice4, _ctx$$page$props$user3, _ctx$notice5, _ctx$notice6, _ctx$notice7, _ctx$notice8;
+      var _ctx$notice2, _ctx$$page$props$user, _ctx$notice3, _ctx$$page$props$user2, _ctx$notice4, _ctx$$page$props$user3, _ctx$notice5;
 
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
         "class": ["grid gap-4 mb-4 grid-cols-1 md:grid-cols-2", {
@@ -41774,19 +42074,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_ctx$notice5 = _ctx.notice) === null || _ctx$notice5 === void 0 ? void 0 : _ctx$notice5.body), 1
       /* TEXT */
-      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
+      ), _ctx.notice ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
         "class": "w-10 h-10 rounded-full mr-4",
-        src: (_ctx$notice6 = _ctx.notice) === null || _ctx$notice6 === void 0 ? void 0 : _ctx$notice6.author.profile_photo_url,
-        alt: (_ctx$notice7 = _ctx.notice) === null || _ctx$notice7 === void 0 ? void 0 : _ctx$notice7.author.name
+        src: _ctx.notice.author.profile_photo_url,
+        alt: _ctx.notice.author.name
       }, null, 8
       /* PROPS */
       , ["src", "alt"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
-        href: _ctx.route('profiles.show', (_ctx$notice8 = _ctx.notice) === null || _ctx$notice8 === void 0 ? void 0 : _ctx$notice8.author.id)
+        href: _ctx.route('profiles.show', _ctx.notice.author.id)
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          var _ctx$notice9;
-
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_ctx$notice9 = _ctx.notice) === null || _ctx$notice9 === void 0 ? void 0 : _ctx$notice9.author.name), 1
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.notice.author.name), 1
           /* TEXT */
           )];
         }),
@@ -41795,7 +42093,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }, 8
       /* PROPS */
-      , ["href"])])])])])])];
+      , ["href"])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])];
     }),
     _: 1
     /* STABLE */
@@ -43187,6 +43485,167 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./node_modules/base64-js/index.js":
+/*!*****************************************!*\
+  !*** ./node_modules/base64-js/index.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+exports.byteLength = byteLength
+exports.toByteArray = toByteArray
+exports.fromByteArray = fromByteArray
+
+var lookup = []
+var revLookup = []
+var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
+
+var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+for (var i = 0, len = code.length; i < len; ++i) {
+  lookup[i] = code[i]
+  revLookup[code.charCodeAt(i)] = i
+}
+
+// Support decoding URL-safe base64 strings, as Node.js does.
+// See: https://en.wikipedia.org/wiki/Base64#URL_applications
+revLookup['-'.charCodeAt(0)] = 62
+revLookup['_'.charCodeAt(0)] = 63
+
+function getLens (b64) {
+  var len = b64.length
+
+  if (len % 4 > 0) {
+    throw new Error('Invalid string. Length must be a multiple of 4')
+  }
+
+  // Trim off extra bytes after placeholder bytes are found
+  // See: https://github.com/beatgammit/base64-js/issues/42
+  var validLen = b64.indexOf('=')
+  if (validLen === -1) validLen = len
+
+  var placeHoldersLen = validLen === len
+    ? 0
+    : 4 - (validLen % 4)
+
+  return [validLen, placeHoldersLen]
+}
+
+// base64 is 4/3 + up to two characters of the original data
+function byteLength (b64) {
+  var lens = getLens(b64)
+  var validLen = lens[0]
+  var placeHoldersLen = lens[1]
+  return ((validLen + placeHoldersLen) * 3 / 4) - placeHoldersLen
+}
+
+function _byteLength (b64, validLen, placeHoldersLen) {
+  return ((validLen + placeHoldersLen) * 3 / 4) - placeHoldersLen
+}
+
+function toByteArray (b64) {
+  var tmp
+  var lens = getLens(b64)
+  var validLen = lens[0]
+  var placeHoldersLen = lens[1]
+
+  var arr = new Arr(_byteLength(b64, validLen, placeHoldersLen))
+
+  var curByte = 0
+
+  // if there are placeholders, only get up to the last complete 4 chars
+  var len = placeHoldersLen > 0
+    ? validLen - 4
+    : validLen
+
+  var i
+  for (i = 0; i < len; i += 4) {
+    tmp =
+      (revLookup[b64.charCodeAt(i)] << 18) |
+      (revLookup[b64.charCodeAt(i + 1)] << 12) |
+      (revLookup[b64.charCodeAt(i + 2)] << 6) |
+      revLookup[b64.charCodeAt(i + 3)]
+    arr[curByte++] = (tmp >> 16) & 0xFF
+    arr[curByte++] = (tmp >> 8) & 0xFF
+    arr[curByte++] = tmp & 0xFF
+  }
+
+  if (placeHoldersLen === 2) {
+    tmp =
+      (revLookup[b64.charCodeAt(i)] << 2) |
+      (revLookup[b64.charCodeAt(i + 1)] >> 4)
+    arr[curByte++] = tmp & 0xFF
+  }
+
+  if (placeHoldersLen === 1) {
+    tmp =
+      (revLookup[b64.charCodeAt(i)] << 10) |
+      (revLookup[b64.charCodeAt(i + 1)] << 4) |
+      (revLookup[b64.charCodeAt(i + 2)] >> 2)
+    arr[curByte++] = (tmp >> 8) & 0xFF
+    arr[curByte++] = tmp & 0xFF
+  }
+
+  return arr
+}
+
+function tripletToBase64 (num) {
+  return lookup[num >> 18 & 0x3F] +
+    lookup[num >> 12 & 0x3F] +
+    lookup[num >> 6 & 0x3F] +
+    lookup[num & 0x3F]
+}
+
+function encodeChunk (uint8, start, end) {
+  var tmp
+  var output = []
+  for (var i = start; i < end; i += 3) {
+    tmp =
+      ((uint8[i] << 16) & 0xFF0000) +
+      ((uint8[i + 1] << 8) & 0xFF00) +
+      (uint8[i + 2] & 0xFF)
+    output.push(tripletToBase64(tmp))
+  }
+  return output.join('')
+}
+
+function fromByteArray (uint8) {
+  var tmp
+  var len = uint8.length
+  var extraBytes = len % 3 // if we have 1 byte left, pad 2 bytes
+  var parts = []
+  var maxChunkLength = 16383 // must be multiple of 3
+
+  // go through the array every three bytes, we'll deal with trailing stuff later
+  for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
+    parts.push(encodeChunk(uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)))
+  }
+
+  // pad the end with zeros, but make sure to not forget the extra bytes
+  if (extraBytes === 1) {
+    tmp = uint8[len - 1]
+    parts.push(
+      lookup[tmp >> 2] +
+      lookup[(tmp << 4) & 0x3F] +
+      '=='
+    )
+  } else if (extraBytes === 2) {
+    tmp = (uint8[len - 2] << 8) + uint8[len - 1]
+    parts.push(
+      lookup[tmp >> 10] +
+      lookup[(tmp >> 4) & 0x3F] +
+      lookup[(tmp << 2) & 0x3F] +
+      '='
+    )
+  }
+
+  return parts.join('')
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/call-bind/callBound.js":
 /*!*********************************************!*\
   !*** ./node_modules/call-bind/callBound.js ***!
@@ -43411,6 +43870,182 @@ deepmerge.all = function deepmergeAll(array, options) {
 var deepmerge_1 = deepmerge;
 
 module.exports = deepmerge_1;
+
+
+/***/ }),
+
+/***/ "./node_modules/dijkstrajs/dijkstra.js":
+/*!*********************************************!*\
+  !*** ./node_modules/dijkstrajs/dijkstra.js ***!
+  \*********************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+/******************************************************************************
+ * Created 2008-08-19.
+ *
+ * Dijkstra path-finding functions. Adapted from the Dijkstar Python project.
+ *
+ * Copyright (C) 2008
+ *   Wyatt Baldwin <self@wyattbaldwin.com>
+ *   All rights reserved
+ *
+ * Licensed under the MIT license.
+ *
+ *   http://www.opensource.org/licenses/mit-license.php
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *****************************************************************************/
+var dijkstra = {
+  single_source_shortest_paths: function(graph, s, d) {
+    // Predecessor map for each node that has been encountered.
+    // node ID => predecessor node ID
+    var predecessors = {};
+
+    // Costs of shortest paths from s to all nodes encountered.
+    // node ID => cost
+    var costs = {};
+    costs[s] = 0;
+
+    // Costs of shortest paths from s to all nodes encountered; differs from
+    // `costs` in that it provides easy access to the node that currently has
+    // the known shortest path from s.
+    // XXX: Do we actually need both `costs` and `open`?
+    var open = dijkstra.PriorityQueue.make();
+    open.push(s, 0);
+
+    var closest,
+        u, v,
+        cost_of_s_to_u,
+        adjacent_nodes,
+        cost_of_e,
+        cost_of_s_to_u_plus_cost_of_e,
+        cost_of_s_to_v,
+        first_visit;
+    while (!open.empty()) {
+      // In the nodes remaining in graph that have a known cost from s,
+      // find the node, u, that currently has the shortest path from s.
+      closest = open.pop();
+      u = closest.value;
+      cost_of_s_to_u = closest.cost;
+
+      // Get nodes adjacent to u...
+      adjacent_nodes = graph[u] || {};
+
+      // ...and explore the edges that connect u to those nodes, updating
+      // the cost of the shortest paths to any or all of those nodes as
+      // necessary. v is the node across the current edge from u.
+      for (v in adjacent_nodes) {
+        if (adjacent_nodes.hasOwnProperty(v)) {
+          // Get the cost of the edge running from u to v.
+          cost_of_e = adjacent_nodes[v];
+
+          // Cost of s to u plus the cost of u to v across e--this is *a*
+          // cost from s to v that may or may not be less than the current
+          // known cost to v.
+          cost_of_s_to_u_plus_cost_of_e = cost_of_s_to_u + cost_of_e;
+
+          // If we haven't visited v yet OR if the current known cost from s to
+          // v is greater than the new cost we just found (cost of s to u plus
+          // cost of u to v across e), update v's cost in the cost list and
+          // update v's predecessor in the predecessor list (it's now u).
+          cost_of_s_to_v = costs[v];
+          first_visit = (typeof costs[v] === 'undefined');
+          if (first_visit || cost_of_s_to_v > cost_of_s_to_u_plus_cost_of_e) {
+            costs[v] = cost_of_s_to_u_plus_cost_of_e;
+            open.push(v, cost_of_s_to_u_plus_cost_of_e);
+            predecessors[v] = u;
+          }
+        }
+      }
+    }
+
+    if (typeof d !== 'undefined' && typeof costs[d] === 'undefined') {
+      var msg = ['Could not find a path from ', s, ' to ', d, '.'].join('');
+      throw new Error(msg);
+    }
+
+    return predecessors;
+  },
+
+  extract_shortest_path_from_predecessor_list: function(predecessors, d) {
+    var nodes = [];
+    var u = d;
+    var predecessor;
+    while (u) {
+      nodes.push(u);
+      predecessor = predecessors[u];
+      u = predecessors[u];
+    }
+    nodes.reverse();
+    return nodes;
+  },
+
+  find_path: function(graph, s, d) {
+    var predecessors = dijkstra.single_source_shortest_paths(graph, s, d);
+    return dijkstra.extract_shortest_path_from_predecessor_list(
+      predecessors, d);
+  },
+
+  /**
+   * A very naive priority queue implementation.
+   */
+  PriorityQueue: {
+    make: function (opts) {
+      var T = dijkstra.PriorityQueue,
+          t = {},
+          key;
+      opts = opts || {};
+      for (key in T) {
+        if (T.hasOwnProperty(key)) {
+          t[key] = T[key];
+        }
+      }
+      t.queue = [];
+      t.sorter = opts.sorter || T.default_sorter;
+      return t;
+    },
+
+    default_sorter: function (a, b) {
+      return a.cost - b.cost;
+    },
+
+    /**
+     * Add a new item to the queue and ensure the highest priority element
+     * is at the front of the queue.
+     */
+    push: function (value, cost) {
+      var item = {value: value, cost: cost};
+      this.queue.push(item);
+      this.queue.sort(this.sorter);
+    },
+
+    /**
+     * Return the highest priority element in the queue.
+     */
+    pop: function () {
+      return this.queue.shift();
+    },
+
+    empty: function () {
+      return this.queue.length === 0;
+    }
+  }
+};
+
+
+// node.js module exports
+if (true) {
+  module.exports = dijkstra;
+}
 
 
 /***/ }),
@@ -43924,6 +44559,101 @@ module.exports = function hasSymbols() {
 var bind = __webpack_require__(/*! function-bind */ "./node_modules/function-bind/index.js");
 
 module.exports = bind.call(Function.call, Object.prototype.hasOwnProperty);
+
+
+/***/ }),
+
+/***/ "./node_modules/ieee754/index.js":
+/*!***************************************!*\
+  !*** ./node_modules/ieee754/index.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+/*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
+exports.read = function (buffer, offset, isLE, mLen, nBytes) {
+  var e, m
+  var eLen = (nBytes * 8) - mLen - 1
+  var eMax = (1 << eLen) - 1
+  var eBias = eMax >> 1
+  var nBits = -7
+  var i = isLE ? (nBytes - 1) : 0
+  var d = isLE ? -1 : 1
+  var s = buffer[offset + i]
+
+  i += d
+
+  e = s & ((1 << (-nBits)) - 1)
+  s >>= (-nBits)
+  nBits += eLen
+  for (; nBits > 0; e = (e * 256) + buffer[offset + i], i += d, nBits -= 8) {}
+
+  m = e & ((1 << (-nBits)) - 1)
+  e >>= (-nBits)
+  nBits += mLen
+  for (; nBits > 0; m = (m * 256) + buffer[offset + i], i += d, nBits -= 8) {}
+
+  if (e === 0) {
+    e = 1 - eBias
+  } else if (e === eMax) {
+    return m ? NaN : ((s ? -1 : 1) * Infinity)
+  } else {
+    m = m + Math.pow(2, mLen)
+    e = e - eBias
+  }
+  return (s ? -1 : 1) * m * Math.pow(2, e - mLen)
+}
+
+exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
+  var e, m, c
+  var eLen = (nBytes * 8) - mLen - 1
+  var eMax = (1 << eLen) - 1
+  var eBias = eMax >> 1
+  var rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0)
+  var i = isLE ? 0 : (nBytes - 1)
+  var d = isLE ? 1 : -1
+  var s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0
+
+  value = Math.abs(value)
+
+  if (isNaN(value) || value === Infinity) {
+    m = isNaN(value) ? 1 : 0
+    e = eMax
+  } else {
+    e = Math.floor(Math.log(value) / Math.LN2)
+    if (value * (c = Math.pow(2, -e)) < 1) {
+      e--
+      c *= 2
+    }
+    if (e + eBias >= 1) {
+      value += rt / c
+    } else {
+      value += rt * Math.pow(2, 1 - eBias)
+    }
+    if (value * c >= 2) {
+      e++
+      c /= 2
+    }
+
+    if (e + eBias >= eMax) {
+      m = 0
+      e = eMax
+    } else if (e + eBias >= 1) {
+      m = ((value * c) - 1) * Math.pow(2, mLen)
+      e = e + eBias
+    } else {
+      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen)
+      e = 0
+    }
+  }
+
+  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8) {}
+
+  e = (e << mLen) | m
+  eLen += mLen
+  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8) {}
+
+  buffer[offset + i - d] |= s * 128
+}
 
 
 /***/ }),
@@ -65929,6 +66659,5269 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/qrcode/lib/browser.js":
+/*!********************************************!*\
+  !*** ./node_modules/qrcode/lib/browser.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+var canPromise = __webpack_require__(/*! ./can-promise */ "./node_modules/qrcode/lib/can-promise.js")
+
+var QRCode = __webpack_require__(/*! ./core/qrcode */ "./node_modules/qrcode/lib/core/qrcode.js")
+var CanvasRenderer = __webpack_require__(/*! ./renderer/canvas */ "./node_modules/qrcode/lib/renderer/canvas.js")
+var SvgRenderer = __webpack_require__(/*! ./renderer/svg-tag.js */ "./node_modules/qrcode/lib/renderer/svg-tag.js")
+
+function renderCanvas (renderFunc, canvas, text, opts, cb) {
+  var args = [].slice.call(arguments, 1)
+  var argsNum = args.length
+  var isLastArgCb = typeof args[argsNum - 1] === 'function'
+
+  if (!isLastArgCb && !canPromise()) {
+    throw new Error('Callback required as last argument')
+  }
+
+  if (isLastArgCb) {
+    if (argsNum < 2) {
+      throw new Error('Too few arguments provided')
+    }
+
+    if (argsNum === 2) {
+      cb = text
+      text = canvas
+      canvas = opts = undefined
+    } else if (argsNum === 3) {
+      if (canvas.getContext && typeof cb === 'undefined') {
+        cb = opts
+        opts = undefined
+      } else {
+        cb = opts
+        opts = text
+        text = canvas
+        canvas = undefined
+      }
+    }
+  } else {
+    if (argsNum < 1) {
+      throw new Error('Too few arguments provided')
+    }
+
+    if (argsNum === 1) {
+      text = canvas
+      canvas = opts = undefined
+    } else if (argsNum === 2 && !canvas.getContext) {
+      opts = text
+      text = canvas
+      canvas = undefined
+    }
+
+    return new Promise(function (resolve, reject) {
+      try {
+        var data = QRCode.create(text, opts)
+        resolve(renderFunc(data, canvas, opts))
+      } catch (e) {
+        reject(e)
+      }
+    })
+  }
+
+  try {
+    var data = QRCode.create(text, opts)
+    cb(null, renderFunc(data, canvas, opts))
+  } catch (e) {
+    cb(e)
+  }
+}
+
+exports.create = QRCode.create
+exports.toCanvas = renderCanvas.bind(null, CanvasRenderer.render)
+exports.toDataURL = renderCanvas.bind(null, CanvasRenderer.renderToDataURL)
+
+// only svg for now.
+exports.toString = renderCanvas.bind(null, function (data, _, opts) {
+  return SvgRenderer.render(data, opts)
+})
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/can-promise.js":
+/*!************************************************!*\
+  !*** ./node_modules/qrcode/lib/can-promise.js ***!
+  \************************************************/
+/***/ ((module) => {
+
+// can-promise has a crash in some versions of react native that dont have
+// standard global objects
+// https://github.com/soldair/node-qrcode/issues/157
+
+module.exports = function () {
+  return typeof Promise === 'function' && Promise.prototype && Promise.prototype.then
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/core/alignment-pattern.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/qrcode/lib/core/alignment-pattern.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+/**
+ * Alignment pattern are fixed reference pattern in defined positions
+ * in a matrix symbology, which enables the decode software to re-synchronise
+ * the coordinate mapping of the image modules in the event of moderate amounts
+ * of distortion of the image.
+ *
+ * Alignment patterns are present only in QR Code symbols of version 2 or larger
+ * and their number depends on the symbol version.
+ */
+
+var getSymbolSize = __webpack_require__(/*! ./utils */ "./node_modules/qrcode/lib/core/utils.js").getSymbolSize
+
+/**
+ * Calculate the row/column coordinates of the center module of each alignment pattern
+ * for the specified QR Code version.
+ *
+ * The alignment patterns are positioned symmetrically on either side of the diagonal
+ * running from the top left corner of the symbol to the bottom right corner.
+ *
+ * Since positions are simmetrical only half of the coordinates are returned.
+ * Each item of the array will represent in turn the x and y coordinate.
+ * @see {@link getPositions}
+ *
+ * @param  {Number} version QR Code version
+ * @return {Array}          Array of coordinate
+ */
+exports.getRowColCoords = function getRowColCoords (version) {
+  if (version === 1) return []
+
+  var posCount = Math.floor(version / 7) + 2
+  var size = getSymbolSize(version)
+  var intervals = size === 145 ? 26 : Math.ceil((size - 13) / (2 * posCount - 2)) * 2
+  var positions = [size - 7] // Last coord is always (size - 7)
+
+  for (var i = 1; i < posCount - 1; i++) {
+    positions[i] = positions[i - 1] - intervals
+  }
+
+  positions.push(6) // First coord is always 6
+
+  return positions.reverse()
+}
+
+/**
+ * Returns an array containing the positions of each alignment pattern.
+ * Each array's element represent the center point of the pattern as (x, y) coordinates
+ *
+ * Coordinates are calculated expanding the row/column coordinates returned by {@link getRowColCoords}
+ * and filtering out the items that overlaps with finder pattern
+ *
+ * @example
+ * For a Version 7 symbol {@link getRowColCoords} returns values 6, 22 and 38.
+ * The alignment patterns, therefore, are to be centered on (row, column)
+ * positions (6,22), (22,6), (22,22), (22,38), (38,22), (38,38).
+ * Note that the coordinates (6,6), (6,38), (38,6) are occupied by finder patterns
+ * and are not therefore used for alignment patterns.
+ *
+ * var pos = getPositions(7)
+ * // [[6,22], [22,6], [22,22], [22,38], [38,22], [38,38]]
+ *
+ * @param  {Number} version QR Code version
+ * @return {Array}          Array of coordinates
+ */
+exports.getPositions = function getPositions (version) {
+  var coords = []
+  var pos = exports.getRowColCoords(version)
+  var posLength = pos.length
+
+  for (var i = 0; i < posLength; i++) {
+    for (var j = 0; j < posLength; j++) {
+      // Skip if position is occupied by finder patterns
+      if ((i === 0 && j === 0) ||             // top-left
+          (i === 0 && j === posLength - 1) || // bottom-left
+          (i === posLength - 1 && j === 0)) { // top-right
+        continue
+      }
+
+      coords.push([pos[i], pos[j]])
+    }
+  }
+
+  return coords
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/core/alphanumeric-data.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/qrcode/lib/core/alphanumeric-data.js ***!
+  \***********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var Mode = __webpack_require__(/*! ./mode */ "./node_modules/qrcode/lib/core/mode.js")
+
+/**
+ * Array of characters available in alphanumeric mode
+ *
+ * As per QR Code specification, to each character
+ * is assigned a value from 0 to 44 which in this case coincides
+ * with the array index
+ *
+ * @type {Array}
+ */
+var ALPHA_NUM_CHARS = [
+  '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+  'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+  'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+  ' ', '$', '%', '*', '+', '-', '.', '/', ':'
+]
+
+function AlphanumericData (data) {
+  this.mode = Mode.ALPHANUMERIC
+  this.data = data
+}
+
+AlphanumericData.getBitsLength = function getBitsLength (length) {
+  return 11 * Math.floor(length / 2) + 6 * (length % 2)
+}
+
+AlphanumericData.prototype.getLength = function getLength () {
+  return this.data.length
+}
+
+AlphanumericData.prototype.getBitsLength = function getBitsLength () {
+  return AlphanumericData.getBitsLength(this.data.length)
+}
+
+AlphanumericData.prototype.write = function write (bitBuffer) {
+  var i
+
+  // Input data characters are divided into groups of two characters
+  // and encoded as 11-bit binary codes.
+  for (i = 0; i + 2 <= this.data.length; i += 2) {
+    // The character value of the first character is multiplied by 45
+    var value = ALPHA_NUM_CHARS.indexOf(this.data[i]) * 45
+
+    // The character value of the second digit is added to the product
+    value += ALPHA_NUM_CHARS.indexOf(this.data[i + 1])
+
+    // The sum is then stored as 11-bit binary number
+    bitBuffer.put(value, 11)
+  }
+
+  // If the number of input data characters is not a multiple of two,
+  // the character value of the final character is encoded as a 6-bit binary number.
+  if (this.data.length % 2) {
+    bitBuffer.put(ALPHA_NUM_CHARS.indexOf(this.data[i]), 6)
+  }
+}
+
+module.exports = AlphanumericData
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/core/bit-buffer.js":
+/*!****************************************************!*\
+  !*** ./node_modules/qrcode/lib/core/bit-buffer.js ***!
+  \****************************************************/
+/***/ ((module) => {
+
+function BitBuffer () {
+  this.buffer = []
+  this.length = 0
+}
+
+BitBuffer.prototype = {
+
+  get: function (index) {
+    var bufIndex = Math.floor(index / 8)
+    return ((this.buffer[bufIndex] >>> (7 - index % 8)) & 1) === 1
+  },
+
+  put: function (num, length) {
+    for (var i = 0; i < length; i++) {
+      this.putBit(((num >>> (length - i - 1)) & 1) === 1)
+    }
+  },
+
+  getLengthInBits: function () {
+    return this.length
+  },
+
+  putBit: function (bit) {
+    var bufIndex = Math.floor(this.length / 8)
+    if (this.buffer.length <= bufIndex) {
+      this.buffer.push(0)
+    }
+
+    if (bit) {
+      this.buffer[bufIndex] |= (0x80 >>> (this.length % 8))
+    }
+
+    this.length++
+  }
+}
+
+module.exports = BitBuffer
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/core/bit-matrix.js":
+/*!****************************************************!*\
+  !*** ./node_modules/qrcode/lib/core/bit-matrix.js ***!
+  \****************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var BufferUtil = __webpack_require__(/*! ../utils/buffer */ "./node_modules/qrcode/lib/utils/typedarray-buffer.js")
+
+/**
+ * Helper class to handle QR Code symbol modules
+ *
+ * @param {Number} size Symbol size
+ */
+function BitMatrix (size) {
+  if (!size || size < 1) {
+    throw new Error('BitMatrix size must be defined and greater than 0')
+  }
+
+  this.size = size
+  this.data = BufferUtil.alloc(size * size)
+  this.reservedBit = BufferUtil.alloc(size * size)
+}
+
+/**
+ * Set bit value at specified location
+ * If reserved flag is set, this bit will be ignored during masking process
+ *
+ * @param {Number}  row
+ * @param {Number}  col
+ * @param {Boolean} value
+ * @param {Boolean} reserved
+ */
+BitMatrix.prototype.set = function (row, col, value, reserved) {
+  var index = row * this.size + col
+  this.data[index] = value
+  if (reserved) this.reservedBit[index] = true
+}
+
+/**
+ * Returns bit value at specified location
+ *
+ * @param  {Number}  row
+ * @param  {Number}  col
+ * @return {Boolean}
+ */
+BitMatrix.prototype.get = function (row, col) {
+  return this.data[row * this.size + col]
+}
+
+/**
+ * Applies xor operator at specified location
+ * (used during masking process)
+ *
+ * @param {Number}  row
+ * @param {Number}  col
+ * @param {Boolean} value
+ */
+BitMatrix.prototype.xor = function (row, col, value) {
+  this.data[row * this.size + col] ^= value
+}
+
+/**
+ * Check if bit at specified location is reserved
+ *
+ * @param {Number}   row
+ * @param {Number}   col
+ * @return {Boolean}
+ */
+BitMatrix.prototype.isReserved = function (row, col) {
+  return this.reservedBit[row * this.size + col]
+}
+
+module.exports = BitMatrix
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/core/byte-data.js":
+/*!***************************************************!*\
+  !*** ./node_modules/qrcode/lib/core/byte-data.js ***!
+  \***************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var BufferUtil = __webpack_require__(/*! ../utils/buffer */ "./node_modules/qrcode/lib/utils/typedarray-buffer.js")
+var Mode = __webpack_require__(/*! ./mode */ "./node_modules/qrcode/lib/core/mode.js")
+
+function ByteData (data) {
+  this.mode = Mode.BYTE
+  this.data = BufferUtil.from(data)
+}
+
+ByteData.getBitsLength = function getBitsLength (length) {
+  return length * 8
+}
+
+ByteData.prototype.getLength = function getLength () {
+  return this.data.length
+}
+
+ByteData.prototype.getBitsLength = function getBitsLength () {
+  return ByteData.getBitsLength(this.data.length)
+}
+
+ByteData.prototype.write = function (bitBuffer) {
+  for (var i = 0, l = this.data.length; i < l; i++) {
+    bitBuffer.put(this.data[i], 8)
+  }
+}
+
+module.exports = ByteData
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/core/error-correction-code.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/qrcode/lib/core/error-correction-code.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+var ECLevel = __webpack_require__(/*! ./error-correction-level */ "./node_modules/qrcode/lib/core/error-correction-level.js")
+
+var EC_BLOCKS_TABLE = [
+// L  M  Q  H
+  1, 1, 1, 1,
+  1, 1, 1, 1,
+  1, 1, 2, 2,
+  1, 2, 2, 4,
+  1, 2, 4, 4,
+  2, 4, 4, 4,
+  2, 4, 6, 5,
+  2, 4, 6, 6,
+  2, 5, 8, 8,
+  4, 5, 8, 8,
+  4, 5, 8, 11,
+  4, 8, 10, 11,
+  4, 9, 12, 16,
+  4, 9, 16, 16,
+  6, 10, 12, 18,
+  6, 10, 17, 16,
+  6, 11, 16, 19,
+  6, 13, 18, 21,
+  7, 14, 21, 25,
+  8, 16, 20, 25,
+  8, 17, 23, 25,
+  9, 17, 23, 34,
+  9, 18, 25, 30,
+  10, 20, 27, 32,
+  12, 21, 29, 35,
+  12, 23, 34, 37,
+  12, 25, 34, 40,
+  13, 26, 35, 42,
+  14, 28, 38, 45,
+  15, 29, 40, 48,
+  16, 31, 43, 51,
+  17, 33, 45, 54,
+  18, 35, 48, 57,
+  19, 37, 51, 60,
+  19, 38, 53, 63,
+  20, 40, 56, 66,
+  21, 43, 59, 70,
+  22, 45, 62, 74,
+  24, 47, 65, 77,
+  25, 49, 68, 81
+]
+
+var EC_CODEWORDS_TABLE = [
+// L  M  Q  H
+  7, 10, 13, 17,
+  10, 16, 22, 28,
+  15, 26, 36, 44,
+  20, 36, 52, 64,
+  26, 48, 72, 88,
+  36, 64, 96, 112,
+  40, 72, 108, 130,
+  48, 88, 132, 156,
+  60, 110, 160, 192,
+  72, 130, 192, 224,
+  80, 150, 224, 264,
+  96, 176, 260, 308,
+  104, 198, 288, 352,
+  120, 216, 320, 384,
+  132, 240, 360, 432,
+  144, 280, 408, 480,
+  168, 308, 448, 532,
+  180, 338, 504, 588,
+  196, 364, 546, 650,
+  224, 416, 600, 700,
+  224, 442, 644, 750,
+  252, 476, 690, 816,
+  270, 504, 750, 900,
+  300, 560, 810, 960,
+  312, 588, 870, 1050,
+  336, 644, 952, 1110,
+  360, 700, 1020, 1200,
+  390, 728, 1050, 1260,
+  420, 784, 1140, 1350,
+  450, 812, 1200, 1440,
+  480, 868, 1290, 1530,
+  510, 924, 1350, 1620,
+  540, 980, 1440, 1710,
+  570, 1036, 1530, 1800,
+  570, 1064, 1590, 1890,
+  600, 1120, 1680, 1980,
+  630, 1204, 1770, 2100,
+  660, 1260, 1860, 2220,
+  720, 1316, 1950, 2310,
+  750, 1372, 2040, 2430
+]
+
+/**
+ * Returns the number of error correction block that the QR Code should contain
+ * for the specified version and error correction level.
+ *
+ * @param  {Number} version              QR Code version
+ * @param  {Number} errorCorrectionLevel Error correction level
+ * @return {Number}                      Number of error correction blocks
+ */
+exports.getBlocksCount = function getBlocksCount (version, errorCorrectionLevel) {
+  switch (errorCorrectionLevel) {
+    case ECLevel.L:
+      return EC_BLOCKS_TABLE[(version - 1) * 4 + 0]
+    case ECLevel.M:
+      return EC_BLOCKS_TABLE[(version - 1) * 4 + 1]
+    case ECLevel.Q:
+      return EC_BLOCKS_TABLE[(version - 1) * 4 + 2]
+    case ECLevel.H:
+      return EC_BLOCKS_TABLE[(version - 1) * 4 + 3]
+    default:
+      return undefined
+  }
+}
+
+/**
+ * Returns the number of error correction codewords to use for the specified
+ * version and error correction level.
+ *
+ * @param  {Number} version              QR Code version
+ * @param  {Number} errorCorrectionLevel Error correction level
+ * @return {Number}                      Number of error correction codewords
+ */
+exports.getTotalCodewordsCount = function getTotalCodewordsCount (version, errorCorrectionLevel) {
+  switch (errorCorrectionLevel) {
+    case ECLevel.L:
+      return EC_CODEWORDS_TABLE[(version - 1) * 4 + 0]
+    case ECLevel.M:
+      return EC_CODEWORDS_TABLE[(version - 1) * 4 + 1]
+    case ECLevel.Q:
+      return EC_CODEWORDS_TABLE[(version - 1) * 4 + 2]
+    case ECLevel.H:
+      return EC_CODEWORDS_TABLE[(version - 1) * 4 + 3]
+    default:
+      return undefined
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/core/error-correction-level.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/qrcode/lib/core/error-correction-level.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+exports.L = { bit: 1 }
+exports.M = { bit: 0 }
+exports.Q = { bit: 3 }
+exports.H = { bit: 2 }
+
+function fromString (string) {
+  if (typeof string !== 'string') {
+    throw new Error('Param is not a string')
+  }
+
+  var lcStr = string.toLowerCase()
+
+  switch (lcStr) {
+    case 'l':
+    case 'low':
+      return exports.L
+
+    case 'm':
+    case 'medium':
+      return exports.M
+
+    case 'q':
+    case 'quartile':
+      return exports.Q
+
+    case 'h':
+    case 'high':
+      return exports.H
+
+    default:
+      throw new Error('Unknown EC Level: ' + string)
+  }
+}
+
+exports.isValid = function isValid (level) {
+  return level && typeof level.bit !== 'undefined' &&
+    level.bit >= 0 && level.bit < 4
+}
+
+exports.from = function from (value, defaultValue) {
+  if (exports.isValid(value)) {
+    return value
+  }
+
+  try {
+    return fromString(value)
+  } catch (e) {
+    return defaultValue
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/core/finder-pattern.js":
+/*!********************************************************!*\
+  !*** ./node_modules/qrcode/lib/core/finder-pattern.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+var getSymbolSize = __webpack_require__(/*! ./utils */ "./node_modules/qrcode/lib/core/utils.js").getSymbolSize
+var FINDER_PATTERN_SIZE = 7
+
+/**
+ * Returns an array containing the positions of each finder pattern.
+ * Each array's element represent the top-left point of the pattern as (x, y) coordinates
+ *
+ * @param  {Number} version QR Code version
+ * @return {Array}          Array of coordinates
+ */
+exports.getPositions = function getPositions (version) {
+  var size = getSymbolSize(version)
+
+  return [
+    // top-left
+    [0, 0],
+    // top-right
+    [size - FINDER_PATTERN_SIZE, 0],
+    // bottom-left
+    [0, size - FINDER_PATTERN_SIZE]
+  ]
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/core/format-info.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/qrcode/lib/core/format-info.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+var Utils = __webpack_require__(/*! ./utils */ "./node_modules/qrcode/lib/core/utils.js")
+
+var G15 = (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0)
+var G15_MASK = (1 << 14) | (1 << 12) | (1 << 10) | (1 << 4) | (1 << 1)
+var G15_BCH = Utils.getBCHDigit(G15)
+
+/**
+ * Returns format information with relative error correction bits
+ *
+ * The format information is a 15-bit sequence containing 5 data bits,
+ * with 10 error correction bits calculated using the (15, 5) BCH code.
+ *
+ * @param  {Number} errorCorrectionLevel Error correction level
+ * @param  {Number} mask                 Mask pattern
+ * @return {Number}                      Encoded format information bits
+ */
+exports.getEncodedBits = function getEncodedBits (errorCorrectionLevel, mask) {
+  var data = ((errorCorrectionLevel.bit << 3) | mask)
+  var d = data << 10
+
+  while (Utils.getBCHDigit(d) - G15_BCH >= 0) {
+    d ^= (G15 << (Utils.getBCHDigit(d) - G15_BCH))
+  }
+
+  // xor final data with mask pattern in order to ensure that
+  // no combination of Error Correction Level and data mask pattern
+  // will result in an all-zero data string
+  return ((data << 10) | d) ^ G15_MASK
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/core/galois-field.js":
+/*!******************************************************!*\
+  !*** ./node_modules/qrcode/lib/core/galois-field.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+var BufferUtil = __webpack_require__(/*! ../utils/buffer */ "./node_modules/qrcode/lib/utils/typedarray-buffer.js")
+
+var EXP_TABLE = BufferUtil.alloc(512)
+var LOG_TABLE = BufferUtil.alloc(256)
+/**
+ * Precompute the log and anti-log tables for faster computation later
+ *
+ * For each possible value in the galois field 2^8, we will pre-compute
+ * the logarithm and anti-logarithm (exponential) of this value
+ *
+ * ref {@link https://en.wikiversity.org/wiki/Reed%E2%80%93Solomon_codes_for_coders#Introduction_to_mathematical_fields}
+ */
+;(function initTables () {
+  var x = 1
+  for (var i = 0; i < 255; i++) {
+    EXP_TABLE[i] = x
+    LOG_TABLE[x] = i
+
+    x <<= 1 // multiply by 2
+
+    // The QR code specification says to use byte-wise modulo 100011101 arithmetic.
+    // This means that when a number is 256 or larger, it should be XORed with 0x11D.
+    if (x & 0x100) { // similar to x >= 256, but a lot faster (because 0x100 == 256)
+      x ^= 0x11D
+    }
+  }
+
+  // Optimization: double the size of the anti-log table so that we don't need to mod 255 to
+  // stay inside the bounds (because we will mainly use this table for the multiplication of
+  // two GF numbers, no more).
+  // @see {@link mul}
+  for (i = 255; i < 512; i++) {
+    EXP_TABLE[i] = EXP_TABLE[i - 255]
+  }
+}())
+
+/**
+ * Returns log value of n inside Galois Field
+ *
+ * @param  {Number} n
+ * @return {Number}
+ */
+exports.log = function log (n) {
+  if (n < 1) throw new Error('log(' + n + ')')
+  return LOG_TABLE[n]
+}
+
+/**
+ * Returns anti-log value of n inside Galois Field
+ *
+ * @param  {Number} n
+ * @return {Number}
+ */
+exports.exp = function exp (n) {
+  return EXP_TABLE[n]
+}
+
+/**
+ * Multiplies two number inside Galois Field
+ *
+ * @param  {Number} x
+ * @param  {Number} y
+ * @return {Number}
+ */
+exports.mul = function mul (x, y) {
+  if (x === 0 || y === 0) return 0
+
+  // should be EXP_TABLE[(LOG_TABLE[x] + LOG_TABLE[y]) % 255] if EXP_TABLE wasn't oversized
+  // @see {@link initTables}
+  return EXP_TABLE[LOG_TABLE[x] + LOG_TABLE[y]]
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/core/kanji-data.js":
+/*!****************************************************!*\
+  !*** ./node_modules/qrcode/lib/core/kanji-data.js ***!
+  \****************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var Mode = __webpack_require__(/*! ./mode */ "./node_modules/qrcode/lib/core/mode.js")
+var Utils = __webpack_require__(/*! ./utils */ "./node_modules/qrcode/lib/core/utils.js")
+
+function KanjiData (data) {
+  this.mode = Mode.KANJI
+  this.data = data
+}
+
+KanjiData.getBitsLength = function getBitsLength (length) {
+  return length * 13
+}
+
+KanjiData.prototype.getLength = function getLength () {
+  return this.data.length
+}
+
+KanjiData.prototype.getBitsLength = function getBitsLength () {
+  return KanjiData.getBitsLength(this.data.length)
+}
+
+KanjiData.prototype.write = function (bitBuffer) {
+  var i
+
+  // In the Shift JIS system, Kanji characters are represented by a two byte combination.
+  // These byte values are shifted from the JIS X 0208 values.
+  // JIS X 0208 gives details of the shift coded representation.
+  for (i = 0; i < this.data.length; i++) {
+    var value = Utils.toSJIS(this.data[i])
+
+    // For characters with Shift JIS values from 0x8140 to 0x9FFC:
+    if (value >= 0x8140 && value <= 0x9FFC) {
+      // Subtract 0x8140 from Shift JIS value
+      value -= 0x8140
+
+    // For characters with Shift JIS values from 0xE040 to 0xEBBF
+    } else if (value >= 0xE040 && value <= 0xEBBF) {
+      // Subtract 0xC140 from Shift JIS value
+      value -= 0xC140
+    } else {
+      throw new Error(
+        'Invalid SJIS character: ' + this.data[i] + '\n' +
+        'Make sure your charset is UTF-8')
+    }
+
+    // Multiply most significant byte of result by 0xC0
+    // and add least significant byte to product
+    value = (((value >>> 8) & 0xff) * 0xC0) + (value & 0xff)
+
+    // Convert result to a 13-bit binary string
+    bitBuffer.put(value, 13)
+  }
+}
+
+module.exports = KanjiData
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/core/mask-pattern.js":
+/*!******************************************************!*\
+  !*** ./node_modules/qrcode/lib/core/mask-pattern.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+/**
+ * Data mask pattern reference
+ * @type {Object}
+ */
+exports.Patterns = {
+  PATTERN000: 0,
+  PATTERN001: 1,
+  PATTERN010: 2,
+  PATTERN011: 3,
+  PATTERN100: 4,
+  PATTERN101: 5,
+  PATTERN110: 6,
+  PATTERN111: 7
+}
+
+/**
+ * Weighted penalty scores for the undesirable features
+ * @type {Object}
+ */
+var PenaltyScores = {
+  N1: 3,
+  N2: 3,
+  N3: 40,
+  N4: 10
+}
+
+/**
+ * Check if mask pattern value is valid
+ *
+ * @param  {Number}  mask    Mask pattern
+ * @return {Boolean}         true if valid, false otherwise
+ */
+exports.isValid = function isValid (mask) {
+  return mask != null && mask !== '' && !isNaN(mask) && mask >= 0 && mask <= 7
+}
+
+/**
+ * Returns mask pattern from a value.
+ * If value is not valid, returns undefined
+ *
+ * @param  {Number|String} value        Mask pattern value
+ * @return {Number}                     Valid mask pattern or undefined
+ */
+exports.from = function from (value) {
+  return exports.isValid(value) ? parseInt(value, 10) : undefined
+}
+
+/**
+* Find adjacent modules in row/column with the same color
+* and assign a penalty value.
+*
+* Points: N1 + i
+* i is the amount by which the number of adjacent modules of the same color exceeds 5
+*/
+exports.getPenaltyN1 = function getPenaltyN1 (data) {
+  var size = data.size
+  var points = 0
+  var sameCountCol = 0
+  var sameCountRow = 0
+  var lastCol = null
+  var lastRow = null
+
+  for (var row = 0; row < size; row++) {
+    sameCountCol = sameCountRow = 0
+    lastCol = lastRow = null
+
+    for (var col = 0; col < size; col++) {
+      var module = data.get(row, col)
+      if (module === lastCol) {
+        sameCountCol++
+      } else {
+        if (sameCountCol >= 5) points += PenaltyScores.N1 + (sameCountCol - 5)
+        lastCol = module
+        sameCountCol = 1
+      }
+
+      module = data.get(col, row)
+      if (module === lastRow) {
+        sameCountRow++
+      } else {
+        if (sameCountRow >= 5) points += PenaltyScores.N1 + (sameCountRow - 5)
+        lastRow = module
+        sameCountRow = 1
+      }
+    }
+
+    if (sameCountCol >= 5) points += PenaltyScores.N1 + (sameCountCol - 5)
+    if (sameCountRow >= 5) points += PenaltyScores.N1 + (sameCountRow - 5)
+  }
+
+  return points
+}
+
+/**
+ * Find 2x2 blocks with the same color and assign a penalty value
+ *
+ * Points: N2 * (m - 1) * (n - 1)
+ */
+exports.getPenaltyN2 = function getPenaltyN2 (data) {
+  var size = data.size
+  var points = 0
+
+  for (var row = 0; row < size - 1; row++) {
+    for (var col = 0; col < size - 1; col++) {
+      var last = data.get(row, col) +
+        data.get(row, col + 1) +
+        data.get(row + 1, col) +
+        data.get(row + 1, col + 1)
+
+      if (last === 4 || last === 0) points++
+    }
+  }
+
+  return points * PenaltyScores.N2
+}
+
+/**
+ * Find 1:1:3:1:1 ratio (dark:light:dark:light:dark) pattern in row/column,
+ * preceded or followed by light area 4 modules wide
+ *
+ * Points: N3 * number of pattern found
+ */
+exports.getPenaltyN3 = function getPenaltyN3 (data) {
+  var size = data.size
+  var points = 0
+  var bitsCol = 0
+  var bitsRow = 0
+
+  for (var row = 0; row < size; row++) {
+    bitsCol = bitsRow = 0
+    for (var col = 0; col < size; col++) {
+      bitsCol = ((bitsCol << 1) & 0x7FF) | data.get(row, col)
+      if (col >= 10 && (bitsCol === 0x5D0 || bitsCol === 0x05D)) points++
+
+      bitsRow = ((bitsRow << 1) & 0x7FF) | data.get(col, row)
+      if (col >= 10 && (bitsRow === 0x5D0 || bitsRow === 0x05D)) points++
+    }
+  }
+
+  return points * PenaltyScores.N3
+}
+
+/**
+ * Calculate proportion of dark modules in entire symbol
+ *
+ * Points: N4 * k
+ *
+ * k is the rating of the deviation of the proportion of dark modules
+ * in the symbol from 50% in steps of 5%
+ */
+exports.getPenaltyN4 = function getPenaltyN4 (data) {
+  var darkCount = 0
+  var modulesCount = data.data.length
+
+  for (var i = 0; i < modulesCount; i++) darkCount += data.data[i]
+
+  var k = Math.abs(Math.ceil((darkCount * 100 / modulesCount) / 5) - 10)
+
+  return k * PenaltyScores.N4
+}
+
+/**
+ * Return mask value at given position
+ *
+ * @param  {Number} maskPattern Pattern reference value
+ * @param  {Number} i           Row
+ * @param  {Number} j           Column
+ * @return {Boolean}            Mask value
+ */
+function getMaskAt (maskPattern, i, j) {
+  switch (maskPattern) {
+    case exports.Patterns.PATTERN000: return (i + j) % 2 === 0
+    case exports.Patterns.PATTERN001: return i % 2 === 0
+    case exports.Patterns.PATTERN010: return j % 3 === 0
+    case exports.Patterns.PATTERN011: return (i + j) % 3 === 0
+    case exports.Patterns.PATTERN100: return (Math.floor(i / 2) + Math.floor(j / 3)) % 2 === 0
+    case exports.Patterns.PATTERN101: return (i * j) % 2 + (i * j) % 3 === 0
+    case exports.Patterns.PATTERN110: return ((i * j) % 2 + (i * j) % 3) % 2 === 0
+    case exports.Patterns.PATTERN111: return ((i * j) % 3 + (i + j) % 2) % 2 === 0
+
+    default: throw new Error('bad maskPattern:' + maskPattern)
+  }
+}
+
+/**
+ * Apply a mask pattern to a BitMatrix
+ *
+ * @param  {Number}    pattern Pattern reference number
+ * @param  {BitMatrix} data    BitMatrix data
+ */
+exports.applyMask = function applyMask (pattern, data) {
+  var size = data.size
+
+  for (var col = 0; col < size; col++) {
+    for (var row = 0; row < size; row++) {
+      if (data.isReserved(row, col)) continue
+      data.xor(row, col, getMaskAt(pattern, row, col))
+    }
+  }
+}
+
+/**
+ * Returns the best mask pattern for data
+ *
+ * @param  {BitMatrix} data
+ * @return {Number} Mask pattern reference number
+ */
+exports.getBestMask = function getBestMask (data, setupFormatFunc) {
+  var numPatterns = Object.keys(exports.Patterns).length
+  var bestPattern = 0
+  var lowerPenalty = Infinity
+
+  for (var p = 0; p < numPatterns; p++) {
+    setupFormatFunc(p)
+    exports.applyMask(p, data)
+
+    // Calculate penalty
+    var penalty =
+      exports.getPenaltyN1(data) +
+      exports.getPenaltyN2(data) +
+      exports.getPenaltyN3(data) +
+      exports.getPenaltyN4(data)
+
+    // Undo previously applied mask
+    exports.applyMask(p, data)
+
+    if (penalty < lowerPenalty) {
+      lowerPenalty = penalty
+      bestPattern = p
+    }
+  }
+
+  return bestPattern
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/core/mode.js":
+/*!**********************************************!*\
+  !*** ./node_modules/qrcode/lib/core/mode.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+var VersionCheck = __webpack_require__(/*! ./version-check */ "./node_modules/qrcode/lib/core/version-check.js")
+var Regex = __webpack_require__(/*! ./regex */ "./node_modules/qrcode/lib/core/regex.js")
+
+/**
+ * Numeric mode encodes data from the decimal digit set (0 - 9)
+ * (byte values 30HEX to 39HEX).
+ * Normally, 3 data characters are represented by 10 bits.
+ *
+ * @type {Object}
+ */
+exports.NUMERIC = {
+  id: 'Numeric',
+  bit: 1 << 0,
+  ccBits: [10, 12, 14]
+}
+
+/**
+ * Alphanumeric mode encodes data from a set of 45 characters,
+ * i.e. 10 numeric digits (0 - 9),
+ *      26 alphabetic characters (A - Z),
+ *   and 9 symbols (SP, $, %, *, +, -, ., /, :).
+ * Normally, two input characters are represented by 11 bits.
+ *
+ * @type {Object}
+ */
+exports.ALPHANUMERIC = {
+  id: 'Alphanumeric',
+  bit: 1 << 1,
+  ccBits: [9, 11, 13]
+}
+
+/**
+ * In byte mode, data is encoded at 8 bits per character.
+ *
+ * @type {Object}
+ */
+exports.BYTE = {
+  id: 'Byte',
+  bit: 1 << 2,
+  ccBits: [8, 16, 16]
+}
+
+/**
+ * The Kanji mode efficiently encodes Kanji characters in accordance with
+ * the Shift JIS system based on JIS X 0208.
+ * The Shift JIS values are shifted from the JIS X 0208 values.
+ * JIS X 0208 gives details of the shift coded representation.
+ * Each two-byte character value is compacted to a 13-bit binary codeword.
+ *
+ * @type {Object}
+ */
+exports.KANJI = {
+  id: 'Kanji',
+  bit: 1 << 3,
+  ccBits: [8, 10, 12]
+}
+
+/**
+ * Mixed mode will contain a sequences of data in a combination of any of
+ * the modes described above
+ *
+ * @type {Object}
+ */
+exports.MIXED = {
+  bit: -1
+}
+
+/**
+ * Returns the number of bits needed to store the data length
+ * according to QR Code specifications.
+ *
+ * @param  {Mode}   mode    Data mode
+ * @param  {Number} version QR Code version
+ * @return {Number}         Number of bits
+ */
+exports.getCharCountIndicator = function getCharCountIndicator (mode, version) {
+  if (!mode.ccBits) throw new Error('Invalid mode: ' + mode)
+
+  if (!VersionCheck.isValid(version)) {
+    throw new Error('Invalid version: ' + version)
+  }
+
+  if (version >= 1 && version < 10) return mode.ccBits[0]
+  else if (version < 27) return mode.ccBits[1]
+  return mode.ccBits[2]
+}
+
+/**
+ * Returns the most efficient mode to store the specified data
+ *
+ * @param  {String} dataStr Input data string
+ * @return {Mode}           Best mode
+ */
+exports.getBestModeForData = function getBestModeForData (dataStr) {
+  if (Regex.testNumeric(dataStr)) return exports.NUMERIC
+  else if (Regex.testAlphanumeric(dataStr)) return exports.ALPHANUMERIC
+  else if (Regex.testKanji(dataStr)) return exports.KANJI
+  else return exports.BYTE
+}
+
+/**
+ * Return mode name as string
+ *
+ * @param {Mode} mode Mode object
+ * @returns {String}  Mode name
+ */
+exports.toString = function toString (mode) {
+  if (mode && mode.id) return mode.id
+  throw new Error('Invalid mode')
+}
+
+/**
+ * Check if input param is a valid mode object
+ *
+ * @param   {Mode}    mode Mode object
+ * @returns {Boolean} True if valid mode, false otherwise
+ */
+exports.isValid = function isValid (mode) {
+  return mode && mode.bit && mode.ccBits
+}
+
+/**
+ * Get mode object from its name
+ *
+ * @param   {String} string Mode name
+ * @returns {Mode}          Mode object
+ */
+function fromString (string) {
+  if (typeof string !== 'string') {
+    throw new Error('Param is not a string')
+  }
+
+  var lcStr = string.toLowerCase()
+
+  switch (lcStr) {
+    case 'numeric':
+      return exports.NUMERIC
+    case 'alphanumeric':
+      return exports.ALPHANUMERIC
+    case 'kanji':
+      return exports.KANJI
+    case 'byte':
+      return exports.BYTE
+    default:
+      throw new Error('Unknown mode: ' + string)
+  }
+}
+
+/**
+ * Returns mode from a value.
+ * If value is not a valid mode, returns defaultValue
+ *
+ * @param  {Mode|String} value        Encoding mode
+ * @param  {Mode}        defaultValue Fallback value
+ * @return {Mode}                     Encoding mode
+ */
+exports.from = function from (value, defaultValue) {
+  if (exports.isValid(value)) {
+    return value
+  }
+
+  try {
+    return fromString(value)
+  } catch (e) {
+    return defaultValue
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/core/numeric-data.js":
+/*!******************************************************!*\
+  !*** ./node_modules/qrcode/lib/core/numeric-data.js ***!
+  \******************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var Mode = __webpack_require__(/*! ./mode */ "./node_modules/qrcode/lib/core/mode.js")
+
+function NumericData (data) {
+  this.mode = Mode.NUMERIC
+  this.data = data.toString()
+}
+
+NumericData.getBitsLength = function getBitsLength (length) {
+  return 10 * Math.floor(length / 3) + ((length % 3) ? ((length % 3) * 3 + 1) : 0)
+}
+
+NumericData.prototype.getLength = function getLength () {
+  return this.data.length
+}
+
+NumericData.prototype.getBitsLength = function getBitsLength () {
+  return NumericData.getBitsLength(this.data.length)
+}
+
+NumericData.prototype.write = function write (bitBuffer) {
+  var i, group, value
+
+  // The input data string is divided into groups of three digits,
+  // and each group is converted to its 10-bit binary equivalent.
+  for (i = 0; i + 3 <= this.data.length; i += 3) {
+    group = this.data.substr(i, 3)
+    value = parseInt(group, 10)
+
+    bitBuffer.put(value, 10)
+  }
+
+  // If the number of input digits is not an exact multiple of three,
+  // the final one or two digits are converted to 4 or 7 bits respectively.
+  var remainingNum = this.data.length - i
+  if (remainingNum > 0) {
+    group = this.data.substr(i)
+    value = parseInt(group, 10)
+
+    bitBuffer.put(value, remainingNum * 3 + 1)
+  }
+}
+
+module.exports = NumericData
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/core/polynomial.js":
+/*!****************************************************!*\
+  !*** ./node_modules/qrcode/lib/core/polynomial.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+var BufferUtil = __webpack_require__(/*! ../utils/buffer */ "./node_modules/qrcode/lib/utils/typedarray-buffer.js")
+var GF = __webpack_require__(/*! ./galois-field */ "./node_modules/qrcode/lib/core/galois-field.js")
+
+/**
+ * Multiplies two polynomials inside Galois Field
+ *
+ * @param  {Buffer} p1 Polynomial
+ * @param  {Buffer} p2 Polynomial
+ * @return {Buffer}    Product of p1 and p2
+ */
+exports.mul = function mul (p1, p2) {
+  var coeff = BufferUtil.alloc(p1.length + p2.length - 1)
+
+  for (var i = 0; i < p1.length; i++) {
+    for (var j = 0; j < p2.length; j++) {
+      coeff[i + j] ^= GF.mul(p1[i], p2[j])
+    }
+  }
+
+  return coeff
+}
+
+/**
+ * Calculate the remainder of polynomials division
+ *
+ * @param  {Buffer} divident Polynomial
+ * @param  {Buffer} divisor  Polynomial
+ * @return {Buffer}          Remainder
+ */
+exports.mod = function mod (divident, divisor) {
+  var result = BufferUtil.from(divident)
+
+  while ((result.length - divisor.length) >= 0) {
+    var coeff = result[0]
+
+    for (var i = 0; i < divisor.length; i++) {
+      result[i] ^= GF.mul(divisor[i], coeff)
+    }
+
+    // remove all zeros from buffer head
+    var offset = 0
+    while (offset < result.length && result[offset] === 0) offset++
+    result = result.slice(offset)
+  }
+
+  return result
+}
+
+/**
+ * Generate an irreducible generator polynomial of specified degree
+ * (used by Reed-Solomon encoder)
+ *
+ * @param  {Number} degree Degree of the generator polynomial
+ * @return {Buffer}        Buffer containing polynomial coefficients
+ */
+exports.generateECPolynomial = function generateECPolynomial (degree) {
+  var poly = BufferUtil.from([1])
+  for (var i = 0; i < degree; i++) {
+    poly = exports.mul(poly, [1, GF.exp(i)])
+  }
+
+  return poly
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/core/qrcode.js":
+/*!************************************************!*\
+  !*** ./node_modules/qrcode/lib/core/qrcode.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+var BufferUtil = __webpack_require__(/*! ../utils/buffer */ "./node_modules/qrcode/lib/utils/typedarray-buffer.js")
+var Utils = __webpack_require__(/*! ./utils */ "./node_modules/qrcode/lib/core/utils.js")
+var ECLevel = __webpack_require__(/*! ./error-correction-level */ "./node_modules/qrcode/lib/core/error-correction-level.js")
+var BitBuffer = __webpack_require__(/*! ./bit-buffer */ "./node_modules/qrcode/lib/core/bit-buffer.js")
+var BitMatrix = __webpack_require__(/*! ./bit-matrix */ "./node_modules/qrcode/lib/core/bit-matrix.js")
+var AlignmentPattern = __webpack_require__(/*! ./alignment-pattern */ "./node_modules/qrcode/lib/core/alignment-pattern.js")
+var FinderPattern = __webpack_require__(/*! ./finder-pattern */ "./node_modules/qrcode/lib/core/finder-pattern.js")
+var MaskPattern = __webpack_require__(/*! ./mask-pattern */ "./node_modules/qrcode/lib/core/mask-pattern.js")
+var ECCode = __webpack_require__(/*! ./error-correction-code */ "./node_modules/qrcode/lib/core/error-correction-code.js")
+var ReedSolomonEncoder = __webpack_require__(/*! ./reed-solomon-encoder */ "./node_modules/qrcode/lib/core/reed-solomon-encoder.js")
+var Version = __webpack_require__(/*! ./version */ "./node_modules/qrcode/lib/core/version.js")
+var FormatInfo = __webpack_require__(/*! ./format-info */ "./node_modules/qrcode/lib/core/format-info.js")
+var Mode = __webpack_require__(/*! ./mode */ "./node_modules/qrcode/lib/core/mode.js")
+var Segments = __webpack_require__(/*! ./segments */ "./node_modules/qrcode/lib/core/segments.js")
+var isArray = __webpack_require__(/*! isarray */ "./node_modules/qrcode/node_modules/isarray/index.js")
+
+/**
+ * QRCode for JavaScript
+ *
+ * modified by Ryan Day for nodejs support
+ * Copyright (c) 2011 Ryan Day
+ *
+ * Licensed under the MIT license:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *
+//---------------------------------------------------------------------
+// QRCode for JavaScript
+//
+// Copyright (c) 2009 Kazuhiko Arase
+//
+// URL: http://www.d-project.com/
+//
+// Licensed under the MIT license:
+//   http://www.opensource.org/licenses/mit-license.php
+//
+// The word "QR Code" is registered trademark of
+// DENSO WAVE INCORPORATED
+//   http://www.denso-wave.com/qrcode/faqpatent-e.html
+//
+//---------------------------------------------------------------------
+*/
+
+/**
+ * Add finder patterns bits to matrix
+ *
+ * @param  {BitMatrix} matrix  Modules matrix
+ * @param  {Number}    version QR Code version
+ */
+function setupFinderPattern (matrix, version) {
+  var size = matrix.size
+  var pos = FinderPattern.getPositions(version)
+
+  for (var i = 0; i < pos.length; i++) {
+    var row = pos[i][0]
+    var col = pos[i][1]
+
+    for (var r = -1; r <= 7; r++) {
+      if (row + r <= -1 || size <= row + r) continue
+
+      for (var c = -1; c <= 7; c++) {
+        if (col + c <= -1 || size <= col + c) continue
+
+        if ((r >= 0 && r <= 6 && (c === 0 || c === 6)) ||
+          (c >= 0 && c <= 6 && (r === 0 || r === 6)) ||
+          (r >= 2 && r <= 4 && c >= 2 && c <= 4)) {
+          matrix.set(row + r, col + c, true, true)
+        } else {
+          matrix.set(row + r, col + c, false, true)
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Add timing pattern bits to matrix
+ *
+ * Note: this function must be called before {@link setupAlignmentPattern}
+ *
+ * @param  {BitMatrix} matrix Modules matrix
+ */
+function setupTimingPattern (matrix) {
+  var size = matrix.size
+
+  for (var r = 8; r < size - 8; r++) {
+    var value = r % 2 === 0
+    matrix.set(r, 6, value, true)
+    matrix.set(6, r, value, true)
+  }
+}
+
+/**
+ * Add alignment patterns bits to matrix
+ *
+ * Note: this function must be called after {@link setupTimingPattern}
+ *
+ * @param  {BitMatrix} matrix  Modules matrix
+ * @param  {Number}    version QR Code version
+ */
+function setupAlignmentPattern (matrix, version) {
+  var pos = AlignmentPattern.getPositions(version)
+
+  for (var i = 0; i < pos.length; i++) {
+    var row = pos[i][0]
+    var col = pos[i][1]
+
+    for (var r = -2; r <= 2; r++) {
+      for (var c = -2; c <= 2; c++) {
+        if (r === -2 || r === 2 || c === -2 || c === 2 ||
+          (r === 0 && c === 0)) {
+          matrix.set(row + r, col + c, true, true)
+        } else {
+          matrix.set(row + r, col + c, false, true)
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Add version info bits to matrix
+ *
+ * @param  {BitMatrix} matrix  Modules matrix
+ * @param  {Number}    version QR Code version
+ */
+function setupVersionInfo (matrix, version) {
+  var size = matrix.size
+  var bits = Version.getEncodedBits(version)
+  var row, col, mod
+
+  for (var i = 0; i < 18; i++) {
+    row = Math.floor(i / 3)
+    col = i % 3 + size - 8 - 3
+    mod = ((bits >> i) & 1) === 1
+
+    matrix.set(row, col, mod, true)
+    matrix.set(col, row, mod, true)
+  }
+}
+
+/**
+ * Add format info bits to matrix
+ *
+ * @param  {BitMatrix} matrix               Modules matrix
+ * @param  {ErrorCorrectionLevel}    errorCorrectionLevel Error correction level
+ * @param  {Number}    maskPattern          Mask pattern reference value
+ */
+function setupFormatInfo (matrix, errorCorrectionLevel, maskPattern) {
+  var size = matrix.size
+  var bits = FormatInfo.getEncodedBits(errorCorrectionLevel, maskPattern)
+  var i, mod
+
+  for (i = 0; i < 15; i++) {
+    mod = ((bits >> i) & 1) === 1
+
+    // vertical
+    if (i < 6) {
+      matrix.set(i, 8, mod, true)
+    } else if (i < 8) {
+      matrix.set(i + 1, 8, mod, true)
+    } else {
+      matrix.set(size - 15 + i, 8, mod, true)
+    }
+
+    // horizontal
+    if (i < 8) {
+      matrix.set(8, size - i - 1, mod, true)
+    } else if (i < 9) {
+      matrix.set(8, 15 - i - 1 + 1, mod, true)
+    } else {
+      matrix.set(8, 15 - i - 1, mod, true)
+    }
+  }
+
+  // fixed module
+  matrix.set(size - 8, 8, 1, true)
+}
+
+/**
+ * Add encoded data bits to matrix
+ *
+ * @param  {BitMatrix} matrix Modules matrix
+ * @param  {Buffer}    data   Data codewords
+ */
+function setupData (matrix, data) {
+  var size = matrix.size
+  var inc = -1
+  var row = size - 1
+  var bitIndex = 7
+  var byteIndex = 0
+
+  for (var col = size - 1; col > 0; col -= 2) {
+    if (col === 6) col--
+
+    while (true) {
+      for (var c = 0; c < 2; c++) {
+        if (!matrix.isReserved(row, col - c)) {
+          var dark = false
+
+          if (byteIndex < data.length) {
+            dark = (((data[byteIndex] >>> bitIndex) & 1) === 1)
+          }
+
+          matrix.set(row, col - c, dark)
+          bitIndex--
+
+          if (bitIndex === -1) {
+            byteIndex++
+            bitIndex = 7
+          }
+        }
+      }
+
+      row += inc
+
+      if (row < 0 || size <= row) {
+        row -= inc
+        inc = -inc
+        break
+      }
+    }
+  }
+}
+
+/**
+ * Create encoded codewords from data input
+ *
+ * @param  {Number}   version              QR Code version
+ * @param  {ErrorCorrectionLevel}   errorCorrectionLevel Error correction level
+ * @param  {ByteData} data                 Data input
+ * @return {Buffer}                        Buffer containing encoded codewords
+ */
+function createData (version, errorCorrectionLevel, segments) {
+  // Prepare data buffer
+  var buffer = new BitBuffer()
+
+  segments.forEach(function (data) {
+    // prefix data with mode indicator (4 bits)
+    buffer.put(data.mode.bit, 4)
+
+    // Prefix data with character count indicator.
+    // The character count indicator is a string of bits that represents the
+    // number of characters that are being encoded.
+    // The character count indicator must be placed after the mode indicator
+    // and must be a certain number of bits long, depending on the QR version
+    // and data mode
+    // @see {@link Mode.getCharCountIndicator}.
+    buffer.put(data.getLength(), Mode.getCharCountIndicator(data.mode, version))
+
+    // add binary data sequence to buffer
+    data.write(buffer)
+  })
+
+  // Calculate required number of bits
+  var totalCodewords = Utils.getSymbolTotalCodewords(version)
+  var ecTotalCodewords = ECCode.getTotalCodewordsCount(version, errorCorrectionLevel)
+  var dataTotalCodewordsBits = (totalCodewords - ecTotalCodewords) * 8
+
+  // Add a terminator.
+  // If the bit string is shorter than the total number of required bits,
+  // a terminator of up to four 0s must be added to the right side of the string.
+  // If the bit string is more than four bits shorter than the required number of bits,
+  // add four 0s to the end.
+  if (buffer.getLengthInBits() + 4 <= dataTotalCodewordsBits) {
+    buffer.put(0, 4)
+  }
+
+  // If the bit string is fewer than four bits shorter, add only the number of 0s that
+  // are needed to reach the required number of bits.
+
+  // After adding the terminator, if the number of bits in the string is not a multiple of 8,
+  // pad the string on the right with 0s to make the string's length a multiple of 8.
+  while (buffer.getLengthInBits() % 8 !== 0) {
+    buffer.putBit(0)
+  }
+
+  // Add pad bytes if the string is still shorter than the total number of required bits.
+  // Extend the buffer to fill the data capacity of the symbol corresponding to
+  // the Version and Error Correction Level by adding the Pad Codewords 11101100 (0xEC)
+  // and 00010001 (0x11) alternately.
+  var remainingByte = (dataTotalCodewordsBits - buffer.getLengthInBits()) / 8
+  for (var i = 0; i < remainingByte; i++) {
+    buffer.put(i % 2 ? 0x11 : 0xEC, 8)
+  }
+
+  return createCodewords(buffer, version, errorCorrectionLevel)
+}
+
+/**
+ * Encode input data with Reed-Solomon and return codewords with
+ * relative error correction bits
+ *
+ * @param  {BitBuffer} bitBuffer            Data to encode
+ * @param  {Number}    version              QR Code version
+ * @param  {ErrorCorrectionLevel} errorCorrectionLevel Error correction level
+ * @return {Buffer}                         Buffer containing encoded codewords
+ */
+function createCodewords (bitBuffer, version, errorCorrectionLevel) {
+  // Total codewords for this QR code version (Data + Error correction)
+  var totalCodewords = Utils.getSymbolTotalCodewords(version)
+
+  // Total number of error correction codewords
+  var ecTotalCodewords = ECCode.getTotalCodewordsCount(version, errorCorrectionLevel)
+
+  // Total number of data codewords
+  var dataTotalCodewords = totalCodewords - ecTotalCodewords
+
+  // Total number of blocks
+  var ecTotalBlocks = ECCode.getBlocksCount(version, errorCorrectionLevel)
+
+  // Calculate how many blocks each group should contain
+  var blocksInGroup2 = totalCodewords % ecTotalBlocks
+  var blocksInGroup1 = ecTotalBlocks - blocksInGroup2
+
+  var totalCodewordsInGroup1 = Math.floor(totalCodewords / ecTotalBlocks)
+
+  var dataCodewordsInGroup1 = Math.floor(dataTotalCodewords / ecTotalBlocks)
+  var dataCodewordsInGroup2 = dataCodewordsInGroup1 + 1
+
+  // Number of EC codewords is the same for both groups
+  var ecCount = totalCodewordsInGroup1 - dataCodewordsInGroup1
+
+  // Initialize a Reed-Solomon encoder with a generator polynomial of degree ecCount
+  var rs = new ReedSolomonEncoder(ecCount)
+
+  var offset = 0
+  var dcData = new Array(ecTotalBlocks)
+  var ecData = new Array(ecTotalBlocks)
+  var maxDataSize = 0
+  var buffer = BufferUtil.from(bitBuffer.buffer)
+
+  // Divide the buffer into the required number of blocks
+  for (var b = 0; b < ecTotalBlocks; b++) {
+    var dataSize = b < blocksInGroup1 ? dataCodewordsInGroup1 : dataCodewordsInGroup2
+
+    // extract a block of data from buffer
+    dcData[b] = buffer.slice(offset, offset + dataSize)
+
+    // Calculate EC codewords for this data block
+    ecData[b] = rs.encode(dcData[b])
+
+    offset += dataSize
+    maxDataSize = Math.max(maxDataSize, dataSize)
+  }
+
+  // Create final data
+  // Interleave the data and error correction codewords from each block
+  var data = BufferUtil.alloc(totalCodewords)
+  var index = 0
+  var i, r
+
+  // Add data codewords
+  for (i = 0; i < maxDataSize; i++) {
+    for (r = 0; r < ecTotalBlocks; r++) {
+      if (i < dcData[r].length) {
+        data[index++] = dcData[r][i]
+      }
+    }
+  }
+
+  // Apped EC codewords
+  for (i = 0; i < ecCount; i++) {
+    for (r = 0; r < ecTotalBlocks; r++) {
+      data[index++] = ecData[r][i]
+    }
+  }
+
+  return data
+}
+
+/**
+ * Build QR Code symbol
+ *
+ * @param  {String} data                 Input string
+ * @param  {Number} version              QR Code version
+ * @param  {ErrorCorretionLevel} errorCorrectionLevel Error level
+ * @param  {MaskPattern} maskPattern     Mask pattern
+ * @return {Object}                      Object containing symbol data
+ */
+function createSymbol (data, version, errorCorrectionLevel, maskPattern) {
+  var segments
+
+  if (isArray(data)) {
+    segments = Segments.fromArray(data)
+  } else if (typeof data === 'string') {
+    var estimatedVersion = version
+
+    if (!estimatedVersion) {
+      var rawSegments = Segments.rawSplit(data)
+
+      // Estimate best version that can contain raw splitted segments
+      estimatedVersion = Version.getBestVersionForData(rawSegments,
+        errorCorrectionLevel)
+    }
+
+    // Build optimized segments
+    // If estimated version is undefined, try with the highest version
+    segments = Segments.fromString(data, estimatedVersion || 40)
+  } else {
+    throw new Error('Invalid data')
+  }
+
+  // Get the min version that can contain data
+  var bestVersion = Version.getBestVersionForData(segments,
+      errorCorrectionLevel)
+
+  // If no version is found, data cannot be stored
+  if (!bestVersion) {
+    throw new Error('The amount of data is too big to be stored in a QR Code')
+  }
+
+  // If not specified, use min version as default
+  if (!version) {
+    version = bestVersion
+
+  // Check if the specified version can contain the data
+  } else if (version < bestVersion) {
+    throw new Error('\n' +
+      'The chosen QR Code version cannot contain this amount of data.\n' +
+      'Minimum version required to store current data is: ' + bestVersion + '.\n'
+    )
+  }
+
+  var dataBits = createData(version, errorCorrectionLevel, segments)
+
+  // Allocate matrix buffer
+  var moduleCount = Utils.getSymbolSize(version)
+  var modules = new BitMatrix(moduleCount)
+
+  // Add function modules
+  setupFinderPattern(modules, version)
+  setupTimingPattern(modules)
+  setupAlignmentPattern(modules, version)
+
+  // Add temporary dummy bits for format info just to set them as reserved.
+  // This is needed to prevent these bits from being masked by {@link MaskPattern.applyMask}
+  // since the masking operation must be performed only on the encoding region.
+  // These blocks will be replaced with correct values later in code.
+  setupFormatInfo(modules, errorCorrectionLevel, 0)
+
+  if (version >= 7) {
+    setupVersionInfo(modules, version)
+  }
+
+  // Add data codewords
+  setupData(modules, dataBits)
+
+  if (isNaN(maskPattern)) {
+    // Find best mask pattern
+    maskPattern = MaskPattern.getBestMask(modules,
+      setupFormatInfo.bind(null, modules, errorCorrectionLevel))
+  }
+
+  // Apply mask pattern
+  MaskPattern.applyMask(maskPattern, modules)
+
+  // Replace format info bits with correct values
+  setupFormatInfo(modules, errorCorrectionLevel, maskPattern)
+
+  return {
+    modules: modules,
+    version: version,
+    errorCorrectionLevel: errorCorrectionLevel,
+    maskPattern: maskPattern,
+    segments: segments
+  }
+}
+
+/**
+ * QR Code
+ *
+ * @param {String | Array} data                 Input data
+ * @param {Object} options                      Optional configurations
+ * @param {Number} options.version              QR Code version
+ * @param {String} options.errorCorrectionLevel Error correction level
+ * @param {Function} options.toSJISFunc         Helper func to convert utf8 to sjis
+ */
+exports.create = function create (data, options) {
+  if (typeof data === 'undefined' || data === '') {
+    throw new Error('No input text')
+  }
+
+  var errorCorrectionLevel = ECLevel.M
+  var version
+  var mask
+
+  if (typeof options !== 'undefined') {
+    // Use higher error correction level as default
+    errorCorrectionLevel = ECLevel.from(options.errorCorrectionLevel, ECLevel.M)
+    version = Version.from(options.version)
+    mask = MaskPattern.from(options.maskPattern)
+
+    if (options.toSJISFunc) {
+      Utils.setToSJISFunction(options.toSJISFunc)
+    }
+  }
+
+  return createSymbol(data, version, errorCorrectionLevel, mask)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/core/reed-solomon-encoder.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/qrcode/lib/core/reed-solomon-encoder.js ***!
+  \**************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var BufferUtil = __webpack_require__(/*! ../utils/buffer */ "./node_modules/qrcode/lib/utils/typedarray-buffer.js")
+var Polynomial = __webpack_require__(/*! ./polynomial */ "./node_modules/qrcode/lib/core/polynomial.js")
+var Buffer = __webpack_require__(/*! buffer */ "./node_modules/qrcode/node_modules/buffer/index.js").Buffer
+
+function ReedSolomonEncoder (degree) {
+  this.genPoly = undefined
+  this.degree = degree
+
+  if (this.degree) this.initialize(this.degree)
+}
+
+/**
+ * Initialize the encoder.
+ * The input param should correspond to the number of error correction codewords.
+ *
+ * @param  {Number} degree
+ */
+ReedSolomonEncoder.prototype.initialize = function initialize (degree) {
+  // create an irreducible generator polynomial
+  this.degree = degree
+  this.genPoly = Polynomial.generateECPolynomial(this.degree)
+}
+
+/**
+ * Encodes a chunk of data
+ *
+ * @param  {Buffer} data Buffer containing input data
+ * @return {Buffer}      Buffer containing encoded data
+ */
+ReedSolomonEncoder.prototype.encode = function encode (data) {
+  if (!this.genPoly) {
+    throw new Error('Encoder not initialized')
+  }
+
+  // Calculate EC for this data block
+  // extends data size to data+genPoly size
+  var pad = BufferUtil.alloc(this.degree)
+  var paddedData = Buffer.concat([data, pad], data.length + this.degree)
+
+  // The error correction codewords are the remainder after dividing the data codewords
+  // by a generator polynomial
+  var remainder = Polynomial.mod(paddedData, this.genPoly)
+
+  // return EC data blocks (last n byte, where n is the degree of genPoly)
+  // If coefficients number in remainder are less than genPoly degree,
+  // pad with 0s to the left to reach the needed number of coefficients
+  var start = this.degree - remainder.length
+  if (start > 0) {
+    var buff = BufferUtil.alloc(this.degree)
+    remainder.copy(buff, start)
+
+    return buff
+  }
+
+  return remainder
+}
+
+module.exports = ReedSolomonEncoder
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/core/regex.js":
+/*!***********************************************!*\
+  !*** ./node_modules/qrcode/lib/core/regex.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+var numeric = '[0-9]+'
+var alphanumeric = '[A-Z $%*+\\-./:]+'
+var kanji = '(?:[u3000-u303F]|[u3040-u309F]|[u30A0-u30FF]|' +
+  '[uFF00-uFFEF]|[u4E00-u9FAF]|[u2605-u2606]|[u2190-u2195]|u203B|' +
+  '[u2010u2015u2018u2019u2025u2026u201Cu201Du2225u2260]|' +
+  '[u0391-u0451]|[u00A7u00A8u00B1u00B4u00D7u00F7])+'
+kanji = kanji.replace(/u/g, '\\u')
+
+var byte = '(?:(?![A-Z0-9 $%*+\\-./:]|' + kanji + ')(?:.|[\r\n]))+'
+
+exports.KANJI = new RegExp(kanji, 'g')
+exports.BYTE_KANJI = new RegExp('[^A-Z0-9 $%*+\\-./:]+', 'g')
+exports.BYTE = new RegExp(byte, 'g')
+exports.NUMERIC = new RegExp(numeric, 'g')
+exports.ALPHANUMERIC = new RegExp(alphanumeric, 'g')
+
+var TEST_KANJI = new RegExp('^' + kanji + '$')
+var TEST_NUMERIC = new RegExp('^' + numeric + '$')
+var TEST_ALPHANUMERIC = new RegExp('^[A-Z0-9 $%*+\\-./:]+$')
+
+exports.testKanji = function testKanji (str) {
+  return TEST_KANJI.test(str)
+}
+
+exports.testNumeric = function testNumeric (str) {
+  return TEST_NUMERIC.test(str)
+}
+
+exports.testAlphanumeric = function testAlphanumeric (str) {
+  return TEST_ALPHANUMERIC.test(str)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/core/segments.js":
+/*!**************************************************!*\
+  !*** ./node_modules/qrcode/lib/core/segments.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+var Mode = __webpack_require__(/*! ./mode */ "./node_modules/qrcode/lib/core/mode.js")
+var NumericData = __webpack_require__(/*! ./numeric-data */ "./node_modules/qrcode/lib/core/numeric-data.js")
+var AlphanumericData = __webpack_require__(/*! ./alphanumeric-data */ "./node_modules/qrcode/lib/core/alphanumeric-data.js")
+var ByteData = __webpack_require__(/*! ./byte-data */ "./node_modules/qrcode/lib/core/byte-data.js")
+var KanjiData = __webpack_require__(/*! ./kanji-data */ "./node_modules/qrcode/lib/core/kanji-data.js")
+var Regex = __webpack_require__(/*! ./regex */ "./node_modules/qrcode/lib/core/regex.js")
+var Utils = __webpack_require__(/*! ./utils */ "./node_modules/qrcode/lib/core/utils.js")
+var dijkstra = __webpack_require__(/*! dijkstrajs */ "./node_modules/dijkstrajs/dijkstra.js")
+
+/**
+ * Returns UTF8 byte length
+ *
+ * @param  {String} str Input string
+ * @return {Number}     Number of byte
+ */
+function getStringByteLength (str) {
+  return unescape(encodeURIComponent(str)).length
+}
+
+/**
+ * Get a list of segments of the specified mode
+ * from a string
+ *
+ * @param  {Mode}   mode Segment mode
+ * @param  {String} str  String to process
+ * @return {Array}       Array of object with segments data
+ */
+function getSegments (regex, mode, str) {
+  var segments = []
+  var result
+
+  while ((result = regex.exec(str)) !== null) {
+    segments.push({
+      data: result[0],
+      index: result.index,
+      mode: mode,
+      length: result[0].length
+    })
+  }
+
+  return segments
+}
+
+/**
+ * Extracts a series of segments with the appropriate
+ * modes from a string
+ *
+ * @param  {String} dataStr Input string
+ * @return {Array}          Array of object with segments data
+ */
+function getSegmentsFromString (dataStr) {
+  var numSegs = getSegments(Regex.NUMERIC, Mode.NUMERIC, dataStr)
+  var alphaNumSegs = getSegments(Regex.ALPHANUMERIC, Mode.ALPHANUMERIC, dataStr)
+  var byteSegs
+  var kanjiSegs
+
+  if (Utils.isKanjiModeEnabled()) {
+    byteSegs = getSegments(Regex.BYTE, Mode.BYTE, dataStr)
+    kanjiSegs = getSegments(Regex.KANJI, Mode.KANJI, dataStr)
+  } else {
+    byteSegs = getSegments(Regex.BYTE_KANJI, Mode.BYTE, dataStr)
+    kanjiSegs = []
+  }
+
+  var segs = numSegs.concat(alphaNumSegs, byteSegs, kanjiSegs)
+
+  return segs
+    .sort(function (s1, s2) {
+      return s1.index - s2.index
+    })
+    .map(function (obj) {
+      return {
+        data: obj.data,
+        mode: obj.mode,
+        length: obj.length
+      }
+    })
+}
+
+/**
+ * Returns how many bits are needed to encode a string of
+ * specified length with the specified mode
+ *
+ * @param  {Number} length String length
+ * @param  {Mode} mode     Segment mode
+ * @return {Number}        Bit length
+ */
+function getSegmentBitsLength (length, mode) {
+  switch (mode) {
+    case Mode.NUMERIC:
+      return NumericData.getBitsLength(length)
+    case Mode.ALPHANUMERIC:
+      return AlphanumericData.getBitsLength(length)
+    case Mode.KANJI:
+      return KanjiData.getBitsLength(length)
+    case Mode.BYTE:
+      return ByteData.getBitsLength(length)
+  }
+}
+
+/**
+ * Merges adjacent segments which have the same mode
+ *
+ * @param  {Array} segs Array of object with segments data
+ * @return {Array}      Array of object with segments data
+ */
+function mergeSegments (segs) {
+  return segs.reduce(function (acc, curr) {
+    var prevSeg = acc.length - 1 >= 0 ? acc[acc.length - 1] : null
+    if (prevSeg && prevSeg.mode === curr.mode) {
+      acc[acc.length - 1].data += curr.data
+      return acc
+    }
+
+    acc.push(curr)
+    return acc
+  }, [])
+}
+
+/**
+ * Generates a list of all possible nodes combination which
+ * will be used to build a segments graph.
+ *
+ * Nodes are divided by groups. Each group will contain a list of all the modes
+ * in which is possible to encode the given text.
+ *
+ * For example the text '12345' can be encoded as Numeric, Alphanumeric or Byte.
+ * The group for '12345' will contain then 3 objects, one for each
+ * possible encoding mode.
+ *
+ * Each node represents a possible segment.
+ *
+ * @param  {Array} segs Array of object with segments data
+ * @return {Array}      Array of object with segments data
+ */
+function buildNodes (segs) {
+  var nodes = []
+  for (var i = 0; i < segs.length; i++) {
+    var seg = segs[i]
+
+    switch (seg.mode) {
+      case Mode.NUMERIC:
+        nodes.push([seg,
+          { data: seg.data, mode: Mode.ALPHANUMERIC, length: seg.length },
+          { data: seg.data, mode: Mode.BYTE, length: seg.length }
+        ])
+        break
+      case Mode.ALPHANUMERIC:
+        nodes.push([seg,
+          { data: seg.data, mode: Mode.BYTE, length: seg.length }
+        ])
+        break
+      case Mode.KANJI:
+        nodes.push([seg,
+          { data: seg.data, mode: Mode.BYTE, length: getStringByteLength(seg.data) }
+        ])
+        break
+      case Mode.BYTE:
+        nodes.push([
+          { data: seg.data, mode: Mode.BYTE, length: getStringByteLength(seg.data) }
+        ])
+    }
+  }
+
+  return nodes
+}
+
+/**
+ * Builds a graph from a list of nodes.
+ * All segments in each node group will be connected with all the segments of
+ * the next group and so on.
+ *
+ * At each connection will be assigned a weight depending on the
+ * segment's byte length.
+ *
+ * @param  {Array} nodes    Array of object with segments data
+ * @param  {Number} version QR Code version
+ * @return {Object}         Graph of all possible segments
+ */
+function buildGraph (nodes, version) {
+  var table = {}
+  var graph = {'start': {}}
+  var prevNodeIds = ['start']
+
+  for (var i = 0; i < nodes.length; i++) {
+    var nodeGroup = nodes[i]
+    var currentNodeIds = []
+
+    for (var j = 0; j < nodeGroup.length; j++) {
+      var node = nodeGroup[j]
+      var key = '' + i + j
+
+      currentNodeIds.push(key)
+      table[key] = { node: node, lastCount: 0 }
+      graph[key] = {}
+
+      for (var n = 0; n < prevNodeIds.length; n++) {
+        var prevNodeId = prevNodeIds[n]
+
+        if (table[prevNodeId] && table[prevNodeId].node.mode === node.mode) {
+          graph[prevNodeId][key] =
+            getSegmentBitsLength(table[prevNodeId].lastCount + node.length, node.mode) -
+            getSegmentBitsLength(table[prevNodeId].lastCount, node.mode)
+
+          table[prevNodeId].lastCount += node.length
+        } else {
+          if (table[prevNodeId]) table[prevNodeId].lastCount = node.length
+
+          graph[prevNodeId][key] = getSegmentBitsLength(node.length, node.mode) +
+            4 + Mode.getCharCountIndicator(node.mode, version) // switch cost
+        }
+      }
+    }
+
+    prevNodeIds = currentNodeIds
+  }
+
+  for (n = 0; n < prevNodeIds.length; n++) {
+    graph[prevNodeIds[n]]['end'] = 0
+  }
+
+  return { map: graph, table: table }
+}
+
+/**
+ * Builds a segment from a specified data and mode.
+ * If a mode is not specified, the more suitable will be used.
+ *
+ * @param  {String} data             Input data
+ * @param  {Mode | String} modesHint Data mode
+ * @return {Segment}                 Segment
+ */
+function buildSingleSegment (data, modesHint) {
+  var mode
+  var bestMode = Mode.getBestModeForData(data)
+
+  mode = Mode.from(modesHint, bestMode)
+
+  // Make sure data can be encoded
+  if (mode !== Mode.BYTE && mode.bit < bestMode.bit) {
+    throw new Error('"' + data + '"' +
+      ' cannot be encoded with mode ' + Mode.toString(mode) +
+      '.\n Suggested mode is: ' + Mode.toString(bestMode))
+  }
+
+  // Use Mode.BYTE if Kanji support is disabled
+  if (mode === Mode.KANJI && !Utils.isKanjiModeEnabled()) {
+    mode = Mode.BYTE
+  }
+
+  switch (mode) {
+    case Mode.NUMERIC:
+      return new NumericData(data)
+
+    case Mode.ALPHANUMERIC:
+      return new AlphanumericData(data)
+
+    case Mode.KANJI:
+      return new KanjiData(data)
+
+    case Mode.BYTE:
+      return new ByteData(data)
+  }
+}
+
+/**
+ * Builds a list of segments from an array.
+ * Array can contain Strings or Objects with segment's info.
+ *
+ * For each item which is a string, will be generated a segment with the given
+ * string and the more appropriate encoding mode.
+ *
+ * For each item which is an object, will be generated a segment with the given
+ * data and mode.
+ * Objects must contain at least the property "data".
+ * If property "mode" is not present, the more suitable mode will be used.
+ *
+ * @param  {Array} array Array of objects with segments data
+ * @return {Array}       Array of Segments
+ */
+exports.fromArray = function fromArray (array) {
+  return array.reduce(function (acc, seg) {
+    if (typeof seg === 'string') {
+      acc.push(buildSingleSegment(seg, null))
+    } else if (seg.data) {
+      acc.push(buildSingleSegment(seg.data, seg.mode))
+    }
+
+    return acc
+  }, [])
+}
+
+/**
+ * Builds an optimized sequence of segments from a string,
+ * which will produce the shortest possible bitstream.
+ *
+ * @param  {String} data    Input string
+ * @param  {Number} version QR Code version
+ * @return {Array}          Array of segments
+ */
+exports.fromString = function fromString (data, version) {
+  var segs = getSegmentsFromString(data, Utils.isKanjiModeEnabled())
+
+  var nodes = buildNodes(segs)
+  var graph = buildGraph(nodes, version)
+  var path = dijkstra.find_path(graph.map, 'start', 'end')
+
+  var optimizedSegs = []
+  for (var i = 1; i < path.length - 1; i++) {
+    optimizedSegs.push(graph.table[path[i]].node)
+  }
+
+  return exports.fromArray(mergeSegments(optimizedSegs))
+}
+
+/**
+ * Splits a string in various segments with the modes which
+ * best represent their content.
+ * The produced segments are far from being optimized.
+ * The output of this function is only used to estimate a QR Code version
+ * which may contain the data.
+ *
+ * @param  {string} data Input string
+ * @return {Array}       Array of segments
+ */
+exports.rawSplit = function rawSplit (data) {
+  return exports.fromArray(
+    getSegmentsFromString(data, Utils.isKanjiModeEnabled())
+  )
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/core/utils.js":
+/*!***********************************************!*\
+  !*** ./node_modules/qrcode/lib/core/utils.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+var toSJISFunction
+var CODEWORDS_COUNT = [
+  0, // Not used
+  26, 44, 70, 100, 134, 172, 196, 242, 292, 346,
+  404, 466, 532, 581, 655, 733, 815, 901, 991, 1085,
+  1156, 1258, 1364, 1474, 1588, 1706, 1828, 1921, 2051, 2185,
+  2323, 2465, 2611, 2761, 2876, 3034, 3196, 3362, 3532, 3706
+]
+
+/**
+ * Returns the QR Code size for the specified version
+ *
+ * @param  {Number} version QR Code version
+ * @return {Number}         size of QR code
+ */
+exports.getSymbolSize = function getSymbolSize (version) {
+  if (!version) throw new Error('"version" cannot be null or undefined')
+  if (version < 1 || version > 40) throw new Error('"version" should be in range from 1 to 40')
+  return version * 4 + 17
+}
+
+/**
+ * Returns the total number of codewords used to store data and EC information.
+ *
+ * @param  {Number} version QR Code version
+ * @return {Number}         Data length in bits
+ */
+exports.getSymbolTotalCodewords = function getSymbolTotalCodewords (version) {
+  return CODEWORDS_COUNT[version]
+}
+
+/**
+ * Encode data with Bose-Chaudhuri-Hocquenghem
+ *
+ * @param  {Number} data Value to encode
+ * @return {Number}      Encoded value
+ */
+exports.getBCHDigit = function (data) {
+  var digit = 0
+
+  while (data !== 0) {
+    digit++
+    data >>>= 1
+  }
+
+  return digit
+}
+
+exports.setToSJISFunction = function setToSJISFunction (f) {
+  if (typeof f !== 'function') {
+    throw new Error('"toSJISFunc" is not a valid function.')
+  }
+
+  toSJISFunction = f
+}
+
+exports.isKanjiModeEnabled = function () {
+  return typeof toSJISFunction !== 'undefined'
+}
+
+exports.toSJIS = function toSJIS (kanji) {
+  return toSJISFunction(kanji)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/core/version-check.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/qrcode/lib/core/version-check.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+/**
+ * Check if QR Code version is valid
+ *
+ * @param  {Number}  version QR Code version
+ * @return {Boolean}         true if valid version, false otherwise
+ */
+exports.isValid = function isValid (version) {
+  return !isNaN(version) && version >= 1 && version <= 40
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/core/version.js":
+/*!*************************************************!*\
+  !*** ./node_modules/qrcode/lib/core/version.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+var Utils = __webpack_require__(/*! ./utils */ "./node_modules/qrcode/lib/core/utils.js")
+var ECCode = __webpack_require__(/*! ./error-correction-code */ "./node_modules/qrcode/lib/core/error-correction-code.js")
+var ECLevel = __webpack_require__(/*! ./error-correction-level */ "./node_modules/qrcode/lib/core/error-correction-level.js")
+var Mode = __webpack_require__(/*! ./mode */ "./node_modules/qrcode/lib/core/mode.js")
+var VersionCheck = __webpack_require__(/*! ./version-check */ "./node_modules/qrcode/lib/core/version-check.js")
+var isArray = __webpack_require__(/*! isarray */ "./node_modules/qrcode/node_modules/isarray/index.js")
+
+// Generator polynomial used to encode version information
+var G18 = (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0)
+var G18_BCH = Utils.getBCHDigit(G18)
+
+function getBestVersionForDataLength (mode, length, errorCorrectionLevel) {
+  for (var currentVersion = 1; currentVersion <= 40; currentVersion++) {
+    if (length <= exports.getCapacity(currentVersion, errorCorrectionLevel, mode)) {
+      return currentVersion
+    }
+  }
+
+  return undefined
+}
+
+function getReservedBitsCount (mode, version) {
+  // Character count indicator + mode indicator bits
+  return Mode.getCharCountIndicator(mode, version) + 4
+}
+
+function getTotalBitsFromDataArray (segments, version) {
+  var totalBits = 0
+
+  segments.forEach(function (data) {
+    var reservedBits = getReservedBitsCount(data.mode, version)
+    totalBits += reservedBits + data.getBitsLength()
+  })
+
+  return totalBits
+}
+
+function getBestVersionForMixedData (segments, errorCorrectionLevel) {
+  for (var currentVersion = 1; currentVersion <= 40; currentVersion++) {
+    var length = getTotalBitsFromDataArray(segments, currentVersion)
+    if (length <= exports.getCapacity(currentVersion, errorCorrectionLevel, Mode.MIXED)) {
+      return currentVersion
+    }
+  }
+
+  return undefined
+}
+
+/**
+ * Returns version number from a value.
+ * If value is not a valid version, returns defaultValue
+ *
+ * @param  {Number|String} value        QR Code version
+ * @param  {Number}        defaultValue Fallback value
+ * @return {Number}                     QR Code version number
+ */
+exports.from = function from (value, defaultValue) {
+  if (VersionCheck.isValid(value)) {
+    return parseInt(value, 10)
+  }
+
+  return defaultValue
+}
+
+/**
+ * Returns how much data can be stored with the specified QR code version
+ * and error correction level
+ *
+ * @param  {Number} version              QR Code version (1-40)
+ * @param  {Number} errorCorrectionLevel Error correction level
+ * @param  {Mode}   mode                 Data mode
+ * @return {Number}                      Quantity of storable data
+ */
+exports.getCapacity = function getCapacity (version, errorCorrectionLevel, mode) {
+  if (!VersionCheck.isValid(version)) {
+    throw new Error('Invalid QR Code version')
+  }
+
+  // Use Byte mode as default
+  if (typeof mode === 'undefined') mode = Mode.BYTE
+
+  // Total codewords for this QR code version (Data + Error correction)
+  var totalCodewords = Utils.getSymbolTotalCodewords(version)
+
+  // Total number of error correction codewords
+  var ecTotalCodewords = ECCode.getTotalCodewordsCount(version, errorCorrectionLevel)
+
+  // Total number of data codewords
+  var dataTotalCodewordsBits = (totalCodewords - ecTotalCodewords) * 8
+
+  if (mode === Mode.MIXED) return dataTotalCodewordsBits
+
+  var usableBits = dataTotalCodewordsBits - getReservedBitsCount(mode, version)
+
+  // Return max number of storable codewords
+  switch (mode) {
+    case Mode.NUMERIC:
+      return Math.floor((usableBits / 10) * 3)
+
+    case Mode.ALPHANUMERIC:
+      return Math.floor((usableBits / 11) * 2)
+
+    case Mode.KANJI:
+      return Math.floor(usableBits / 13)
+
+    case Mode.BYTE:
+    default:
+      return Math.floor(usableBits / 8)
+  }
+}
+
+/**
+ * Returns the minimum version needed to contain the amount of data
+ *
+ * @param  {Segment} data                    Segment of data
+ * @param  {Number} [errorCorrectionLevel=H] Error correction level
+ * @param  {Mode} mode                       Data mode
+ * @return {Number}                          QR Code version
+ */
+exports.getBestVersionForData = function getBestVersionForData (data, errorCorrectionLevel) {
+  var seg
+
+  var ecl = ECLevel.from(errorCorrectionLevel, ECLevel.M)
+
+  if (isArray(data)) {
+    if (data.length > 1) {
+      return getBestVersionForMixedData(data, ecl)
+    }
+
+    if (data.length === 0) {
+      return 1
+    }
+
+    seg = data[0]
+  } else {
+    seg = data
+  }
+
+  return getBestVersionForDataLength(seg.mode, seg.getLength(), ecl)
+}
+
+/**
+ * Returns version information with relative error correction bits
+ *
+ * The version information is included in QR Code symbols of version 7 or larger.
+ * It consists of an 18-bit sequence containing 6 data bits,
+ * with 12 error correction bits calculated using the (18, 6) Golay code.
+ *
+ * @param  {Number} version QR Code version
+ * @return {Number}         Encoded version info bits
+ */
+exports.getEncodedBits = function getEncodedBits (version) {
+  if (!VersionCheck.isValid(version) || version < 7) {
+    throw new Error('Invalid QR Code version')
+  }
+
+  var d = version << 12
+
+  while (Utils.getBCHDigit(d) - G18_BCH >= 0) {
+    d ^= (G18 << (Utils.getBCHDigit(d) - G18_BCH))
+  }
+
+  return (version << 12) | d
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/renderer/canvas.js":
+/*!****************************************************!*\
+  !*** ./node_modules/qrcode/lib/renderer/canvas.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+var Utils = __webpack_require__(/*! ./utils */ "./node_modules/qrcode/lib/renderer/utils.js")
+
+function clearCanvas (ctx, canvas, size) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+  if (!canvas.style) canvas.style = {}
+  canvas.height = size
+  canvas.width = size
+  canvas.style.height = size + 'px'
+  canvas.style.width = size + 'px'
+}
+
+function getCanvasElement () {
+  try {
+    return document.createElement('canvas')
+  } catch (e) {
+    throw new Error('You need to specify a canvas element')
+  }
+}
+
+exports.render = function render (qrData, canvas, options) {
+  var opts = options
+  var canvasEl = canvas
+
+  if (typeof opts === 'undefined' && (!canvas || !canvas.getContext)) {
+    opts = canvas
+    canvas = undefined
+  }
+
+  if (!canvas) {
+    canvasEl = getCanvasElement()
+  }
+
+  opts = Utils.getOptions(opts)
+  var size = Utils.getImageWidth(qrData.modules.size, opts)
+
+  var ctx = canvasEl.getContext('2d')
+  var image = ctx.createImageData(size, size)
+  Utils.qrToImageData(image.data, qrData, opts)
+
+  clearCanvas(ctx, canvasEl, size)
+  ctx.putImageData(image, 0, 0)
+
+  return canvasEl
+}
+
+exports.renderToDataURL = function renderToDataURL (qrData, canvas, options) {
+  var opts = options
+
+  if (typeof opts === 'undefined' && (!canvas || !canvas.getContext)) {
+    opts = canvas
+    canvas = undefined
+  }
+
+  if (!opts) opts = {}
+
+  var canvasEl = exports.render(qrData, canvas, opts)
+
+  var type = opts.type || 'image/png'
+  var rendererOpts = opts.rendererOpts || {}
+
+  return canvasEl.toDataURL(type, rendererOpts.quality)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/renderer/svg-tag.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/qrcode/lib/renderer/svg-tag.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+var Utils = __webpack_require__(/*! ./utils */ "./node_modules/qrcode/lib/renderer/utils.js")
+
+function getColorAttrib (color, attrib) {
+  var alpha = color.a / 255
+  var str = attrib + '="' + color.hex + '"'
+
+  return alpha < 1
+    ? str + ' ' + attrib + '-opacity="' + alpha.toFixed(2).slice(1) + '"'
+    : str
+}
+
+function svgCmd (cmd, x, y) {
+  var str = cmd + x
+  if (typeof y !== 'undefined') str += ' ' + y
+
+  return str
+}
+
+function qrToPath (data, size, margin) {
+  var path = ''
+  var moveBy = 0
+  var newRow = false
+  var lineLength = 0
+
+  for (var i = 0; i < data.length; i++) {
+    var col = Math.floor(i % size)
+    var row = Math.floor(i / size)
+
+    if (!col && !newRow) newRow = true
+
+    if (data[i]) {
+      lineLength++
+
+      if (!(i > 0 && col > 0 && data[i - 1])) {
+        path += newRow
+          ? svgCmd('M', col + margin, 0.5 + row + margin)
+          : svgCmd('m', moveBy, 0)
+
+        moveBy = 0
+        newRow = false
+      }
+
+      if (!(col + 1 < size && data[i + 1])) {
+        path += svgCmd('h', lineLength)
+        lineLength = 0
+      }
+    } else {
+      moveBy++
+    }
+  }
+
+  return path
+}
+
+exports.render = function render (qrData, options, cb) {
+  var opts = Utils.getOptions(options)
+  var size = qrData.modules.size
+  var data = qrData.modules.data
+  var qrcodesize = size + opts.margin * 2
+
+  var bg = !opts.color.light.a
+    ? ''
+    : '<path ' + getColorAttrib(opts.color.light, 'fill') +
+      ' d="M0 0h' + qrcodesize + 'v' + qrcodesize + 'H0z"/>'
+
+  var path =
+    '<path ' + getColorAttrib(opts.color.dark, 'stroke') +
+    ' d="' + qrToPath(data, size, opts.margin) + '"/>'
+
+  var viewBox = 'viewBox="' + '0 0 ' + qrcodesize + ' ' + qrcodesize + '"'
+
+  var width = !opts.width ? '' : 'width="' + opts.width + '" height="' + opts.width + '" '
+
+  var svgTag = '<svg xmlns="http://www.w3.org/2000/svg" ' + width + viewBox + ' shape-rendering="crispEdges">' + bg + path + '</svg>\n'
+
+  if (typeof cb === 'function') {
+    cb(null, svgTag)
+  }
+
+  return svgTag
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/renderer/utils.js":
+/*!***************************************************!*\
+  !*** ./node_modules/qrcode/lib/renderer/utils.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+function hex2rgba (hex) {
+  if (typeof hex === 'number') {
+    hex = hex.toString()
+  }
+
+  if (typeof hex !== 'string') {
+    throw new Error('Color should be defined as hex string')
+  }
+
+  var hexCode = hex.slice().replace('#', '').split('')
+  if (hexCode.length < 3 || hexCode.length === 5 || hexCode.length > 8) {
+    throw new Error('Invalid hex color: ' + hex)
+  }
+
+  // Convert from short to long form (fff -> ffffff)
+  if (hexCode.length === 3 || hexCode.length === 4) {
+    hexCode = Array.prototype.concat.apply([], hexCode.map(function (c) {
+      return [c, c]
+    }))
+  }
+
+  // Add default alpha value
+  if (hexCode.length === 6) hexCode.push('F', 'F')
+
+  var hexValue = parseInt(hexCode.join(''), 16)
+
+  return {
+    r: (hexValue >> 24) & 255,
+    g: (hexValue >> 16) & 255,
+    b: (hexValue >> 8) & 255,
+    a: hexValue & 255,
+    hex: '#' + hexCode.slice(0, 6).join('')
+  }
+}
+
+exports.getOptions = function getOptions (options) {
+  if (!options) options = {}
+  if (!options.color) options.color = {}
+
+  var margin = typeof options.margin === 'undefined' ||
+    options.margin === null ||
+    options.margin < 0 ? 4 : options.margin
+
+  var width = options.width && options.width >= 21 ? options.width : undefined
+  var scale = options.scale || 4
+
+  return {
+    width: width,
+    scale: width ? 4 : scale,
+    margin: margin,
+    color: {
+      dark: hex2rgba(options.color.dark || '#000000ff'),
+      light: hex2rgba(options.color.light || '#ffffffff')
+    },
+    type: options.type,
+    rendererOpts: options.rendererOpts || {}
+  }
+}
+
+exports.getScale = function getScale (qrSize, opts) {
+  return opts.width && opts.width >= qrSize + opts.margin * 2
+    ? opts.width / (qrSize + opts.margin * 2)
+    : opts.scale
+}
+
+exports.getImageWidth = function getImageWidth (qrSize, opts) {
+  var scale = exports.getScale(qrSize, opts)
+  return Math.floor((qrSize + opts.margin * 2) * scale)
+}
+
+exports.qrToImageData = function qrToImageData (imgData, qr, opts) {
+  var size = qr.modules.size
+  var data = qr.modules.data
+  var scale = exports.getScale(size, opts)
+  var symbolSize = Math.floor((size + opts.margin * 2) * scale)
+  var scaledMargin = opts.margin * scale
+  var palette = [opts.color.light, opts.color.dark]
+
+  for (var i = 0; i < symbolSize; i++) {
+    for (var j = 0; j < symbolSize; j++) {
+      var posDst = (i * symbolSize + j) * 4
+      var pxColor = opts.color.light
+
+      if (i >= scaledMargin && j >= scaledMargin &&
+        i < symbolSize - scaledMargin && j < symbolSize - scaledMargin) {
+        var iSrc = Math.floor((i - scaledMargin) / scale)
+        var jSrc = Math.floor((j - scaledMargin) / scale)
+        pxColor = palette[data[iSrc * size + jSrc] ? 1 : 0]
+      }
+
+      imgData[posDst++] = pxColor.r
+      imgData[posDst++] = pxColor.g
+      imgData[posDst++] = pxColor.b
+      imgData[posDst] = pxColor.a
+    }
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/lib/utils/typedarray-buffer.js":
+/*!************************************************************!*\
+  !*** ./node_modules/qrcode/lib/utils/typedarray-buffer.js ***!
+  \************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+/**
+ * Implementation of a subset of node.js Buffer methods for the browser.
+ * Based on https://github.com/feross/buffer
+ */
+
+/* eslint-disable no-proto */
+
+
+
+var isArray = __webpack_require__(/*! isarray */ "./node_modules/qrcode/node_modules/isarray/index.js")
+
+function typedArraySupport () {
+  // Can typed array instances be augmented?
+  try {
+    var arr = new Uint8Array(1)
+    arr.__proto__ = {__proto__: Uint8Array.prototype, foo: function () { return 42 }}
+    return arr.foo() === 42
+  } catch (e) {
+    return false
+  }
+}
+
+Buffer.TYPED_ARRAY_SUPPORT = typedArraySupport()
+
+var K_MAX_LENGTH = Buffer.TYPED_ARRAY_SUPPORT
+    ? 0x7fffffff
+    : 0x3fffffff
+
+function Buffer (arg, offset, length) {
+  if (!Buffer.TYPED_ARRAY_SUPPORT && !(this instanceof Buffer)) {
+    return new Buffer(arg, offset, length)
+  }
+
+  if (typeof arg === 'number') {
+    return allocUnsafe(this, arg)
+  }
+
+  return from(this, arg, offset, length)
+}
+
+if (Buffer.TYPED_ARRAY_SUPPORT) {
+  Buffer.prototype.__proto__ = Uint8Array.prototype
+  Buffer.__proto__ = Uint8Array
+
+  // Fix subarray() in ES2016. See: https://github.com/feross/buffer/pull/97
+  if (typeof Symbol !== 'undefined' && Symbol.species &&
+      Buffer[Symbol.species] === Buffer) {
+    Object.defineProperty(Buffer, Symbol.species, {
+      value: null,
+      configurable: true,
+      enumerable: false,
+      writable: false
+    })
+  }
+}
+
+function checked (length) {
+  // Note: cannot use `length < K_MAX_LENGTH` here because that fails when
+  // length is NaN (which is otherwise coerced to zero.)
+  if (length >= K_MAX_LENGTH) {
+    throw new RangeError('Attempt to allocate Buffer larger than maximum ' +
+                         'size: 0x' + K_MAX_LENGTH.toString(16) + ' bytes')
+  }
+  return length | 0
+}
+
+function isnan (val) {
+  return val !== val // eslint-disable-line no-self-compare
+}
+
+function createBuffer (that, length) {
+  var buf
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    buf = new Uint8Array(length)
+    buf.__proto__ = Buffer.prototype
+  } else {
+    // Fallback: Return an object instance of the Buffer class
+    buf = that
+    if (buf === null) {
+      buf = new Buffer(length)
+    }
+    buf.length = length
+  }
+
+  return buf
+}
+
+function allocUnsafe (that, size) {
+  var buf = createBuffer(that, size < 0 ? 0 : checked(size) | 0)
+
+  if (!Buffer.TYPED_ARRAY_SUPPORT) {
+    for (var i = 0; i < size; ++i) {
+      buf[i] = 0
+    }
+  }
+
+  return buf
+}
+
+function fromString (that, string) {
+  var length = byteLength(string) | 0
+  var buf = createBuffer(that, length)
+
+  var actual = buf.write(string)
+
+  if (actual !== length) {
+    // Writing a hex string, for example, that contains invalid characters will
+    // cause everything after the first invalid character to be ignored. (e.g.
+    // 'abxxcd' will be treated as 'ab')
+    buf = buf.slice(0, actual)
+  }
+
+  return buf
+}
+
+function fromArrayLike (that, array) {
+  var length = array.length < 0 ? 0 : checked(array.length) | 0
+  var buf = createBuffer(that, length)
+  for (var i = 0; i < length; i += 1) {
+    buf[i] = array[i] & 255
+  }
+  return buf
+}
+
+function fromArrayBuffer (that, array, byteOffset, length) {
+  if (byteOffset < 0 || array.byteLength < byteOffset) {
+    throw new RangeError('\'offset\' is out of bounds')
+  }
+
+  if (array.byteLength < byteOffset + (length || 0)) {
+    throw new RangeError('\'length\' is out of bounds')
+  }
+
+  var buf
+  if (byteOffset === undefined && length === undefined) {
+    buf = new Uint8Array(array)
+  } else if (length === undefined) {
+    buf = new Uint8Array(array, byteOffset)
+  } else {
+    buf = new Uint8Array(array, byteOffset, length)
+  }
+
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    // Return an augmented `Uint8Array` instance, for best performance
+    buf.__proto__ = Buffer.prototype
+  } else {
+    // Fallback: Return an object instance of the Buffer class
+    buf = fromArrayLike(that, buf)
+  }
+
+  return buf
+}
+
+function fromObject (that, obj) {
+  if (Buffer.isBuffer(obj)) {
+    var len = checked(obj.length) | 0
+    var buf = createBuffer(that, len)
+
+    if (buf.length === 0) {
+      return buf
+    }
+
+    obj.copy(buf, 0, 0, len)
+    return buf
+  }
+
+  if (obj) {
+    if ((typeof ArrayBuffer !== 'undefined' &&
+        obj.buffer instanceof ArrayBuffer) || 'length' in obj) {
+      if (typeof obj.length !== 'number' || isnan(obj.length)) {
+        return createBuffer(that, 0)
+      }
+      return fromArrayLike(that, obj)
+    }
+
+    if (obj.type === 'Buffer' && Array.isArray(obj.data)) {
+      return fromArrayLike(that, obj.data)
+    }
+  }
+
+  throw new TypeError('First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.')
+}
+
+function utf8ToBytes (string, units) {
+  units = units || Infinity
+  var codePoint
+  var length = string.length
+  var leadSurrogate = null
+  var bytes = []
+
+  for (var i = 0; i < length; ++i) {
+    codePoint = string.charCodeAt(i)
+
+    // is surrogate component
+    if (codePoint > 0xD7FF && codePoint < 0xE000) {
+      // last char was a lead
+      if (!leadSurrogate) {
+        // no lead yet
+        if (codePoint > 0xDBFF) {
+          // unexpected trail
+          if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+          continue
+        } else if (i + 1 === length) {
+          // unpaired lead
+          if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+          continue
+        }
+
+        // valid lead
+        leadSurrogate = codePoint
+
+        continue
+      }
+
+      // 2 leads in a row
+      if (codePoint < 0xDC00) {
+        if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+        leadSurrogate = codePoint
+        continue
+      }
+
+      // valid surrogate pair
+      codePoint = (leadSurrogate - 0xD800 << 10 | codePoint - 0xDC00) + 0x10000
+    } else if (leadSurrogate) {
+      // valid bmp char, but last char was a lead
+      if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+    }
+
+    leadSurrogate = null
+
+    // encode utf8
+    if (codePoint < 0x80) {
+      if ((units -= 1) < 0) break
+      bytes.push(codePoint)
+    } else if (codePoint < 0x800) {
+      if ((units -= 2) < 0) break
+      bytes.push(
+        codePoint >> 0x6 | 0xC0,
+        codePoint & 0x3F | 0x80
+      )
+    } else if (codePoint < 0x10000) {
+      if ((units -= 3) < 0) break
+      bytes.push(
+        codePoint >> 0xC | 0xE0,
+        codePoint >> 0x6 & 0x3F | 0x80,
+        codePoint & 0x3F | 0x80
+      )
+    } else if (codePoint < 0x110000) {
+      if ((units -= 4) < 0) break
+      bytes.push(
+        codePoint >> 0x12 | 0xF0,
+        codePoint >> 0xC & 0x3F | 0x80,
+        codePoint >> 0x6 & 0x3F | 0x80,
+        codePoint & 0x3F | 0x80
+      )
+    } else {
+      throw new Error('Invalid code point')
+    }
+  }
+
+  return bytes
+}
+
+function byteLength (string) {
+  if (Buffer.isBuffer(string)) {
+    return string.length
+  }
+  if (typeof ArrayBuffer !== 'undefined' && typeof ArrayBuffer.isView === 'function' &&
+      (ArrayBuffer.isView(string) || string instanceof ArrayBuffer)) {
+    return string.byteLength
+  }
+  if (typeof string !== 'string') {
+    string = '' + string
+  }
+
+  var len = string.length
+  if (len === 0) return 0
+
+  return utf8ToBytes(string).length
+}
+
+function blitBuffer (src, dst, offset, length) {
+  for (var i = 0; i < length; ++i) {
+    if ((i + offset >= dst.length) || (i >= src.length)) break
+    dst[i + offset] = src[i]
+  }
+  return i
+}
+
+function utf8Write (buf, string, offset, length) {
+  return blitBuffer(utf8ToBytes(string, buf.length - offset), buf, offset, length)
+}
+
+function from (that, value, offset, length) {
+  if (typeof value === 'number') {
+    throw new TypeError('"value" argument must not be a number')
+  }
+
+  if (typeof ArrayBuffer !== 'undefined' && value instanceof ArrayBuffer) {
+    return fromArrayBuffer(that, value, offset, length)
+  }
+
+  if (typeof value === 'string') {
+    return fromString(that, value, offset)
+  }
+
+  return fromObject(that, value)
+}
+
+Buffer.prototype.write = function write (string, offset, length) {
+  // Buffer#write(string)
+  if (offset === undefined) {
+    length = this.length
+    offset = 0
+  // Buffer#write(string, encoding)
+  } else if (length === undefined && typeof offset === 'string') {
+    length = this.length
+    offset = 0
+  // Buffer#write(string, offset[, length])
+  } else if (isFinite(offset)) {
+    offset = offset | 0
+    if (isFinite(length)) {
+      length = length | 0
+    } else {
+      length = undefined
+    }
+  }
+
+  var remaining = this.length - offset
+  if (length === undefined || length > remaining) length = remaining
+
+  if ((string.length > 0 && (length < 0 || offset < 0)) || offset > this.length) {
+    throw new RangeError('Attempt to write outside buffer bounds')
+  }
+
+  return utf8Write(this, string, offset, length)
+}
+
+Buffer.prototype.slice = function slice (start, end) {
+  var len = this.length
+  start = ~~start
+  end = end === undefined ? len : ~~end
+
+  if (start < 0) {
+    start += len
+    if (start < 0) start = 0
+  } else if (start > len) {
+    start = len
+  }
+
+  if (end < 0) {
+    end += len
+    if (end < 0) end = 0
+  } else if (end > len) {
+    end = len
+  }
+
+  if (end < start) end = start
+
+  var newBuf
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    newBuf = this.subarray(start, end)
+    // Return an augmented `Uint8Array` instance
+    newBuf.__proto__ = Buffer.prototype
+  } else {
+    var sliceLen = end - start
+    newBuf = new Buffer(sliceLen, undefined)
+    for (var i = 0; i < sliceLen; ++i) {
+      newBuf[i] = this[i + start]
+    }
+  }
+
+  return newBuf
+}
+
+Buffer.prototype.copy = function copy (target, targetStart, start, end) {
+  if (!start) start = 0
+  if (!end && end !== 0) end = this.length
+  if (targetStart >= target.length) targetStart = target.length
+  if (!targetStart) targetStart = 0
+  if (end > 0 && end < start) end = start
+
+  // Copy 0 bytes; we're done
+  if (end === start) return 0
+  if (target.length === 0 || this.length === 0) return 0
+
+  // Fatal error conditions
+  if (targetStart < 0) {
+    throw new RangeError('targetStart out of bounds')
+  }
+  if (start < 0 || start >= this.length) throw new RangeError('sourceStart out of bounds')
+  if (end < 0) throw new RangeError('sourceEnd out of bounds')
+
+  // Are we oob?
+  if (end > this.length) end = this.length
+  if (target.length - targetStart < end - start) {
+    end = target.length - targetStart + start
+  }
+
+  var len = end - start
+  var i
+
+  if (this === target && start < targetStart && targetStart < end) {
+    // descending copy from end
+    for (i = len - 1; i >= 0; --i) {
+      target[i + targetStart] = this[i + start]
+    }
+  } else if (len < 1000 || !Buffer.TYPED_ARRAY_SUPPORT) {
+    // ascending copy from start
+    for (i = 0; i < len; ++i) {
+      target[i + targetStart] = this[i + start]
+    }
+  } else {
+    Uint8Array.prototype.set.call(
+      target,
+      this.subarray(start, start + len),
+      targetStart
+    )
+  }
+
+  return len
+}
+
+Buffer.prototype.fill = function fill (val, start, end) {
+  // Handle string cases:
+  if (typeof val === 'string') {
+    if (typeof start === 'string') {
+      start = 0
+      end = this.length
+    } else if (typeof end === 'string') {
+      end = this.length
+    }
+    if (val.length === 1) {
+      var code = val.charCodeAt(0)
+      if (code < 256) {
+        val = code
+      }
+    }
+  } else if (typeof val === 'number') {
+    val = val & 255
+  }
+
+  // Invalid ranges are not set to a default, so can range check early.
+  if (start < 0 || this.length < start || this.length < end) {
+    throw new RangeError('Out of range index')
+  }
+
+  if (end <= start) {
+    return this
+  }
+
+  start = start >>> 0
+  end = end === undefined ? this.length : end >>> 0
+
+  if (!val) val = 0
+
+  var i
+  if (typeof val === 'number') {
+    for (i = start; i < end; ++i) {
+      this[i] = val
+    }
+  } else {
+    var bytes = Buffer.isBuffer(val)
+      ? val
+      : new Buffer(val)
+    var len = bytes.length
+    for (i = 0; i < end - start; ++i) {
+      this[i + start] = bytes[i % len]
+    }
+  }
+
+  return this
+}
+
+Buffer.concat = function concat (list, length) {
+  if (!isArray(list)) {
+    throw new TypeError('"list" argument must be an Array of Buffers')
+  }
+
+  if (list.length === 0) {
+    return createBuffer(null, 0)
+  }
+
+  var i
+  if (length === undefined) {
+    length = 0
+    for (i = 0; i < list.length; ++i) {
+      length += list[i].length
+    }
+  }
+
+  var buffer = allocUnsafe(null, length)
+  var pos = 0
+  for (i = 0; i < list.length; ++i) {
+    var buf = list[i]
+    if (!Buffer.isBuffer(buf)) {
+      throw new TypeError('"list" argument must be an Array of Buffers')
+    }
+    buf.copy(buffer, pos)
+    pos += buf.length
+  }
+  return buffer
+}
+
+Buffer.byteLength = byteLength
+
+Buffer.prototype._isBuffer = true
+Buffer.isBuffer = function isBuffer (b) {
+  return !!(b != null && b._isBuffer)
+}
+
+module.exports.alloc = function (size) {
+  var buffer = new Buffer(size)
+  buffer.fill(0)
+  return buffer
+}
+
+module.exports.from = function (data) {
+  return new Buffer(data)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/node_modules/buffer/index.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/qrcode/node_modules/buffer/index.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+/*!
+ * The buffer module from node.js, for the browser.
+ *
+ * @author   Feross Aboukhadijeh <https://feross.org>
+ * @license  MIT
+ */
+/* eslint-disable no-proto */
+
+
+
+var base64 = __webpack_require__(/*! base64-js */ "./node_modules/base64-js/index.js")
+var ieee754 = __webpack_require__(/*! ieee754 */ "./node_modules/ieee754/index.js")
+var customInspectSymbol =
+  (typeof Symbol === 'function' && typeof Symbol['for'] === 'function') // eslint-disable-line dot-notation
+    ? Symbol['for']('nodejs.util.inspect.custom') // eslint-disable-line dot-notation
+    : null
+
+exports.Buffer = Buffer
+exports.SlowBuffer = SlowBuffer
+exports.INSPECT_MAX_BYTES = 50
+
+var K_MAX_LENGTH = 0x7fffffff
+exports.kMaxLength = K_MAX_LENGTH
+
+/**
+ * If `Buffer.TYPED_ARRAY_SUPPORT`:
+ *   === true    Use Uint8Array implementation (fastest)
+ *   === false   Print warning and recommend using `buffer` v4.x which has an Object
+ *               implementation (most compatible, even IE6)
+ *
+ * Browsers that support typed arrays are IE 10+, Firefox 4+, Chrome 7+, Safari 5.1+,
+ * Opera 11.6+, iOS 4.2+.
+ *
+ * We report that the browser does not support typed arrays if the are not subclassable
+ * using __proto__. Firefox 4-29 lacks support for adding new properties to `Uint8Array`
+ * (See: https://bugzilla.mozilla.org/show_bug.cgi?id=695438). IE 10 lacks support
+ * for __proto__ and has a buggy typed array implementation.
+ */
+Buffer.TYPED_ARRAY_SUPPORT = typedArraySupport()
+
+if (!Buffer.TYPED_ARRAY_SUPPORT && typeof console !== 'undefined' &&
+    typeof console.error === 'function') {
+  console.error(
+    'This browser lacks typed array (Uint8Array) support which is required by ' +
+    '`buffer` v5.x. Use `buffer` v4.x if you require old browser support.'
+  )
+}
+
+function typedArraySupport () {
+  // Can typed array instances can be augmented?
+  try {
+    var arr = new Uint8Array(1)
+    var proto = { foo: function () { return 42 } }
+    Object.setPrototypeOf(proto, Uint8Array.prototype)
+    Object.setPrototypeOf(arr, proto)
+    return arr.foo() === 42
+  } catch (e) {
+    return false
+  }
+}
+
+Object.defineProperty(Buffer.prototype, 'parent', {
+  enumerable: true,
+  get: function () {
+    if (!Buffer.isBuffer(this)) return undefined
+    return this.buffer
+  }
+})
+
+Object.defineProperty(Buffer.prototype, 'offset', {
+  enumerable: true,
+  get: function () {
+    if (!Buffer.isBuffer(this)) return undefined
+    return this.byteOffset
+  }
+})
+
+function createBuffer (length) {
+  if (length > K_MAX_LENGTH) {
+    throw new RangeError('The value "' + length + '" is invalid for option "size"')
+  }
+  // Return an augmented `Uint8Array` instance
+  var buf = new Uint8Array(length)
+  Object.setPrototypeOf(buf, Buffer.prototype)
+  return buf
+}
+
+/**
+ * The Buffer constructor returns instances of `Uint8Array` that have their
+ * prototype changed to `Buffer.prototype`. Furthermore, `Buffer` is a subclass of
+ * `Uint8Array`, so the returned instances will have all the node `Buffer` methods
+ * and the `Uint8Array` methods. Square bracket notation works as expected -- it
+ * returns a single octet.
+ *
+ * The `Uint8Array` prototype remains unmodified.
+ */
+
+function Buffer (arg, encodingOrOffset, length) {
+  // Common case.
+  if (typeof arg === 'number') {
+    if (typeof encodingOrOffset === 'string') {
+      throw new TypeError(
+        'The "string" argument must be of type string. Received type number'
+      )
+    }
+    return allocUnsafe(arg)
+  }
+  return from(arg, encodingOrOffset, length)
+}
+
+Buffer.poolSize = 8192 // not used by this implementation
+
+function from (value, encodingOrOffset, length) {
+  if (typeof value === 'string') {
+    return fromString(value, encodingOrOffset)
+  }
+
+  if (ArrayBuffer.isView(value)) {
+    return fromArrayView(value)
+  }
+
+  if (value == null) {
+    throw new TypeError(
+      'The first argument must be one of type string, Buffer, ArrayBuffer, Array, ' +
+      'or Array-like Object. Received type ' + (typeof value)
+    )
+  }
+
+  if (isInstance(value, ArrayBuffer) ||
+      (value && isInstance(value.buffer, ArrayBuffer))) {
+    return fromArrayBuffer(value, encodingOrOffset, length)
+  }
+
+  if (typeof SharedArrayBuffer !== 'undefined' &&
+      (isInstance(value, SharedArrayBuffer) ||
+      (value && isInstance(value.buffer, SharedArrayBuffer)))) {
+    return fromArrayBuffer(value, encodingOrOffset, length)
+  }
+
+  if (typeof value === 'number') {
+    throw new TypeError(
+      'The "value" argument must not be of type number. Received type number'
+    )
+  }
+
+  var valueOf = value.valueOf && value.valueOf()
+  if (valueOf != null && valueOf !== value) {
+    return Buffer.from(valueOf, encodingOrOffset, length)
+  }
+
+  var b = fromObject(value)
+  if (b) return b
+
+  if (typeof Symbol !== 'undefined' && Symbol.toPrimitive != null &&
+      typeof value[Symbol.toPrimitive] === 'function') {
+    return Buffer.from(
+      value[Symbol.toPrimitive]('string'), encodingOrOffset, length
+    )
+  }
+
+  throw new TypeError(
+    'The first argument must be one of type string, Buffer, ArrayBuffer, Array, ' +
+    'or Array-like Object. Received type ' + (typeof value)
+  )
+}
+
+/**
+ * Functionally equivalent to Buffer(arg, encoding) but throws a TypeError
+ * if value is a number.
+ * Buffer.from(str[, encoding])
+ * Buffer.from(array)
+ * Buffer.from(buffer)
+ * Buffer.from(arrayBuffer[, byteOffset[, length]])
+ **/
+Buffer.from = function (value, encodingOrOffset, length) {
+  return from(value, encodingOrOffset, length)
+}
+
+// Note: Change prototype *after* Buffer.from is defined to workaround Chrome bug:
+// https://github.com/feross/buffer/pull/148
+Object.setPrototypeOf(Buffer.prototype, Uint8Array.prototype)
+Object.setPrototypeOf(Buffer, Uint8Array)
+
+function assertSize (size) {
+  if (typeof size !== 'number') {
+    throw new TypeError('"size" argument must be of type number')
+  } else if (size < 0) {
+    throw new RangeError('The value "' + size + '" is invalid for option "size"')
+  }
+}
+
+function alloc (size, fill, encoding) {
+  assertSize(size)
+  if (size <= 0) {
+    return createBuffer(size)
+  }
+  if (fill !== undefined) {
+    // Only pay attention to encoding if it's a string. This
+    // prevents accidentally sending in a number that would
+    // be interpreted as a start offset.
+    return typeof encoding === 'string'
+      ? createBuffer(size).fill(fill, encoding)
+      : createBuffer(size).fill(fill)
+  }
+  return createBuffer(size)
+}
+
+/**
+ * Creates a new filled Buffer instance.
+ * alloc(size[, fill[, encoding]])
+ **/
+Buffer.alloc = function (size, fill, encoding) {
+  return alloc(size, fill, encoding)
+}
+
+function allocUnsafe (size) {
+  assertSize(size)
+  return createBuffer(size < 0 ? 0 : checked(size) | 0)
+}
+
+/**
+ * Equivalent to Buffer(num), by default creates a non-zero-filled Buffer instance.
+ * */
+Buffer.allocUnsafe = function (size) {
+  return allocUnsafe(size)
+}
+/**
+ * Equivalent to SlowBuffer(num), by default creates a non-zero-filled Buffer instance.
+ */
+Buffer.allocUnsafeSlow = function (size) {
+  return allocUnsafe(size)
+}
+
+function fromString (string, encoding) {
+  if (typeof encoding !== 'string' || encoding === '') {
+    encoding = 'utf8'
+  }
+
+  if (!Buffer.isEncoding(encoding)) {
+    throw new TypeError('Unknown encoding: ' + encoding)
+  }
+
+  var length = byteLength(string, encoding) | 0
+  var buf = createBuffer(length)
+
+  var actual = buf.write(string, encoding)
+
+  if (actual !== length) {
+    // Writing a hex string, for example, that contains invalid characters will
+    // cause everything after the first invalid character to be ignored. (e.g.
+    // 'abxxcd' will be treated as 'ab')
+    buf = buf.slice(0, actual)
+  }
+
+  return buf
+}
+
+function fromArrayLike (array) {
+  var length = array.length < 0 ? 0 : checked(array.length) | 0
+  var buf = createBuffer(length)
+  for (var i = 0; i < length; i += 1) {
+    buf[i] = array[i] & 255
+  }
+  return buf
+}
+
+function fromArrayView (arrayView) {
+  if (isInstance(arrayView, Uint8Array)) {
+    var copy = new Uint8Array(arrayView)
+    return fromArrayBuffer(copy.buffer, copy.byteOffset, copy.byteLength)
+  }
+  return fromArrayLike(arrayView)
+}
+
+function fromArrayBuffer (array, byteOffset, length) {
+  if (byteOffset < 0 || array.byteLength < byteOffset) {
+    throw new RangeError('"offset" is outside of buffer bounds')
+  }
+
+  if (array.byteLength < byteOffset + (length || 0)) {
+    throw new RangeError('"length" is outside of buffer bounds')
+  }
+
+  var buf
+  if (byteOffset === undefined && length === undefined) {
+    buf = new Uint8Array(array)
+  } else if (length === undefined) {
+    buf = new Uint8Array(array, byteOffset)
+  } else {
+    buf = new Uint8Array(array, byteOffset, length)
+  }
+
+  // Return an augmented `Uint8Array` instance
+  Object.setPrototypeOf(buf, Buffer.prototype)
+
+  return buf
+}
+
+function fromObject (obj) {
+  if (Buffer.isBuffer(obj)) {
+    var len = checked(obj.length) | 0
+    var buf = createBuffer(len)
+
+    if (buf.length === 0) {
+      return buf
+    }
+
+    obj.copy(buf, 0, 0, len)
+    return buf
+  }
+
+  if (obj.length !== undefined) {
+    if (typeof obj.length !== 'number' || numberIsNaN(obj.length)) {
+      return createBuffer(0)
+    }
+    return fromArrayLike(obj)
+  }
+
+  if (obj.type === 'Buffer' && Array.isArray(obj.data)) {
+    return fromArrayLike(obj.data)
+  }
+}
+
+function checked (length) {
+  // Note: cannot use `length < K_MAX_LENGTH` here because that fails when
+  // length is NaN (which is otherwise coerced to zero.)
+  if (length >= K_MAX_LENGTH) {
+    throw new RangeError('Attempt to allocate Buffer larger than maximum ' +
+                         'size: 0x' + K_MAX_LENGTH.toString(16) + ' bytes')
+  }
+  return length | 0
+}
+
+function SlowBuffer (length) {
+  if (+length != length) { // eslint-disable-line eqeqeq
+    length = 0
+  }
+  return Buffer.alloc(+length)
+}
+
+Buffer.isBuffer = function isBuffer (b) {
+  return b != null && b._isBuffer === true &&
+    b !== Buffer.prototype // so Buffer.isBuffer(Buffer.prototype) will be false
+}
+
+Buffer.compare = function compare (a, b) {
+  if (isInstance(a, Uint8Array)) a = Buffer.from(a, a.offset, a.byteLength)
+  if (isInstance(b, Uint8Array)) b = Buffer.from(b, b.offset, b.byteLength)
+  if (!Buffer.isBuffer(a) || !Buffer.isBuffer(b)) {
+    throw new TypeError(
+      'The "buf1", "buf2" arguments must be one of type Buffer or Uint8Array'
+    )
+  }
+
+  if (a === b) return 0
+
+  var x = a.length
+  var y = b.length
+
+  for (var i = 0, len = Math.min(x, y); i < len; ++i) {
+    if (a[i] !== b[i]) {
+      x = a[i]
+      y = b[i]
+      break
+    }
+  }
+
+  if (x < y) return -1
+  if (y < x) return 1
+  return 0
+}
+
+Buffer.isEncoding = function isEncoding (encoding) {
+  switch (String(encoding).toLowerCase()) {
+    case 'hex':
+    case 'utf8':
+    case 'utf-8':
+    case 'ascii':
+    case 'latin1':
+    case 'binary':
+    case 'base64':
+    case 'ucs2':
+    case 'ucs-2':
+    case 'utf16le':
+    case 'utf-16le':
+      return true
+    default:
+      return false
+  }
+}
+
+Buffer.concat = function concat (list, length) {
+  if (!Array.isArray(list)) {
+    throw new TypeError('"list" argument must be an Array of Buffers')
+  }
+
+  if (list.length === 0) {
+    return Buffer.alloc(0)
+  }
+
+  var i
+  if (length === undefined) {
+    length = 0
+    for (i = 0; i < list.length; ++i) {
+      length += list[i].length
+    }
+  }
+
+  var buffer = Buffer.allocUnsafe(length)
+  var pos = 0
+  for (i = 0; i < list.length; ++i) {
+    var buf = list[i]
+    if (isInstance(buf, Uint8Array)) {
+      if (pos + buf.length > buffer.length) {
+        Buffer.from(buf).copy(buffer, pos)
+      } else {
+        Uint8Array.prototype.set.call(
+          buffer,
+          buf,
+          pos
+        )
+      }
+    } else if (!Buffer.isBuffer(buf)) {
+      throw new TypeError('"list" argument must be an Array of Buffers')
+    } else {
+      buf.copy(buffer, pos)
+    }
+    pos += buf.length
+  }
+  return buffer
+}
+
+function byteLength (string, encoding) {
+  if (Buffer.isBuffer(string)) {
+    return string.length
+  }
+  if (ArrayBuffer.isView(string) || isInstance(string, ArrayBuffer)) {
+    return string.byteLength
+  }
+  if (typeof string !== 'string') {
+    throw new TypeError(
+      'The "string" argument must be one of type string, Buffer, or ArrayBuffer. ' +
+      'Received type ' + typeof string
+    )
+  }
+
+  var len = string.length
+  var mustMatch = (arguments.length > 2 && arguments[2] === true)
+  if (!mustMatch && len === 0) return 0
+
+  // Use a for loop to avoid recursion
+  var loweredCase = false
+  for (;;) {
+    switch (encoding) {
+      case 'ascii':
+      case 'latin1':
+      case 'binary':
+        return len
+      case 'utf8':
+      case 'utf-8':
+        return utf8ToBytes(string).length
+      case 'ucs2':
+      case 'ucs-2':
+      case 'utf16le':
+      case 'utf-16le':
+        return len * 2
+      case 'hex':
+        return len >>> 1
+      case 'base64':
+        return base64ToBytes(string).length
+      default:
+        if (loweredCase) {
+          return mustMatch ? -1 : utf8ToBytes(string).length // assume utf8
+        }
+        encoding = ('' + encoding).toLowerCase()
+        loweredCase = true
+    }
+  }
+}
+Buffer.byteLength = byteLength
+
+function slowToString (encoding, start, end) {
+  var loweredCase = false
+
+  // No need to verify that "this.length <= MAX_UINT32" since it's a read-only
+  // property of a typed array.
+
+  // This behaves neither like String nor Uint8Array in that we set start/end
+  // to their upper/lower bounds if the value passed is out of range.
+  // undefined is handled specially as per ECMA-262 6th Edition,
+  // Section 13.3.3.7 Runtime Semantics: KeyedBindingInitialization.
+  if (start === undefined || start < 0) {
+    start = 0
+  }
+  // Return early if start > this.length. Done here to prevent potential uint32
+  // coercion fail below.
+  if (start > this.length) {
+    return ''
+  }
+
+  if (end === undefined || end > this.length) {
+    end = this.length
+  }
+
+  if (end <= 0) {
+    return ''
+  }
+
+  // Force coercion to uint32. This will also coerce falsey/NaN values to 0.
+  end >>>= 0
+  start >>>= 0
+
+  if (end <= start) {
+    return ''
+  }
+
+  if (!encoding) encoding = 'utf8'
+
+  while (true) {
+    switch (encoding) {
+      case 'hex':
+        return hexSlice(this, start, end)
+
+      case 'utf8':
+      case 'utf-8':
+        return utf8Slice(this, start, end)
+
+      case 'ascii':
+        return asciiSlice(this, start, end)
+
+      case 'latin1':
+      case 'binary':
+        return latin1Slice(this, start, end)
+
+      case 'base64':
+        return base64Slice(this, start, end)
+
+      case 'ucs2':
+      case 'ucs-2':
+      case 'utf16le':
+      case 'utf-16le':
+        return utf16leSlice(this, start, end)
+
+      default:
+        if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding)
+        encoding = (encoding + '').toLowerCase()
+        loweredCase = true
+    }
+  }
+}
+
+// This property is used by `Buffer.isBuffer` (and the `is-buffer` npm package)
+// to detect a Buffer instance. It's not possible to use `instanceof Buffer`
+// reliably in a browserify context because there could be multiple different
+// copies of the 'buffer' package in use. This method works even for Buffer
+// instances that were created from another copy of the `buffer` package.
+// See: https://github.com/feross/buffer/issues/154
+Buffer.prototype._isBuffer = true
+
+function swap (b, n, m) {
+  var i = b[n]
+  b[n] = b[m]
+  b[m] = i
+}
+
+Buffer.prototype.swap16 = function swap16 () {
+  var len = this.length
+  if (len % 2 !== 0) {
+    throw new RangeError('Buffer size must be a multiple of 16-bits')
+  }
+  for (var i = 0; i < len; i += 2) {
+    swap(this, i, i + 1)
+  }
+  return this
+}
+
+Buffer.prototype.swap32 = function swap32 () {
+  var len = this.length
+  if (len % 4 !== 0) {
+    throw new RangeError('Buffer size must be a multiple of 32-bits')
+  }
+  for (var i = 0; i < len; i += 4) {
+    swap(this, i, i + 3)
+    swap(this, i + 1, i + 2)
+  }
+  return this
+}
+
+Buffer.prototype.swap64 = function swap64 () {
+  var len = this.length
+  if (len % 8 !== 0) {
+    throw new RangeError('Buffer size must be a multiple of 64-bits')
+  }
+  for (var i = 0; i < len; i += 8) {
+    swap(this, i, i + 7)
+    swap(this, i + 1, i + 6)
+    swap(this, i + 2, i + 5)
+    swap(this, i + 3, i + 4)
+  }
+  return this
+}
+
+Buffer.prototype.toString = function toString () {
+  var length = this.length
+  if (length === 0) return ''
+  if (arguments.length === 0) return utf8Slice(this, 0, length)
+  return slowToString.apply(this, arguments)
+}
+
+Buffer.prototype.toLocaleString = Buffer.prototype.toString
+
+Buffer.prototype.equals = function equals (b) {
+  if (!Buffer.isBuffer(b)) throw new TypeError('Argument must be a Buffer')
+  if (this === b) return true
+  return Buffer.compare(this, b) === 0
+}
+
+Buffer.prototype.inspect = function inspect () {
+  var str = ''
+  var max = exports.INSPECT_MAX_BYTES
+  str = this.toString('hex', 0, max).replace(/(.{2})/g, '$1 ').trim()
+  if (this.length > max) str += ' ... '
+  return '<Buffer ' + str + '>'
+}
+if (customInspectSymbol) {
+  Buffer.prototype[customInspectSymbol] = Buffer.prototype.inspect
+}
+
+Buffer.prototype.compare = function compare (target, start, end, thisStart, thisEnd) {
+  if (isInstance(target, Uint8Array)) {
+    target = Buffer.from(target, target.offset, target.byteLength)
+  }
+  if (!Buffer.isBuffer(target)) {
+    throw new TypeError(
+      'The "target" argument must be one of type Buffer or Uint8Array. ' +
+      'Received type ' + (typeof target)
+    )
+  }
+
+  if (start === undefined) {
+    start = 0
+  }
+  if (end === undefined) {
+    end = target ? target.length : 0
+  }
+  if (thisStart === undefined) {
+    thisStart = 0
+  }
+  if (thisEnd === undefined) {
+    thisEnd = this.length
+  }
+
+  if (start < 0 || end > target.length || thisStart < 0 || thisEnd > this.length) {
+    throw new RangeError('out of range index')
+  }
+
+  if (thisStart >= thisEnd && start >= end) {
+    return 0
+  }
+  if (thisStart >= thisEnd) {
+    return -1
+  }
+  if (start >= end) {
+    return 1
+  }
+
+  start >>>= 0
+  end >>>= 0
+  thisStart >>>= 0
+  thisEnd >>>= 0
+
+  if (this === target) return 0
+
+  var x = thisEnd - thisStart
+  var y = end - start
+  var len = Math.min(x, y)
+
+  var thisCopy = this.slice(thisStart, thisEnd)
+  var targetCopy = target.slice(start, end)
+
+  for (var i = 0; i < len; ++i) {
+    if (thisCopy[i] !== targetCopy[i]) {
+      x = thisCopy[i]
+      y = targetCopy[i]
+      break
+    }
+  }
+
+  if (x < y) return -1
+  if (y < x) return 1
+  return 0
+}
+
+// Finds either the first index of `val` in `buffer` at offset >= `byteOffset`,
+// OR the last index of `val` in `buffer` at offset <= `byteOffset`.
+//
+// Arguments:
+// - buffer - a Buffer to search
+// - val - a string, Buffer, or number
+// - byteOffset - an index into `buffer`; will be clamped to an int32
+// - encoding - an optional encoding, relevant is val is a string
+// - dir - true for indexOf, false for lastIndexOf
+function bidirectionalIndexOf (buffer, val, byteOffset, encoding, dir) {
+  // Empty buffer means no match
+  if (buffer.length === 0) return -1
+
+  // Normalize byteOffset
+  if (typeof byteOffset === 'string') {
+    encoding = byteOffset
+    byteOffset = 0
+  } else if (byteOffset > 0x7fffffff) {
+    byteOffset = 0x7fffffff
+  } else if (byteOffset < -0x80000000) {
+    byteOffset = -0x80000000
+  }
+  byteOffset = +byteOffset // Coerce to Number.
+  if (numberIsNaN(byteOffset)) {
+    // byteOffset: it it's undefined, null, NaN, "foo", etc, search whole buffer
+    byteOffset = dir ? 0 : (buffer.length - 1)
+  }
+
+  // Normalize byteOffset: negative offsets start from the end of the buffer
+  if (byteOffset < 0) byteOffset = buffer.length + byteOffset
+  if (byteOffset >= buffer.length) {
+    if (dir) return -1
+    else byteOffset = buffer.length - 1
+  } else if (byteOffset < 0) {
+    if (dir) byteOffset = 0
+    else return -1
+  }
+
+  // Normalize val
+  if (typeof val === 'string') {
+    val = Buffer.from(val, encoding)
+  }
+
+  // Finally, search either indexOf (if dir is true) or lastIndexOf
+  if (Buffer.isBuffer(val)) {
+    // Special case: looking for empty string/buffer always fails
+    if (val.length === 0) {
+      return -1
+    }
+    return arrayIndexOf(buffer, val, byteOffset, encoding, dir)
+  } else if (typeof val === 'number') {
+    val = val & 0xFF // Search for a byte value [0-255]
+    if (typeof Uint8Array.prototype.indexOf === 'function') {
+      if (dir) {
+        return Uint8Array.prototype.indexOf.call(buffer, val, byteOffset)
+      } else {
+        return Uint8Array.prototype.lastIndexOf.call(buffer, val, byteOffset)
+      }
+    }
+    return arrayIndexOf(buffer, [val], byteOffset, encoding, dir)
+  }
+
+  throw new TypeError('val must be string, number or Buffer')
+}
+
+function arrayIndexOf (arr, val, byteOffset, encoding, dir) {
+  var indexSize = 1
+  var arrLength = arr.length
+  var valLength = val.length
+
+  if (encoding !== undefined) {
+    encoding = String(encoding).toLowerCase()
+    if (encoding === 'ucs2' || encoding === 'ucs-2' ||
+        encoding === 'utf16le' || encoding === 'utf-16le') {
+      if (arr.length < 2 || val.length < 2) {
+        return -1
+      }
+      indexSize = 2
+      arrLength /= 2
+      valLength /= 2
+      byteOffset /= 2
+    }
+  }
+
+  function read (buf, i) {
+    if (indexSize === 1) {
+      return buf[i]
+    } else {
+      return buf.readUInt16BE(i * indexSize)
+    }
+  }
+
+  var i
+  if (dir) {
+    var foundIndex = -1
+    for (i = byteOffset; i < arrLength; i++) {
+      if (read(arr, i) === read(val, foundIndex === -1 ? 0 : i - foundIndex)) {
+        if (foundIndex === -1) foundIndex = i
+        if (i - foundIndex + 1 === valLength) return foundIndex * indexSize
+      } else {
+        if (foundIndex !== -1) i -= i - foundIndex
+        foundIndex = -1
+      }
+    }
+  } else {
+    if (byteOffset + valLength > arrLength) byteOffset = arrLength - valLength
+    for (i = byteOffset; i >= 0; i--) {
+      var found = true
+      for (var j = 0; j < valLength; j++) {
+        if (read(arr, i + j) !== read(val, j)) {
+          found = false
+          break
+        }
+      }
+      if (found) return i
+    }
+  }
+
+  return -1
+}
+
+Buffer.prototype.includes = function includes (val, byteOffset, encoding) {
+  return this.indexOf(val, byteOffset, encoding) !== -1
+}
+
+Buffer.prototype.indexOf = function indexOf (val, byteOffset, encoding) {
+  return bidirectionalIndexOf(this, val, byteOffset, encoding, true)
+}
+
+Buffer.prototype.lastIndexOf = function lastIndexOf (val, byteOffset, encoding) {
+  return bidirectionalIndexOf(this, val, byteOffset, encoding, false)
+}
+
+function hexWrite (buf, string, offset, length) {
+  offset = Number(offset) || 0
+  var remaining = buf.length - offset
+  if (!length) {
+    length = remaining
+  } else {
+    length = Number(length)
+    if (length > remaining) {
+      length = remaining
+    }
+  }
+
+  var strLen = string.length
+
+  if (length > strLen / 2) {
+    length = strLen / 2
+  }
+  for (var i = 0; i < length; ++i) {
+    var parsed = parseInt(string.substr(i * 2, 2), 16)
+    if (numberIsNaN(parsed)) return i
+    buf[offset + i] = parsed
+  }
+  return i
+}
+
+function utf8Write (buf, string, offset, length) {
+  return blitBuffer(utf8ToBytes(string, buf.length - offset), buf, offset, length)
+}
+
+function asciiWrite (buf, string, offset, length) {
+  return blitBuffer(asciiToBytes(string), buf, offset, length)
+}
+
+function base64Write (buf, string, offset, length) {
+  return blitBuffer(base64ToBytes(string), buf, offset, length)
+}
+
+function ucs2Write (buf, string, offset, length) {
+  return blitBuffer(utf16leToBytes(string, buf.length - offset), buf, offset, length)
+}
+
+Buffer.prototype.write = function write (string, offset, length, encoding) {
+  // Buffer#write(string)
+  if (offset === undefined) {
+    encoding = 'utf8'
+    length = this.length
+    offset = 0
+  // Buffer#write(string, encoding)
+  } else if (length === undefined && typeof offset === 'string') {
+    encoding = offset
+    length = this.length
+    offset = 0
+  // Buffer#write(string, offset[, length][, encoding])
+  } else if (isFinite(offset)) {
+    offset = offset >>> 0
+    if (isFinite(length)) {
+      length = length >>> 0
+      if (encoding === undefined) encoding = 'utf8'
+    } else {
+      encoding = length
+      length = undefined
+    }
+  } else {
+    throw new Error(
+      'Buffer.write(string, encoding, offset[, length]) is no longer supported'
+    )
+  }
+
+  var remaining = this.length - offset
+  if (length === undefined || length > remaining) length = remaining
+
+  if ((string.length > 0 && (length < 0 || offset < 0)) || offset > this.length) {
+    throw new RangeError('Attempt to write outside buffer bounds')
+  }
+
+  if (!encoding) encoding = 'utf8'
+
+  var loweredCase = false
+  for (;;) {
+    switch (encoding) {
+      case 'hex':
+        return hexWrite(this, string, offset, length)
+
+      case 'utf8':
+      case 'utf-8':
+        return utf8Write(this, string, offset, length)
+
+      case 'ascii':
+      case 'latin1':
+      case 'binary':
+        return asciiWrite(this, string, offset, length)
+
+      case 'base64':
+        // Warning: maxLength not taken into account in base64Write
+        return base64Write(this, string, offset, length)
+
+      case 'ucs2':
+      case 'ucs-2':
+      case 'utf16le':
+      case 'utf-16le':
+        return ucs2Write(this, string, offset, length)
+
+      default:
+        if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding)
+        encoding = ('' + encoding).toLowerCase()
+        loweredCase = true
+    }
+  }
+}
+
+Buffer.prototype.toJSON = function toJSON () {
+  return {
+    type: 'Buffer',
+    data: Array.prototype.slice.call(this._arr || this, 0)
+  }
+}
+
+function base64Slice (buf, start, end) {
+  if (start === 0 && end === buf.length) {
+    return base64.fromByteArray(buf)
+  } else {
+    return base64.fromByteArray(buf.slice(start, end))
+  }
+}
+
+function utf8Slice (buf, start, end) {
+  end = Math.min(buf.length, end)
+  var res = []
+
+  var i = start
+  while (i < end) {
+    var firstByte = buf[i]
+    var codePoint = null
+    var bytesPerSequence = (firstByte > 0xEF)
+      ? 4
+      : (firstByte > 0xDF)
+          ? 3
+          : (firstByte > 0xBF)
+              ? 2
+              : 1
+
+    if (i + bytesPerSequence <= end) {
+      var secondByte, thirdByte, fourthByte, tempCodePoint
+
+      switch (bytesPerSequence) {
+        case 1:
+          if (firstByte < 0x80) {
+            codePoint = firstByte
+          }
+          break
+        case 2:
+          secondByte = buf[i + 1]
+          if ((secondByte & 0xC0) === 0x80) {
+            tempCodePoint = (firstByte & 0x1F) << 0x6 | (secondByte & 0x3F)
+            if (tempCodePoint > 0x7F) {
+              codePoint = tempCodePoint
+            }
+          }
+          break
+        case 3:
+          secondByte = buf[i + 1]
+          thirdByte = buf[i + 2]
+          if ((secondByte & 0xC0) === 0x80 && (thirdByte & 0xC0) === 0x80) {
+            tempCodePoint = (firstByte & 0xF) << 0xC | (secondByte & 0x3F) << 0x6 | (thirdByte & 0x3F)
+            if (tempCodePoint > 0x7FF && (tempCodePoint < 0xD800 || tempCodePoint > 0xDFFF)) {
+              codePoint = tempCodePoint
+            }
+          }
+          break
+        case 4:
+          secondByte = buf[i + 1]
+          thirdByte = buf[i + 2]
+          fourthByte = buf[i + 3]
+          if ((secondByte & 0xC0) === 0x80 && (thirdByte & 0xC0) === 0x80 && (fourthByte & 0xC0) === 0x80) {
+            tempCodePoint = (firstByte & 0xF) << 0x12 | (secondByte & 0x3F) << 0xC | (thirdByte & 0x3F) << 0x6 | (fourthByte & 0x3F)
+            if (tempCodePoint > 0xFFFF && tempCodePoint < 0x110000) {
+              codePoint = tempCodePoint
+            }
+          }
+      }
+    }
+
+    if (codePoint === null) {
+      // we did not generate a valid codePoint so insert a
+      // replacement char (U+FFFD) and advance only 1 byte
+      codePoint = 0xFFFD
+      bytesPerSequence = 1
+    } else if (codePoint > 0xFFFF) {
+      // encode to utf16 (surrogate pair dance)
+      codePoint -= 0x10000
+      res.push(codePoint >>> 10 & 0x3FF | 0xD800)
+      codePoint = 0xDC00 | codePoint & 0x3FF
+    }
+
+    res.push(codePoint)
+    i += bytesPerSequence
+  }
+
+  return decodeCodePointsArray(res)
+}
+
+// Based on http://stackoverflow.com/a/22747272/680742, the browser with
+// the lowest limit is Chrome, with 0x10000 args.
+// We go 1 magnitude less, for safety
+var MAX_ARGUMENTS_LENGTH = 0x1000
+
+function decodeCodePointsArray (codePoints) {
+  var len = codePoints.length
+  if (len <= MAX_ARGUMENTS_LENGTH) {
+    return String.fromCharCode.apply(String, codePoints) // avoid extra slice()
+  }
+
+  // Decode in chunks to avoid "call stack size exceeded".
+  var res = ''
+  var i = 0
+  while (i < len) {
+    res += String.fromCharCode.apply(
+      String,
+      codePoints.slice(i, i += MAX_ARGUMENTS_LENGTH)
+    )
+  }
+  return res
+}
+
+function asciiSlice (buf, start, end) {
+  var ret = ''
+  end = Math.min(buf.length, end)
+
+  for (var i = start; i < end; ++i) {
+    ret += String.fromCharCode(buf[i] & 0x7F)
+  }
+  return ret
+}
+
+function latin1Slice (buf, start, end) {
+  var ret = ''
+  end = Math.min(buf.length, end)
+
+  for (var i = start; i < end; ++i) {
+    ret += String.fromCharCode(buf[i])
+  }
+  return ret
+}
+
+function hexSlice (buf, start, end) {
+  var len = buf.length
+
+  if (!start || start < 0) start = 0
+  if (!end || end < 0 || end > len) end = len
+
+  var out = ''
+  for (var i = start; i < end; ++i) {
+    out += hexSliceLookupTable[buf[i]]
+  }
+  return out
+}
+
+function utf16leSlice (buf, start, end) {
+  var bytes = buf.slice(start, end)
+  var res = ''
+  // If bytes.length is odd, the last 8 bits must be ignored (same as node.js)
+  for (var i = 0; i < bytes.length - 1; i += 2) {
+    res += String.fromCharCode(bytes[i] + (bytes[i + 1] * 256))
+  }
+  return res
+}
+
+Buffer.prototype.slice = function slice (start, end) {
+  var len = this.length
+  start = ~~start
+  end = end === undefined ? len : ~~end
+
+  if (start < 0) {
+    start += len
+    if (start < 0) start = 0
+  } else if (start > len) {
+    start = len
+  }
+
+  if (end < 0) {
+    end += len
+    if (end < 0) end = 0
+  } else if (end > len) {
+    end = len
+  }
+
+  if (end < start) end = start
+
+  var newBuf = this.subarray(start, end)
+  // Return an augmented `Uint8Array` instance
+  Object.setPrototypeOf(newBuf, Buffer.prototype)
+
+  return newBuf
+}
+
+/*
+ * Need to make sure that buffer isn't trying to write out of bounds.
+ */
+function checkOffset (offset, ext, length) {
+  if ((offset % 1) !== 0 || offset < 0) throw new RangeError('offset is not uint')
+  if (offset + ext > length) throw new RangeError('Trying to access beyond buffer length')
+}
+
+Buffer.prototype.readUintLE =
+Buffer.prototype.readUIntLE = function readUIntLE (offset, byteLength, noAssert) {
+  offset = offset >>> 0
+  byteLength = byteLength >>> 0
+  if (!noAssert) checkOffset(offset, byteLength, this.length)
+
+  var val = this[offset]
+  var mul = 1
+  var i = 0
+  while (++i < byteLength && (mul *= 0x100)) {
+    val += this[offset + i] * mul
+  }
+
+  return val
+}
+
+Buffer.prototype.readUintBE =
+Buffer.prototype.readUIntBE = function readUIntBE (offset, byteLength, noAssert) {
+  offset = offset >>> 0
+  byteLength = byteLength >>> 0
+  if (!noAssert) {
+    checkOffset(offset, byteLength, this.length)
+  }
+
+  var val = this[offset + --byteLength]
+  var mul = 1
+  while (byteLength > 0 && (mul *= 0x100)) {
+    val += this[offset + --byteLength] * mul
+  }
+
+  return val
+}
+
+Buffer.prototype.readUint8 =
+Buffer.prototype.readUInt8 = function readUInt8 (offset, noAssert) {
+  offset = offset >>> 0
+  if (!noAssert) checkOffset(offset, 1, this.length)
+  return this[offset]
+}
+
+Buffer.prototype.readUint16LE =
+Buffer.prototype.readUInt16LE = function readUInt16LE (offset, noAssert) {
+  offset = offset >>> 0
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  return this[offset] | (this[offset + 1] << 8)
+}
+
+Buffer.prototype.readUint16BE =
+Buffer.prototype.readUInt16BE = function readUInt16BE (offset, noAssert) {
+  offset = offset >>> 0
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  return (this[offset] << 8) | this[offset + 1]
+}
+
+Buffer.prototype.readUint32LE =
+Buffer.prototype.readUInt32LE = function readUInt32LE (offset, noAssert) {
+  offset = offset >>> 0
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return ((this[offset]) |
+      (this[offset + 1] << 8) |
+      (this[offset + 2] << 16)) +
+      (this[offset + 3] * 0x1000000)
+}
+
+Buffer.prototype.readUint32BE =
+Buffer.prototype.readUInt32BE = function readUInt32BE (offset, noAssert) {
+  offset = offset >>> 0
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return (this[offset] * 0x1000000) +
+    ((this[offset + 1] << 16) |
+    (this[offset + 2] << 8) |
+    this[offset + 3])
+}
+
+Buffer.prototype.readIntLE = function readIntLE (offset, byteLength, noAssert) {
+  offset = offset >>> 0
+  byteLength = byteLength >>> 0
+  if (!noAssert) checkOffset(offset, byteLength, this.length)
+
+  var val = this[offset]
+  var mul = 1
+  var i = 0
+  while (++i < byteLength && (mul *= 0x100)) {
+    val += this[offset + i] * mul
+  }
+  mul *= 0x80
+
+  if (val >= mul) val -= Math.pow(2, 8 * byteLength)
+
+  return val
+}
+
+Buffer.prototype.readIntBE = function readIntBE (offset, byteLength, noAssert) {
+  offset = offset >>> 0
+  byteLength = byteLength >>> 0
+  if (!noAssert) checkOffset(offset, byteLength, this.length)
+
+  var i = byteLength
+  var mul = 1
+  var val = this[offset + --i]
+  while (i > 0 && (mul *= 0x100)) {
+    val += this[offset + --i] * mul
+  }
+  mul *= 0x80
+
+  if (val >= mul) val -= Math.pow(2, 8 * byteLength)
+
+  return val
+}
+
+Buffer.prototype.readInt8 = function readInt8 (offset, noAssert) {
+  offset = offset >>> 0
+  if (!noAssert) checkOffset(offset, 1, this.length)
+  if (!(this[offset] & 0x80)) return (this[offset])
+  return ((0xff - this[offset] + 1) * -1)
+}
+
+Buffer.prototype.readInt16LE = function readInt16LE (offset, noAssert) {
+  offset = offset >>> 0
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  var val = this[offset] | (this[offset + 1] << 8)
+  return (val & 0x8000) ? val | 0xFFFF0000 : val
+}
+
+Buffer.prototype.readInt16BE = function readInt16BE (offset, noAssert) {
+  offset = offset >>> 0
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  var val = this[offset + 1] | (this[offset] << 8)
+  return (val & 0x8000) ? val | 0xFFFF0000 : val
+}
+
+Buffer.prototype.readInt32LE = function readInt32LE (offset, noAssert) {
+  offset = offset >>> 0
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return (this[offset]) |
+    (this[offset + 1] << 8) |
+    (this[offset + 2] << 16) |
+    (this[offset + 3] << 24)
+}
+
+Buffer.prototype.readInt32BE = function readInt32BE (offset, noAssert) {
+  offset = offset >>> 0
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return (this[offset] << 24) |
+    (this[offset + 1] << 16) |
+    (this[offset + 2] << 8) |
+    (this[offset + 3])
+}
+
+Buffer.prototype.readFloatLE = function readFloatLE (offset, noAssert) {
+  offset = offset >>> 0
+  if (!noAssert) checkOffset(offset, 4, this.length)
+  return ieee754.read(this, offset, true, 23, 4)
+}
+
+Buffer.prototype.readFloatBE = function readFloatBE (offset, noAssert) {
+  offset = offset >>> 0
+  if (!noAssert) checkOffset(offset, 4, this.length)
+  return ieee754.read(this, offset, false, 23, 4)
+}
+
+Buffer.prototype.readDoubleLE = function readDoubleLE (offset, noAssert) {
+  offset = offset >>> 0
+  if (!noAssert) checkOffset(offset, 8, this.length)
+  return ieee754.read(this, offset, true, 52, 8)
+}
+
+Buffer.prototype.readDoubleBE = function readDoubleBE (offset, noAssert) {
+  offset = offset >>> 0
+  if (!noAssert) checkOffset(offset, 8, this.length)
+  return ieee754.read(this, offset, false, 52, 8)
+}
+
+function checkInt (buf, value, offset, ext, max, min) {
+  if (!Buffer.isBuffer(buf)) throw new TypeError('"buffer" argument must be a Buffer instance')
+  if (value > max || value < min) throw new RangeError('"value" argument is out of bounds')
+  if (offset + ext > buf.length) throw new RangeError('Index out of range')
+}
+
+Buffer.prototype.writeUintLE =
+Buffer.prototype.writeUIntLE = function writeUIntLE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset >>> 0
+  byteLength = byteLength >>> 0
+  if (!noAssert) {
+    var maxBytes = Math.pow(2, 8 * byteLength) - 1
+    checkInt(this, value, offset, byteLength, maxBytes, 0)
+  }
+
+  var mul = 1
+  var i = 0
+  this[offset] = value & 0xFF
+  while (++i < byteLength && (mul *= 0x100)) {
+    this[offset + i] = (value / mul) & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeUintBE =
+Buffer.prototype.writeUIntBE = function writeUIntBE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset >>> 0
+  byteLength = byteLength >>> 0
+  if (!noAssert) {
+    var maxBytes = Math.pow(2, 8 * byteLength) - 1
+    checkInt(this, value, offset, byteLength, maxBytes, 0)
+  }
+
+  var i = byteLength - 1
+  var mul = 1
+  this[offset + i] = value & 0xFF
+  while (--i >= 0 && (mul *= 0x100)) {
+    this[offset + i] = (value / mul) & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeUint8 =
+Buffer.prototype.writeUInt8 = function writeUInt8 (value, offset, noAssert) {
+  value = +value
+  offset = offset >>> 0
+  if (!noAssert) checkInt(this, value, offset, 1, 0xff, 0)
+  this[offset] = (value & 0xff)
+  return offset + 1
+}
+
+Buffer.prototype.writeUint16LE =
+Buffer.prototype.writeUInt16LE = function writeUInt16LE (value, offset, noAssert) {
+  value = +value
+  offset = offset >>> 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0)
+  this[offset] = (value & 0xff)
+  this[offset + 1] = (value >>> 8)
+  return offset + 2
+}
+
+Buffer.prototype.writeUint16BE =
+Buffer.prototype.writeUInt16BE = function writeUInt16BE (value, offset, noAssert) {
+  value = +value
+  offset = offset >>> 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0)
+  this[offset] = (value >>> 8)
+  this[offset + 1] = (value & 0xff)
+  return offset + 2
+}
+
+Buffer.prototype.writeUint32LE =
+Buffer.prototype.writeUInt32LE = function writeUInt32LE (value, offset, noAssert) {
+  value = +value
+  offset = offset >>> 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0xffffffff, 0)
+  this[offset + 3] = (value >>> 24)
+  this[offset + 2] = (value >>> 16)
+  this[offset + 1] = (value >>> 8)
+  this[offset] = (value & 0xff)
+  return offset + 4
+}
+
+Buffer.prototype.writeUint32BE =
+Buffer.prototype.writeUInt32BE = function writeUInt32BE (value, offset, noAssert) {
+  value = +value
+  offset = offset >>> 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0xffffffff, 0)
+  this[offset] = (value >>> 24)
+  this[offset + 1] = (value >>> 16)
+  this[offset + 2] = (value >>> 8)
+  this[offset + 3] = (value & 0xff)
+  return offset + 4
+}
+
+Buffer.prototype.writeIntLE = function writeIntLE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset >>> 0
+  if (!noAssert) {
+    var limit = Math.pow(2, (8 * byteLength) - 1)
+
+    checkInt(this, value, offset, byteLength, limit - 1, -limit)
+  }
+
+  var i = 0
+  var mul = 1
+  var sub = 0
+  this[offset] = value & 0xFF
+  while (++i < byteLength && (mul *= 0x100)) {
+    if (value < 0 && sub === 0 && this[offset + i - 1] !== 0) {
+      sub = 1
+    }
+    this[offset + i] = ((value / mul) >> 0) - sub & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeIntBE = function writeIntBE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset >>> 0
+  if (!noAssert) {
+    var limit = Math.pow(2, (8 * byteLength) - 1)
+
+    checkInt(this, value, offset, byteLength, limit - 1, -limit)
+  }
+
+  var i = byteLength - 1
+  var mul = 1
+  var sub = 0
+  this[offset + i] = value & 0xFF
+  while (--i >= 0 && (mul *= 0x100)) {
+    if (value < 0 && sub === 0 && this[offset + i + 1] !== 0) {
+      sub = 1
+    }
+    this[offset + i] = ((value / mul) >> 0) - sub & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeInt8 = function writeInt8 (value, offset, noAssert) {
+  value = +value
+  offset = offset >>> 0
+  if (!noAssert) checkInt(this, value, offset, 1, 0x7f, -0x80)
+  if (value < 0) value = 0xff + value + 1
+  this[offset] = (value & 0xff)
+  return offset + 1
+}
+
+Buffer.prototype.writeInt16LE = function writeInt16LE (value, offset, noAssert) {
+  value = +value
+  offset = offset >>> 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -0x8000)
+  this[offset] = (value & 0xff)
+  this[offset + 1] = (value >>> 8)
+  return offset + 2
+}
+
+Buffer.prototype.writeInt16BE = function writeInt16BE (value, offset, noAssert) {
+  value = +value
+  offset = offset >>> 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -0x8000)
+  this[offset] = (value >>> 8)
+  this[offset + 1] = (value & 0xff)
+  return offset + 2
+}
+
+Buffer.prototype.writeInt32LE = function writeInt32LE (value, offset, noAssert) {
+  value = +value
+  offset = offset >>> 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
+  this[offset] = (value & 0xff)
+  this[offset + 1] = (value >>> 8)
+  this[offset + 2] = (value >>> 16)
+  this[offset + 3] = (value >>> 24)
+  return offset + 4
+}
+
+Buffer.prototype.writeInt32BE = function writeInt32BE (value, offset, noAssert) {
+  value = +value
+  offset = offset >>> 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
+  if (value < 0) value = 0xffffffff + value + 1
+  this[offset] = (value >>> 24)
+  this[offset + 1] = (value >>> 16)
+  this[offset + 2] = (value >>> 8)
+  this[offset + 3] = (value & 0xff)
+  return offset + 4
+}
+
+function checkIEEE754 (buf, value, offset, ext, max, min) {
+  if (offset + ext > buf.length) throw new RangeError('Index out of range')
+  if (offset < 0) throw new RangeError('Index out of range')
+}
+
+function writeFloat (buf, value, offset, littleEndian, noAssert) {
+  value = +value
+  offset = offset >>> 0
+  if (!noAssert) {
+    checkIEEE754(buf, value, offset, 4, 3.4028234663852886e+38, -3.4028234663852886e+38)
+  }
+  ieee754.write(buf, value, offset, littleEndian, 23, 4)
+  return offset + 4
+}
+
+Buffer.prototype.writeFloatLE = function writeFloatLE (value, offset, noAssert) {
+  return writeFloat(this, value, offset, true, noAssert)
+}
+
+Buffer.prototype.writeFloatBE = function writeFloatBE (value, offset, noAssert) {
+  return writeFloat(this, value, offset, false, noAssert)
+}
+
+function writeDouble (buf, value, offset, littleEndian, noAssert) {
+  value = +value
+  offset = offset >>> 0
+  if (!noAssert) {
+    checkIEEE754(buf, value, offset, 8, 1.7976931348623157E+308, -1.7976931348623157E+308)
+  }
+  ieee754.write(buf, value, offset, littleEndian, 52, 8)
+  return offset + 8
+}
+
+Buffer.prototype.writeDoubleLE = function writeDoubleLE (value, offset, noAssert) {
+  return writeDouble(this, value, offset, true, noAssert)
+}
+
+Buffer.prototype.writeDoubleBE = function writeDoubleBE (value, offset, noAssert) {
+  return writeDouble(this, value, offset, false, noAssert)
+}
+
+// copy(targetBuffer, targetStart=0, sourceStart=0, sourceEnd=buffer.length)
+Buffer.prototype.copy = function copy (target, targetStart, start, end) {
+  if (!Buffer.isBuffer(target)) throw new TypeError('argument should be a Buffer')
+  if (!start) start = 0
+  if (!end && end !== 0) end = this.length
+  if (targetStart >= target.length) targetStart = target.length
+  if (!targetStart) targetStart = 0
+  if (end > 0 && end < start) end = start
+
+  // Copy 0 bytes; we're done
+  if (end === start) return 0
+  if (target.length === 0 || this.length === 0) return 0
+
+  // Fatal error conditions
+  if (targetStart < 0) {
+    throw new RangeError('targetStart out of bounds')
+  }
+  if (start < 0 || start >= this.length) throw new RangeError('Index out of range')
+  if (end < 0) throw new RangeError('sourceEnd out of bounds')
+
+  // Are we oob?
+  if (end > this.length) end = this.length
+  if (target.length - targetStart < end - start) {
+    end = target.length - targetStart + start
+  }
+
+  var len = end - start
+
+  if (this === target && typeof Uint8Array.prototype.copyWithin === 'function') {
+    // Use built-in when available, missing from IE11
+    this.copyWithin(targetStart, start, end)
+  } else {
+    Uint8Array.prototype.set.call(
+      target,
+      this.subarray(start, end),
+      targetStart
+    )
+  }
+
+  return len
+}
+
+// Usage:
+//    buffer.fill(number[, offset[, end]])
+//    buffer.fill(buffer[, offset[, end]])
+//    buffer.fill(string[, offset[, end]][, encoding])
+Buffer.prototype.fill = function fill (val, start, end, encoding) {
+  // Handle string cases:
+  if (typeof val === 'string') {
+    if (typeof start === 'string') {
+      encoding = start
+      start = 0
+      end = this.length
+    } else if (typeof end === 'string') {
+      encoding = end
+      end = this.length
+    }
+    if (encoding !== undefined && typeof encoding !== 'string') {
+      throw new TypeError('encoding must be a string')
+    }
+    if (typeof encoding === 'string' && !Buffer.isEncoding(encoding)) {
+      throw new TypeError('Unknown encoding: ' + encoding)
+    }
+    if (val.length === 1) {
+      var code = val.charCodeAt(0)
+      if ((encoding === 'utf8' && code < 128) ||
+          encoding === 'latin1') {
+        // Fast path: If `val` fits into a single byte, use that numeric value.
+        val = code
+      }
+    }
+  } else if (typeof val === 'number') {
+    val = val & 255
+  } else if (typeof val === 'boolean') {
+    val = Number(val)
+  }
+
+  // Invalid ranges are not set to a default, so can range check early.
+  if (start < 0 || this.length < start || this.length < end) {
+    throw new RangeError('Out of range index')
+  }
+
+  if (end <= start) {
+    return this
+  }
+
+  start = start >>> 0
+  end = end === undefined ? this.length : end >>> 0
+
+  if (!val) val = 0
+
+  var i
+  if (typeof val === 'number') {
+    for (i = start; i < end; ++i) {
+      this[i] = val
+    }
+  } else {
+    var bytes = Buffer.isBuffer(val)
+      ? val
+      : Buffer.from(val, encoding)
+    var len = bytes.length
+    if (len === 0) {
+      throw new TypeError('The value "' + val +
+        '" is invalid for argument "value"')
+    }
+    for (i = 0; i < end - start; ++i) {
+      this[i + start] = bytes[i % len]
+    }
+  }
+
+  return this
+}
+
+// HELPER FUNCTIONS
+// ================
+
+var INVALID_BASE64_RE = /[^+/0-9A-Za-z-_]/g
+
+function base64clean (str) {
+  // Node takes equal signs as end of the Base64 encoding
+  str = str.split('=')[0]
+  // Node strips out invalid characters like \n and \t from the string, base64-js does not
+  str = str.trim().replace(INVALID_BASE64_RE, '')
+  // Node converts strings with length < 2 to ''
+  if (str.length < 2) return ''
+  // Node allows for non-padded base64 strings (missing trailing ===), base64-js does not
+  while (str.length % 4 !== 0) {
+    str = str + '='
+  }
+  return str
+}
+
+function utf8ToBytes (string, units) {
+  units = units || Infinity
+  var codePoint
+  var length = string.length
+  var leadSurrogate = null
+  var bytes = []
+
+  for (var i = 0; i < length; ++i) {
+    codePoint = string.charCodeAt(i)
+
+    // is surrogate component
+    if (codePoint > 0xD7FF && codePoint < 0xE000) {
+      // last char was a lead
+      if (!leadSurrogate) {
+        // no lead yet
+        if (codePoint > 0xDBFF) {
+          // unexpected trail
+          if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+          continue
+        } else if (i + 1 === length) {
+          // unpaired lead
+          if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+          continue
+        }
+
+        // valid lead
+        leadSurrogate = codePoint
+
+        continue
+      }
+
+      // 2 leads in a row
+      if (codePoint < 0xDC00) {
+        if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+        leadSurrogate = codePoint
+        continue
+      }
+
+      // valid surrogate pair
+      codePoint = (leadSurrogate - 0xD800 << 10 | codePoint - 0xDC00) + 0x10000
+    } else if (leadSurrogate) {
+      // valid bmp char, but last char was a lead
+      if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+    }
+
+    leadSurrogate = null
+
+    // encode utf8
+    if (codePoint < 0x80) {
+      if ((units -= 1) < 0) break
+      bytes.push(codePoint)
+    } else if (codePoint < 0x800) {
+      if ((units -= 2) < 0) break
+      bytes.push(
+        codePoint >> 0x6 | 0xC0,
+        codePoint & 0x3F | 0x80
+      )
+    } else if (codePoint < 0x10000) {
+      if ((units -= 3) < 0) break
+      bytes.push(
+        codePoint >> 0xC | 0xE0,
+        codePoint >> 0x6 & 0x3F | 0x80,
+        codePoint & 0x3F | 0x80
+      )
+    } else if (codePoint < 0x110000) {
+      if ((units -= 4) < 0) break
+      bytes.push(
+        codePoint >> 0x12 | 0xF0,
+        codePoint >> 0xC & 0x3F | 0x80,
+        codePoint >> 0x6 & 0x3F | 0x80,
+        codePoint & 0x3F | 0x80
+      )
+    } else {
+      throw new Error('Invalid code point')
+    }
+  }
+
+  return bytes
+}
+
+function asciiToBytes (str) {
+  var byteArray = []
+  for (var i = 0; i < str.length; ++i) {
+    // Node's code seems to be doing this and not & 0x7F..
+    byteArray.push(str.charCodeAt(i) & 0xFF)
+  }
+  return byteArray
+}
+
+function utf16leToBytes (str, units) {
+  var c, hi, lo
+  var byteArray = []
+  for (var i = 0; i < str.length; ++i) {
+    if ((units -= 2) < 0) break
+
+    c = str.charCodeAt(i)
+    hi = c >> 8
+    lo = c % 256
+    byteArray.push(lo)
+    byteArray.push(hi)
+  }
+
+  return byteArray
+}
+
+function base64ToBytes (str) {
+  return base64.toByteArray(base64clean(str))
+}
+
+function blitBuffer (src, dst, offset, length) {
+  for (var i = 0; i < length; ++i) {
+    if ((i + offset >= dst.length) || (i >= src.length)) break
+    dst[i + offset] = src[i]
+  }
+  return i
+}
+
+// ArrayBuffer or Uint8Array objects from other contexts (i.e. iframes) do not pass
+// the `instanceof` check but they should be treated as of that type.
+// See: https://github.com/feross/buffer/issues/166
+function isInstance (obj, type) {
+  return obj instanceof type ||
+    (obj != null && obj.constructor != null && obj.constructor.name != null &&
+      obj.constructor.name === type.name)
+}
+function numberIsNaN (obj) {
+  // For IE11 support
+  return obj !== obj // eslint-disable-line no-self-compare
+}
+
+// Create lookup table for `toString('hex')`
+// See: https://github.com/feross/buffer/issues/219
+var hexSliceLookupTable = (function () {
+  var alphabet = '0123456789abcdef'
+  var table = new Array(256)
+  for (var i = 0; i < 16; ++i) {
+    var i16 = i * 16
+    for (var j = 0; j < 16; ++j) {
+      table[i16 + j] = alphabet[i] + alphabet[j]
+    }
+  }
+  return table
+})()
+
+
+/***/ }),
+
+/***/ "./node_modules/qrcode/node_modules/isarray/index.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/qrcode/node_modules/isarray/index.js ***!
+  \***********************************************************/
+/***/ ((module) => {
+
+var toString = {}.toString;
+
+module.exports = Array.isArray || function (arr) {
+  return toString.call(arr) == '[object Array]';
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/qs/lib/formats.js":
 /*!****************************************!*\
   !*** ./node_modules/qs/lib/formats.js ***!
@@ -67712,6 +73705,3197 @@ module.exports = function getSideChannel() {
 	return channel;
 };
 
+
+/***/ }),
+
+/***/ "./node_modules/sweetalert2/dist/sweetalert2.all.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/sweetalert2/dist/sweetalert2.all.js ***!
+  \**********************************************************/
+/***/ (function(module) {
+
+/*!
+* sweetalert2 v11.1.9
+* Released under the MIT License.
+*/
+(function (global, factory) {
+   true ? module.exports = factory() :
+  0;
+}(this, function () { 'use strict';
+
+  const DismissReason = Object.freeze({
+    cancel: 'cancel',
+    backdrop: 'backdrop',
+    close: 'close',
+    esc: 'esc',
+    timer: 'timer'
+  });
+
+  const consolePrefix = 'SweetAlert2:';
+  /**
+   * Filter the unique values into a new array
+   * @param arr
+   */
+
+  const uniqueArray = arr => {
+    const result = [];
+
+    for (let i = 0; i < arr.length; i++) {
+      if (result.indexOf(arr[i]) === -1) {
+        result.push(arr[i]);
+      }
+    }
+
+    return result;
+  };
+  /**
+   * Capitalize the first letter of a string
+   * @param str
+   */
+
+  const capitalizeFirstLetter = str => str.charAt(0).toUpperCase() + str.slice(1);
+  /**
+   * Convert NodeList to Array
+   * @param nodeList
+   */
+
+  const toArray = nodeList => Array.prototype.slice.call(nodeList);
+  /**
+   * Standardise console warnings
+   * @param message
+   */
+
+  const warn = message => {
+    console.warn("".concat(consolePrefix, " ").concat(typeof message === 'object' ? message.join(' ') : message));
+  };
+  /**
+   * Standardise console errors
+   * @param message
+   */
+
+  const error = message => {
+    console.error("".concat(consolePrefix, " ").concat(message));
+  };
+  /**
+   * Private global state for `warnOnce`
+   * @type {Array}
+   * @private
+   */
+
+  const previousWarnOnceMessages = [];
+  /**
+   * Show a console warning, but only if it hasn't already been shown
+   * @param message
+   */
+
+  const warnOnce = message => {
+    if (!previousWarnOnceMessages.includes(message)) {
+      previousWarnOnceMessages.push(message);
+      warn(message);
+    }
+  };
+  /**
+   * Show a one-time console warning about deprecated params/methods
+   */
+
+  const warnAboutDeprecation = (deprecatedParam, useInstead) => {
+    warnOnce("\"".concat(deprecatedParam, "\" is deprecated and will be removed in the next major release. Please use \"").concat(useInstead, "\" instead."));
+  };
+  /**
+   * If `arg` is a function, call it (with no arguments or context) and return the result.
+   * Otherwise, just pass the value through
+   * @param arg
+   */
+
+  const callIfFunction = arg => typeof arg === 'function' ? arg() : arg;
+  const hasToPromiseFn = arg => arg && typeof arg.toPromise === 'function';
+  const asPromise = arg => hasToPromiseFn(arg) ? arg.toPromise() : Promise.resolve(arg);
+  const isPromise = arg => arg && Promise.resolve(arg) === arg;
+
+  const isJqueryElement = elem => typeof elem === 'object' && elem.jquery;
+
+  const isElement = elem => elem instanceof Element || isJqueryElement(elem);
+
+  const argsToParams = args => {
+    const params = {};
+
+    if (typeof args[0] === 'object' && !isElement(args[0])) {
+      Object.assign(params, args[0]);
+    } else {
+      ['title', 'html', 'icon'].forEach((name, index) => {
+        const arg = args[index];
+
+        if (typeof arg === 'string' || isElement(arg)) {
+          params[name] = arg;
+        } else if (arg !== undefined) {
+          error("Unexpected type of ".concat(name, "! Expected \"string\" or \"Element\", got ").concat(typeof arg));
+        }
+      });
+    }
+
+    return params;
+  };
+
+  const swalPrefix = 'swal2-';
+  const prefix = items => {
+    const result = {};
+
+    for (const i in items) {
+      result[items[i]] = swalPrefix + items[i];
+    }
+
+    return result;
+  };
+  const swalClasses = prefix(['container', 'shown', 'height-auto', 'iosfix', 'popup', 'modal', 'no-backdrop', 'no-transition', 'toast', 'toast-shown', 'show', 'hide', 'close', 'title', 'html-container', 'actions', 'confirm', 'deny', 'cancel', 'default-outline', 'footer', 'icon', 'icon-content', 'image', 'input', 'file', 'range', 'select', 'radio', 'checkbox', 'label', 'textarea', 'inputerror', 'input-label', 'validation-message', 'progress-steps', 'active-progress-step', 'progress-step', 'progress-step-line', 'loader', 'loading', 'styled', 'top', 'top-start', 'top-end', 'top-left', 'top-right', 'center', 'center-start', 'center-end', 'center-left', 'center-right', 'bottom', 'bottom-start', 'bottom-end', 'bottom-left', 'bottom-right', 'grow-row', 'grow-column', 'grow-fullscreen', 'rtl', 'timer-progress-bar', 'timer-progress-bar-container', 'scrollbar-measure', 'icon-success', 'icon-warning', 'icon-info', 'icon-question', 'icon-error']);
+  const iconTypes = prefix(['success', 'warning', 'info', 'question', 'error']);
+
+  const getContainer = () => document.body.querySelector(".".concat(swalClasses.container));
+  const elementBySelector = selectorString => {
+    const container = getContainer();
+    return container ? container.querySelector(selectorString) : null;
+  };
+
+  const elementByClass = className => {
+    return elementBySelector(".".concat(className));
+  };
+
+  const getPopup = () => elementByClass(swalClasses.popup);
+  const getIcon = () => elementByClass(swalClasses.icon);
+  const getTitle = () => elementByClass(swalClasses.title);
+  const getHtmlContainer = () => elementByClass(swalClasses['html-container']);
+  const getImage = () => elementByClass(swalClasses.image);
+  const getProgressSteps = () => elementByClass(swalClasses['progress-steps']);
+  const getValidationMessage = () => elementByClass(swalClasses['validation-message']);
+  const getConfirmButton = () => elementBySelector(".".concat(swalClasses.actions, " .").concat(swalClasses.confirm));
+  const getDenyButton = () => elementBySelector(".".concat(swalClasses.actions, " .").concat(swalClasses.deny));
+  const getInputLabel = () => elementByClass(swalClasses['input-label']);
+  const getLoader = () => elementBySelector(".".concat(swalClasses.loader));
+  const getCancelButton = () => elementBySelector(".".concat(swalClasses.actions, " .").concat(swalClasses.cancel));
+  const getActions = () => elementByClass(swalClasses.actions);
+  const getFooter = () => elementByClass(swalClasses.footer);
+  const getTimerProgressBar = () => elementByClass(swalClasses['timer-progress-bar']);
+  const getCloseButton = () => elementByClass(swalClasses.close); // https://github.com/jkup/focusable/blob/master/index.js
+
+  const focusable = "\n  a[href],\n  area[href],\n  input:not([disabled]),\n  select:not([disabled]),\n  textarea:not([disabled]),\n  button:not([disabled]),\n  iframe,\n  object,\n  embed,\n  [tabindex=\"0\"],\n  [contenteditable],\n  audio[controls],\n  video[controls],\n  summary\n";
+  const getFocusableElements = () => {
+    const focusableElementsWithTabindex = toArray(getPopup().querySelectorAll('[tabindex]:not([tabindex="-1"]):not([tabindex="0"])')) // sort according to tabindex
+    .sort((a, b) => {
+      a = parseInt(a.getAttribute('tabindex'));
+      b = parseInt(b.getAttribute('tabindex'));
+
+      if (a > b) {
+        return 1;
+      } else if (a < b) {
+        return -1;
+      }
+
+      return 0;
+    });
+    const otherFocusableElements = toArray(getPopup().querySelectorAll(focusable)).filter(el => el.getAttribute('tabindex') !== '-1');
+    return uniqueArray(focusableElementsWithTabindex.concat(otherFocusableElements)).filter(el => isVisible(el));
+  };
+  const isModal = () => {
+    return !isToast() && !document.body.classList.contains(swalClasses['no-backdrop']);
+  };
+  const isToast = () => {
+    return document.body.classList.contains(swalClasses['toast-shown']);
+  };
+  const isLoading = () => {
+    return getPopup().hasAttribute('data-loading');
+  };
+
+  const states = {
+    previousBodyPadding: null
+  };
+  const setInnerHtml = (elem, html) => {
+    // #1926
+    elem.textContent = '';
+
+    if (html) {
+      const parser = new DOMParser();
+      const parsed = parser.parseFromString(html, "text/html");
+      toArray(parsed.querySelector('head').childNodes).forEach(child => {
+        elem.appendChild(child);
+      });
+      toArray(parsed.querySelector('body').childNodes).forEach(child => {
+        elem.appendChild(child);
+      });
+    }
+  };
+  const hasClass = (elem, className) => {
+    if (!className) {
+      return false;
+    }
+
+    const classList = className.split(/\s+/);
+
+    for (let i = 0; i < classList.length; i++) {
+      if (!elem.classList.contains(classList[i])) {
+        return false;
+      }
+    }
+
+    return true;
+  };
+
+  const removeCustomClasses = (elem, params) => {
+    toArray(elem.classList).forEach(className => {
+      if (!Object.values(swalClasses).includes(className) && !Object.values(iconTypes).includes(className) && !Object.values(params.showClass).includes(className)) {
+        elem.classList.remove(className);
+      }
+    });
+  };
+
+  const applyCustomClass = (elem, params, className) => {
+    removeCustomClasses(elem, params);
+
+    if (params.customClass && params.customClass[className]) {
+      if (typeof params.customClass[className] !== 'string' && !params.customClass[className].forEach) {
+        return warn("Invalid type of customClass.".concat(className, "! Expected string or iterable object, got \"").concat(typeof params.customClass[className], "\""));
+      }
+
+      addClass(elem, params.customClass[className]);
+    }
+  };
+  const getInput = (popup, inputType) => {
+    if (!inputType) {
+      return null;
+    }
+
+    switch (inputType) {
+      case 'select':
+      case 'textarea':
+      case 'file':
+        return getChildByClass(popup, swalClasses[inputType]);
+
+      case 'checkbox':
+        return popup.querySelector(".".concat(swalClasses.checkbox, " input"));
+
+      case 'radio':
+        return popup.querySelector(".".concat(swalClasses.radio, " input:checked")) || popup.querySelector(".".concat(swalClasses.radio, " input:first-child"));
+
+      case 'range':
+        return popup.querySelector(".".concat(swalClasses.range, " input"));
+
+      default:
+        return getChildByClass(popup, swalClasses.input);
+    }
+  };
+  const focusInput = input => {
+    input.focus(); // place cursor at end of text in text input
+
+    if (input.type !== 'file') {
+      // http://stackoverflow.com/a/2345915
+      const val = input.value;
+      input.value = '';
+      input.value = val;
+    }
+  };
+  const toggleClass = (target, classList, condition) => {
+    if (!target || !classList) {
+      return;
+    }
+
+    if (typeof classList === 'string') {
+      classList = classList.split(/\s+/).filter(Boolean);
+    }
+
+    classList.forEach(className => {
+      if (target.forEach) {
+        target.forEach(elem => {
+          condition ? elem.classList.add(className) : elem.classList.remove(className);
+        });
+      } else {
+        condition ? target.classList.add(className) : target.classList.remove(className);
+      }
+    });
+  };
+  const addClass = (target, classList) => {
+    toggleClass(target, classList, true);
+  };
+  const removeClass = (target, classList) => {
+    toggleClass(target, classList, false);
+  };
+  const getChildByClass = (elem, className) => {
+    for (let i = 0; i < elem.childNodes.length; i++) {
+      if (hasClass(elem.childNodes[i], className)) {
+        return elem.childNodes[i];
+      }
+    }
+  };
+  const applyNumericalStyle = (elem, property, value) => {
+    if (value === "".concat(parseInt(value))) {
+      value = parseInt(value);
+    }
+
+    if (value || parseInt(value) === 0) {
+      elem.style[property] = typeof value === 'number' ? "".concat(value, "px") : value;
+    } else {
+      elem.style.removeProperty(property);
+    }
+  };
+  const show = (elem, display = 'flex') => {
+    elem.style.display = display;
+  };
+  const hide = elem => {
+    elem.style.display = 'none';
+  };
+  const setStyle = (parent, selector, property, value) => {
+    const el = parent.querySelector(selector);
+
+    if (el) {
+      el.style[property] = value;
+    }
+  };
+  const toggle = (elem, condition, display) => {
+    condition ? show(elem, display) : hide(elem);
+  }; // borrowed from jquery $(elem).is(':visible') implementation
+
+  const isVisible = elem => !!(elem && (elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length));
+  const allButtonsAreHidden = () => !isVisible(getConfirmButton()) && !isVisible(getDenyButton()) && !isVisible(getCancelButton());
+  const isScrollable = elem => !!(elem.scrollHeight > elem.clientHeight); // borrowed from https://stackoverflow.com/a/46352119
+
+  const hasCssAnimation = elem => {
+    const style = window.getComputedStyle(elem);
+    const animDuration = parseFloat(style.getPropertyValue('animation-duration') || '0');
+    const transDuration = parseFloat(style.getPropertyValue('transition-duration') || '0');
+    return animDuration > 0 || transDuration > 0;
+  };
+  const animateTimerProgressBar = (timer, reset = false) => {
+    const timerProgressBar = getTimerProgressBar();
+
+    if (isVisible(timerProgressBar)) {
+      if (reset) {
+        timerProgressBar.style.transition = 'none';
+        timerProgressBar.style.width = '100%';
+      }
+
+      setTimeout(() => {
+        timerProgressBar.style.transition = "width ".concat(timer / 1000, "s linear");
+        timerProgressBar.style.width = '0%';
+      }, 10);
+    }
+  };
+  const stopTimerProgressBar = () => {
+    const timerProgressBar = getTimerProgressBar();
+    const timerProgressBarWidth = parseInt(window.getComputedStyle(timerProgressBar).width);
+    timerProgressBar.style.removeProperty('transition');
+    timerProgressBar.style.width = '100%';
+    const timerProgressBarFullWidth = parseInt(window.getComputedStyle(timerProgressBar).width);
+    const timerProgressBarPercent = parseInt(timerProgressBarWidth / timerProgressBarFullWidth * 100);
+    timerProgressBar.style.removeProperty('transition');
+    timerProgressBar.style.width = "".concat(timerProgressBarPercent, "%");
+  };
+
+  // Detect Node env
+  const isNodeEnv = () => typeof window === 'undefined' || typeof document === 'undefined';
+
+  const sweetHTML = "\n <div aria-labelledby=\"".concat(swalClasses.title, "\" aria-describedby=\"").concat(swalClasses['html-container'], "\" class=\"").concat(swalClasses.popup, "\" tabindex=\"-1\">\n   <button type=\"button\" class=\"").concat(swalClasses.close, "\"></button>\n   <ul class=\"").concat(swalClasses['progress-steps'], "\"></ul>\n   <div class=\"").concat(swalClasses.icon, "\"></div>\n   <img class=\"").concat(swalClasses.image, "\" />\n   <h2 class=\"").concat(swalClasses.title, "\" id=\"").concat(swalClasses.title, "\"></h2>\n   <div class=\"").concat(swalClasses['html-container'], "\" id=\"").concat(swalClasses['html-container'], "\"></div>\n   <input class=\"").concat(swalClasses.input, "\" />\n   <input type=\"file\" class=\"").concat(swalClasses.file, "\" />\n   <div class=\"").concat(swalClasses.range, "\">\n     <input type=\"range\" />\n     <output></output>\n   </div>\n   <select class=\"").concat(swalClasses.select, "\"></select>\n   <div class=\"").concat(swalClasses.radio, "\"></div>\n   <label for=\"").concat(swalClasses.checkbox, "\" class=\"").concat(swalClasses.checkbox, "\">\n     <input type=\"checkbox\" />\n     <span class=\"").concat(swalClasses.label, "\"></span>\n   </label>\n   <textarea class=\"").concat(swalClasses.textarea, "\"></textarea>\n   <div class=\"").concat(swalClasses['validation-message'], "\" id=\"").concat(swalClasses['validation-message'], "\"></div>\n   <div class=\"").concat(swalClasses.actions, "\">\n     <div class=\"").concat(swalClasses.loader, "\"></div>\n     <button type=\"button\" class=\"").concat(swalClasses.confirm, "\"></button>\n     <button type=\"button\" class=\"").concat(swalClasses.deny, "\"></button>\n     <button type=\"button\" class=\"").concat(swalClasses.cancel, "\"></button>\n   </div>\n   <div class=\"").concat(swalClasses.footer, "\"></div>\n   <div class=\"").concat(swalClasses['timer-progress-bar-container'], "\">\n     <div class=\"").concat(swalClasses['timer-progress-bar'], "\"></div>\n   </div>\n </div>\n").replace(/(^|\n)\s*/g, '');
+
+  const resetOldContainer = () => {
+    const oldContainer = getContainer();
+
+    if (!oldContainer) {
+      return false;
+    }
+
+    oldContainer.remove();
+    removeClass([document.documentElement, document.body], [swalClasses['no-backdrop'], swalClasses['toast-shown'], swalClasses['has-column']]);
+    return true;
+  };
+
+  const resetValidationMessage = () => {
+    if (Swal.isVisible()) {
+      Swal.resetValidationMessage();
+    }
+  };
+
+  const addInputChangeListeners = () => {
+    const popup = getPopup();
+    const input = getChildByClass(popup, swalClasses.input);
+    const file = getChildByClass(popup, swalClasses.file);
+    const range = popup.querySelector(".".concat(swalClasses.range, " input"));
+    const rangeOutput = popup.querySelector(".".concat(swalClasses.range, " output"));
+    const select = getChildByClass(popup, swalClasses.select);
+    const checkbox = popup.querySelector(".".concat(swalClasses.checkbox, " input"));
+    const textarea = getChildByClass(popup, swalClasses.textarea);
+    input.oninput = resetValidationMessage;
+    file.onchange = resetValidationMessage;
+    select.onchange = resetValidationMessage;
+    checkbox.onchange = resetValidationMessage;
+    textarea.oninput = resetValidationMessage;
+
+    range.oninput = () => {
+      resetValidationMessage();
+      rangeOutput.value = range.value;
+    };
+
+    range.onchange = () => {
+      resetValidationMessage();
+      range.nextSibling.value = range.value;
+    };
+  };
+
+  const getTarget = target => typeof target === 'string' ? document.querySelector(target) : target;
+
+  const setupAccessibility = params => {
+    const popup = getPopup();
+    popup.setAttribute('role', params.toast ? 'alert' : 'dialog');
+    popup.setAttribute('aria-live', params.toast ? 'polite' : 'assertive');
+
+    if (!params.toast) {
+      popup.setAttribute('aria-modal', 'true');
+    }
+  };
+
+  const setupRTL = targetElement => {
+    if (window.getComputedStyle(targetElement).direction === 'rtl') {
+      addClass(getContainer(), swalClasses.rtl);
+    }
+  };
+  /*
+   * Add modal + backdrop to DOM
+   */
+
+
+  const init = params => {
+    // Clean up the old popup container if it exists
+    const oldContainerExisted = resetOldContainer();
+    /* istanbul ignore if */
+
+    if (isNodeEnv()) {
+      error('SweetAlert2 requires document to initialize');
+      return;
+    }
+
+    const container = document.createElement('div');
+    container.className = swalClasses.container;
+
+    if (oldContainerExisted) {
+      addClass(container, swalClasses['no-transition']);
+    }
+
+    setInnerHtml(container, sweetHTML);
+    const targetElement = getTarget(params.target);
+    targetElement.appendChild(container);
+    setupAccessibility(params);
+    setupRTL(targetElement);
+    addInputChangeListeners();
+  };
+
+  const parseHtmlToContainer = (param, target) => {
+    // DOM element
+    if (param instanceof HTMLElement) {
+      target.appendChild(param); // Object
+    } else if (typeof param === 'object') {
+      handleObject(param, target); // Plain string
+    } else if (param) {
+      setInnerHtml(target, param);
+    }
+  };
+
+  const handleObject = (param, target) => {
+    // JQuery element(s)
+    if (param.jquery) {
+      handleJqueryElem(target, param); // For other objects use their string representation
+    } else {
+      setInnerHtml(target, param.toString());
+    }
+  };
+
+  const handleJqueryElem = (target, elem) => {
+    target.textContent = '';
+
+    if (0 in elem) {
+      for (let i = 0; (i in elem); i++) {
+        target.appendChild(elem[i].cloneNode(true));
+      }
+    } else {
+      target.appendChild(elem.cloneNode(true));
+    }
+  };
+
+  const animationEndEvent = (() => {
+    // Prevent run in Node env
+
+    /* istanbul ignore if */
+    if (isNodeEnv()) {
+      return false;
+    }
+
+    const testEl = document.createElement('div');
+    const transEndEventNames = {
+      WebkitAnimation: 'webkitAnimationEnd',
+      OAnimation: 'oAnimationEnd oanimationend',
+      animation: 'animationend'
+    };
+
+    for (const i in transEndEventNames) {
+      if (Object.prototype.hasOwnProperty.call(transEndEventNames, i) && typeof testEl.style[i] !== 'undefined') {
+        return transEndEventNames[i];
+      }
+    }
+
+    return false;
+  })();
+
+  // https://github.com/twbs/bootstrap/blob/master/js/src/modal.js
+
+  const measureScrollbar = () => {
+    const scrollDiv = document.createElement('div');
+    scrollDiv.className = swalClasses['scrollbar-measure'];
+    document.body.appendChild(scrollDiv);
+    const scrollbarWidth = scrollDiv.getBoundingClientRect().width - scrollDiv.clientWidth;
+    document.body.removeChild(scrollDiv);
+    return scrollbarWidth;
+  };
+
+  const renderActions = (instance, params) => {
+    const actions = getActions();
+    const loader = getLoader();
+    const confirmButton = getConfirmButton();
+    const denyButton = getDenyButton();
+    const cancelButton = getCancelButton(); // Actions (buttons) wrapper
+
+    if (!params.showConfirmButton && !params.showDenyButton && !params.showCancelButton) {
+      hide(actions);
+    } else {
+      show(actions);
+    } // Custom class
+
+
+    applyCustomClass(actions, params, 'actions'); // Render buttons
+
+    renderButton(confirmButton, 'confirm', params);
+    renderButton(denyButton, 'deny', params);
+    renderButton(cancelButton, 'cancel', params);
+    handleButtonsStyling(confirmButton, denyButton, cancelButton, params);
+
+    if (params.reverseButtons) {
+      actions.insertBefore(cancelButton, loader);
+      actions.insertBefore(denyButton, loader);
+      actions.insertBefore(confirmButton, loader);
+    } // Loader
+
+
+    setInnerHtml(loader, params.loaderHtml);
+    applyCustomClass(loader, params, 'loader');
+  };
+
+  function handleButtonsStyling(confirmButton, denyButton, cancelButton, params) {
+    if (!params.buttonsStyling) {
+      return removeClass([confirmButton, denyButton, cancelButton], swalClasses.styled);
+    }
+
+    addClass([confirmButton, denyButton, cancelButton], swalClasses.styled); // Buttons background colors
+
+    if (params.confirmButtonColor) {
+      confirmButton.style.backgroundColor = params.confirmButtonColor;
+      addClass(confirmButton, swalClasses['default-outline']);
+    }
+
+    if (params.denyButtonColor) {
+      denyButton.style.backgroundColor = params.denyButtonColor;
+      addClass(denyButton, swalClasses['default-outline']);
+    }
+
+    if (params.cancelButtonColor) {
+      cancelButton.style.backgroundColor = params.cancelButtonColor;
+      addClass(cancelButton, swalClasses['default-outline']);
+    }
+  }
+
+  function renderButton(button, buttonType, params) {
+    toggle(button, params["show".concat(capitalizeFirstLetter(buttonType), "Button")], 'inline-block');
+    setInnerHtml(button, params["".concat(buttonType, "ButtonText")]); // Set caption text
+
+    button.setAttribute('aria-label', params["".concat(buttonType, "ButtonAriaLabel")]); // ARIA label
+    // Add buttons custom classes
+
+    button.className = swalClasses[buttonType];
+    applyCustomClass(button, params, "".concat(buttonType, "Button"));
+    addClass(button, params["".concat(buttonType, "ButtonClass")]);
+  }
+
+  function handleBackdropParam(container, backdrop) {
+    if (typeof backdrop === 'string') {
+      container.style.background = backdrop;
+    } else if (!backdrop) {
+      addClass([document.documentElement, document.body], swalClasses['no-backdrop']);
+    }
+  }
+
+  function handlePositionParam(container, position) {
+    if (position in swalClasses) {
+      addClass(container, swalClasses[position]);
+    } else {
+      warn('The "position" parameter is not valid, defaulting to "center"');
+      addClass(container, swalClasses.center);
+    }
+  }
+
+  function handleGrowParam(container, grow) {
+    if (grow && typeof grow === 'string') {
+      const growClass = "grow-".concat(grow);
+
+      if (growClass in swalClasses) {
+        addClass(container, swalClasses[growClass]);
+      }
+    }
+  }
+
+  const renderContainer = (instance, params) => {
+    const container = getContainer();
+
+    if (!container) {
+      return;
+    }
+
+    handleBackdropParam(container, params.backdrop);
+    handlePositionParam(container, params.position);
+    handleGrowParam(container, params.grow); // Custom class
+
+    applyCustomClass(container, params, 'container');
+  };
+
+  /**
+   * This module containts `WeakMap`s for each effectively-"private  property" that a `Swal` has.
+   * For example, to set the private property "foo" of `this` to "bar", you can `privateProps.foo.set(this, 'bar')`
+   * This is the approach that Babel will probably take to implement private methods/fields
+   *   https://github.com/tc39/proposal-private-methods
+   *   https://github.com/babel/babel/pull/7555
+   * Once we have the changes from that PR in Babel, and our core class fits reasonable in *one module*
+   *   then we can use that language feature.
+   */
+  var privateProps = {
+    awaitingPromise: new WeakMap(),
+    promise: new WeakMap(),
+    innerParams: new WeakMap(),
+    domCache: new WeakMap()
+  };
+
+  const inputTypes = ['input', 'file', 'range', 'select', 'radio', 'checkbox', 'textarea'];
+  const renderInput = (instance, params) => {
+    const popup = getPopup();
+    const innerParams = privateProps.innerParams.get(instance);
+    const rerender = !innerParams || params.input !== innerParams.input;
+    inputTypes.forEach(inputType => {
+      const inputClass = swalClasses[inputType];
+      const inputContainer = getChildByClass(popup, inputClass); // set attributes
+
+      setAttributes(inputType, params.inputAttributes); // set class
+
+      inputContainer.className = inputClass;
+
+      if (rerender) {
+        hide(inputContainer);
+      }
+    });
+
+    if (params.input) {
+      if (rerender) {
+        showInput(params);
+      } // set custom class
+
+
+      setCustomClass(params);
+    }
+  };
+
+  const showInput = params => {
+    if (!renderInputType[params.input]) {
+      return error("Unexpected type of input! Expected \"text\", \"email\", \"password\", \"number\", \"tel\", \"select\", \"radio\", \"checkbox\", \"textarea\", \"file\" or \"url\", got \"".concat(params.input, "\""));
+    }
+
+    const inputContainer = getInputContainer(params.input);
+    const input = renderInputType[params.input](inputContainer, params);
+    show(input); // input autofocus
+
+    setTimeout(() => {
+      focusInput(input);
+    });
+  };
+
+  const removeAttributes = input => {
+    for (let i = 0; i < input.attributes.length; i++) {
+      const attrName = input.attributes[i].name;
+
+      if (!['type', 'value', 'style'].includes(attrName)) {
+        input.removeAttribute(attrName);
+      }
+    }
+  };
+
+  const setAttributes = (inputType, inputAttributes) => {
+    const input = getInput(getPopup(), inputType);
+
+    if (!input) {
+      return;
+    }
+
+    removeAttributes(input);
+
+    for (const attr in inputAttributes) {
+      input.setAttribute(attr, inputAttributes[attr]);
+    }
+  };
+
+  const setCustomClass = params => {
+    const inputContainer = getInputContainer(params.input);
+
+    if (params.customClass) {
+      addClass(inputContainer, params.customClass.input);
+    }
+  };
+
+  const setInputPlaceholder = (input, params) => {
+    if (!input.placeholder || params.inputPlaceholder) {
+      input.placeholder = params.inputPlaceholder;
+    }
+  };
+
+  const setInputLabel = (input, prependTo, params) => {
+    if (params.inputLabel) {
+      input.id = swalClasses.input;
+      const label = document.createElement('label');
+      const labelClass = swalClasses['input-label'];
+      label.setAttribute('for', input.id);
+      label.className = labelClass;
+      addClass(label, params.customClass.inputLabel);
+      label.innerText = params.inputLabel;
+      prependTo.insertAdjacentElement('beforebegin', label);
+    }
+  };
+
+  const getInputContainer = inputType => {
+    const inputClass = swalClasses[inputType] ? swalClasses[inputType] : swalClasses.input;
+    return getChildByClass(getPopup(), inputClass);
+  };
+
+  const renderInputType = {};
+
+  renderInputType.text = renderInputType.email = renderInputType.password = renderInputType.number = renderInputType.tel = renderInputType.url = (input, params) => {
+    if (typeof params.inputValue === 'string' || typeof params.inputValue === 'number') {
+      input.value = params.inputValue;
+    } else if (!isPromise(params.inputValue)) {
+      warn("Unexpected type of inputValue! Expected \"string\", \"number\" or \"Promise\", got \"".concat(typeof params.inputValue, "\""));
+    }
+
+    setInputLabel(input, input, params);
+    setInputPlaceholder(input, params);
+    input.type = params.input;
+    return input;
+  };
+
+  renderInputType.file = (input, params) => {
+    setInputLabel(input, input, params);
+    setInputPlaceholder(input, params);
+    return input;
+  };
+
+  renderInputType.range = (range, params) => {
+    const rangeInput = range.querySelector('input');
+    const rangeOutput = range.querySelector('output');
+    rangeInput.value = params.inputValue;
+    rangeInput.type = params.input;
+    rangeOutput.value = params.inputValue;
+    setInputLabel(rangeInput, range, params);
+    return range;
+  };
+
+  renderInputType.select = (select, params) => {
+    select.textContent = '';
+
+    if (params.inputPlaceholder) {
+      const placeholder = document.createElement('option');
+      setInnerHtml(placeholder, params.inputPlaceholder);
+      placeholder.value = '';
+      placeholder.disabled = true;
+      placeholder.selected = true;
+      select.appendChild(placeholder);
+    }
+
+    setInputLabel(select, select, params);
+    return select;
+  };
+
+  renderInputType.radio = radio => {
+    radio.textContent = '';
+    return radio;
+  };
+
+  renderInputType.checkbox = (checkboxContainer, params) => {
+    const checkbox = getInput(getPopup(), 'checkbox');
+    checkbox.value = 1;
+    checkbox.id = swalClasses.checkbox;
+    checkbox.checked = Boolean(params.inputValue);
+    const label = checkboxContainer.querySelector('span');
+    setInnerHtml(label, params.inputPlaceholder);
+    return checkboxContainer;
+  };
+
+  renderInputType.textarea = (textarea, params) => {
+    textarea.value = params.inputValue;
+    setInputPlaceholder(textarea, params);
+    setInputLabel(textarea, textarea, params);
+
+    const getMargin = el => parseInt(window.getComputedStyle(el).marginLeft) + parseInt(window.getComputedStyle(el).marginRight);
+
+    setTimeout(() => {
+      // #2291
+      if ('MutationObserver' in window) {
+        // #1699
+        const initialPopupWidth = parseInt(window.getComputedStyle(getPopup()).width);
+
+        const textareaResizeHandler = () => {
+          const textareaWidth = textarea.offsetWidth + getMargin(textarea);
+
+          if (textareaWidth > initialPopupWidth) {
+            getPopup().style.width = "".concat(textareaWidth, "px");
+          } else {
+            getPopup().style.width = null;
+          }
+        };
+
+        new MutationObserver(textareaResizeHandler).observe(textarea, {
+          attributes: true,
+          attributeFilter: ['style']
+        });
+      }
+    });
+    return textarea;
+  };
+
+  const renderContent = (instance, params) => {
+    const htmlContainer = getHtmlContainer();
+    applyCustomClass(htmlContainer, params, 'htmlContainer'); // Content as HTML
+
+    if (params.html) {
+      parseHtmlToContainer(params.html, htmlContainer);
+      show(htmlContainer, 'block'); // Content as plain text
+    } else if (params.text) {
+      htmlContainer.textContent = params.text;
+      show(htmlContainer, 'block'); // No content
+    } else {
+      hide(htmlContainer);
+    }
+
+    renderInput(instance, params);
+  };
+
+  const renderFooter = (instance, params) => {
+    const footer = getFooter();
+    toggle(footer, params.footer);
+
+    if (params.footer) {
+      parseHtmlToContainer(params.footer, footer);
+    } // Custom class
+
+
+    applyCustomClass(footer, params, 'footer');
+  };
+
+  const renderCloseButton = (instance, params) => {
+    const closeButton = getCloseButton();
+    setInnerHtml(closeButton, params.closeButtonHtml); // Custom class
+
+    applyCustomClass(closeButton, params, 'closeButton');
+    toggle(closeButton, params.showCloseButton);
+    closeButton.setAttribute('aria-label', params.closeButtonAriaLabel);
+  };
+
+  const renderIcon = (instance, params) => {
+    const innerParams = privateProps.innerParams.get(instance);
+    const icon = getIcon(); // if the given icon already rendered, apply the styling without re-rendering the icon
+
+    if (innerParams && params.icon === innerParams.icon) {
+      // Custom or default content
+      setContent(icon, params);
+      applyStyles(icon, params);
+      return;
+    }
+
+    if (!params.icon && !params.iconHtml) {
+      return hide(icon);
+    }
+
+    if (params.icon && Object.keys(iconTypes).indexOf(params.icon) === -1) {
+      error("Unknown icon! Expected \"success\", \"error\", \"warning\", \"info\" or \"question\", got \"".concat(params.icon, "\""));
+      return hide(icon);
+    }
+
+    show(icon); // Custom or default content
+
+    setContent(icon, params);
+    applyStyles(icon, params); // Animate icon
+
+    addClass(icon, params.showClass.icon);
+  };
+
+  const applyStyles = (icon, params) => {
+    for (const iconType in iconTypes) {
+      if (params.icon !== iconType) {
+        removeClass(icon, iconTypes[iconType]);
+      }
+    }
+
+    addClass(icon, iconTypes[params.icon]); // Icon color
+
+    setColor(icon, params); // Success icon background color
+
+    adjustSuccessIconBackgoundColor(); // Custom class
+
+    applyCustomClass(icon, params, 'icon');
+  }; // Adjust success icon background color to match the popup background color
+
+
+  const adjustSuccessIconBackgoundColor = () => {
+    const popup = getPopup();
+    const popupBackgroundColor = window.getComputedStyle(popup).getPropertyValue('background-color');
+    const successIconParts = popup.querySelectorAll('[class^=swal2-success-circular-line], .swal2-success-fix');
+
+    for (let i = 0; i < successIconParts.length; i++) {
+      successIconParts[i].style.backgroundColor = popupBackgroundColor;
+    }
+  };
+
+  const setContent = (icon, params) => {
+    icon.textContent = '';
+
+    if (params.iconHtml) {
+      setInnerHtml(icon, iconContent(params.iconHtml));
+    } else if (params.icon === 'success') {
+      setInnerHtml(icon, "\n      <div class=\"swal2-success-circular-line-left\"></div>\n      <span class=\"swal2-success-line-tip\"></span> <span class=\"swal2-success-line-long\"></span>\n      <div class=\"swal2-success-ring\"></div> <div class=\"swal2-success-fix\"></div>\n      <div class=\"swal2-success-circular-line-right\"></div>\n    ");
+    } else if (params.icon === 'error') {
+      setInnerHtml(icon, "\n      <span class=\"swal2-x-mark\">\n        <span class=\"swal2-x-mark-line-left\"></span>\n        <span class=\"swal2-x-mark-line-right\"></span>\n      </span>\n    ");
+    } else {
+      const defaultIconHtml = {
+        question: '?',
+        warning: '!',
+        info: 'i'
+      };
+      setInnerHtml(icon, iconContent(defaultIconHtml[params.icon]));
+    }
+  };
+
+  const setColor = (icon, params) => {
+    if (!params.iconColor) {
+      return;
+    }
+
+    icon.style.color = params.iconColor;
+    icon.style.borderColor = params.iconColor;
+
+    for (const sel of ['.swal2-success-line-tip', '.swal2-success-line-long', '.swal2-x-mark-line-left', '.swal2-x-mark-line-right']) {
+      setStyle(icon, sel, 'backgroundColor', params.iconColor);
+    }
+
+    setStyle(icon, '.swal2-success-ring', 'borderColor', params.iconColor);
+  };
+
+  const iconContent = content => "<div class=\"".concat(swalClasses['icon-content'], "\">").concat(content, "</div>");
+
+  const renderImage = (instance, params) => {
+    const image = getImage();
+
+    if (!params.imageUrl) {
+      return hide(image);
+    }
+
+    show(image, ''); // Src, alt
+
+    image.setAttribute('src', params.imageUrl);
+    image.setAttribute('alt', params.imageAlt); // Width, height
+
+    applyNumericalStyle(image, 'width', params.imageWidth);
+    applyNumericalStyle(image, 'height', params.imageHeight); // Class
+
+    image.className = swalClasses.image;
+    applyCustomClass(image, params, 'image');
+  };
+
+  const createStepElement = step => {
+    const stepEl = document.createElement('li');
+    addClass(stepEl, swalClasses['progress-step']);
+    setInnerHtml(stepEl, step);
+    return stepEl;
+  };
+
+  const createLineElement = params => {
+    const lineEl = document.createElement('li');
+    addClass(lineEl, swalClasses['progress-step-line']);
+
+    if (params.progressStepsDistance) {
+      lineEl.style.width = params.progressStepsDistance;
+    }
+
+    return lineEl;
+  };
+
+  const renderProgressSteps = (instance, params) => {
+    const progressStepsContainer = getProgressSteps();
+
+    if (!params.progressSteps || params.progressSteps.length === 0) {
+      return hide(progressStepsContainer);
+    }
+
+    show(progressStepsContainer);
+    progressStepsContainer.textContent = '';
+
+    if (params.currentProgressStep >= params.progressSteps.length) {
+      warn('Invalid currentProgressStep parameter, it should be less than progressSteps.length ' + '(currentProgressStep like JS arrays starts from 0)');
+    }
+
+    params.progressSteps.forEach((step, index) => {
+      const stepEl = createStepElement(step);
+      progressStepsContainer.appendChild(stepEl);
+
+      if (index === params.currentProgressStep) {
+        addClass(stepEl, swalClasses['active-progress-step']);
+      }
+
+      if (index !== params.progressSteps.length - 1) {
+        const lineEl = createLineElement(params);
+        progressStepsContainer.appendChild(lineEl);
+      }
+    });
+  };
+
+  const renderTitle = (instance, params) => {
+    const title = getTitle();
+    toggle(title, params.title || params.titleText, 'block');
+
+    if (params.title) {
+      parseHtmlToContainer(params.title, title);
+    }
+
+    if (params.titleText) {
+      title.innerText = params.titleText;
+    } // Custom class
+
+
+    applyCustomClass(title, params, 'title');
+  };
+
+  const renderPopup = (instance, params) => {
+    const container = getContainer();
+    const popup = getPopup(); // Width
+
+    if (params.toast) {
+      // #2170
+      applyNumericalStyle(container, 'width', params.width);
+      popup.style.width = '100%';
+      popup.insertBefore(getLoader(), getIcon());
+    } else {
+      applyNumericalStyle(popup, 'width', params.width);
+    } // Padding
+
+
+    applyNumericalStyle(popup, 'padding', params.padding); // Background
+
+    if (params.background) {
+      popup.style.background = params.background;
+    }
+
+    hide(getValidationMessage()); // Classes
+
+    addClasses(popup, params);
+  };
+
+  const addClasses = (popup, params) => {
+    // Default Class + showClass when updating Swal.update({})
+    popup.className = "".concat(swalClasses.popup, " ").concat(isVisible(popup) ? params.showClass.popup : '');
+
+    if (params.toast) {
+      addClass([document.documentElement, document.body], swalClasses['toast-shown']);
+      addClass(popup, swalClasses.toast);
+    } else {
+      addClass(popup, swalClasses.modal);
+    } // Custom class
+
+
+    applyCustomClass(popup, params, 'popup');
+
+    if (typeof params.customClass === 'string') {
+      addClass(popup, params.customClass);
+    } // Icon class (#1842)
+
+
+    if (params.icon) {
+      addClass(popup, swalClasses["icon-".concat(params.icon)]);
+    }
+  };
+
+  const render = (instance, params) => {
+    renderPopup(instance, params);
+    renderContainer(instance, params);
+    renderProgressSteps(instance, params);
+    renderIcon(instance, params);
+    renderImage(instance, params);
+    renderTitle(instance, params);
+    renderCloseButton(instance, params);
+    renderContent(instance, params);
+    renderActions(instance, params);
+    renderFooter(instance, params);
+
+    if (typeof params.didRender === 'function') {
+      params.didRender(getPopup());
+    }
+  };
+
+  /*
+   * Global function to determine if SweetAlert2 popup is shown
+   */
+
+  const isVisible$1 = () => {
+    return isVisible(getPopup());
+  };
+  /*
+   * Global function to click 'Confirm' button
+   */
+
+  const clickConfirm = () => getConfirmButton() && getConfirmButton().click();
+  /*
+   * Global function to click 'Deny' button
+   */
+
+  const clickDeny = () => getDenyButton() && getDenyButton().click();
+  /*
+   * Global function to click 'Cancel' button
+   */
+
+  const clickCancel = () => getCancelButton() && getCancelButton().click();
+
+  function fire(...args) {
+    const Swal = this;
+    return new Swal(...args);
+  }
+
+  /**
+   * Returns an extended version of `Swal` containing `params` as defaults.
+   * Useful for reusing Swal configuration.
+   *
+   * For example:
+   *
+   * Before:
+   * const textPromptOptions = { input: 'text', showCancelButton: true }
+   * const {value: firstName} = await Swal.fire({ ...textPromptOptions, title: 'What is your first name?' })
+   * const {value: lastName} = await Swal.fire({ ...textPromptOptions, title: 'What is your last name?' })
+   *
+   * After:
+   * const TextPrompt = Swal.mixin({ input: 'text', showCancelButton: true })
+   * const {value: firstName} = await TextPrompt('What is your first name?')
+   * const {value: lastName} = await TextPrompt('What is your last name?')
+   *
+   * @param mixinParams
+   */
+  function mixin(mixinParams) {
+    class MixinSwal extends this {
+      _main(params, priorityMixinParams) {
+        return super._main(params, Object.assign({}, mixinParams, priorityMixinParams));
+      }
+
+    }
+
+    return MixinSwal;
+  }
+
+  /**
+   * Shows loader (spinner), this is useful with AJAX requests.
+   * By default the loader be shown instead of the "Confirm" button.
+   */
+
+  const showLoading = buttonToReplace => {
+    let popup = getPopup();
+
+    if (!popup) {
+      Swal.fire();
+    }
+
+    popup = getPopup();
+    const loader = getLoader();
+
+    if (isToast()) {
+      hide(getIcon());
+    } else {
+      replaceButton(popup, buttonToReplace);
+    }
+
+    show(loader);
+    popup.setAttribute('data-loading', true);
+    popup.setAttribute('aria-busy', true);
+    popup.focus();
+  };
+
+  const replaceButton = (popup, buttonToReplace) => {
+    const actions = getActions();
+    const loader = getLoader();
+
+    if (!buttonToReplace && isVisible(getConfirmButton())) {
+      buttonToReplace = getConfirmButton();
+    }
+
+    show(actions);
+
+    if (buttonToReplace) {
+      hide(buttonToReplace);
+      loader.setAttribute('data-button-to-replace', buttonToReplace.className);
+    }
+
+    loader.parentNode.insertBefore(loader, buttonToReplace);
+    addClass([popup, actions], swalClasses.loading);
+  };
+
+  const RESTORE_FOCUS_TIMEOUT = 100;
+
+  const globalState = {};
+
+  const focusPreviousActiveElement = () => {
+    if (globalState.previousActiveElement && globalState.previousActiveElement.focus) {
+      globalState.previousActiveElement.focus();
+      globalState.previousActiveElement = null;
+    } else if (document.body) {
+      document.body.focus();
+    }
+  }; // Restore previous active (focused) element
+
+
+  const restoreActiveElement = returnFocus => {
+    return new Promise(resolve => {
+      if (!returnFocus) {
+        return resolve();
+      }
+
+      const x = window.scrollX;
+      const y = window.scrollY;
+      globalState.restoreFocusTimeout = setTimeout(() => {
+        focusPreviousActiveElement();
+        resolve();
+      }, RESTORE_FOCUS_TIMEOUT); // issues/900
+
+      window.scrollTo(x, y);
+    });
+  };
+
+  /**
+   * If `timer` parameter is set, returns number of milliseconds of timer remained.
+   * Otherwise, returns undefined.
+   */
+
+  const getTimerLeft = () => {
+    return globalState.timeout && globalState.timeout.getTimerLeft();
+  };
+  /**
+   * Stop timer. Returns number of milliseconds of timer remained.
+   * If `timer` parameter isn't set, returns undefined.
+   */
+
+  const stopTimer = () => {
+    if (globalState.timeout) {
+      stopTimerProgressBar();
+      return globalState.timeout.stop();
+    }
+  };
+  /**
+   * Resume timer. Returns number of milliseconds of timer remained.
+   * If `timer` parameter isn't set, returns undefined.
+   */
+
+  const resumeTimer = () => {
+    if (globalState.timeout) {
+      const remaining = globalState.timeout.start();
+      animateTimerProgressBar(remaining);
+      return remaining;
+    }
+  };
+  /**
+   * Resume timer. Returns number of milliseconds of timer remained.
+   * If `timer` parameter isn't set, returns undefined.
+   */
+
+  const toggleTimer = () => {
+    const timer = globalState.timeout;
+    return timer && (timer.running ? stopTimer() : resumeTimer());
+  };
+  /**
+   * Increase timer. Returns number of milliseconds of an updated timer.
+   * If `timer` parameter isn't set, returns undefined.
+   */
+
+  const increaseTimer = n => {
+    if (globalState.timeout) {
+      const remaining = globalState.timeout.increase(n);
+      animateTimerProgressBar(remaining, true);
+      return remaining;
+    }
+  };
+  /**
+   * Check if timer is running. Returns true if timer is running
+   * or false if timer is paused or stopped.
+   * If `timer` parameter isn't set, returns undefined
+   */
+
+  const isTimerRunning = () => {
+    return globalState.timeout && globalState.timeout.isRunning();
+  };
+
+  let bodyClickListenerAdded = false;
+  const clickHandlers = {};
+  function bindClickHandler(attr = 'data-swal-template') {
+    clickHandlers[attr] = this;
+
+    if (!bodyClickListenerAdded) {
+      document.body.addEventListener('click', bodyClickListener);
+      bodyClickListenerAdded = true;
+    }
+  }
+
+  const bodyClickListener = event => {
+    for (let el = event.target; el && el !== document; el = el.parentNode) {
+      for (const attr in clickHandlers) {
+        const template = el.getAttribute(attr);
+
+        if (template) {
+          clickHandlers[attr].fire({
+            template
+          });
+          return;
+        }
+      }
+    }
+  };
+
+  const defaultParams = {
+    title: '',
+    titleText: '',
+    text: '',
+    html: '',
+    footer: '',
+    icon: undefined,
+    iconColor: undefined,
+    iconHtml: undefined,
+    template: undefined,
+    toast: false,
+    showClass: {
+      popup: 'swal2-show',
+      backdrop: 'swal2-backdrop-show',
+      icon: 'swal2-icon-show'
+    },
+    hideClass: {
+      popup: 'swal2-hide',
+      backdrop: 'swal2-backdrop-hide',
+      icon: 'swal2-icon-hide'
+    },
+    customClass: {},
+    target: 'body',
+    backdrop: true,
+    heightAuto: true,
+    allowOutsideClick: true,
+    allowEscapeKey: true,
+    allowEnterKey: true,
+    stopKeydownPropagation: true,
+    keydownListenerCapture: false,
+    showConfirmButton: true,
+    showDenyButton: false,
+    showCancelButton: false,
+    preConfirm: undefined,
+    preDeny: undefined,
+    confirmButtonText: 'OK',
+    confirmButtonAriaLabel: '',
+    confirmButtonColor: undefined,
+    denyButtonText: 'No',
+    denyButtonAriaLabel: '',
+    denyButtonColor: undefined,
+    cancelButtonText: 'Cancel',
+    cancelButtonAriaLabel: '',
+    cancelButtonColor: undefined,
+    buttonsStyling: true,
+    reverseButtons: false,
+    focusConfirm: true,
+    focusDeny: false,
+    focusCancel: false,
+    returnFocus: true,
+    showCloseButton: false,
+    closeButtonHtml: '&times;',
+    closeButtonAriaLabel: 'Close this dialog',
+    loaderHtml: '',
+    showLoaderOnConfirm: false,
+    showLoaderOnDeny: false,
+    imageUrl: undefined,
+    imageWidth: undefined,
+    imageHeight: undefined,
+    imageAlt: '',
+    timer: undefined,
+    timerProgressBar: false,
+    width: undefined,
+    padding: undefined,
+    background: undefined,
+    input: undefined,
+    inputPlaceholder: '',
+    inputLabel: '',
+    inputValue: '',
+    inputOptions: {},
+    inputAutoTrim: true,
+    inputAttributes: {},
+    inputValidator: undefined,
+    returnInputValueOnDeny: false,
+    validationMessage: undefined,
+    grow: false,
+    position: 'center',
+    progressSteps: [],
+    currentProgressStep: undefined,
+    progressStepsDistance: undefined,
+    willOpen: undefined,
+    didOpen: undefined,
+    didRender: undefined,
+    willClose: undefined,
+    didClose: undefined,
+    didDestroy: undefined,
+    scrollbarPadding: true
+  };
+  const updatableParams = ['allowEscapeKey', 'allowOutsideClick', 'background', 'buttonsStyling', 'cancelButtonAriaLabel', 'cancelButtonColor', 'cancelButtonText', 'closeButtonAriaLabel', 'closeButtonHtml', 'confirmButtonAriaLabel', 'confirmButtonColor', 'confirmButtonText', 'currentProgressStep', 'customClass', 'denyButtonAriaLabel', 'denyButtonColor', 'denyButtonText', 'didClose', 'didDestroy', 'footer', 'hideClass', 'html', 'icon', 'iconColor', 'iconHtml', 'imageAlt', 'imageHeight', 'imageUrl', 'imageWidth', 'preConfirm', 'preDeny', 'progressSteps', 'returnFocus', 'reverseButtons', 'showCancelButton', 'showCloseButton', 'showConfirmButton', 'showDenyButton', 'text', 'title', 'titleText', 'willClose'];
+  const deprecatedParams = {};
+  const toastIncompatibleParams = ['allowOutsideClick', 'allowEnterKey', 'backdrop', 'focusConfirm', 'focusDeny', 'focusCancel', 'returnFocus', 'heightAuto', 'keydownListenerCapture'];
+  /**
+   * Is valid parameter
+   * @param {String} paramName
+   */
+
+  const isValidParameter = paramName => {
+    return Object.prototype.hasOwnProperty.call(defaultParams, paramName);
+  };
+  /**
+   * Is valid parameter for Swal.update() method
+   * @param {String} paramName
+   */
+
+  const isUpdatableParameter = paramName => {
+    return updatableParams.indexOf(paramName) !== -1;
+  };
+  /**
+   * Is deprecated parameter
+   * @param {String} paramName
+   */
+
+  const isDeprecatedParameter = paramName => {
+    return deprecatedParams[paramName];
+  };
+
+  const checkIfParamIsValid = param => {
+    if (!isValidParameter(param)) {
+      warn("Unknown parameter \"".concat(param, "\""));
+    }
+  };
+
+  const checkIfToastParamIsValid = param => {
+    if (toastIncompatibleParams.includes(param)) {
+      warn("The parameter \"".concat(param, "\" is incompatible with toasts"));
+    }
+  };
+
+  const checkIfParamIsDeprecated = param => {
+    if (isDeprecatedParameter(param)) {
+      warnAboutDeprecation(param, isDeprecatedParameter(param));
+    }
+  };
+  /**
+   * Show relevant warnings for given params
+   *
+   * @param params
+   */
+
+
+  const showWarningsForParams = params => {
+    if (!params.backdrop && params.allowOutsideClick) {
+      warn('"allowOutsideClick" parameter requires `backdrop` parameter to be set to `true`');
+    }
+
+    for (const param in params) {
+      checkIfParamIsValid(param);
+
+      if (params.toast) {
+        checkIfToastParamIsValid(param);
+      }
+
+      checkIfParamIsDeprecated(param);
+    }
+  };
+
+
+
+  var staticMethods = /*#__PURE__*/Object.freeze({
+    isValidParameter: isValidParameter,
+    isUpdatableParameter: isUpdatableParameter,
+    isDeprecatedParameter: isDeprecatedParameter,
+    argsToParams: argsToParams,
+    isVisible: isVisible$1,
+    clickConfirm: clickConfirm,
+    clickDeny: clickDeny,
+    clickCancel: clickCancel,
+    getContainer: getContainer,
+    getPopup: getPopup,
+    getTitle: getTitle,
+    getHtmlContainer: getHtmlContainer,
+    getImage: getImage,
+    getIcon: getIcon,
+    getInputLabel: getInputLabel,
+    getCloseButton: getCloseButton,
+    getActions: getActions,
+    getConfirmButton: getConfirmButton,
+    getDenyButton: getDenyButton,
+    getCancelButton: getCancelButton,
+    getLoader: getLoader,
+    getFooter: getFooter,
+    getTimerProgressBar: getTimerProgressBar,
+    getFocusableElements: getFocusableElements,
+    getValidationMessage: getValidationMessage,
+    isLoading: isLoading,
+    fire: fire,
+    mixin: mixin,
+    showLoading: showLoading,
+    enableLoading: showLoading,
+    getTimerLeft: getTimerLeft,
+    stopTimer: stopTimer,
+    resumeTimer: resumeTimer,
+    toggleTimer: toggleTimer,
+    increaseTimer: increaseTimer,
+    isTimerRunning: isTimerRunning,
+    bindClickHandler: bindClickHandler
+  });
+
+  /**
+   * Hides loader and shows back the button which was hidden by .showLoading()
+   */
+
+  function hideLoading() {
+    // do nothing if popup is closed
+    const innerParams = privateProps.innerParams.get(this);
+
+    if (!innerParams) {
+      return;
+    }
+
+    const domCache = privateProps.domCache.get(this);
+    hide(domCache.loader);
+
+    if (isToast()) {
+      if (innerParams.icon) {
+        show(getIcon());
+      }
+    } else {
+      showRelatedButton(domCache);
+    }
+
+    removeClass([domCache.popup, domCache.actions], swalClasses.loading);
+    domCache.popup.removeAttribute('aria-busy');
+    domCache.popup.removeAttribute('data-loading');
+    domCache.confirmButton.disabled = false;
+    domCache.denyButton.disabled = false;
+    domCache.cancelButton.disabled = false;
+  }
+
+  const showRelatedButton = domCache => {
+    const buttonToReplace = domCache.popup.getElementsByClassName(domCache.loader.getAttribute('data-button-to-replace'));
+
+    if (buttonToReplace.length) {
+      show(buttonToReplace[0], 'inline-block');
+    } else if (allButtonsAreHidden()) {
+      hide(domCache.actions);
+    }
+  };
+
+  function getInput$1(instance) {
+    const innerParams = privateProps.innerParams.get(instance || this);
+    const domCache = privateProps.domCache.get(instance || this);
+
+    if (!domCache) {
+      return null;
+    }
+
+    return getInput(domCache.popup, innerParams.input);
+  }
+
+  const fixScrollbar = () => {
+    // for queues, do not do this more than once
+    if (states.previousBodyPadding !== null) {
+      return;
+    } // if the body has overflow
+
+
+    if (document.body.scrollHeight > window.innerHeight) {
+      // add padding so the content doesn't shift after removal of scrollbar
+      states.previousBodyPadding = parseInt(window.getComputedStyle(document.body).getPropertyValue('padding-right'));
+      document.body.style.paddingRight = "".concat(states.previousBodyPadding + measureScrollbar(), "px");
+    }
+  };
+  const undoScrollbar = () => {
+    if (states.previousBodyPadding !== null) {
+      document.body.style.paddingRight = "".concat(states.previousBodyPadding, "px");
+      states.previousBodyPadding = null;
+    }
+  };
+
+  /* istanbul ignore file */
+
+  const iOSfix = () => {
+    const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream || navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
+
+    if (iOS && !hasClass(document.body, swalClasses.iosfix)) {
+      const offset = document.body.scrollTop;
+      document.body.style.top = "".concat(offset * -1, "px");
+      addClass(document.body, swalClasses.iosfix);
+      lockBodyScroll();
+      addBottomPaddingForTallPopups(); // #1948
+    }
+  };
+
+  const addBottomPaddingForTallPopups = () => {
+    const safari = !navigator.userAgent.match(/(CriOS|FxiOS|EdgiOS|YaBrowser|UCBrowser)/i);
+
+    if (safari) {
+      const bottomPanelHeight = 44;
+
+      if (getPopup().scrollHeight > window.innerHeight - bottomPanelHeight) {
+        getContainer().style.paddingBottom = "".concat(bottomPanelHeight, "px");
+      }
+    }
+  };
+
+  const lockBodyScroll = () => {
+    // #1246
+    const container = getContainer();
+    let preventTouchMove;
+
+    container.ontouchstart = e => {
+      preventTouchMove = shouldPreventTouchMove(e);
+    };
+
+    container.ontouchmove = e => {
+      if (preventTouchMove) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    };
+  };
+
+  const shouldPreventTouchMove = event => {
+    const target = event.target;
+    const container = getContainer();
+
+    if (isStylys(event) || isZoom(event)) {
+      return false;
+    }
+
+    if (target === container) {
+      return true;
+    }
+
+    if (!isScrollable(container) && target.tagName !== 'INPUT' && // #1603
+    target.tagName !== 'TEXTAREA' && // #2266
+    !(isScrollable(getHtmlContainer()) && // #1944
+    getHtmlContainer().contains(target))) {
+      return true;
+    }
+
+    return false;
+  };
+
+  const isStylys = event => {
+    // #1786
+    return event.touches && event.touches.length && event.touches[0].touchType === 'stylus';
+  };
+
+  const isZoom = event => {
+    // #1891
+    return event.touches && event.touches.length > 1;
+  };
+
+  const undoIOSfix = () => {
+    if (hasClass(document.body, swalClasses.iosfix)) {
+      const offset = parseInt(document.body.style.top, 10);
+      removeClass(document.body, swalClasses.iosfix);
+      document.body.style.top = '';
+      document.body.scrollTop = offset * -1;
+    }
+  };
+
+  // Adding aria-hidden="true" to elements outside of the active modal dialog ensures that
+  // elements not within the active modal dialog will not be surfaced if a user opens a screen
+  // reader’s list of elements (headings, form controls, landmarks, etc.) in the document.
+
+  const setAriaHidden = () => {
+    const bodyChildren = toArray(document.body.children);
+    bodyChildren.forEach(el => {
+      if (el === getContainer() || el.contains(getContainer())) {
+        return;
+      }
+
+      if (el.hasAttribute('aria-hidden')) {
+        el.setAttribute('data-previous-aria-hidden', el.getAttribute('aria-hidden'));
+      }
+
+      el.setAttribute('aria-hidden', 'true');
+    });
+  };
+  const unsetAriaHidden = () => {
+    const bodyChildren = toArray(document.body.children);
+    bodyChildren.forEach(el => {
+      if (el.hasAttribute('data-previous-aria-hidden')) {
+        el.setAttribute('aria-hidden', el.getAttribute('data-previous-aria-hidden'));
+        el.removeAttribute('data-previous-aria-hidden');
+      } else {
+        el.removeAttribute('aria-hidden');
+      }
+    });
+  };
+
+  /**
+   * This module containts `WeakMap`s for each effectively-"private  property" that a `Swal` has.
+   * For example, to set the private property "foo" of `this` to "bar", you can `privateProps.foo.set(this, 'bar')`
+   * This is the approach that Babel will probably take to implement private methods/fields
+   *   https://github.com/tc39/proposal-private-methods
+   *   https://github.com/babel/babel/pull/7555
+   * Once we have the changes from that PR in Babel, and our core class fits reasonable in *one module*
+   *   then we can use that language feature.
+   */
+  var privateMethods = {
+    swalPromiseResolve: new WeakMap(),
+    swalPromiseReject: new WeakMap()
+  };
+
+  /*
+   * Instance method to close sweetAlert
+   */
+
+  function removePopupAndResetState(instance, container, returnFocus, didClose) {
+    if (isToast()) {
+      triggerDidCloseAndDispose(instance, didClose);
+    } else {
+      restoreActiveElement(returnFocus).then(() => triggerDidCloseAndDispose(instance, didClose));
+      globalState.keydownTarget.removeEventListener('keydown', globalState.keydownHandler, {
+        capture: globalState.keydownListenerCapture
+      });
+      globalState.keydownHandlerAdded = false;
+    }
+
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent); // workaround for #2088
+    // for some reason removing the container in Safari will scroll the document to bottom
+
+    if (isSafari) {
+      container.setAttribute('style', 'display:none !important');
+      container.removeAttribute('class');
+      container.innerHTML = '';
+    } else {
+      container.remove();
+    }
+
+    if (isModal()) {
+      undoScrollbar();
+      undoIOSfix();
+      unsetAriaHidden();
+    }
+
+    removeBodyClasses();
+  }
+
+  function removeBodyClasses() {
+    removeClass([document.documentElement, document.body], [swalClasses.shown, swalClasses['height-auto'], swalClasses['no-backdrop'], swalClasses['toast-shown']]);
+  }
+
+  function close(resolveValue) {
+    resolveValue = prepareResolveValue(resolveValue);
+    const swalPromiseResolve = privateMethods.swalPromiseResolve.get(this);
+    const didClose = triggerClosePopup(this);
+
+    if (this.isAwaitingPromise()) {
+      // A swal awaiting for a promise (after a click on Confirm or Deny) cannot be dismissed anymore #2335
+      if (!resolveValue.isDismissed) {
+        handleAwaitingPromise(this);
+        swalPromiseResolve(resolveValue);
+      }
+    } else if (didClose) {
+      // Resolve Swal promise
+      swalPromiseResolve(resolveValue);
+    }
+  }
+  function isAwaitingPromise() {
+    return !!privateProps.awaitingPromise.get(this);
+  }
+
+  const triggerClosePopup = instance => {
+    const popup = getPopup();
+
+    if (!popup) {
+      return false;
+    }
+
+    const innerParams = privateProps.innerParams.get(instance);
+
+    if (!innerParams || hasClass(popup, innerParams.hideClass.popup)) {
+      return false;
+    }
+
+    removeClass(popup, innerParams.showClass.popup);
+    addClass(popup, innerParams.hideClass.popup);
+    const backdrop = getContainer();
+    removeClass(backdrop, innerParams.showClass.backdrop);
+    addClass(backdrop, innerParams.hideClass.backdrop);
+    handlePopupAnimation(instance, popup, innerParams);
+    return true;
+  };
+
+  function rejectPromise(error) {
+    const rejectPromise = privateMethods.swalPromiseReject.get(this);
+    handleAwaitingPromise(this);
+
+    if (rejectPromise) {
+      // Reject Swal promise
+      rejectPromise(error);
+    }
+  }
+
+  const handleAwaitingPromise = instance => {
+    if (instance.isAwaitingPromise()) {
+      privateProps.awaitingPromise.delete(instance); // The instance might have been previously partly destroyed, we must resume the destroy process in this case #2335
+
+      if (!privateProps.innerParams.get(instance)) {
+        instance._destroy();
+      }
+    }
+  };
+
+  const prepareResolveValue = resolveValue => {
+    // When user calls Swal.close()
+    if (typeof resolveValue === 'undefined') {
+      return {
+        isConfirmed: false,
+        isDenied: false,
+        isDismissed: true
+      };
+    }
+
+    return Object.assign({
+      isConfirmed: false,
+      isDenied: false,
+      isDismissed: false
+    }, resolveValue);
+  };
+
+  const handlePopupAnimation = (instance, popup, innerParams) => {
+    const container = getContainer(); // If animation is supported, animate
+
+    const animationIsSupported = animationEndEvent && hasCssAnimation(popup);
+
+    if (typeof innerParams.willClose === 'function') {
+      innerParams.willClose(popup);
+    }
+
+    if (animationIsSupported) {
+      animatePopup(instance, popup, container, innerParams.returnFocus, innerParams.didClose);
+    } else {
+      // Otherwise, remove immediately
+      removePopupAndResetState(instance, container, innerParams.returnFocus, innerParams.didClose);
+    }
+  };
+
+  const animatePopup = (instance, popup, container, returnFocus, didClose) => {
+    globalState.swalCloseEventFinishedCallback = removePopupAndResetState.bind(null, instance, container, returnFocus, didClose);
+    popup.addEventListener(animationEndEvent, function (e) {
+      if (e.target === popup) {
+        globalState.swalCloseEventFinishedCallback();
+        delete globalState.swalCloseEventFinishedCallback;
+      }
+    });
+  };
+
+  const triggerDidCloseAndDispose = (instance, didClose) => {
+    setTimeout(() => {
+      if (typeof didClose === 'function') {
+        didClose.bind(instance.params)();
+      }
+
+      instance._destroy();
+    });
+  };
+
+  function setButtonsDisabled(instance, buttons, disabled) {
+    const domCache = privateProps.domCache.get(instance);
+    buttons.forEach(button => {
+      domCache[button].disabled = disabled;
+    });
+  }
+
+  function setInputDisabled(input, disabled) {
+    if (!input) {
+      return false;
+    }
+
+    if (input.type === 'radio') {
+      const radiosContainer = input.parentNode.parentNode;
+      const radios = radiosContainer.querySelectorAll('input');
+
+      for (let i = 0; i < radios.length; i++) {
+        radios[i].disabled = disabled;
+      }
+    } else {
+      input.disabled = disabled;
+    }
+  }
+
+  function enableButtons() {
+    setButtonsDisabled(this, ['confirmButton', 'denyButton', 'cancelButton'], false);
+  }
+  function disableButtons() {
+    setButtonsDisabled(this, ['confirmButton', 'denyButton', 'cancelButton'], true);
+  }
+  function enableInput() {
+    return setInputDisabled(this.getInput(), false);
+  }
+  function disableInput() {
+    return setInputDisabled(this.getInput(), true);
+  }
+
+  function showValidationMessage(error) {
+    const domCache = privateProps.domCache.get(this);
+    const params = privateProps.innerParams.get(this);
+    setInnerHtml(domCache.validationMessage, error);
+    domCache.validationMessage.className = swalClasses['validation-message'];
+
+    if (params.customClass && params.customClass.validationMessage) {
+      addClass(domCache.validationMessage, params.customClass.validationMessage);
+    }
+
+    show(domCache.validationMessage);
+    const input = this.getInput();
+
+    if (input) {
+      input.setAttribute('aria-invalid', true);
+      input.setAttribute('aria-describedby', swalClasses['validation-message']);
+      focusInput(input);
+      addClass(input, swalClasses.inputerror);
+    }
+  } // Hide block with validation message
+
+  function resetValidationMessage$1() {
+    const domCache = privateProps.domCache.get(this);
+
+    if (domCache.validationMessage) {
+      hide(domCache.validationMessage);
+    }
+
+    const input = this.getInput();
+
+    if (input) {
+      input.removeAttribute('aria-invalid');
+      input.removeAttribute('aria-describedby');
+      removeClass(input, swalClasses.inputerror);
+    }
+  }
+
+  function getProgressSteps$1() {
+    const domCache = privateProps.domCache.get(this);
+    return domCache.progressSteps;
+  }
+
+  class Timer {
+    constructor(callback, delay) {
+      this.callback = callback;
+      this.remaining = delay;
+      this.running = false;
+      this.start();
+    }
+
+    start() {
+      if (!this.running) {
+        this.running = true;
+        this.started = new Date();
+        this.id = setTimeout(this.callback, this.remaining);
+      }
+
+      return this.remaining;
+    }
+
+    stop() {
+      if (this.running) {
+        this.running = false;
+        clearTimeout(this.id);
+        this.remaining -= new Date() - this.started;
+      }
+
+      return this.remaining;
+    }
+
+    increase(n) {
+      const running = this.running;
+
+      if (running) {
+        this.stop();
+      }
+
+      this.remaining += n;
+
+      if (running) {
+        this.start();
+      }
+
+      return this.remaining;
+    }
+
+    getTimerLeft() {
+      if (this.running) {
+        this.stop();
+        this.start();
+      }
+
+      return this.remaining;
+    }
+
+    isRunning() {
+      return this.running;
+    }
+
+  }
+
+  var defaultInputValidators = {
+    email: (string, validationMessage) => {
+      return /^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9-]{2,24}$/.test(string) ? Promise.resolve() : Promise.resolve(validationMessage || 'Invalid email address');
+    },
+    url: (string, validationMessage) => {
+      // taken from https://stackoverflow.com/a/3809435 with a small change from #1306 and #2013
+      return /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,63}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/.test(string) ? Promise.resolve() : Promise.resolve(validationMessage || 'Invalid URL');
+    }
+  };
+
+  function setDefaultInputValidators(params) {
+    // Use default `inputValidator` for supported input types if not provided
+    if (!params.inputValidator) {
+      Object.keys(defaultInputValidators).forEach(key => {
+        if (params.input === key) {
+          params.inputValidator = defaultInputValidators[key];
+        }
+      });
+    }
+  }
+
+  function validateCustomTargetElement(params) {
+    // Determine if the custom target element is valid
+    if (!params.target || typeof params.target === 'string' && !document.querySelector(params.target) || typeof params.target !== 'string' && !params.target.appendChild) {
+      warn('Target parameter is not valid, defaulting to "body"');
+      params.target = 'body';
+    }
+  }
+  /**
+   * Set type, text and actions on popup
+   *
+   * @param params
+   * @returns {boolean}
+   */
+
+
+  function setParameters(params) {
+    setDefaultInputValidators(params); // showLoaderOnConfirm && preConfirm
+
+    if (params.showLoaderOnConfirm && !params.preConfirm) {
+      warn('showLoaderOnConfirm is set to true, but preConfirm is not defined.\n' + 'showLoaderOnConfirm should be used together with preConfirm, see usage example:\n' + 'https://sweetalert2.github.io/#ajax-request');
+    }
+
+    validateCustomTargetElement(params); // Replace newlines with <br> in title
+
+    if (typeof params.title === 'string') {
+      params.title = params.title.split('\n').join('<br />');
+    }
+
+    init(params);
+  }
+
+  const swalStringParams = ['swal-title', 'swal-html', 'swal-footer'];
+  const getTemplateParams = params => {
+    const template = typeof params.template === 'string' ? document.querySelector(params.template) : params.template;
+
+    if (!template) {
+      return {};
+    }
+
+    const templateContent = template.content;
+    showWarningsForElements(templateContent);
+    const result = Object.assign(getSwalParams(templateContent), getSwalButtons(templateContent), getSwalImage(templateContent), getSwalIcon(templateContent), getSwalInput(templateContent), getSwalStringParams(templateContent, swalStringParams));
+    return result;
+  };
+
+  const getSwalParams = templateContent => {
+    const result = {};
+    toArray(templateContent.querySelectorAll('swal-param')).forEach(param => {
+      showWarningsForAttributes(param, ['name', 'value']);
+      const paramName = param.getAttribute('name');
+      let value = param.getAttribute('value');
+
+      if (typeof defaultParams[paramName] === 'boolean' && value === 'false') {
+        value = false;
+      }
+
+      if (typeof defaultParams[paramName] === 'object') {
+        value = JSON.parse(value);
+      }
+
+      result[paramName] = value;
+    });
+    return result;
+  };
+
+  const getSwalButtons = templateContent => {
+    const result = {};
+    toArray(templateContent.querySelectorAll('swal-button')).forEach(button => {
+      showWarningsForAttributes(button, ['type', 'color', 'aria-label']);
+      const type = button.getAttribute('type');
+      result["".concat(type, "ButtonText")] = button.innerHTML;
+      result["show".concat(capitalizeFirstLetter(type), "Button")] = true;
+
+      if (button.hasAttribute('color')) {
+        result["".concat(type, "ButtonColor")] = button.getAttribute('color');
+      }
+
+      if (button.hasAttribute('aria-label')) {
+        result["".concat(type, "ButtonAriaLabel")] = button.getAttribute('aria-label');
+      }
+    });
+    return result;
+  };
+
+  const getSwalImage = templateContent => {
+    const result = {};
+    const image = templateContent.querySelector('swal-image');
+
+    if (image) {
+      showWarningsForAttributes(image, ['src', 'width', 'height', 'alt']);
+
+      if (image.hasAttribute('src')) {
+        result.imageUrl = image.getAttribute('src');
+      }
+
+      if (image.hasAttribute('width')) {
+        result.imageWidth = image.getAttribute('width');
+      }
+
+      if (image.hasAttribute('height')) {
+        result.imageHeight = image.getAttribute('height');
+      }
+
+      if (image.hasAttribute('alt')) {
+        result.imageAlt = image.getAttribute('alt');
+      }
+    }
+
+    return result;
+  };
+
+  const getSwalIcon = templateContent => {
+    const result = {};
+    const icon = templateContent.querySelector('swal-icon');
+
+    if (icon) {
+      showWarningsForAttributes(icon, ['type', 'color']);
+
+      if (icon.hasAttribute('type')) {
+        result.icon = icon.getAttribute('type');
+      }
+
+      if (icon.hasAttribute('color')) {
+        result.iconColor = icon.getAttribute('color');
+      }
+
+      result.iconHtml = icon.innerHTML;
+    }
+
+    return result;
+  };
+
+  const getSwalInput = templateContent => {
+    const result = {};
+    const input = templateContent.querySelector('swal-input');
+
+    if (input) {
+      showWarningsForAttributes(input, ['type', 'label', 'placeholder', 'value']);
+      result.input = input.getAttribute('type') || 'text';
+
+      if (input.hasAttribute('label')) {
+        result.inputLabel = input.getAttribute('label');
+      }
+
+      if (input.hasAttribute('placeholder')) {
+        result.inputPlaceholder = input.getAttribute('placeholder');
+      }
+
+      if (input.hasAttribute('value')) {
+        result.inputValue = input.getAttribute('value');
+      }
+    }
+
+    const inputOptions = templateContent.querySelectorAll('swal-input-option');
+
+    if (inputOptions.length) {
+      result.inputOptions = {};
+      toArray(inputOptions).forEach(option => {
+        showWarningsForAttributes(option, ['value']);
+        const optionValue = option.getAttribute('value');
+        const optionName = option.innerHTML;
+        result.inputOptions[optionValue] = optionName;
+      });
+    }
+
+    return result;
+  };
+
+  const getSwalStringParams = (templateContent, paramNames) => {
+    const result = {};
+
+    for (const i in paramNames) {
+      const paramName = paramNames[i];
+      const tag = templateContent.querySelector(paramName);
+
+      if (tag) {
+        showWarningsForAttributes(tag, []);
+        result[paramName.replace(/^swal-/, '')] = tag.innerHTML.trim();
+      }
+    }
+
+    return result;
+  };
+
+  const showWarningsForElements = template => {
+    const allowedElements = swalStringParams.concat(['swal-param', 'swal-button', 'swal-image', 'swal-icon', 'swal-input', 'swal-input-option']);
+    toArray(template.children).forEach(el => {
+      const tagName = el.tagName.toLowerCase();
+
+      if (allowedElements.indexOf(tagName) === -1) {
+        warn("Unrecognized element <".concat(tagName, ">"));
+      }
+    });
+  };
+
+  const showWarningsForAttributes = (el, allowedAttributes) => {
+    toArray(el.attributes).forEach(attribute => {
+      if (allowedAttributes.indexOf(attribute.name) === -1) {
+        warn(["Unrecognized attribute \"".concat(attribute.name, "\" on <").concat(el.tagName.toLowerCase(), ">."), "".concat(allowedAttributes.length ? "Allowed attributes are: ".concat(allowedAttributes.join(', ')) : 'To set the value, use HTML within the element.')]);
+      }
+    });
+  };
+
+  const SHOW_CLASS_TIMEOUT = 10;
+  /**
+   * Open popup, add necessary classes and styles, fix scrollbar
+   *
+   * @param params
+   */
+
+  const openPopup = params => {
+    const container = getContainer();
+    const popup = getPopup();
+
+    if (typeof params.willOpen === 'function') {
+      params.willOpen(popup);
+    }
+
+    const bodyStyles = window.getComputedStyle(document.body);
+    const initialBodyOverflow = bodyStyles.overflowY;
+    addClasses$1(container, popup, params); // scrolling is 'hidden' until animation is done, after that 'auto'
+
+    setTimeout(() => {
+      setScrollingVisibility(container, popup);
+    }, SHOW_CLASS_TIMEOUT);
+
+    if (isModal()) {
+      fixScrollContainer(container, params.scrollbarPadding, initialBodyOverflow);
+      setAriaHidden();
+    }
+
+    if (!isToast() && !globalState.previousActiveElement) {
+      globalState.previousActiveElement = document.activeElement;
+    }
+
+    if (typeof params.didOpen === 'function') {
+      setTimeout(() => params.didOpen(popup));
+    }
+
+    removeClass(container, swalClasses['no-transition']);
+  };
+
+  const swalOpenAnimationFinished = event => {
+    const popup = getPopup();
+
+    if (event.target !== popup) {
+      return;
+    }
+
+    const container = getContainer();
+    popup.removeEventListener(animationEndEvent, swalOpenAnimationFinished);
+    container.style.overflowY = 'auto';
+  };
+
+  const setScrollingVisibility = (container, popup) => {
+    if (animationEndEvent && hasCssAnimation(popup)) {
+      container.style.overflowY = 'hidden';
+      popup.addEventListener(animationEndEvent, swalOpenAnimationFinished);
+    } else {
+      container.style.overflowY = 'auto';
+    }
+  };
+
+  const fixScrollContainer = (container, scrollbarPadding, initialBodyOverflow) => {
+    iOSfix();
+
+    if (scrollbarPadding && initialBodyOverflow !== 'hidden') {
+      fixScrollbar();
+    } // sweetalert2/issues/1247
+
+
+    setTimeout(() => {
+      container.scrollTop = 0;
+    });
+  };
+
+  const addClasses$1 = (container, popup, params) => {
+    addClass(container, params.showClass.backdrop); // the workaround with setting/unsetting opacity is needed for #2019 and 2059
+
+    popup.style.setProperty('opacity', '0', 'important');
+    show(popup, 'grid');
+    setTimeout(() => {
+      // Animate popup right after showing it
+      addClass(popup, params.showClass.popup); // and remove the opacity workaround
+
+      popup.style.removeProperty('opacity');
+    }, SHOW_CLASS_TIMEOUT); // 10ms in order to fix #2062
+
+    addClass([document.documentElement, document.body], swalClasses.shown);
+
+    if (params.heightAuto && params.backdrop && !params.toast) {
+      addClass([document.documentElement, document.body], swalClasses['height-auto']);
+    }
+  };
+
+  const handleInputOptionsAndValue = (instance, params) => {
+    if (params.input === 'select' || params.input === 'radio') {
+      handleInputOptions(instance, params);
+    } else if (['text', 'email', 'number', 'tel', 'textarea'].includes(params.input) && (hasToPromiseFn(params.inputValue) || isPromise(params.inputValue))) {
+      showLoading(getConfirmButton());
+      handleInputValue(instance, params);
+    }
+  };
+  const getInputValue = (instance, innerParams) => {
+    const input = instance.getInput();
+
+    if (!input) {
+      return null;
+    }
+
+    switch (innerParams.input) {
+      case 'checkbox':
+        return getCheckboxValue(input);
+
+      case 'radio':
+        return getRadioValue(input);
+
+      case 'file':
+        return getFileValue(input);
+
+      default:
+        return innerParams.inputAutoTrim ? input.value.trim() : input.value;
+    }
+  };
+
+  const getCheckboxValue = input => input.checked ? 1 : 0;
+
+  const getRadioValue = input => input.checked ? input.value : null;
+
+  const getFileValue = input => input.files.length ? input.getAttribute('multiple') !== null ? input.files : input.files[0] : null;
+
+  const handleInputOptions = (instance, params) => {
+    const popup = getPopup();
+
+    const processInputOptions = inputOptions => populateInputOptions[params.input](popup, formatInputOptions(inputOptions), params);
+
+    if (hasToPromiseFn(params.inputOptions) || isPromise(params.inputOptions)) {
+      showLoading(getConfirmButton());
+      asPromise(params.inputOptions).then(inputOptions => {
+        instance.hideLoading();
+        processInputOptions(inputOptions);
+      });
+    } else if (typeof params.inputOptions === 'object') {
+      processInputOptions(params.inputOptions);
+    } else {
+      error("Unexpected type of inputOptions! Expected object, Map or Promise, got ".concat(typeof params.inputOptions));
+    }
+  };
+
+  const handleInputValue = (instance, params) => {
+    const input = instance.getInput();
+    hide(input);
+    asPromise(params.inputValue).then(inputValue => {
+      input.value = params.input === 'number' ? parseFloat(inputValue) || 0 : "".concat(inputValue);
+      show(input);
+      input.focus();
+      instance.hideLoading();
+    }).catch(err => {
+      error("Error in inputValue promise: ".concat(err));
+      input.value = '';
+      show(input);
+      input.focus();
+      instance.hideLoading();
+    });
+  };
+
+  const populateInputOptions = {
+    select: (popup, inputOptions, params) => {
+      const select = getChildByClass(popup, swalClasses.select);
+
+      const renderOption = (parent, optionLabel, optionValue) => {
+        const option = document.createElement('option');
+        option.value = optionValue;
+        setInnerHtml(option, optionLabel);
+        option.selected = isSelected(optionValue, params.inputValue);
+        parent.appendChild(option);
+      };
+
+      inputOptions.forEach(inputOption => {
+        const optionValue = inputOption[0];
+        const optionLabel = inputOption[1]; // <optgroup> spec:
+        // https://www.w3.org/TR/html401/interact/forms.html#h-17.6
+        // "...all OPTGROUP elements must be specified directly within a SELECT element (i.e., groups may not be nested)..."
+        // check whether this is a <optgroup>
+
+        if (Array.isArray(optionLabel)) {
+          // if it is an array, then it is an <optgroup>
+          const optgroup = document.createElement('optgroup');
+          optgroup.label = optionValue;
+          optgroup.disabled = false; // not configurable for now
+
+          select.appendChild(optgroup);
+          optionLabel.forEach(o => renderOption(optgroup, o[1], o[0]));
+        } else {
+          // case of <option>
+          renderOption(select, optionLabel, optionValue);
+        }
+      });
+      select.focus();
+    },
+    radio: (popup, inputOptions, params) => {
+      const radio = getChildByClass(popup, swalClasses.radio);
+      inputOptions.forEach(inputOption => {
+        const radioValue = inputOption[0];
+        const radioLabel = inputOption[1];
+        const radioInput = document.createElement('input');
+        const radioLabelElement = document.createElement('label');
+        radioInput.type = 'radio';
+        radioInput.name = swalClasses.radio;
+        radioInput.value = radioValue;
+
+        if (isSelected(radioValue, params.inputValue)) {
+          radioInput.checked = true;
+        }
+
+        const label = document.createElement('span');
+        setInnerHtml(label, radioLabel);
+        label.className = swalClasses.label;
+        radioLabelElement.appendChild(radioInput);
+        radioLabelElement.appendChild(label);
+        radio.appendChild(radioLabelElement);
+      });
+      const radios = radio.querySelectorAll('input');
+
+      if (radios.length) {
+        radios[0].focus();
+      }
+    }
+  };
+  /**
+   * Converts `inputOptions` into an array of `[value, label]`s
+   * @param inputOptions
+   */
+
+  const formatInputOptions = inputOptions => {
+    const result = [];
+
+    if (typeof Map !== 'undefined' && inputOptions instanceof Map) {
+      inputOptions.forEach((value, key) => {
+        let valueFormatted = value;
+
+        if (typeof valueFormatted === 'object') {
+          // case of <optgroup>
+          valueFormatted = formatInputOptions(valueFormatted);
+        }
+
+        result.push([key, valueFormatted]);
+      });
+    } else {
+      Object.keys(inputOptions).forEach(key => {
+        let valueFormatted = inputOptions[key];
+
+        if (typeof valueFormatted === 'object') {
+          // case of <optgroup>
+          valueFormatted = formatInputOptions(valueFormatted);
+        }
+
+        result.push([key, valueFormatted]);
+      });
+    }
+
+    return result;
+  };
+
+  const isSelected = (optionValue, inputValue) => {
+    return inputValue && inputValue.toString() === optionValue.toString();
+  };
+
+  const handleConfirmButtonClick = instance => {
+    const innerParams = privateProps.innerParams.get(instance);
+    instance.disableButtons();
+
+    if (innerParams.input) {
+      handleConfirmOrDenyWithInput(instance, 'confirm');
+    } else {
+      confirm(instance, true);
+    }
+  };
+  const handleDenyButtonClick = instance => {
+    const innerParams = privateProps.innerParams.get(instance);
+    instance.disableButtons();
+
+    if (innerParams.returnInputValueOnDeny) {
+      handleConfirmOrDenyWithInput(instance, 'deny');
+    } else {
+      deny(instance, false);
+    }
+  };
+  const handleCancelButtonClick = (instance, dismissWith) => {
+    instance.disableButtons();
+    dismissWith(DismissReason.cancel);
+  };
+
+  const handleConfirmOrDenyWithInput = (instance, type
+  /* 'confirm' | 'deny' */
+  ) => {
+    const innerParams = privateProps.innerParams.get(instance);
+    const inputValue = getInputValue(instance, innerParams);
+
+    if (innerParams.inputValidator) {
+      handleInputValidator(instance, inputValue, type);
+    } else if (!instance.getInput().checkValidity()) {
+      instance.enableButtons();
+      instance.showValidationMessage(innerParams.validationMessage);
+    } else if (type === 'deny') {
+      deny(instance, inputValue);
+    } else {
+      confirm(instance, inputValue);
+    }
+  };
+
+  const handleInputValidator = (instance, inputValue, type
+  /* 'confirm' | 'deny' */
+  ) => {
+    const innerParams = privateProps.innerParams.get(instance);
+    instance.disableInput();
+    const validationPromise = Promise.resolve().then(() => asPromise(innerParams.inputValidator(inputValue, innerParams.validationMessage)));
+    validationPromise.then(validationMessage => {
+      instance.enableButtons();
+      instance.enableInput();
+
+      if (validationMessage) {
+        instance.showValidationMessage(validationMessage);
+      } else if (type === 'deny') {
+        deny(instance, inputValue);
+      } else {
+        confirm(instance, inputValue);
+      }
+    });
+  };
+
+  const deny = (instance, value) => {
+    const innerParams = privateProps.innerParams.get(instance || undefined);
+
+    if (innerParams.showLoaderOnDeny) {
+      showLoading(getDenyButton());
+    }
+
+    if (innerParams.preDeny) {
+      privateProps.awaitingPromise.set(instance || undefined, true); // Flagging the instance as awaiting a promise so it's own promise's reject/resolve methods doesnt get destroyed until the result from this preDeny's promise is received
+
+      const preDenyPromise = Promise.resolve().then(() => asPromise(innerParams.preDeny(value, innerParams.validationMessage)));
+      preDenyPromise.then(preDenyValue => {
+        if (preDenyValue === false) {
+          instance.hideLoading();
+        } else {
+          instance.closePopup({
+            isDenied: true,
+            value: typeof preDenyValue === 'undefined' ? value : preDenyValue
+          });
+        }
+      }).catch(error$$1 => rejectWith(instance || undefined, error$$1));
+    } else {
+      instance.closePopup({
+        isDenied: true,
+        value
+      });
+    }
+  };
+
+  const succeedWith = (instance, value) => {
+    instance.closePopup({
+      isConfirmed: true,
+      value
+    });
+  };
+
+  const rejectWith = (instance, error$$1) => {
+    instance.rejectPromise(error$$1);
+  };
+
+  const confirm = (instance, value) => {
+    const innerParams = privateProps.innerParams.get(instance || undefined);
+
+    if (innerParams.showLoaderOnConfirm) {
+      showLoading();
+    }
+
+    if (innerParams.preConfirm) {
+      instance.resetValidationMessage();
+      privateProps.awaitingPromise.set(instance || undefined, true); // Flagging the instance as awaiting a promise so it's own promise's reject/resolve methods doesnt get destroyed until the result from this preConfirm's promise is received
+
+      const preConfirmPromise = Promise.resolve().then(() => asPromise(innerParams.preConfirm(value, innerParams.validationMessage)));
+      preConfirmPromise.then(preConfirmValue => {
+        if (isVisible(getValidationMessage()) || preConfirmValue === false) {
+          instance.hideLoading();
+        } else {
+          succeedWith(instance, typeof preConfirmValue === 'undefined' ? value : preConfirmValue);
+        }
+      }).catch(error$$1 => rejectWith(instance || undefined, error$$1));
+    } else {
+      succeedWith(instance, value);
+    }
+  };
+
+  const addKeydownHandler = (instance, globalState, innerParams, dismissWith) => {
+    if (globalState.keydownTarget && globalState.keydownHandlerAdded) {
+      globalState.keydownTarget.removeEventListener('keydown', globalState.keydownHandler, {
+        capture: globalState.keydownListenerCapture
+      });
+      globalState.keydownHandlerAdded = false;
+    }
+
+    if (!innerParams.toast) {
+      globalState.keydownHandler = e => keydownHandler(instance, e, dismissWith);
+
+      globalState.keydownTarget = innerParams.keydownListenerCapture ? window : getPopup();
+      globalState.keydownListenerCapture = innerParams.keydownListenerCapture;
+      globalState.keydownTarget.addEventListener('keydown', globalState.keydownHandler, {
+        capture: globalState.keydownListenerCapture
+      });
+      globalState.keydownHandlerAdded = true;
+    }
+  }; // Focus handling
+
+  const setFocus = (innerParams, index, increment) => {
+    const focusableElements = getFocusableElements(); // search for visible elements and select the next possible match
+
+    if (focusableElements.length) {
+      index = index + increment; // rollover to first item
+
+      if (index === focusableElements.length) {
+        index = 0; // go to last item
+      } else if (index === -1) {
+        index = focusableElements.length - 1;
+      }
+
+      return focusableElements[index].focus();
+    } // no visible focusable elements, focus the popup
+
+
+    getPopup().focus();
+  };
+  const arrowKeysNextButton = ['ArrowRight', 'ArrowDown'];
+  const arrowKeysPreviousButton = ['ArrowLeft', 'ArrowUp'];
+
+  const keydownHandler = (instance, e, dismissWith) => {
+    const innerParams = privateProps.innerParams.get(instance);
+
+    if (!innerParams) {
+      return; // This instance has already been destroyed
+    }
+
+    if (innerParams.stopKeydownPropagation) {
+      e.stopPropagation();
+    } // ENTER
+
+
+    if (e.key === 'Enter') {
+      handleEnter(instance, e, innerParams); // TAB
+    } else if (e.key === 'Tab') {
+      handleTab(e, innerParams); // ARROWS - switch focus between buttons
+    } else if ([...arrowKeysNextButton, ...arrowKeysPreviousButton].includes(e.key)) {
+      handleArrows(e.key); // ESC
+    } else if (e.key === 'Escape') {
+      handleEsc(e, innerParams, dismissWith);
+    }
+  };
+
+  const handleEnter = (instance, e, innerParams) => {
+    // #720 #721
+    if (e.isComposing) {
+      return;
+    }
+
+    if (e.target && instance.getInput() && e.target.outerHTML === instance.getInput().outerHTML) {
+      if (['textarea', 'file'].includes(innerParams.input)) {
+        return; // do not submit
+      }
+
+      clickConfirm();
+      e.preventDefault();
+    }
+  };
+
+  const handleTab = (e, innerParams) => {
+    const targetElement = e.target;
+    const focusableElements = getFocusableElements();
+    let btnIndex = -1;
+
+    for (let i = 0; i < focusableElements.length; i++) {
+      if (targetElement === focusableElements[i]) {
+        btnIndex = i;
+        break;
+      }
+    }
+
+    if (!e.shiftKey) {
+      // Cycle to the next button
+      setFocus(innerParams, btnIndex, 1);
+    } else {
+      // Cycle to the prev button
+      setFocus(innerParams, btnIndex, -1);
+    }
+
+    e.stopPropagation();
+    e.preventDefault();
+  };
+
+  const handleArrows = key => {
+    const confirmButton = getConfirmButton();
+    const denyButton = getDenyButton();
+    const cancelButton = getCancelButton();
+
+    if (![confirmButton, denyButton, cancelButton].includes(document.activeElement)) {
+      return;
+    }
+
+    const sibling = arrowKeysNextButton.includes(key) ? 'nextElementSibling' : 'previousElementSibling';
+    const buttonToFocus = document.activeElement[sibling];
+
+    if (buttonToFocus) {
+      buttonToFocus.focus();
+    }
+  };
+
+  const handleEsc = (e, innerParams, dismissWith) => {
+    if (callIfFunction(innerParams.allowEscapeKey)) {
+      e.preventDefault();
+      dismissWith(DismissReason.esc);
+    }
+  };
+
+  const handlePopupClick = (instance, domCache, dismissWith) => {
+    const innerParams = privateProps.innerParams.get(instance);
+
+    if (innerParams.toast) {
+      handleToastClick(instance, domCache, dismissWith);
+    } else {
+      // Ignore click events that had mousedown on the popup but mouseup on the container
+      // This can happen when the user drags a slider
+      handleModalMousedown(domCache); // Ignore click events that had mousedown on the container but mouseup on the popup
+
+      handleContainerMousedown(domCache);
+      handleModalClick(instance, domCache, dismissWith);
+    }
+  };
+
+  const handleToastClick = (instance, domCache, dismissWith) => {
+    // Closing toast by internal click
+    domCache.popup.onclick = () => {
+      const innerParams = privateProps.innerParams.get(instance);
+
+      if (innerParams.showConfirmButton || innerParams.showDenyButton || innerParams.showCancelButton || innerParams.showCloseButton || innerParams.timer || innerParams.input) {
+        return;
+      }
+
+      dismissWith(DismissReason.close);
+    };
+  };
+
+  let ignoreOutsideClick = false;
+
+  const handleModalMousedown = domCache => {
+    domCache.popup.onmousedown = () => {
+      domCache.container.onmouseup = function (e) {
+        domCache.container.onmouseup = undefined; // We only check if the mouseup target is the container because usually it doesn't
+        // have any other direct children aside of the popup
+
+        if (e.target === domCache.container) {
+          ignoreOutsideClick = true;
+        }
+      };
+    };
+  };
+
+  const handleContainerMousedown = domCache => {
+    domCache.container.onmousedown = () => {
+      domCache.popup.onmouseup = function (e) {
+        domCache.popup.onmouseup = undefined; // We also need to check if the mouseup target is a child of the popup
+
+        if (e.target === domCache.popup || domCache.popup.contains(e.target)) {
+          ignoreOutsideClick = true;
+        }
+      };
+    };
+  };
+
+  const handleModalClick = (instance, domCache, dismissWith) => {
+    domCache.container.onclick = e => {
+      const innerParams = privateProps.innerParams.get(instance);
+
+      if (ignoreOutsideClick) {
+        ignoreOutsideClick = false;
+        return;
+      }
+
+      if (e.target === domCache.container && callIfFunction(innerParams.allowOutsideClick)) {
+        dismissWith(DismissReason.backdrop);
+      }
+    };
+  };
+
+  function _main(userParams, mixinParams = {}) {
+    showWarningsForParams(Object.assign({}, mixinParams, userParams));
+
+    if (globalState.currentInstance) {
+      globalState.currentInstance._destroy();
+
+      if (isModal()) {
+        unsetAriaHidden();
+      }
+    }
+
+    globalState.currentInstance = this;
+    const innerParams = prepareParams(userParams, mixinParams);
+    setParameters(innerParams);
+    Object.freeze(innerParams); // clear the previous timer
+
+    if (globalState.timeout) {
+      globalState.timeout.stop();
+      delete globalState.timeout;
+    } // clear the restore focus timeout
+
+
+    clearTimeout(globalState.restoreFocusTimeout);
+    const domCache = populateDomCache(this);
+    render(this, innerParams);
+    privateProps.innerParams.set(this, innerParams);
+    return swalPromise(this, domCache, innerParams);
+  }
+
+  const prepareParams = (userParams, mixinParams) => {
+    const templateParams = getTemplateParams(userParams);
+    const params = Object.assign({}, defaultParams, mixinParams, templateParams, userParams); // precedence is described in #2131
+
+    params.showClass = Object.assign({}, defaultParams.showClass, params.showClass);
+    params.hideClass = Object.assign({}, defaultParams.hideClass, params.hideClass);
+    return params;
+  };
+
+  const swalPromise = (instance, domCache, innerParams) => {
+    return new Promise((resolve, reject) => {
+      // functions to handle all closings/dismissals
+      const dismissWith = dismiss => {
+        instance.closePopup({
+          isDismissed: true,
+          dismiss
+        });
+      };
+
+      privateMethods.swalPromiseResolve.set(instance, resolve);
+      privateMethods.swalPromiseReject.set(instance, reject);
+
+      domCache.confirmButton.onclick = () => handleConfirmButtonClick(instance);
+
+      domCache.denyButton.onclick = () => handleDenyButtonClick(instance);
+
+      domCache.cancelButton.onclick = () => handleCancelButtonClick(instance, dismissWith);
+
+      domCache.closeButton.onclick = () => dismissWith(DismissReason.close);
+
+      handlePopupClick(instance, domCache, dismissWith);
+      addKeydownHandler(instance, globalState, innerParams, dismissWith);
+      handleInputOptionsAndValue(instance, innerParams);
+      openPopup(innerParams);
+      setupTimer(globalState, innerParams, dismissWith);
+      initFocus(domCache, innerParams); // Scroll container to top on open (#1247, #1946)
+
+      setTimeout(() => {
+        domCache.container.scrollTop = 0;
+      });
+    });
+  };
+
+  const populateDomCache = instance => {
+    const domCache = {
+      popup: getPopup(),
+      container: getContainer(),
+      actions: getActions(),
+      confirmButton: getConfirmButton(),
+      denyButton: getDenyButton(),
+      cancelButton: getCancelButton(),
+      loader: getLoader(),
+      closeButton: getCloseButton(),
+      validationMessage: getValidationMessage(),
+      progressSteps: getProgressSteps()
+    };
+    privateProps.domCache.set(instance, domCache);
+    return domCache;
+  };
+
+  const setupTimer = (globalState$$1, innerParams, dismissWith) => {
+    const timerProgressBar = getTimerProgressBar();
+    hide(timerProgressBar);
+
+    if (innerParams.timer) {
+      globalState$$1.timeout = new Timer(() => {
+        dismissWith('timer');
+        delete globalState$$1.timeout;
+      }, innerParams.timer);
+
+      if (innerParams.timerProgressBar) {
+        show(timerProgressBar);
+        setTimeout(() => {
+          if (globalState$$1.timeout && globalState$$1.timeout.running) {
+            // timer can be already stopped or unset at this point
+            animateTimerProgressBar(innerParams.timer);
+          }
+        });
+      }
+    }
+  };
+
+  const initFocus = (domCache, innerParams) => {
+    if (innerParams.toast) {
+      return;
+    }
+
+    if (!callIfFunction(innerParams.allowEnterKey)) {
+      return blurActiveElement();
+    }
+
+    if (!focusButton(domCache, innerParams)) {
+      setFocus(innerParams, -1, 1);
+    }
+  };
+
+  const focusButton = (domCache, innerParams) => {
+    if (innerParams.focusDeny && isVisible(domCache.denyButton)) {
+      domCache.denyButton.focus();
+      return true;
+    }
+
+    if (innerParams.focusCancel && isVisible(domCache.cancelButton)) {
+      domCache.cancelButton.focus();
+      return true;
+    }
+
+    if (innerParams.focusConfirm && isVisible(domCache.confirmButton)) {
+      domCache.confirmButton.focus();
+      return true;
+    }
+
+    return false;
+  };
+
+  const blurActiveElement = () => {
+    if (document.activeElement && typeof document.activeElement.blur === 'function') {
+      document.activeElement.blur();
+    }
+  };
+
+  /**
+   * Updates popup parameters.
+   */
+
+  function update(params) {
+    const popup = getPopup();
+    const innerParams = privateProps.innerParams.get(this);
+
+    if (!popup || hasClass(popup, innerParams.hideClass.popup)) {
+      return warn("You're trying to update the closed or closing popup, that won't work. Use the update() method in preConfirm parameter or show a new popup.");
+    }
+
+    const validUpdatableParams = {}; // assign valid params from `params` to `defaults`
+
+    Object.keys(params).forEach(param => {
+      if (Swal.isUpdatableParameter(param)) {
+        validUpdatableParams[param] = params[param];
+      } else {
+        warn("Invalid parameter to update: \"".concat(param, "\". Updatable params are listed here: https://github.com/sweetalert2/sweetalert2/blob/master/src/utils/params.js\n\nIf you think this parameter should be updatable, request it here: https://github.com/sweetalert2/sweetalert2/issues/new?template=02_feature_request.md"));
+      }
+    });
+    const updatedParams = Object.assign({}, innerParams, validUpdatableParams);
+    render(this, updatedParams);
+    privateProps.innerParams.set(this, updatedParams);
+    Object.defineProperties(this, {
+      params: {
+        value: Object.assign({}, this.params, params),
+        writable: false,
+        enumerable: true
+      }
+    });
+  }
+
+  function _destroy() {
+    const domCache = privateProps.domCache.get(this);
+    const innerParams = privateProps.innerParams.get(this);
+
+    if (!innerParams) {
+      disposeWeakMaps(this); // The WeakMaps might have been partly destroyed, we must recall it to dispose any remaining weakmaps #2335
+
+      return; // This instance has already been destroyed
+    } // Check if there is another Swal closing
+
+
+    if (domCache.popup && globalState.swalCloseEventFinishedCallback) {
+      globalState.swalCloseEventFinishedCallback();
+      delete globalState.swalCloseEventFinishedCallback;
+    } // Check if there is a swal disposal defer timer
+
+
+    if (globalState.deferDisposalTimer) {
+      clearTimeout(globalState.deferDisposalTimer);
+      delete globalState.deferDisposalTimer;
+    }
+
+    if (typeof innerParams.didDestroy === 'function') {
+      innerParams.didDestroy();
+    }
+
+    disposeSwal(this);
+  }
+
+  const disposeSwal = instance => {
+    disposeWeakMaps(instance); // Unset this.params so GC will dispose it (#1569)
+
+    delete instance.params; // Unset globalState props so GC will dispose globalState (#1569)
+
+    delete globalState.keydownHandler;
+    delete globalState.keydownTarget; // Unset currentInstance
+
+    delete globalState.currentInstance;
+  };
+
+  const disposeWeakMaps = instance => {
+    // If the current instance is awaiting a promise result, we keep the privateMethods to call them once the promise result is retreived #2335
+    if (instance.isAwaitingPromise()) {
+      unsetWeakMaps(privateProps, instance);
+      privateProps.awaitingPromise.set(instance, true);
+    } else {
+      unsetWeakMaps(privateMethods, instance);
+      unsetWeakMaps(privateProps, instance);
+    }
+  };
+
+  const unsetWeakMaps = (obj, instance) => {
+    for (const i in obj) {
+      obj[i].delete(instance);
+    }
+  };
+
+
+
+  var instanceMethods = /*#__PURE__*/Object.freeze({
+    hideLoading: hideLoading,
+    disableLoading: hideLoading,
+    getInput: getInput$1,
+    close: close,
+    isAwaitingPromise: isAwaitingPromise,
+    rejectPromise: rejectPromise,
+    closePopup: close,
+    closeModal: close,
+    closeToast: close,
+    enableButtons: enableButtons,
+    disableButtons: disableButtons,
+    enableInput: enableInput,
+    disableInput: disableInput,
+    showValidationMessage: showValidationMessage,
+    resetValidationMessage: resetValidationMessage$1,
+    getProgressSteps: getProgressSteps$1,
+    _main: _main,
+    update: update,
+    _destroy: _destroy
+  });
+
+  let currentInstance;
+
+  class SweetAlert {
+    constructor(...args) {
+      // Prevent run in Node env
+      if (typeof window === 'undefined') {
+        return;
+      }
+
+      currentInstance = this;
+      const outerParams = Object.freeze(this.constructor.argsToParams(args));
+      Object.defineProperties(this, {
+        params: {
+          value: outerParams,
+          writable: false,
+          enumerable: true,
+          configurable: true
+        }
+      });
+
+      const promise = this._main(this.params);
+
+      privateProps.promise.set(this, promise);
+    } // `catch` cannot be the name of a module export, so we define our thenable methods here instead
+
+
+    then(onFulfilled) {
+      const promise = privateProps.promise.get(this);
+      return promise.then(onFulfilled);
+    }
+
+    finally(onFinally) {
+      const promise = privateProps.promise.get(this);
+      return promise.finally(onFinally);
+    }
+
+  } // Assign instance methods from src/instanceMethods/*.js to prototype
+
+
+  Object.assign(SweetAlert.prototype, instanceMethods); // Assign static methods from src/staticMethods/*.js to constructor
+
+  Object.assign(SweetAlert, staticMethods); // Proxy to instance methods to constructor, for now, for backwards compatibility
+
+  Object.keys(instanceMethods).forEach(key => {
+    SweetAlert[key] = function (...args) {
+      if (currentInstance) {
+        return currentInstance[key](...args);
+      }
+    };
+  });
+  SweetAlert.DismissReason = DismissReason;
+  SweetAlert.version = '11.1.9';
+
+  const Swal = SweetAlert;
+  Swal.default = Swal;
+
+  return Swal;
+
+}));
+if (typeof this !== 'undefined' && this.Sweetalert2){  this.swal = this.sweetAlert = this.Swal = this.SweetAlert = this.Sweetalert2}
+
+"undefined"!=typeof document&&function(e,t){var n=e.createElement("style");if(e.getElementsByTagName("head")[0].appendChild(n),n.styleSheet)n.styleSheet.disabled||(n.styleSheet.cssText=t);else try{n.innerHTML=t}catch(e){n.innerText=t}}(document,".swal2-popup.swal2-toast{box-sizing:border-box;grid-column:1/4!important;grid-row:1/4!important;grid-template-columns:1fr 99fr 1fr;padding:1em;overflow-y:hidden;background:#fff;box-shadow:0 0 1px rgba(0,0,0,.075),0 1px 2px rgba(0,0,0,.075),1px 2px 4px rgba(0,0,0,.075),1px 3px 8px rgba(0,0,0,.075),2px 4px 16px rgba(0,0,0,.075);pointer-events:all}.swal2-popup.swal2-toast>*{grid-column:2}.swal2-popup.swal2-toast .swal2-title{margin:.5em 1em;padding:0;font-size:1em;text-align:initial}.swal2-popup.swal2-toast .swal2-loading{justify-content:center}.swal2-popup.swal2-toast .swal2-input{height:2em;margin:.5em;font-size:1em}.swal2-popup.swal2-toast .swal2-validation-message{font-size:1em}.swal2-popup.swal2-toast .swal2-footer{margin:.5em 0 0;padding:.5em 0 0;font-size:.8em}.swal2-popup.swal2-toast .swal2-close{grid-column:3/3;grid-row:1/99;align-self:center;width:.8em;height:.8em;margin:0;font-size:2em}.swal2-popup.swal2-toast .swal2-html-container{margin:.5em 1em;padding:0;font-size:1em;text-align:initial}.swal2-popup.swal2-toast .swal2-html-container:empty{padding:0}.swal2-popup.swal2-toast .swal2-loader{grid-column:1;grid-row:1/99;align-self:center;width:2em;height:2em;margin:.25em}.swal2-popup.swal2-toast .swal2-icon{grid-column:1;grid-row:1/99;align-self:center;width:2em;min-width:2em;height:2em;margin:0 .5em 0 0}.swal2-popup.swal2-toast .swal2-icon .swal2-icon-content{display:flex;align-items:center;font-size:1.8em;font-weight:700}.swal2-popup.swal2-toast .swal2-icon.swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line]{top:.875em;width:1.375em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:.3125em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:.3125em}.swal2-popup.swal2-toast .swal2-actions{justify-content:flex-start;height:auto;margin:0;margin-top:.5em;padding:0 .5em}.swal2-popup.swal2-toast .swal2-styled{margin:.25em .5em;padding:.4em .6em;font-size:1em}.swal2-popup.swal2-toast .swal2-success{border-color:#a5dc86}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line]{position:absolute;width:1.6em;height:3em;transform:rotate(45deg);border-radius:50%}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=left]{top:-.8em;left:-.5em;transform:rotate(-45deg);transform-origin:2em 2em;border-radius:4em 0 0 4em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=right]{top:-.25em;left:.9375em;transform-origin:0 1.5em;border-radius:0 4em 4em 0}.swal2-popup.swal2-toast .swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-popup.swal2-toast .swal2-success .swal2-success-fix{top:0;left:.4375em;width:.4375em;height:2.6875em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line]{height:.3125em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=tip]{top:1.125em;left:.1875em;width:.75em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=long]{top:.9375em;right:.1875em;width:1.375em}.swal2-popup.swal2-toast .swal2-success.swal2-icon-show .swal2-success-line-tip{-webkit-animation:swal2-toast-animate-success-line-tip .75s;animation:swal2-toast-animate-success-line-tip .75s}.swal2-popup.swal2-toast .swal2-success.swal2-icon-show .swal2-success-line-long{-webkit-animation:swal2-toast-animate-success-line-long .75s;animation:swal2-toast-animate-success-line-long .75s}.swal2-popup.swal2-toast.swal2-show{-webkit-animation:swal2-toast-show .5s;animation:swal2-toast-show .5s}.swal2-popup.swal2-toast.swal2-hide{-webkit-animation:swal2-toast-hide .1s forwards;animation:swal2-toast-hide .1s forwards}.swal2-container{display:grid;position:fixed;z-index:1060;top:0;right:0;bottom:0;left:0;box-sizing:border-box;grid-template-areas:\"top-start     top            top-end\" \"center-start  center         center-end\" \"bottom-start  bottom-center  bottom-end\";grid-template-rows:minmax(-webkit-min-content,auto) minmax(-webkit-min-content,auto) minmax(-webkit-min-content,auto);grid-template-rows:minmax(min-content,auto) minmax(min-content,auto) minmax(min-content,auto);height:100%;padding:.625em;overflow-x:hidden;transition:background-color .1s;-webkit-overflow-scrolling:touch}.swal2-container.swal2-backdrop-show,.swal2-container.swal2-noanimation{background:rgba(0,0,0,.4)}.swal2-container.swal2-backdrop-hide{background:0 0!important}.swal2-container.swal2-bottom-start,.swal2-container.swal2-center-start,.swal2-container.swal2-top-start{grid-template-columns:minmax(0,1fr) auto auto}.swal2-container.swal2-bottom,.swal2-container.swal2-center,.swal2-container.swal2-top{grid-template-columns:auto minmax(0,1fr) auto}.swal2-container.swal2-bottom-end,.swal2-container.swal2-center-end,.swal2-container.swal2-top-end{grid-template-columns:auto auto minmax(0,1fr)}.swal2-container.swal2-top-start>.swal2-popup{align-self:start}.swal2-container.swal2-top>.swal2-popup{grid-column:2;align-self:start;justify-self:center}.swal2-container.swal2-top-end>.swal2-popup,.swal2-container.swal2-top-right>.swal2-popup{grid-column:3;align-self:start;justify-self:end}.swal2-container.swal2-center-left>.swal2-popup,.swal2-container.swal2-center-start>.swal2-popup{grid-row:2;align-self:center}.swal2-container.swal2-center>.swal2-popup{grid-column:2;grid-row:2;align-self:center;justify-self:center}.swal2-container.swal2-center-end>.swal2-popup,.swal2-container.swal2-center-right>.swal2-popup{grid-column:3;grid-row:2;align-self:center;justify-self:end}.swal2-container.swal2-bottom-left>.swal2-popup,.swal2-container.swal2-bottom-start>.swal2-popup{grid-column:1;grid-row:3;align-self:end}.swal2-container.swal2-bottom>.swal2-popup{grid-column:2;grid-row:3;justify-self:center;align-self:end}.swal2-container.swal2-bottom-end>.swal2-popup,.swal2-container.swal2-bottom-right>.swal2-popup{grid-column:3;grid-row:3;align-self:end;justify-self:end}.swal2-container.swal2-grow-fullscreen>.swal2-popup,.swal2-container.swal2-grow-row>.swal2-popup{grid-column:1/4;width:100%}.swal2-container.swal2-grow-column>.swal2-popup,.swal2-container.swal2-grow-fullscreen>.swal2-popup{grid-row:1/4;align-self:stretch}.swal2-container.swal2-no-transition{transition:none!important}.swal2-popup{display:none;position:relative;box-sizing:border-box;grid-template-columns:minmax(0,100%);width:32em;max-width:100%;padding:0 0 1.25em;border:none;border-radius:5px;background:#fff;color:#545454;font-family:inherit;font-size:1rem}.swal2-popup:focus{outline:0}.swal2-popup.swal2-loading{overflow-y:hidden}.swal2-title{position:relative;max-width:100%;margin:0;padding:.8em 1em 0;color:#595959;font-size:1.875em;font-weight:600;text-align:center;text-transform:none;word-wrap:break-word}.swal2-actions{display:flex;z-index:1;box-sizing:border-box;flex-wrap:wrap;align-items:center;justify-content:center;width:auto;margin:1.25em auto 0;padding:0}.swal2-actions:not(.swal2-loading) .swal2-styled[disabled]{opacity:.4}.swal2-actions:not(.swal2-loading) .swal2-styled:hover{background-image:linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,.1))}.swal2-actions:not(.swal2-loading) .swal2-styled:active{background-image:linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.2))}.swal2-loader{display:none;align-items:center;justify-content:center;width:2.2em;height:2.2em;margin:0 1.875em;-webkit-animation:swal2-rotate-loading 1.5s linear 0s infinite normal;animation:swal2-rotate-loading 1.5s linear 0s infinite normal;border-width:.25em;border-style:solid;border-radius:100%;border-color:#2778c4 transparent #2778c4 transparent}.swal2-styled{margin:.3125em;padding:.625em 1.1em;transition:box-shadow .1s;box-shadow:0 0 0 3px transparent;font-weight:500}.swal2-styled:not([disabled]){cursor:pointer}.swal2-styled.swal2-confirm{border:0;border-radius:.25em;background:initial;background-color:#7367f0;color:#fff;font-size:1em}.swal2-styled.swal2-confirm:focus{box-shadow:0 0 0 3px rgba(115,103,240,.5)}.swal2-styled.swal2-deny{border:0;border-radius:.25em;background:initial;background-color:#ea5455;color:#fff;font-size:1em}.swal2-styled.swal2-deny:focus{box-shadow:0 0 0 3px rgba(234,84,85,.5)}.swal2-styled.swal2-cancel{border:0;border-radius:.25em;background:initial;background-color:#6e7d88;color:#fff;font-size:1em}.swal2-styled.swal2-cancel:focus{box-shadow:0 0 0 3px rgba(110,125,136,.5)}.swal2-styled.swal2-default-outline:focus{box-shadow:0 0 0 3px rgba(100,150,200,.5)}.swal2-styled:focus{outline:0}.swal2-styled::-moz-focus-inner{border:0}.swal2-footer{justify-content:center;margin:1em 0 0;padding:1em 1em 0;border-top:1px solid #eee;color:#545454;font-size:1em}.swal2-timer-progress-bar-container{position:absolute;right:0;bottom:0;left:0;grid-column:auto!important;height:.25em;overflow:hidden;border-bottom-right-radius:5px;border-bottom-left-radius:5px}.swal2-timer-progress-bar{width:100%;height:.25em;background:rgba(0,0,0,.2)}.swal2-image{max-width:100%;margin:2em auto 1em}.swal2-close{z-index:2;align-items:center;justify-content:center;width:1.2em;height:1.2em;margin-top:0;margin-right:0;margin-bottom:-1.2em;padding:0;overflow:hidden;transition:color .1s,box-shadow .1s;border:none;border-radius:5px;background:0 0;color:#ccc;font-family:serif;font-family:monospace;font-size:2.5em;cursor:pointer;justify-self:end}.swal2-close:hover{transform:none;background:0 0;color:#f27474}.swal2-close:focus{outline:0;box-shadow:inset 0 0 0 3px rgba(100,150,200,.5)}.swal2-close::-moz-focus-inner{border:0}.swal2-html-container{z-index:1;justify-content:center;margin:1em 1.6em .3em;padding:0;overflow:auto;color:#545454;font-size:1.125em;font-weight:400;line-height:normal;text-align:center;word-wrap:break-word;word-break:break-word}.swal2-checkbox,.swal2-file,.swal2-input,.swal2-radio,.swal2-select,.swal2-textarea{margin:1em 2em 0}.swal2-file,.swal2-input,.swal2-textarea{box-sizing:border-box;width:auto;transition:border-color .1s,box-shadow .1s;border:1px solid #d9d9d9;border-radius:.1875em;background:inherit;box-shadow:inset 0 1px 1px rgba(0,0,0,.06),0 0 0 3px transparent;color:inherit;font-size:1.125em}.swal2-file.swal2-inputerror,.swal2-input.swal2-inputerror,.swal2-textarea.swal2-inputerror{border-color:#f27474!important;box-shadow:0 0 2px #f27474!important}.swal2-file:focus,.swal2-input:focus,.swal2-textarea:focus{border:1px solid #b4dbed;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,.06),0 0 0 3px rgba(100,150,200,.5)}.swal2-file::-moz-placeholder,.swal2-input::-moz-placeholder,.swal2-textarea::-moz-placeholder{color:#ccc}.swal2-file:-ms-input-placeholder,.swal2-input:-ms-input-placeholder,.swal2-textarea:-ms-input-placeholder{color:#ccc}.swal2-file::placeholder,.swal2-input::placeholder,.swal2-textarea::placeholder{color:#ccc}.swal2-range{margin:1em 2em 0;background:#fff}.swal2-range input{width:80%}.swal2-range output{width:20%;color:inherit;font-weight:600;text-align:center}.swal2-range input,.swal2-range output{height:2.625em;padding:0;font-size:1.125em;line-height:2.625em}.swal2-input{height:2.625em;padding:0 .75em}.swal2-file{width:75%;margin-right:auto;margin-left:auto;background:inherit;font-size:1.125em}.swal2-textarea{height:6.75em;padding:.75em}.swal2-select{min-width:50%;max-width:100%;padding:.375em .625em;background:inherit;color:inherit;font-size:1.125em}.swal2-checkbox,.swal2-radio{align-items:center;justify-content:center;background:#fff;color:inherit}.swal2-checkbox label,.swal2-radio label{margin:0 .6em;font-size:1.125em}.swal2-checkbox input,.swal2-radio input{flex-shrink:0;margin:0 .4em}.swal2-input-label{display:flex;justify-content:center;margin:1em auto 0}.swal2-validation-message{align-items:center;justify-content:center;margin:1em 0 0;padding:.625em;overflow:hidden;background:#f0f0f0;color:#666;font-size:1em;font-weight:300}.swal2-validation-message::before{content:\"!\";display:inline-block;width:1.5em;min-width:1.5em;height:1.5em;margin:0 .625em;border-radius:50%;background-color:#f27474;color:#fff;font-weight:600;line-height:1.5em;text-align:center}.swal2-icon{position:relative;box-sizing:content-box;justify-content:center;width:5em;height:5em;margin:2.5em auto .6em;border:.25em solid transparent;border-radius:50%;border-color:#000;font-family:inherit;line-height:5em;cursor:default;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.swal2-icon .swal2-icon-content{display:flex;align-items:center;font-size:3.75em}.swal2-icon.swal2-error{border-color:#f27474;color:#f27474}.swal2-icon.swal2-error .swal2-x-mark{position:relative;flex-grow:1}.swal2-icon.swal2-error [class^=swal2-x-mark-line]{display:block;position:absolute;top:2.3125em;width:2.9375em;height:.3125em;border-radius:.125em;background-color:#f27474}.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:1.0625em;transform:rotate(45deg)}.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:1em;transform:rotate(-45deg)}.swal2-icon.swal2-error.swal2-icon-show{-webkit-animation:swal2-animate-error-icon .5s;animation:swal2-animate-error-icon .5s}.swal2-icon.swal2-error.swal2-icon-show .swal2-x-mark{-webkit-animation:swal2-animate-error-x-mark .5s;animation:swal2-animate-error-x-mark .5s}.swal2-icon.swal2-warning{border-color:#facea8;color:#f8bb86}.swal2-icon.swal2-info{border-color:#9de0f6;color:#3fc3ee}.swal2-icon.swal2-question{border-color:#c9dae1;color:#87adbd}.swal2-icon.swal2-success{border-color:#a5dc86;color:#a5dc86}.swal2-icon.swal2-success [class^=swal2-success-circular-line]{position:absolute;width:3.75em;height:7.5em;transform:rotate(45deg);border-radius:50%}.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=left]{top:-.4375em;left:-2.0635em;transform:rotate(-45deg);transform-origin:3.75em 3.75em;border-radius:7.5em 0 0 7.5em}.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=right]{top:-.6875em;left:1.875em;transform:rotate(-45deg);transform-origin:0 3.75em;border-radius:0 7.5em 7.5em 0}.swal2-icon.swal2-success .swal2-success-ring{position:absolute;z-index:2;top:-.25em;left:-.25em;box-sizing:content-box;width:100%;height:100%;border:.25em solid rgba(165,220,134,.3);border-radius:50%}.swal2-icon.swal2-success .swal2-success-fix{position:absolute;z-index:1;top:.5em;left:1.625em;width:.4375em;height:5.625em;transform:rotate(-45deg)}.swal2-icon.swal2-success [class^=swal2-success-line]{display:block;position:absolute;z-index:2;height:.3125em;border-radius:.125em;background-color:#a5dc86}.swal2-icon.swal2-success [class^=swal2-success-line][class$=tip]{top:2.875em;left:.8125em;width:1.5625em;transform:rotate(45deg)}.swal2-icon.swal2-success [class^=swal2-success-line][class$=long]{top:2.375em;right:.5em;width:2.9375em;transform:rotate(-45deg)}.swal2-icon.swal2-success.swal2-icon-show .swal2-success-line-tip{-webkit-animation:swal2-animate-success-line-tip .75s;animation:swal2-animate-success-line-tip .75s}.swal2-icon.swal2-success.swal2-icon-show .swal2-success-line-long{-webkit-animation:swal2-animate-success-line-long .75s;animation:swal2-animate-success-line-long .75s}.swal2-icon.swal2-success.swal2-icon-show .swal2-success-circular-line-right{-webkit-animation:swal2-rotate-success-circular-line 4.25s ease-in;animation:swal2-rotate-success-circular-line 4.25s ease-in}.swal2-progress-steps{flex-wrap:wrap;align-items:center;max-width:100%;margin:1.25em auto;padding:0;background:inherit;font-weight:600}.swal2-progress-steps li{display:inline-block;position:relative}.swal2-progress-steps .swal2-progress-step{z-index:20;flex-shrink:0;width:2em;height:2em;border-radius:2em;background:#2778c4;color:#fff;line-height:2em;text-align:center}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step{background:#2778c4}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step{background:#add8e6;color:#fff}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step-line{background:#add8e6}.swal2-progress-steps .swal2-progress-step-line{z-index:10;flex-shrink:0;width:2.5em;height:.4em;margin:0 -1px;background:#2778c4}[class^=swal2]{-webkit-tap-highlight-color:transparent}.swal2-show{-webkit-animation:swal2-show .3s;animation:swal2-show .3s}.swal2-hide{-webkit-animation:swal2-hide .15s forwards;animation:swal2-hide .15s forwards}.swal2-noanimation{transition:none}.swal2-scrollbar-measure{position:absolute;top:-9999px;width:50px;height:50px;overflow:scroll}.swal2-rtl .swal2-close{margin-right:initial;margin-left:0}.swal2-rtl .swal2-timer-progress-bar{right:0;left:auto}@-webkit-keyframes swal2-toast-show{0%{transform:translateY(-.625em) rotateZ(2deg)}33%{transform:translateY(0) rotateZ(-2deg)}66%{transform:translateY(.3125em) rotateZ(2deg)}100%{transform:translateY(0) rotateZ(0)}}@keyframes swal2-toast-show{0%{transform:translateY(-.625em) rotateZ(2deg)}33%{transform:translateY(0) rotateZ(-2deg)}66%{transform:translateY(.3125em) rotateZ(2deg)}100%{transform:translateY(0) rotateZ(0)}}@-webkit-keyframes swal2-toast-hide{100%{transform:rotateZ(1deg);opacity:0}}@keyframes swal2-toast-hide{100%{transform:rotateZ(1deg);opacity:0}}@-webkit-keyframes swal2-toast-animate-success-line-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@keyframes swal2-toast-animate-success-line-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@-webkit-keyframes swal2-toast-animate-success-line-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}@keyframes swal2-toast-animate-success-line-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}@-webkit-keyframes swal2-show{0%{transform:scale(.7)}45%{transform:scale(1.05)}80%{transform:scale(.95)}100%{transform:scale(1)}}@keyframes swal2-show{0%{transform:scale(.7)}45%{transform:scale(1.05)}80%{transform:scale(.95)}100%{transform:scale(1)}}@-webkit-keyframes swal2-hide{0%{transform:scale(1);opacity:1}100%{transform:scale(.5);opacity:0}}@keyframes swal2-hide{0%{transform:scale(1);opacity:1}100%{transform:scale(.5);opacity:0}}@-webkit-keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.8125em;width:1.5625em}}@keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.8125em;width:1.5625em}}@-webkit-keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@-webkit-keyframes swal2-rotate-success-circular-line{0%{transform:rotate(-45deg)}5%{transform:rotate(-45deg)}12%{transform:rotate(-405deg)}100%{transform:rotate(-405deg)}}@keyframes swal2-rotate-success-circular-line{0%{transform:rotate(-45deg)}5%{transform:rotate(-45deg)}12%{transform:rotate(-405deg)}100%{transform:rotate(-405deg)}}@-webkit-keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;transform:scale(.4);opacity:0}50%{margin-top:1.625em;transform:scale(.4);opacity:0}80%{margin-top:-.375em;transform:scale(1.15)}100%{margin-top:0;transform:scale(1);opacity:1}}@keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;transform:scale(.4);opacity:0}50%{margin-top:1.625em;transform:scale(.4);opacity:0}80%{margin-top:-.375em;transform:scale(1.15)}100%{margin-top:0;transform:scale(1);opacity:1}}@-webkit-keyframes swal2-animate-error-icon{0%{transform:rotateX(100deg);opacity:0}100%{transform:rotateX(0);opacity:1}}@keyframes swal2-animate-error-icon{0%{transform:rotateX(100deg);opacity:0}100%{transform:rotateX(0);opacity:1}}@-webkit-keyframes swal2-rotate-loading{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}@keyframes swal2-rotate-loading{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){overflow:hidden}body.swal2-height-auto{height:auto!important}body.swal2-no-backdrop .swal2-container{background-color:transparent!important;pointer-events:none}body.swal2-no-backdrop .swal2-container .swal2-popup{pointer-events:all}body.swal2-no-backdrop .swal2-container .swal2-modal{box-shadow:0 0 10px rgba(0,0,0,.4)}@media print{body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){overflow-y:scroll!important}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown)>[aria-hidden=true]{display:none}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) .swal2-container{position:static!important}}body.swal2-toast-shown .swal2-container{box-sizing:border-box;width:360px;max-width:100%;background-color:transparent;pointer-events:none}body.swal2-toast-shown .swal2-container.swal2-top{top:0;right:auto;bottom:auto;left:50%;transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-top-end,body.swal2-toast-shown .swal2-container.swal2-top-right{top:0;right:0;bottom:auto;left:auto}body.swal2-toast-shown .swal2-container.swal2-top-left,body.swal2-toast-shown .swal2-container.swal2-top-start{top:0;right:auto;bottom:auto;left:0}body.swal2-toast-shown .swal2-container.swal2-center-left,body.swal2-toast-shown .swal2-container.swal2-center-start{top:50%;right:auto;bottom:auto;left:0;transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-center{top:50%;right:auto;bottom:auto;left:50%;transform:translate(-50%,-50%)}body.swal2-toast-shown .swal2-container.swal2-center-end,body.swal2-toast-shown .swal2-container.swal2-center-right{top:50%;right:0;bottom:auto;left:auto;transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-left,body.swal2-toast-shown .swal2-container.swal2-bottom-start{top:auto;right:auto;bottom:0;left:0}body.swal2-toast-shown .swal2-container.swal2-bottom{top:auto;right:auto;bottom:0;left:50%;transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-end,body.swal2-toast-shown .swal2-container.swal2-bottom-right{top:auto;right:0;bottom:0;left:auto}");
 
 /***/ }),
 

@@ -27,6 +27,12 @@
             >
               <FontAwesomeIcon :icon="icons.faQrcode" />
             </button>
+            <button
+              class="flex text-xl rounded-full p-2 text-blue-500 hover:shadow-inner ml-2"
+              @click="share"
+            >
+              <FontAwesomeIcon :icon="icons.faShareAlt" />
+            </button>
           </div>
         </div>
         <div>
@@ -208,7 +214,9 @@ import {
 } from "../client";
 import { determineMostFrequent, generateTopicCounts } from "../utils/notices";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faQrcode } from "@fortawesome/free-solid-svg-icons";
+import { faQrcode, faShareAlt } from "@fortawesome/free-solid-svg-icons";
+import swal from "sweetalert2";
+import QRCode from 'qrcode';
 
 export default {
   props: {
@@ -225,6 +233,7 @@ export default {
     return {
       icons: {
         faQrcode,
+        faShareAlt
       },
       user: null,
       notices: [],
@@ -246,9 +255,31 @@ export default {
     this.frequent = determineMostFrequent(countMap);
   },
   methods: {
-    qrcode: function () {
-      alert("Work in progress!");
+    qrcode: async function () {
+      const url = `https://noticebord.herokuapp.com/profiles/${this.user.id}`;
+      await swal.fire({
+        title: "QR Code",
+        text: "Scan this code to find this user profile again.",
+        imageUrl: await QRCode.toDataURL(url),
+      });
     },
+    share: async function() {
+      if (navigator.canShare) {
+        navigator
+          .share({
+            url: `https://noticebord.herokuapp.com/profiles/${this.user.id}`,
+            text: `Check out this user (${this.user.name}) on Noticebord!`,
+            title: `"${this.user.name}" on Noticebord`,
+          })
+          .catch(console.error);
+      } else {
+        await swal.fire({
+          icon: "error",
+          title: "Error while sharing",
+          text: "Your device does not seem to support this!",
+        });
+      }
+    }
   },
 };
 </script>

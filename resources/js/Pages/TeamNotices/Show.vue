@@ -51,15 +51,15 @@
             {{ notice?.body }}
           </div>
 
-          <div class="flex w-full items-center px-4 py-4">
+          <div class="flex w-full items-center px-4 py-4" v-if="notice">
             <img
               class="w-10 h-10 rounded-full mr-4"
-              :src="notice?.author.profile_photo_url"
-              :alt="notice?.author.name"
+              :src="notice.author.profile_photo_url"
+              :alt="notice.author.name"
             />
-            <div class="flex-1 px-2 text-base md:text-xl">
-              <inertia-link :href="route('profiles.show', notice?.author.id)">
-                {{ notice?.author.name }}
+            <div class="flex-1 px-2 text-base md:text-xl blue">
+              <inertia-link :href="route('profiles.show', notice.author.id)">
+                {{ notice.author.name }}
               </inertia-link>
             </div>
           </div>
@@ -80,6 +80,8 @@ import {
   faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { Inertia } from "@inertiajs/inertia";
+import swal from "sweetalert2";
+import QRCode from 'qrcode';
 
 export default {
   props: {
@@ -108,21 +110,59 @@ export default {
     this.notice = await fetchTeamNoticeAsync(teamId, this.id);
   },
   methods: {
-    qrcode: function () {
-      alert("Work in progress!");
+    qrcode: async function () {
+      const url = `https://noticebord.herokuapp.com/team/${this.notice.id}`;
+      await swal.fire({
+        title: "QR Code",
+        text: "Scan this code to find this notice again.",
+        imageUrl: await QRCode.toDataURL(url),
+      });
     },
-    share: function () {
-      alert("Work in progress!");
+    share: async function () {
+      if (navigator.canShare) {
+        navigator
+          .share({
+            url: `https://noticebord.herokuapp.com/team/${this.notice.id}`,
+            text: `Check out this team notice (${this.notice.title}) on Noticebord!`,
+            title: `"${this.notice.title}" on Noticebord`,
+          })
+          .catch(console.error);
+      } else {
+        await swal.fire({
+          icon: "error",
+          title: "Error while sharing",
+          text: "Your device does not seem to support this!",
+        });
+      }
     },
     editNotice: function () {
       Inertia.get(route("team-notices.edit", this.notice.id));
     },
     deleteNotice: async function () {
-      if (confirm("Are you sure you want to delete this notice?")) {
+      const result = await swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#ef4444",
+        cancelButtonColor: "#3b82f6",
+      });
+
+      if (result.isConfirmed) {
         const teamId = this.$page.props.user.current_team.id;
         await deleteTeamNoticeAsync(teamId, this.notice.id);
-        alert("The notice was deleted successfully!");
+        await swal.fire({
+          icon: "success",
+          title: "Deleted!",
+          text: "The notice was deleted successfully",
+        });
         Inertia.get(route("team-notices.index"));
+      } else {
+        await swal.fire({
+          icon: "error",
+          title: "Cancelled!",
+          text: "The notice was not deleted.",
+        });
       }
     },
   },
