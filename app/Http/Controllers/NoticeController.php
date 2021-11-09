@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Notice;
 use Illuminate\Http\{ Request, Response };
 use Illuminate\Support\Facades\Auth;

@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Collections\ItemNotFoundException;
-use Illuminate\Http\{Request, Response};
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class TeamController extends Controller
