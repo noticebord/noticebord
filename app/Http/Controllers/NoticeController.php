@@ -17,7 +17,7 @@ class NoticeController extends Controller
     {
         return Notice::with(['author'])
             ->where('public', true)
-            ->get();
+            ->cursorPaginate(self::PER_PAGE);
     }
 
     /**

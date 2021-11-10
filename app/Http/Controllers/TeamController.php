@@ -6,6 +6,7 @@ use Illuminate\Collections\ItemNotFoundException;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
+// TODO: Limit number of teams that can be created by a single user
 class TeamController extends Controller
 {
     /**
