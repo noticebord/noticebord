@@ -13,7 +13,7 @@ export function assignDefaultAuthor(notice: Notice): Notice {
     return notice;
 }
 
-export function generateTopicCounts(notices: Array<Notice>): Map<string, { topic: Topic, count: number }> {
+export function generateTopicCounts(notices: Notice[]): Map<string, { topic: Topic, count: number }> {
     const map = new Map<string, { topic: Topic, count: number }>();
 
     for (const { topics } of notices) {
@@ -31,10 +31,10 @@ export function generateTopicCounts(notices: Array<Notice>): Map<string, { topic
         a < b ? 1 : a > b ? -1 : 0));
 }
 
-export function determineMostFrequent(map: Map<string, { topic: Topic, count: number }>): Array<Topic> {
+export function determineMostFrequent(map: Map<string, { topic: Topic, count: number }>): Topic[] {
     let first = true;
     let max = 0;
-    const frequent: Array<Topic> = [];
+    const frequent: Topic[] = [];
 
     for (const item of map) {
         if (first) {

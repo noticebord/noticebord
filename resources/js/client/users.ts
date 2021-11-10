@@ -1,4 +1,4 @@
-import api from "./api";
+import { api } from "./api";
 import { Notice, User } from "./models";
 
 /**
@@ -6,8 +6,8 @@ import { Notice, User } from "./models";
  * 
  * @returns An array of all users.
  */
- export async function fetchUsersAsync(): Promise<Array<User>> {
-    const response = await api.get<Array<User>>("/users");
+ export async function fetchUsersAsync(): Promise<User[]> {
+    const response = await api.get<User[]>("/users");
     return response.data;
 }
 
@@ -28,8 +28,8 @@ export async function fetchUserAsync(user: number): Promise<User> {
  * @param team The user ID
  * @returns A list of notices belonging to the user.
  */
-export async function fetchUserNoticesAsync(user: number): Promise<Array<Notice>> {
-    const response = await api.get<Array<Notice>>(`/users/${user}/notices`);
+export async function fetchUserNoticesAsync(user: number): Promise<Notice[]> {
+    const response = await api.get<Notice[]>(`/users/${user}/notices`);
     return response.data;
 }
 
@@ -39,7 +39,7 @@ export async function fetchUserNoticesAsync(user: number): Promise<Array<Notice>
  * @param team The user ID
  * @returns A list of notes belonging to the user.
  */
- export async function fetchUserNotesAsync(user: number): Promise<Array<Notice>> {
-    const response = await api.get<Array<Notice>>(`/users/${user}/notes`);
+ export async function fetchUserNotesAsync(user: number): Promise<Notice[]> {
+    const response = await api.get<Notice[]>(`/users/${user}/notes`);
     return response.data;
 }
