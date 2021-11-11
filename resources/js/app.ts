@@ -1,4 +1,13 @@
-require('./bootstrap');
+// require('./bootstrap');
+
+// import { Page, Inertia, createHeadManager } from "@inertiajs/inertia";
+// declare module "@vue/runtime-core" {    
+//     interface ComponentCustomProperties {
+//         $inertia: typeof Inertia;
+//         $page: Page;
+//         $headManager: ReturnType<typeof createHeadManager>;
+//     }
+// }
 
 // Import modules...
 import { createApp, h } from 'vue';
@@ -10,12 +19,13 @@ const el = document.getElementById('app');
 createApp({
     render: () =>
         h(InertiaApp, {
-            initialPage: JSON.parse(el.dataset.page),
+            initialPage: JSON.parse(el!.dataset.page!),
             resolveComponent: (name) => require(`./Pages/${name}`).default,
         }),
 })
-    .mixin({ methods: { route } })
+    // @ts-ignore
+    .mixin({ methods: { route } }) 
     .use(InertiaPlugin)
-    .mount(el);
+    .mount(el!);
 
 InertiaProgress.init({ color: '#4B5563' });

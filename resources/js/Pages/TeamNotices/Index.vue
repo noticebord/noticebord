@@ -22,10 +22,10 @@
 
     <div class="py-8 px-4 md:px-0 bg-white">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4" v-if="notices">
           <div
             class="rounded-lg focus-within:shadow hover:shadow"
-            v-for="notice in notices"
+            v-for="notice in notices.data"
             :key="notice.id"
           >
             <div class="p-4">
@@ -52,18 +52,19 @@
                   text-base text-gray-500
                   leading-none
                 "
+                v-if="notice.author"
               >
                 <img
                   class="w-8 h-8 rounded-full mr-2"
-                  :src="notice?.author.profile_photo_url"
-                  :alt="notice?.author.name"
+                  :src="notice.author.profile_photo_url"
+                  :alt="notice.author.name"
                 />
                 <div>
                   <inertia-link
-                    :href="route('profiles.show', notice?.author.id)"
+                    :href="route('profiles.show', notice.author.id)"
                     class="hover:text-indigo-500"
                   >
-                    {{ notice?.author.name }}
+                    {{ notice.author.name }}
                   </inertia-link>
                 </div>
               </div>
@@ -75,23 +76,27 @@
   </app-layout>
 </template>
 
-<script>
+<script lang="ts">
+// TODO: Find a way to resolve/ignore route() errors
 import AppLayout from "../../Layouts/AppLayout.vue";
 import { fetchTeamNoticesAsync } from "../../client";
+import { Notice, Paginated } from '../../client/models';
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   components: {
     AppLayout,
   },
   data: function () {
     return {
-      notices: [],
+      notices: null as Paginated<Notice[]> | null,
     };
   },
   created: async function () {
     this.notices = await fetchTeamNoticesAsync(
+      // @ts-ignore
       this.$page.props.user.current_team.id
     );
   },
-};
+});
 </script>
