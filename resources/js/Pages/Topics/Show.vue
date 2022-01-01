@@ -21,11 +21,11 @@
     </template>
 
     <div class="py-8 px-4 md:px-0 bg-white">
-      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4" v-if="notices">
+      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-2" v-if="notices.length > 0">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
           <div
             class="rounded-lg focus-within:shadow hover:shadow"
-            v-for="notice in notices.data"
+            v-for="notice in notices"
             :key="notice.id"
           >
             <div class="p-4">
@@ -93,6 +93,17 @@
             </div>
           </div>
         </div>
+        <div class="w-full flex" v-if="next">
+          <button
+            @click="loadMore"
+            class="mx-auto px-3 py-2 rounded-full"
+            :class="{ 'text-gray-500 italic': loading, 'shadow hover:shadow-inner': !loading }"
+            :disabled="loading"
+          >
+            <FontAwesomeIcon :icon="icons.faSpinner" class="mr-2" v-if="loading" spin />
+            {{ loading ? "Loading" : "Load More" }}
+          </button>
+        </div>
       </div>
     </div>
   </app-layout>
@@ -104,7 +115,10 @@ import AppLayout from "../../Layouts/AppLayout.vue";
 import { fetchTopicAsync, fetchTopicNoticesAsync } from "../../client";
 import { assignDefaultAuthor } from "../../utils/notices";
 import { defineComponent } from "@vue/runtime-core";
-import { Paginated, Notice, Topic } from "../../client/models";
+import { Notice, Topic } from "../../client/models";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { getParam } from "../../utils/url";
 
 export default defineComponent({
   props: {
@@ -115,18 +129,37 @@ export default defineComponent({
   },
   components: {
     AppLayout,
+    FontAwesomeIcon,
   },
   data: function () {
     return {
-      notices:null as Paginated<Notice[]> | null,
+      notices: [] as Notice[],
       topic: null as Topic | null,
+      next: null as string | null,
+      loading: false,
+      icons: {
+        faSpinner
+      }
     };
   },
   created: async function () {
     this.topic = await fetchTopicAsync(this.id);
-    const notices = await fetchTopicNoticesAsync(this.id);
-    notices.data = notices.data.map((notice) => assignDefaultAuthor(notice));
-    this.notices = notices;
+    await this.fetchNotices();
   },
+  methods: {
+    fetchNotices: async function (cursor?: string) {
+      const response = await await fetchTopicNoticesAsync(this.id, cursor);
+      this.notices.push(...response.data.map(assignDefaultAuthor));
+      this.next = response.next_page_url;
+    },
+    loadMore: async function () {
+      if (this.next) {
+        this.loading = true;
+        const cursor = getParam(this.next, "cursor")!;
+        await this.fetchNotices(cursor);
+        this.loading = false;
+      }
+    },
+  }
 });
 </script>

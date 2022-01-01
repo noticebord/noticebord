@@ -20,7 +20,6 @@
 import AppLayout from "../../Layouts/AppLayout.vue";
 import NoticeDisplay from "../../Components/NoticeDisplay.vue";
 import swal from "sweetalert2";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { Inertia } from "@inertiajs/inertia";
 import { defineComponent } from "@vue/runtime-core";
 import { deleteTeamNoticeAsync, fetchTeamNoticeAsync } from "../../client";
@@ -35,7 +34,6 @@ export default defineComponent({
   },
   components: {
     AppLayout,
-    FontAwesomeIcon,
     NoticeDisplay,
   },
   data: function () {

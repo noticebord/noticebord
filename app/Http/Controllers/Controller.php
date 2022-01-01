@@ -17,5 +17,5 @@ class Controller extends BaseController
     /**
      * @var PER_PAGE The number of items to paginate by.
      */
-    protected const PER_PAGE = 10;
+    protected const PER_PAGE = 20;
 }

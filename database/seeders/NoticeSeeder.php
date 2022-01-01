@@ -9,6 +9,7 @@ use Spatie\Tags\Tag;
 
 class NoticeSeeder extends Seeder
 {
+    private const NUM = 100; 
     private const BODY = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
     private const TOPICS = ["tech", "lifestyle", "opinion", "jobs", "fun", "news", "sports", "entertainment", "general"];
 
@@ -23,7 +24,7 @@ class NoticeSeeder extends Seeder
 
         $body = str_repeat(self::BODY, 20);
 
-        for ($i = 1; $i <= 20; $i++) {
+        for ($i = 1; $i <= self::NUM; $i++) {
             $created = now()->toImmutable()->subMinutes($i + 5);
             $anonymous = random_int(0, 10) > 3;
 
@@ -42,8 +43,5 @@ class NoticeSeeder extends Seeder
                 'tags'       => $topics,
             ]);
         }
-
-        // Notice::create($notices);
-        // DB::table('notices')->insert($notices);
     }
 }
