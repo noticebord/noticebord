@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class TeamNoticeSeeder extends Seeder
 {
+    private const NUM = 100;
     private const BODY = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
 
     /**
@@ -20,7 +21,7 @@ class TeamNoticeSeeder extends Seeder
 
         $body = str_repeat(self::BODY, 20);
 
-        for($i = 1; $i <= 20; $i++)
+        for($i = 1; $i <= self::NUM; $i++)
         {
             $created = now()->subMinutes($i + 5);
             $notices[] = 

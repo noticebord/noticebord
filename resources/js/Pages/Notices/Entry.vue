@@ -41,7 +41,7 @@
               :class="{ 'text-gray-500': !$page.props.user }"
               :disabled="!$page.props.user"
               :checked="notice.anonymous"
-              @change="anonymousChange($event.target.checked)"
+              @change="anonymousChange($event)"
             />
             <label
               for="anonymous"
@@ -111,8 +111,9 @@ export default {
     AppLayout,
   },
   data: function () {
-    const anonymous = !this.$page.props.user;
+    const anonymous = this.$page.props.user == null;
     return {
+      // TODO: Make this nullable
       notice: {
         title: "",
         body: "",
@@ -122,10 +123,19 @@ export default {
     };
   },
   created: async function () {
-    if (this.id > 0) this.notice = await fetchNoticeAsync(this.id);
+    if (this.id > 0) {
+      const notice = await fetchNoticeAsync(this.id); 
+      this.notice = {
+        title: notice.title,
+        body: notice.body ?? "",
+        anonymous: false,
+        public: true
+      }
+    }
   },
   methods: {
-    anonymousChange: function (checked) {
+    anonymousChange: function (event) {
+      const checked = event.target.checked;
       if (checked) {
         this.notice.anonymous = true;
         this.notice.public = true;
@@ -139,6 +149,7 @@ export default {
         ? updateNoticeAsync(this.id, this.notice)
         : createNoticeAsync(this.notice);
       const notice = await saveTask;
+      // @ts-ignore
       Inertia.get(route("notices.show", notice.id));
     },
   },

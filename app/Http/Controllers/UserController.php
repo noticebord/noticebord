@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -24,10 +23,10 @@ class UserController extends Controller
      *
      * @param  int  $user
      * @return \Illuminate\Http\Response
-     * @todo: Is this a good idea?
      */
     public function show($user)
     {
+        // TODO: Is this a good idea?
         return User::findOrFail($user);
     }
 

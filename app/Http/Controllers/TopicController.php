@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\{Notice, Topic};
 
 class TopicController extends Controller
@@ -14,6 +13,8 @@ class TopicController extends Controller
      */
     public function index()
     {
+        // TODO: Paginate
+        // TODO: Fix count
         return Topic::with('notices')->get()->map(fn ($topic) => [
             'id'    => $topic->id,
             'name'  => $topic->name,
@@ -27,10 +28,10 @@ class TopicController extends Controller
      *
      * @param  int  $topic
      * @return \Illuminate\Http\Response
-     * @todo Fix count
      */
     public function show($topic)
     {
+        // TODO: Fix count
         $t = Topic::with('notices')->findOrFail($topic);
         return [
             'id'    => $t->id,
@@ -45,12 +46,11 @@ class TopicController extends Controller
      *
      * @param  int  $topic
      * @return \Illuminate\Http\Response
-     * @todo Fix count
      */
     public function notices($topic)
     {
         return Notice::withAllTagsOfAnyType([Topic::findOrFail($topic)->name])
             ->with(['author'])
-            ->get();
+            ->cursorPaginate(self::PER_PAGE);
     }
 }

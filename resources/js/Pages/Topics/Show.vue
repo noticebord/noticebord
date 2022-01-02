@@ -21,7 +21,7 @@
     </template>
 
     <div class="py-8 px-4 md:px-0 bg-white">
-      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-2" v-if="notices.length > 0">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
           <div
             class="rounded-lg focus-within:shadow hover:shadow"
@@ -70,39 +70,57 @@
                   text-base text-gray-500
                   leading-none
                 "
+                v-if="notice.author"
               >
                 <img
                   class="w-8 h-8 rounded-full mr-2"
-                  :src="notice?.author.profile_photo_url"
-                  :alt="notice?.author.name"
+                  :src="notice.author.profile_photo_url"
+                  :alt="notice.author.name"
                 />
                 <div>
                   <inertia-link
-                    :href="route('profiles.show', notice?.author.id)"
+                    :href="route('profiles.show', notice.author.id)"
                     class="hover:text-indigo-500"
-                    v-if="notice?.author.id > 0"
+                    v-if="notice.author.id > 0"
                   >
-                    {{ notice?.author.name }}
+                    {{ notice.author.name }}
                   </inertia-link>
                   <span v-else>
-                    {{ notice?.author.name }}
+                    {{ notice.author.name }}
                   </span>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <div class="w-full flex" v-if="next">
+          <button
+            @click="loadMore"
+            class="mx-auto px-3 py-2 rounded-full"
+            :class="{ 'text-gray-500 italic': loading, 'shadow hover:shadow-inner': !loading }"
+            :disabled="loading"
+          >
+            <FontAwesomeIcon :icon="icons.faSpinner" class="mr-2" v-if="loading" spin />
+            {{ loading ? "Loading" : "Load More" }}
+          </button>
+        </div>
       </div>
     </div>
   </app-layout>
 </template>
 
-<script>
+<script lang="ts">
+// TODO: Find a way to resolve/ignore route() errors
 import AppLayout from "../../Layouts/AppLayout.vue";
 import { fetchTopicAsync, fetchTopicNoticesAsync } from "../../client";
 import { assignDefaultAuthor } from "../../utils/notices";
+import { defineComponent } from "@vue/runtime-core";
+import { Notice, Topic } from "../../client/models";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { getParam } from "../../utils/url";
 
-export default {
+export default defineComponent({
   props: {
     id: {
       type: Number,
@@ -111,17 +129,37 @@ export default {
   },
   components: {
     AppLayout,
+    FontAwesomeIcon,
   },
   data: function () {
     return {
-      notices: [],
-      topic: null,
+      notices: [] as Notice[],
+      topic: null as Topic | null,
+      next: null as string | null,
+      loading: false,
+      icons: {
+        faSpinner
+      }
     };
   },
   created: async function () {
     this.topic = await fetchTopicAsync(this.id);
-    const notices = await fetchTopicNoticesAsync(this.id);
-    this.notices = notices.map((notice) => assignDefaultAuthor(notice));
+    await this.fetchNotices();
   },
-};
+  methods: {
+    fetchNotices: async function (cursor?: string) {
+      const response = await await fetchTopicNoticesAsync(this.id, cursor);
+      this.notices.push(...response.data.map(assignDefaultAuthor));
+      this.next = response.next_page_url;
+    },
+    loadMore: async function () {
+      if (this.next) {
+        this.loading = true;
+        const cursor = getParam(this.next, "cursor")!;
+        await this.fetchNotices(cursor);
+        this.loading = false;
+      }
+    },
+  }
+});
 </script>

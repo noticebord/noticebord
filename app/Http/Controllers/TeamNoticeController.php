@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\{Team, TeamNotice};
 use Illuminate\Http\{Request, Response};
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +26,7 @@ class TeamNoticeController extends Controller
 
         return TeamNotice::with(['author'])
             ->where('team_id', $team->id)
-            ->get();
+            ->cursorPaginate(self::PER_PAGE);;
     }
 
     /**

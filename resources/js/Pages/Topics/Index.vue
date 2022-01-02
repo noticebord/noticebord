@@ -55,21 +55,24 @@
   </app-layout>
 </template>
 
-<script>
+<script lang="ts">
+// TODO: Find a way to resolve/ignore route() errors
 import AppLayout from "../../Layouts/AppLayout.vue";
 import { fetchTopicsAsync } from "../../client";
+import { defineComponent } from "@vue/runtime-core";
+import { Topic } from "../../client/models";
 
-export default {
+export default defineComponent({
   components: {
     AppLayout
   },
   data: function () {
     return {
-      topics: [],
+      topics: [] as Topic[]
     };
   },
   created: async function () {
     this.topics = await fetchTopicsAsync();
   },
-};
+});
 </script>

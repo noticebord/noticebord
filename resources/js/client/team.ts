@@ -1,13 +1,15 @@
-import api from "./api";
-import { Notice, SaveTeamNoticeRequest } from "./models";
+import { api } from "./api";
+import { Notice, Paginated, SaveTeamNoticeRequest } from "./models";
 
 /**
  * Fetch a list of all notices.
  * 
  * @param {Number} team The team ID
  */
-export async function fetchTeamNoticesAsync(team: number): Promise<Array<Notice>> {
-    const response = await api.get<Array<Notice>>(`/teams/${team}/notices`);
+export async function fetchTeamNoticesAsync(team: number, cursor?: string): Promise<Paginated<Notice[]>> {
+    const response = await api.get<Paginated<Notice[]>>(`/teams/${team}/notices`, {
+        params: { cursor },
+    });
     return response.data;
 }
 

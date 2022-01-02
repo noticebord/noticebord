@@ -1,11 +1,11 @@
-import api from "./api";
-import { Notice, Topic } from "./models";
+import { api } from "./api";
+import { Notice, Paginated, Topic } from "./models";
 
 /**
  * Fetch a list of all topics.
  */
-export async function fetchTopicsAsync(): Promise<Array<Topic>> {
-    const response = await api.get<Array<Topic>>("/topics");
+export async function fetchTopicsAsync(): Promise<Topic[]> {
+    const response = await api.get<Topic[]>("/topics");
     return response.data;
 }
 
@@ -24,7 +24,9 @@ export async function fetchTopicsAsync(): Promise<Array<Topic>> {
  * 
  * @param {Number} topic The topic ID.
  */
-export async function fetchTopicNoticesAsync(topic: number): Promise<Array<Notice>> {
-    const response = await api.get<Array<Notice>>(`/topics/${topic}/notices`);
+export async function fetchTopicNoticesAsync(topic: number, cursor?: string): Promise<Paginated<Notice[]>> {
+    const response = await api.get<Paginated<Notice[]>>(`/topics/${topic}/notices`, {
+        params: { cursor },
+    });
     return response.data;
 }
