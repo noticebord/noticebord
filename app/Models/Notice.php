@@ -70,7 +70,6 @@ class Notice extends Model
         return $this->tags->map(fn ($tag) => [
             'id'   => $tag->id,
             'name' => $tag->name,
-            'type' => $tag->type
         ]);
     }
 }

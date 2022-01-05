@@ -14,22 +14,6 @@ class TopicController extends Controller
      */
     public function index()
     {
-        // TODO: Paginate
-
-        // return Topic::get()->map(function ($t) {
-        //     $count = Notice::withAllTagsOfAnyType([$t->name])
-        //         ->with(['author'])
-        //         ->where('public', true)
-        //         ->count();
-        //     // dd($count);
-
-        //     return [
-        //         'id'    => $t->id,
-        //         'name'  => $t->name,
-        //         'count' => $count,
-        //     ];
-        // });
-
         return DB::table('taggables')
             ->join('tags', 'tags.id', '=', 'taggables.tag_id')
             ->join('notices', 'notices.id', '=', 'taggables.taggable_id')
