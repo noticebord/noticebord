@@ -23,6 +23,18 @@
           </div>
 
           <div class="mb-2">
+            <label for="topics" class="font-semibold text-gray-500">Topics</label>
+            <Multiselect
+              mode="tags"
+              :options="topics"
+              :searchable="true"
+              placeholder="random, fun, ..."
+              :limit="20"
+              v-model="notice.topics"
+              />
+          </div>
+
+          <div class="mb-2">
             <label for="body" class="font-semibold text-gray-500">Body</label>
             <textarea
               id="body"
@@ -90,11 +102,15 @@
   </app-layout>
 </template>
 
+<style src="@vueform/multiselect/themes/default.css"></style>
+
 <script>
 import AppLayout from "../../Layouts/AppLayout.vue";
+import Multiselect from '@vueform/multiselect'
 import {
   createNoticeAsync,
   fetchNoticeAsync,
+  fetchTopicsAsync,
   updateNoticeAsync,
 } from "../../client";
 import { Inertia } from "@inertiajs/inertia";
@@ -109,6 +125,7 @@ export default {
   },
   components: {
     AppLayout,
+    Multiselect,
   },
   data: function () {
     const anonymous = this.$page.props.user == null;
@@ -117,17 +134,23 @@ export default {
       notice: {
         title: "",
         body: "",
+        topics: [],
         anonymous: anonymous,
         public: anonymous,
       },
+      topics: []
     };
   },
   created: async function () {
+    const topics = await fetchTopicsAsync();
+    this.topics = topics.map(topic => topic.name);
+
     if (this.id > 0) {
       const notice = await fetchNoticeAsync(this.id); 
       this.notice = {
         title: notice.title,
         body: notice.body ?? "",
+        topics: notice.topics.map(topic => topic.name),
         anonymous: false,
         public: true
       }
