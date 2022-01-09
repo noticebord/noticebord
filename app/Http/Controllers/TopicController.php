@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\{Notice, Topic};
+use Illuminate\Support\Facades\DB;
 
 class TopicController extends Controller
 {
@@ -13,14 +14,19 @@ class TopicController extends Controller
      */
     public function index()
     {
-        // TODO: Paginate
-        // TODO: Fix count
-        return Topic::with('notices')->get()->map(fn ($topic) => [
-            'id'    => $topic->id,
-            'name'  => $topic->name,
-            'type'  => $topic->type,
-            'count' => $topic->notices->count(),
-        ]);
+        return DB::table('taggables')
+            ->join('tags', 'tags.id', '=', 'taggables.tag_id')
+            ->join('notices', 'notices.id', '=', 'taggables.taggable_id')
+            ->selectRaw('tags.id, name, count(tag_id) as count')
+            ->where('public', true)
+            ->groupBy('tags.id', 'name')
+            ->orderBy('count', 'desc')
+            ->get()
+            ->map(fn ($t) => [
+                'id'    => $t->id,
+                'name'  => json_decode($t->name)->en,
+                'count' => $t->count,
+            ]);
     }
 
     /**
@@ -31,13 +37,15 @@ class TopicController extends Controller
      */
     public function show($topic)
     {
-        // TODO: Fix count
-        $t = Topic::with('notices')->findOrFail($topic);
+        $t = Topic::findOrFail($topic);
+        $count = Notice::withAllTagsOfAnyType([$t->name])
+            ->where('public', true)
+            ->count();
+
         return [
             'id'    => $t->id,
             'name'  => $t->name,
-            'type'  => $t->type,
-            'count' => $t->notices->count(),
+            'count' => $count,
         ];
     }
 
@@ -51,6 +59,7 @@ class TopicController extends Controller
     {
         return Notice::withAllTagsOfAnyType([Topic::findOrFail($topic)->name])
             ->with(['author'])
+            ->where('public', true)
             ->cursorPaginate(self::PER_PAGE);
     }
 }

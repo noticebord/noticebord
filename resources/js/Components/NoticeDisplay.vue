@@ -36,9 +36,19 @@
                     </button>
                 </div>
 
-                <div id="body">{{ notice.body }}</div>
+                <div id="body" class="mb-4">{{ notice.body }}</div>
 
-                <div class="flex w-full items-center px-4 py-4" v-if="notice.author">
+                <div class="flex flex-wrap text-sm text-gray-500 gap-2" v-if="topics">
+                    <span>Topics:</span>
+                    <span v-for="topic in notice.topics" :key="topic.id">
+                        <inertia-link
+                            :href="route('topics.show', topic.id)"
+                            class="px-2 py-1 rounded-full hover:bg-indigo-100 hover:text-indigo-500 hover:underline"
+                        >#{{ topic.name }}</inertia-link>
+                    </span>
+                </div>
+
+                <div class="flex w-full items-center px-4" v-if="notice.author">
                     <img
                         class="w-10 h-10 rounded-full mr-4"
                         :src="notice.author.profile_photo_url"
@@ -86,6 +96,11 @@ export default defineComponent({
         url: {
             type: String,
             required: true,
+        },
+        topics: {
+            type: Boolean,
+            required: false,
+            default: false,
         }
     },
     data: function () {
@@ -120,7 +135,7 @@ export default defineComponent({
                     text: `Check out this notice (${this.notice.title}) on Noticebord!`,
                     title: `"${this.notice.title}" on Noticebord`,
                 })
-                .catch(console.error);
+                    .catch(console.error);
             } else {
                 await swal.fire({
                     icon: "error",

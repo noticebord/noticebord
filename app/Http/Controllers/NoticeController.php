@@ -30,7 +30,9 @@ class NoticeController extends Controller
     {
         $data = $request->validate([
             'title'     => ['required', 'string', 'max:255'],
-            'body'      => ['required', 'string']
+            'body'      => ['required', 'string'],
+            'topics'    => ['required', 'array'],
+            'topics.*'  => ['string']
         ]);
 
         $anonymous = $request->boolean('anonymous', false);
@@ -39,6 +41,8 @@ class NoticeController extends Controller
         $notice = new Notice($data);
         $notice->author_id = $anonymous ? null : Auth::guard('sanctum')->id();
         $notice->save();
+
+        $notice->attachTags($data['topics']);
 
         return response()->json($notice->load(['author'])->makeHidden(['body']), Response::HTTP_CREATED);
     }
@@ -72,7 +76,9 @@ class NoticeController extends Controller
         // TODO: Validate
         $data = $request->validate([
             'title'     => ['nullable', 'string', 'max:255'],
-            'body'      => ['nullable', 'string']
+            'body'      => ['nullable', 'string'],
+            'topics'    => ['nullable', 'array'],
+            'topics.*'  => ['string']
         ]);
 
         $anonymous = $request->boolean('anonymous', false);
@@ -88,6 +94,10 @@ class NoticeController extends Controller
             'public'    => $anonymous || $request->boolean('public', false),
             'author_id' => $anonymous ? null : $notice->author_id,
         ]);
+
+        if ($data['topics'] !== null) {
+            $notice->syncTags($data['topics']);
+        }
 
         return $notice;
     }

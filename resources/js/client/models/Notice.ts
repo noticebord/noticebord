@@ -1,5 +1,7 @@
 import { Topic, User } from ".";
 
+// TODO: Separate into different interfaces
+// One should have body and the other shouldn't
 export interface Notice {
     id: number;
     title: string;

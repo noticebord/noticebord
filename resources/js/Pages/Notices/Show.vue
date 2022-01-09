@@ -12,6 +12,7 @@
       @onEdit="editNotice"
       @onDelete="deleteNotice"
       v-if="notice"
+      topics
     />
   </app-layout>
 </template>

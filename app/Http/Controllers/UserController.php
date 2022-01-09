@@ -15,6 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        // TODO: Is this a good idea?
         return [];
     }
 
@@ -26,7 +27,6 @@ class UserController extends Controller
      */
     public function show($user)
     {
-        // TODO: Is this a good idea?
         return User::findOrFail($user);
     }
 
