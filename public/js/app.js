@@ -31446,6 +31446,11 @@ exports.default = runtime_core_1.defineComponent({
     url: {
       type: String,
       required: true
+    },
+    topics: {
+      type: Boolean,
+      required: false,
+      "default": false
     }
   },
   data: function data() {
@@ -33324,16 +33329,26 @@ var _hoisted_6 = /*#__PURE__*/vue_1.createTextVNode("Edit ");
 var _hoisted_7 = /*#__PURE__*/vue_1.createTextVNode("Delete ");
 
 var _hoisted_8 = {
-  id: "body"
+  id: "body",
+  "class": "mb-4"
 };
 var _hoisted_9 = {
   key: 0,
-  "class": "flex w-full items-center px-4 py-4"
+  "class": "flex flex-wrap text-sm text-gray-500 gap-2"
 };
-var _hoisted_10 = {
+
+var _hoisted_10 = /*#__PURE__*/vue_1.createVNode("span", null, "Topics:", -1
+/* HOISTED */
+);
+
+var _hoisted_11 = {
+  key: 1,
+  "class": "flex w-full items-center px-4"
+};
+var _hoisted_12 = {
   "class": "flex-1 px-2 text-base md:text-xl"
 };
-var _hoisted_11 = {
+var _hoisted_13 = {
   key: 1
 };
 
@@ -33406,13 +33421,33 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* CLASS */
   ), vue_1.createVNode("div", _hoisted_8, vue_1.toDisplayString(_ctx.notice.body), 1
   /* TEXT */
-  ), _ctx.notice.author ? (vue_1.openBlock(), vue_1.createBlock("div", _hoisted_9, [vue_1.createVNode("img", {
+  ), _ctx.topics ? (vue_1.openBlock(), vue_1.createBlock("div", _hoisted_9, [_hoisted_10, (vue_1.openBlock(true), vue_1.createBlock(vue_1.Fragment, null, vue_1.renderList(_ctx.notice.topics, function (topic) {
+    return vue_1.openBlock(), vue_1.createBlock("span", {
+      key: topic.id
+    }, [vue_1.createVNode(_component_inertia_link, {
+      href: _ctx.route('topics.show', topic.id),
+      "class": "px-2 py-1 rounded-full hover:bg-indigo-100 hover:text-indigo-500 hover:underline"
+    }, {
+      "default": vue_1.withCtx(function () {
+        return [vue_1.createTextVNode("#" + vue_1.toDisplayString(topic.name), 1
+        /* TEXT */
+        )];
+      }),
+      _: 2
+      /* DYNAMIC */
+
+    }, 1032
+    /* PROPS, DYNAMIC_SLOTS */
+    , ["href"])]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))])) : vue_1.createCommentVNode("v-if", true), _ctx.notice.author ? (vue_1.openBlock(), vue_1.createBlock("div", _hoisted_11, [vue_1.createVNode("img", {
     "class": "w-10 h-10 rounded-full mr-4",
     src: _ctx.notice.author.profile_photo_url,
     alt: _ctx.notice.author.name
   }, null, 8
   /* PROPS */
-  , ["src", "alt"]), vue_1.createVNode("div", _hoisted_10, [_ctx.notice.author.id > 0 ? (vue_1.openBlock(), vue_1.createBlock(_component_inertia_link, {
+  , ["src", "alt"]), vue_1.createVNode("div", _hoisted_12, [_ctx.notice.author.id > 0 ? (vue_1.openBlock(), vue_1.createBlock(_component_inertia_link, {
     key: 0,
     href: _ctx.route('profiles.show', _ctx.notice.author.id)
   }, {
@@ -33426,7 +33461,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["href"])) : (vue_1.openBlock(), vue_1.createBlock("span", _hoisted_11, vue_1.toDisplayString(_ctx.notice.author.name), 1
+  , ["href"])) : (vue_1.openBlock(), vue_1.createBlock("span", _hoisted_13, vue_1.toDisplayString(_ctx.notice.author.name), 1
   /* TEXT */
   ))])])) : vue_1.createCommentVNode("v-if", true)])) : vue_1.createCommentVNode("v-if", true)])]);
 }
@@ -33695,7 +33730,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         notice: _ctx.notice,
         url: "https://noticebord.herokuapp.com/notices/" + _ctx.notice.id,
         onOnEdit: _ctx.editNotice,
-        onOnDelete: _ctx.deleteNotice
+        onOnDelete: _ctx.deleteNotice,
+        topics: ""
       }, null, 8
       /* PROPS */
       , ["notice", "url", "onOnEdit", "onOnDelete"])) : vue_1.createCommentVNode("v-if", true)];
