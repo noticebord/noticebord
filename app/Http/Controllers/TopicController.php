@@ -19,7 +19,7 @@ class TopicController extends Controller
             ->join('notices', 'notices.id', '=', 'taggables.taggable_id')
             ->selectRaw('tags.id, name, count(tag_id) as count')
             ->where('public', true)
-            ->groupBy('tags.id', 'name')
+            ->groupBy('tags.id')
             ->orderBy('count', 'desc')
             ->get()
             ->map(fn ($t) => [
