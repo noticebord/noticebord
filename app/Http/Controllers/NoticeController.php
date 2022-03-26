@@ -31,7 +31,7 @@ class NoticeController extends Controller
         $data = $request->validate([
             'title'     => ['required', 'string', 'max:255'],
             'body'      => ['required', 'string'],
-            'topics'    => ['required', 'array'],
+            'topics'    => ['present', 'array'],
             'topics.*'  => ['string']
         ]);
 
