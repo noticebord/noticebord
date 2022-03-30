@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Collections\ItemNotFoundException;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\ItemNotFoundException;
 
 // TODO: Limit number of teams that can be created by a single user
 class TeamController extends Controller
@@ -18,7 +18,7 @@ class TeamController extends Controller
     {
         /** @var \App\Models\User $user */
         $user = Auth::guard('sanctum')->user();
-        return $user->allTeams();
+        return $user->allTeams()->sortBy('id');
     }
 
     /**
