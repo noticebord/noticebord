@@ -30,7 +30,7 @@ class TeamNotice extends Model
      * @var array
      */
     protected $hidden = [
-        'public',
+        'body',
         'author_id',
         'team_id',
         'deleted_at'

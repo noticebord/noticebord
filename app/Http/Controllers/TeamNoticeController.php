@@ -26,7 +26,7 @@ class TeamNoticeController extends Controller
 
         return TeamNotice::with(['author'])
             ->where('team_id', $team->id)
-            ->cursorPaginate(self::PER_PAGE);;
+            ->cursorPaginate(self::PER_PAGE);
     }
 
     /**
@@ -76,7 +76,8 @@ class TeamNoticeController extends Controller
         return TeamNotice::with(['author'])
             ->where('author_id', Auth::guard('sanctum')->id())
             ->where('team_id', $team->id)
-            ->findOrFail($notice);
+            ->findOrFail($notice)
+            ->makeVisible(['body']);
     }
 
     /**
