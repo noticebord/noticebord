@@ -1,13 +1,12 @@
 <template>
   <app-layout>
-    <div class="bg-white" style="scroll-snap-type: y mandatory">
+    <div class="bg-white" style="scroll-snap-type: y mandatory; overflow: auto; height: calc(100vh - 4rem)"> 
       <div
         class="flex flex-col md:flex-row p-4"
         v-for="(app, i) in apps"
-        style="scroll-snap-align: start"
+        style="scroll-snap-align: start; height: calc(100vh - 4rem)"
         :key="i"
         :class="{ 'md:flex-row-reverse bg-blue-400 text-white': i % 2 != 0 }"
-        :style="{ height: i == 0 ? 'calc(100vh - 4rem)' : '100vh' }"
       >
         <div class="p-4 md:w-1/2 flex">
           <img src="logo.svg" alt="Logo" class="w-40 h-40 md:w-80 md:h-80 m-auto" />
@@ -44,10 +43,11 @@
           </div>
         </div>
       </div>
-      <div class="p-4 bg-blue-400">
-        <h2 class="text-3xl text-white text-center mb-2">
+      <div class="p-8 bg-blue-400" style="scroll-snap-align: start; height: calc(100vh - 4rem)">
+        <h2 class="text-3xl text-white text-center mb-8">
           Client Libraries
         </h2>
+        <p class="text-xl text-white text-center mb-8">We curently provide {{ libraries.length }} official wrapper libraries for the Noticebord API, as well as Swagger/OpenAPI documentation and a Postman collection.</p>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <div
             class="p-4 bg-white rounded-lg shadow-lg"
@@ -78,11 +78,10 @@
                 target="_blank"
                 class="text-lg text-green-500 hover:underline"
               >
-                <FontAwesomeIcon
-                  :icon="icons.faCloudDownloadAlt"
-                  class="mr-1"
-                />
-                Get it on {{ library.registry }}
+                <i class="colored" :class="library.registryIcon"></i>
+                 <span :style="{ color: library.registryColor }">
+                  Get it on {{ library.registry }}
+                </span>
               </a>
             </div>
             <div>
@@ -96,6 +95,14 @@
               </a>
             </div>
           </div>
+                   
+          <div class="p-4 bg-white rounded-lg shadow-lg flex flex-col justify-center items-center text-blue-300">
+            <FontAwesomeIcon
+                  :icon="icons.faQuestion"
+                  class="text-4xl mb-2"
+                />
+                <p class="text-xl">Your library</p>
+          </div>
         </div>
       </div>
     </div>
@@ -106,7 +113,7 @@
 import AppLayout from "../Layouts/AppLayout.vue";
 import { getApps, getLibraries } from "../utils/apps";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faCloudDownloadAlt } from "@fortawesome/free-solid-svg-icons";
+import { faQuestion } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 export default {
@@ -119,7 +126,7 @@ export default {
       apps: [],
       libraries: [],
       icons: {
-        faCloudDownloadAlt,
+        faQuestion,
         faGithub,
       },
     };
