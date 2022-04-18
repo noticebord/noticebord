@@ -92,13 +92,17 @@ class NoticeController extends Controller
             'title'     => $data['title'] ?? $notice->title,
             'body'      => $data['body'] ?? $notice->body,
             'public'    => $anonymous || $request->boolean('public', false),
-            'author_id' => $anonymous ? null : $notice->author_id,
         ]);
+
+        if ($anonymous) {
+            $notice->author()->dissociate();
+        }
 
         if ($data['topics'] !== null) {
             $notice->syncTags($data['topics']);
         }
 
+        $notice->save(); // TODO: Error handling
         return $notice;
     }
 
