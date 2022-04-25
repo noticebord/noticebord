@@ -26,6 +26,7 @@ class TeamNoticeController extends Controller
 
         return TeamNotice::with(['author'])
             ->where('team_id', $team->id)
+            ->oldest()
             ->cursorPaginate(self::PER_PAGE);
     }
 

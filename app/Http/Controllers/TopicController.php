@@ -60,6 +60,7 @@ class TopicController extends Controller
         return Notice::withAllTagsOfAnyType([Topic::findOrFail($topic)->name])
             ->with(['author'])
             ->where('public', true)
+            ->oldest()
             ->cursorPaginate(self::PER_PAGE);
     }
 }

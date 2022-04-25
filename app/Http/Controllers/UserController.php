@@ -42,6 +42,7 @@ class UserController extends Controller
             ->findOrFail($user)
             ->notices()
             ->where('public', true)
+            ->oldest()
             ->get();
     }
 
@@ -55,6 +56,9 @@ class UserController extends Controller
     {
         $user = User::with(['notices'])->findOrFail($user);
         abort_unless(Auth::guard('sanctum')->id() === $user->id, Response::HTTP_FORBIDDEN);
-        return $user->notices()->where('public', false)->get();
+        return $user->notices()
+            ->where('public', false)
+            ->oldest()
+            ->get();
     }
 }
